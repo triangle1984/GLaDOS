@@ -1,4 +1,7 @@
-def calc(text):
+import vk_api, requests
+from vk_api.utils import get_random_id
+import math
+def calc(vk, text, event):
     try:
         x = text[1]; x = int(x)
         encalc = text[2]; encalc = encalc.lower()
