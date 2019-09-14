@@ -24,3 +24,10 @@ for event in longpoll.listen():
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                              message="*выдернул свой шнур из розетки* Пааааака....~")
             sys.exit()
+        elif zapros == "help" or zapros == "хелп":
+            if "chat_id" in dir(event):
+                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+                                message=help)
+            else:
+                vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                                 message=help)
