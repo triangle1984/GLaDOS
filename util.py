@@ -26,6 +26,8 @@ def calc(vk, text, event):
         result = math.sin(x), math.sin(y)
     elif encalc == "косинус":
         result = math.cos(x), math.cos(y)
+    else:
+        return
     if "chat_id" in dir(event):
         vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                         message=f"Ваш результат: {result}")
@@ -85,7 +87,13 @@ def weather(vk, text, event):
     💧Влажность: {vlaga}
     💨Скорость ветра: {wind}м/с""")
 def answer(vk,text,  event):
-    answer = ["Ку", "зиг хайль", "куку нахуй", "слава украине", "здравствуй", "здравия желаю"]
+    zapros = text[0].lower()
+    if zapros == "споки":
+        answer = ["Спотьки", "Спокойной ночи", "Спи, но я приду и выебу тебя историей аир"
+                  ,"Сладких снов", "Эротишных снов🌚🌚🌚"]
+    else:
+        answer = ["Ку", "зиг хайль", "куку нахуй",
+                   "слава украине", "здравствуй", "здравия желаю"]
     answer2 = random.choice(answer)
     if "chat_id" in dir(event):
         vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
