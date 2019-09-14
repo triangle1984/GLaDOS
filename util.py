@@ -49,7 +49,7 @@ def translit(text, vk=None):
             return "Перевод: {}".format(encode)
         else:
             return encode["text"][0]
-def weather(vk, text, event):
+def weather(text):
     try:
         qr = text[1]
     except:
@@ -77,14 +77,14 @@ def weather(vk, text, event):
     🌥Температура: {temp}°
     💧Влажность: {vlaga}
     💨Скорость ветра: {wind}м/с"""
-def answer(vk,text,  event):
+def answer(text):
     zapros = text[0].lower()
     if zapros == "споки":
         answer = ["Спотьки", "Спокойной ночи", "Спи, но я приду и выебу тебя историей аир"
                   ,"Сладких снов", "Эротишных снов🌚🌚🌚"]
     else:
-        answer = ["Ку", "зиг хайль", "куку нахуй",
-                   "слава украине", "здравствуй", "здравия желаю"]
+        answer = ["Кук", "зииг хайль", "куку нахуй",
+                   "слааава украине", "здравствуй", "здравия желаю"]
     return random.choice(answer)
 def cats(vk,text,event,vk_session):
     r = requests.get("https://api.thecatapi.com/v1/images/search")

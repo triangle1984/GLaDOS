@@ -18,6 +18,8 @@ for event in longpoll.listen():
             otvet = calc(text)
         elif zapros == "погода":
             otvet = weather(text)
+        elif zapros == "слава":
+            otvet = "украине"
         elif zapros in ["привет", "ку", "зиг", "споки", "спокойной"]:
             otvet = answer(text)
         elif zapros == "off" and event.user_id == 367919273:
