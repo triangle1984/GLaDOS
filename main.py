@@ -31,3 +31,6 @@ for event in longpoll.listen():
             else:
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                  message=help)
+        elif zapros == "красилов":
+            vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                             message="Krasyliv")
