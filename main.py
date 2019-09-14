@@ -17,20 +17,13 @@ for event in longpoll.listen():
         if zapros == "калькулятор":
             otvet = calc(text)
         elif zapros == "погода":
-            weather(vk, text, event)
-        elif zapros == "привет" or zapros == "ку" or zapros == "споки":
-            answer(vk, text,  event)
+            otvet = weather(text)
+        elif zapros in ["привет", "ку", "зиг", "споки", "спокойной"]:
+            otvet = answer(text)
         elif zapros == "off" and event.user_id == 367919273:
-            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                             message="*выдернул свой шнур из розетки* Пааааака....~")
             sys.exit()
         elif zapros == "help" or zapros == "хелп":
-            if "chat_id" in dir(event):
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                message=help)
-            else:
-                vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                 message=help)
+            otvet = help
         elif zapros == "красилов":
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                              message="Krasyliv")

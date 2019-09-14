@@ -72,21 +72,11 @@ def weather(vk, text, event):
         wind = encode["list"][0]["wind"]["speed"]
     except:
         return
-    if "chat_id" in dir(event):
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-            message=f"""Город: {qr}
+    return f"""Город: {qr}
     🌡Погода: {w}
     🌥Температура: {temp}°
     💧Влажность: {vlaga}
-    💨Скорость ветра: {wind}м/с""")
-
-    else:
-        vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-            message=f"""Город: {qr}
-    🌡Погода: {w}
-    🌥Температура: {temp}°
-    💧Влажность: {vlaga}
-    💨Скорость ветра: {wind}м/с""")
+    💨Скорость ветра: {wind}м/с"""
 def answer(vk,text,  event):
     zapros = text[0].lower()
     if zapros == "споки":
@@ -95,13 +85,7 @@ def answer(vk,text,  event):
     else:
         answer = ["Ку", "зиг хайль", "куку нахуй",
                    "слава украине", "здравствуй", "здравия желаю"]
-    answer2 = random.choice(answer)
-    if "chat_id" in dir(event):
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                         message=answer2)
-    else:
-        vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                        message=answer2)
+    return random.choice(answer)
 def cats(vk,text,event,vk_session):
     r = requests.get("https://api.thecatapi.com/v1/images/search")
     r = r.json()
