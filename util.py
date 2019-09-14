@@ -85,9 +85,8 @@ def weather(vk, text, event):
     💧Влажность: {vlaga}
     💨Скорость ветра: {wind}м/с""")
 def answer(vk,text,  event):
-    answer = ["Ку", "зиг хайль", "куку нахуй", "слава украине"]
+    answer = ["Ку", "зиг хайль", "куку нахуй", "слава украине", "здравствуй", "здравия желаю"]
     answer2 = random.choice(answer)
-    print(answer2)
     if "chat_id" in dir(event):
         vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                          message=answer2)
