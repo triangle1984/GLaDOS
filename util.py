@@ -53,7 +53,6 @@ def weather(vk, text, event):
     except:
         return
     q = translit(text=qr); q.lower()
-    print(q)
     apiurl = "http://api.openweathermap.org/data/2.5/find"
     appid = '22c7bf8e593c47b0cf88f390e8e5376a'
     params = {
