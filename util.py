@@ -1,4 +1,4 @@
-import vk_api, requests, math, random
+import vk_api, requests, math, random, os
 from vk_api.utils import get_random_id
 help = """Дроу. Ето бот от андрея. Возможности:
 🧾Калькулятор - передавать значения через пробел: калькулятор 2 + 2
@@ -33,12 +33,7 @@ def calc(vk, text, event):
         result = math.cos(x), math.cos(y)
     else:
         return
-    if "chat_id" in dir(event):
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                        message=f"Ваш результат: {result}")
-    else:
-        vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                            message=f"Ваш результат: {result}")
+    return "Ваш результат: {}".format(result)
 def translit(text, vk=None, event=None):
         apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
@@ -57,7 +52,10 @@ def translit(text, vk=None, event=None):
         else:
             return encode["text"][0]
 def weather(vk, text, event):
-    qr = text[1]
+    try:
+        qr = text[1]
+    except:
+        return
     q = translit(text=qr); q.lower()
     apiurl = "http://api.openweathermap.org/data/2.5/find"
     appid = '22c7bf8e593c47b0cf88f390e8e5376a'
@@ -106,3 +104,24 @@ def answer(vk,text,  event):
     else:
         vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                         message=answer2)
+def cats(vk,text,event,vk_session):
+    r = requests.get("https://api.thecatapi.com/v1/images/search")
+    r = r.json()
+    command = "wget {} -O test.jpg".format(r[0]["url"])
+    os.system(command)
+    upload = vk_api.VkUpload(vk_session)
+    photo = upload.photo(
+        '/home/archie/vk-bot/test.jpg',
+        album_id=268910446
+        )
+    vk_photo_url = 'photo{}_{}'.format(
+            photo[0]['owner_id'], photo[0]['id'])
+
+    if "chat_id" in dir(event):
+        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id()
+                        , message="шавуха по заказу",
+                        attachment=vk_photo_url)
+    else:
+        vk.messages.send(user_id=event.user_id, random_id=get_random_id()
+                        , message="шавуха по заказу",
+                        attachment=vk_photo_url)

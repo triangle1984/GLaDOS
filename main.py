@@ -6,6 +6,7 @@ from util import *
 vk_session = vk_api.VkApi(token=token)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
+otvet = None
 for event in longpoll.listen():
     if "text" in dir(event):
         text = event.text.split()
@@ -13,9 +14,8 @@ for event in longpoll.listen():
             zapros = text[0].lower()
         except IndexError:
             continue
-            ConnectionError
         if zapros == "калькулятор":
-            calc(vk, text, event)
+            otvet = calc(vk, text, event)
         elif zapros == "погода":
             weather(vk, text, event)
         elif zapros == "привет" or zapros == "ку" or zapros == "споки":
@@ -34,3 +34,16 @@ for event in longpoll.listen():
         elif zapros == "красилов":
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                              message="Krasyliv")
+        elif zapros == "каты":
+            cats(vk, text, event, vk_session)
+    if otvet:
+        if "chat_id" in dir(event):
+            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+                            message=otvet)
+            otvet = None
+        else:
+            vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                            message=otvet)
+            otvet = None
+
+
