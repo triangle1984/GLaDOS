@@ -13,7 +13,7 @@ def calc(vk, text, event):
         result = x - y
     elif encalc == "*" or encalc == "умножение":
         result = x * y
-    elif encalc == "**" or encalc == "степень":
+    elif encalc == "**" or encalc == "степень" or encalc == "^":
         result = x ** y
     elif encalc == "/":
         try:
