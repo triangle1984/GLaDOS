@@ -51,8 +51,8 @@ def translit(text, vk=None, event=None):
         else:
             return encode["text"][0]
 def weather(vk, text, event):
-    q = text[1]
-    q = translit(text=q); q.lower()
+    qr = text[1]
+    q = translit(text=qr); q.lower()
     apiurl = "http://api.openweathermap.org/data/2.5/find"
     appid = '22c7bf8e593c47b0cf88f390e8e5376a'
     params = {
@@ -72,7 +72,7 @@ def weather(vk, text, event):
         return
     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                      message=f"""Город: {q}
-            Погода: {w}
-            Температура: {temp}°
-            Влажность: {vlaga}
-            Скорость ветра: {wind}м/с""")
+            🌡Погода: {w}
+           🌥Температура: {temp}°
+            💧Влажность: {vlaga}
+            💨Скорость ветра: {wind}м/с""")
