@@ -5,7 +5,7 @@ help = """Дроу. Ето бот от андрея. Возможности:
 ☁погода - мона писать город на русском, не сработает = ингиш, игнор = ошибка
 ❤привет\споки - :З
 github.com/anar66/vk-bot"""
-def calc(vk, text, event):
+def calc(text):
     try:
         x = text[1]; x = int(x)
         encalc = text[2]; encalc = encalc.lower()
@@ -34,21 +34,17 @@ def calc(vk, text, event):
     else:
         return
     return "Ваш результат: {}".format(result)
-def translit(text, vk=None, event=None):
+def translit(text, vk=None):
         apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
         params = {"key": apikey,
-                "text":text,
+                "text":text[0:],
                 "lang":"ru-en"}
         r = requests.get(url, params=params)
         encode = r.json()
         if vk:
-            if "chat_id" in dir(event):
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                message=f"Перевод: {text}")
-            else:
-                vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                    message=f"Перевод {text}")
+            encode = " ".join(encode["text"][1:])
+            return "Перевод: {}".format(encode)
         else:
             return encode["text"][0]
 def weather(vk, text, event):
@@ -57,6 +53,7 @@ def weather(vk, text, event):
     except:
         return
     q = translit(text=qr); q.lower()
+    print(q)
     apiurl = "http://api.openweathermap.org/data/2.5/find"
     appid = '22c7bf8e593c47b0cf88f390e8e5376a'
     params = {

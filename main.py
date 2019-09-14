@@ -15,7 +15,7 @@ for event in longpoll.listen():
         except IndexError:
             continue
         if zapros == "калькулятор":
-            otvet = calc(vk, text, event)
+            otvet = calc(text)
         elif zapros == "погода":
             weather(vk, text, event)
         elif zapros == "привет" or zapros == "ку" or zapros == "споки":
@@ -36,6 +36,8 @@ for event in longpoll.listen():
                              message="Krasyliv")
         elif zapros == "каты":
             cats(vk, text, event, vk_session)
+        elif zapros == "переводчик":
+            otvet = translit(text, vk)
     if otvet:
         if "chat_id" in dir(event):
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
