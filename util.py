@@ -47,7 +47,7 @@ def translit(text, vk=None, event=None):
                                 message=f"Перевод: {text}")
             else:
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                    message=f"Ваш результат: {text}")
+                                    message=f"Перевод {text}")
         else:
             return encode["text"][0]
 def weather(vk, text, event):
@@ -70,9 +70,18 @@ def weather(vk, text, event):
         wind = encode["list"][0]["wind"]["speed"]
     except:
         return
-    vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                     message=f"""Город: {q}
-            🌡Погода: {w}
-           🌥Температура: {temp}°
-            💧Влажность: {vlaga}
-            💨Скорость ветра: {wind}м/с""")
+    if "chat_id" in dir(event):
+        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+            message=f"""Город: {qr}
+    🌡Погода: {w}
+    🌥Температура: {temp}°
+    💧Влажность: {vlaga}
+    💨Скорость ветра: {wind}м/с""")
+
+    else:
+        vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+            message=f"""Город: {qr}
+    🌡Погода: {w}
+    🌥Температура: {temp}°
+    💧Влажность: {vlaga}
+    💨Скорость ветра: {wind}м/с""")
