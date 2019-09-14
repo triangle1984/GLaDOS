@@ -14,3 +14,5 @@ for event in longpoll.listen():
             calc(vk, text, event)
         elif zapros == "погода":
             weather(vk, text, event)
+        elif zapros == "привет" or zapros == "ку":
+            answer(vk, text,  event)

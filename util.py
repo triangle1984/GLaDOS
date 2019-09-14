@@ -1,6 +1,5 @@
-import vk_api, requests
+import vk_api, requests, math, random
 from vk_api.utils import get_random_id
-import math
 def calc(vk, text, event):
     try:
         x = text[1]; x = int(x)
@@ -85,3 +84,13 @@ def weather(vk, text, event):
     🌥Температура: {temp}°
     💧Влажность: {vlaga}
     💨Скорость ветра: {wind}м/с""")
+def answer(vk,text,  event):
+    answer = ["Ку", "зиг хайль", "куку нахуй", "слава украине"]
+    answer2 = random.choice(answer)
+    print(answer2)
+    if "chat_id" in dir(event):
+        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+                         message=answer2)
+    else:
+        vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                        message=answer2)
