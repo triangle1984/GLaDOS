@@ -8,6 +8,9 @@ vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
-        text = event.text.split()[0:]
-        if text[0].lower() == "калькулятор":
+        text = event.text.split()
+        zapros = text[0].lower()
+        if zapros == "калькулятор":
             calc(vk, text, event)
+        elif zapros == "погода":
+            weather(vk, text, event)
