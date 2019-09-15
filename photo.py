@@ -9,7 +9,7 @@ def phootowallrandom(groups, vk, upload, albid="wall"):
     return f"photo{group_id}_{photo}"
 def yuri(vk, upload):
     photo = phootowallrandom(["-170165000", "-63092480", "-153284406"], vk, upload)
-    return {"message":"бот: Юрец~~🌚", "attachment":photo}
+    return {"message":"Юрец~~🌚", "attachment":photo}
 def gebbels(vk, upload):
     photo = phootowallrandom(["-174482230"], vk, upload)
     return {"message":"ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ?", "attachment":photo}

@@ -47,6 +47,8 @@ for event in longpoll.listen():
             otvet = trap(vk, upload)
         elif zapros == "/лоли":
             otvet = loli(vk, upload)
+        elif zapros == "/оцени":
+            otvet = doulikethis(text)
     if otvet:
         if "chat_id" in dir(event):
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
