@@ -45,6 +45,8 @@ for event in longpoll.listen():
             otvet = yaoi(vk, upload)
         elif zapros == "/трапы":
             otvet = trap(vk, upload)
+        elif zapros == "/лоли":
+            otvet = loli(vk, upload)
     if otvet:
         if "chat_id" in dir(event):
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
