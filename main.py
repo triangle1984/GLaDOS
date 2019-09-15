@@ -18,7 +18,6 @@ for event in longpoll.listen():
         except IndexError:
             continue
         if zapros == "/калькулятор":
-            print(text)
             otvet = calc(text)
         elif zapros == "/погода":
             otvet = weather(text)
@@ -35,8 +34,8 @@ for event in longpoll.listen():
                              message="Krasyliv")
         elif zapros == "/каты":
             otvet = cats(vk, upload)
-        elif zapros == "/переводчик":
-            otvet = translit(text, vk)
+        # elif zapros == "/переводчик":
+        #     otvet = translit(text, vk)
         elif zapros == "/юри":
             otvet = yuri(vk, upload)
         elif zapros == "/геббельс":
