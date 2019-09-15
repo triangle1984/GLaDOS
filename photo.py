@@ -1,22 +1,25 @@
-import vk_api, requests, os, random
+import vk_api, requests, random
 from vk_api.utils import get_random_id
-def cats(upload):
-    r = requests.get("https://api.thecatapi.com/v1/images/search")
-    r = r.json()
-    command = "wget {} -O test.jpg".format(r[0]["url"])
-    os.system(command)
-    photo = upload.photo(
-        '/home/archie/vk-bot/test.jpg',
-        album_id=268910446
-        )
-    vk_photo_url = 'photo{}_{}'.format(
-            photo[0]['owner_id'], photo[0]['id'])
-    return {"message":"шавуха по заказу", "attachment":vk_photo_url}
-def yuri(vk, upload):
-    group_id = "-170165000"
-    max_num = vk.photos.get(owner_id=group_id, album_id='wall', count=0)['count']
+def phootowallrandom(groups, vk, upload, albid="wall"):
+    group_id = random.choice(groups)
+    max_num = vk.photos.get(owner_id=group_id, album_id=albid, count=0)['count']
     num = random.randint(0, max_num)
     photo = vk.photos.get(owner_id=group_id, album_id='wall',
                           count=1, offset=num)['items'][0]['id']
-    photo = f"photo{group_id}_{photo}"
-    return {"message":"Юрец~~🌚", "attachment":photo}
+    return f"photo{group_id}_{photo}"
+def yuri(vk, upload):
+    photo = phootowallrandom(["-170165000", "-63092480", "-153284406"], vk, upload)
+    return {"message":"бот: Юрец~~🌚", "attachment":photo}
+def gebbels(vk, upload):
+    photo = phootowallrandom(["-174482230"], vk, upload)
+    return {"message":"ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ?", "attachment":photo}
+def yaoi(vk, upload):
+    photo = phootowallrandom(["-98467405", "-113004231", "-57807542"], vk, upload)
+    return {"message":"Яойчег~~🌚", "attachment":photo}
+def trap(vk, upload):
+    photo = phootowallrandom(["-171834188"], vk, upload)
+    return {"message":"Трапы~~🌚", "attachment":photo}
+def cats(vk, upload):
+    photo = phootowallrandom(["-43228812", "-34137527", "-152424758"], vk, upload)
+    return {"message":"Шавухенция на заказ", "attachment":photo}
+
