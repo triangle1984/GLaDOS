@@ -35,7 +35,7 @@ def calc(text):
         result = math.cos(x), math.cos(y)
     else:
         return
-    return "Ваш результат: {}".format(result)
+    return {"message":"Ваш результат: {}".format(result), "attachment": None}
 def translit(text, vk=None):
         apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
@@ -46,7 +46,7 @@ def translit(text, vk=None):
         encode = r.json()
         if vk:
             encode = " ".join(encode["text"][1:])
-            return "Перевод: {}".format(encode)
+            return ["Перевод: {}".format(encode), None]
         else:
             return encode["text"][0]
 def weather(text):
@@ -72,11 +72,12 @@ def weather(text):
         wind = encode["list"][0]["wind"]["speed"]
     except:
         return
-    return f"""Город: {qr}
-    🌡Погода: {w}
-    🌥Температура: {temp}°
+    return {"message":f"""Город: {qr}
+    🌥Погода: {w}
+    🌡Температура: {temp}°
     💧Влажность: {vlaga}
-    💨Скорость ветра: {wind}м/с"""
+    💨Скорость ветра: {wind}м/с""",
+    "attachment": None}
 def answer(text):
     zapros = text[0].lower()
     if zapros == "споки":
@@ -85,4 +86,4 @@ def answer(text):
     else:
         answer = ["Кук", "зииг хайль", "куку нахуй",
                    "слааава украине", "здравствуй", "здравия желаю"]
-    return random.choice(answer)
+    return {"message":random.choice(answer),"attachment": None}

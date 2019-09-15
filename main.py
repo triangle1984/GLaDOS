@@ -10,6 +10,7 @@ longpoll = VkLongPoll(vk_session)
 upload = vk_api.VkUpload(vk_session)
 otvet = None
 for event in longpoll.listen():
+    otvet = None
     if "text" in dir(event):
         text = event.text.split()
         try:
@@ -21,28 +22,28 @@ for event in longpoll.listen():
         elif zapros == "погода":
             otvet = weather(text)
         elif zapros == "слава":
-            otvet = "украине"
+            otvet = {"message":"украине", "attachment":None}
         elif zapros in ["привет", "ку", "зиг", "споки", "спокойной"]:
             otvet = answer(text)
         elif zapros == "off" and event.user_id == 367919273:
             sys.exit()
         elif zapros == "help" or zapros == "хелп":
-            otvet = help
+            otvet = {"message":help, "attachment":None}
         elif zapros == "красилов":
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                              message="Krasyliv")
         elif zapros == "каты":
-            cats(vk, text, event, upload)
+            otvet = cats(upload)
         elif zapros == "переводчик":
             otvet = translit(text, vk)
+        elif zapros == "юри":
+            otvet = yuri(vk, upload)
     if otvet:
         if "chat_id" in dir(event):
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                            message=otvet)
-            otvet = None
+                            message=otvet["message"], attachment=otvet["attachment"])
         else:
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                            message=otvet)
-            otvet = None
+                            message=otvet["message"], attachment=otvet["attachment"])
 
 

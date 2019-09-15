@@ -1,6 +1,6 @@
-import vk_api, requests, os
+import vk_api, requests, os, random
 from vk_api.utils import get_random_id
-def cats(vk, text, event, upload):
+def cats(upload):
     r = requests.get("https://api.thecatapi.com/v1/images/search")
     r = r.json()
     command = "wget {} -O test.jpg".format(r[0]["url"])
@@ -11,12 +11,12 @@ def cats(vk, text, event, upload):
         )
     vk_photo_url = 'photo{}_{}'.format(
             photo[0]['owner_id'], photo[0]['id'])
-
-    if "chat_id" in dir(event):
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id()
-                        , message="шавуха по заказу",
-                        attachment=vk_photo_url)
-    else:
-        vk.messages.send(user_id=event.user_id, random_id=get_random_id()
-                        , message="шавуха по заказу",
-                        attachment=vk_photo_url)
+    return {"message":"шавуха по заказу", "attachment":vk_photo_url}
+def yuri(vk, upload):
+    group_id = "-170165000"
+    max_num = vk.photos.get(owner_id=group_id, album_id='wall', count=0)['count']
+    num = random.randint(0, max_num)
+    photo = vk.photos.get(owner_id=group_id, album_id='wall',
+                          count=1, offset=num)['items'][0]['id']
+    photo = f"photo{group_id}_{photo}"
+    return {"message":"Юрец~~🌚", "attachment":photo}
