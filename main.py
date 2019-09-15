@@ -17,32 +17,33 @@ for event in longpoll.listen():
             zapros = text[0].lower()
         except IndexError:
             continue
-        if zapros == "калькулятор":
+        if zapros == "/калькулятор":
+            print(text)
             otvet = calc(text)
-        elif zapros == "погода":
+        elif zapros == "/погода":
             otvet = weather(text)
         elif zapros == "слава":
-            otvet = {"message":"украине", "attachment":None}
+            otvet = {"message":"🇺🇦украине🇺🇦", "attachment":None}
         elif zapros in ["привет", "ку", "зиг", "споки", "спокойной"]:
             otvet = answer(text)
-        elif zapros == "off" and event.user_id == 367919273:
+        elif zapros == "/off" and event.user_id == 367919273:
             sys.exit()
-        elif zapros == "help" or zapros == "хелп":
+        elif zapros == "/help" or zapros == "/хелп":
             otvet = {"message":help, "attachment":None}
-        elif zapros == "красилов":
+        elif zapros == "/красилов":
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                              message="Krasyliv")
-        elif zapros == "каты":
+        elif zapros == "/каты":
             otvet = cats(vk, upload)
-        elif zapros == "переводчик":
+        elif zapros == "/переводчик":
             otvet = translit(text, vk)
-        elif zapros == "юри":
+        elif zapros == "/юри":
             otvet = yuri(vk, upload)
-        elif zapros == "геббельс":
+        elif zapros == "/геббельс":
             otvet = gebbels(vk, upload)
-        elif zapros == "яой":
+        elif zapros == "/яой":
             otvet = yaoi(vk, upload)
-        elif zapros == "трапы":
+        elif zapros == "/трапы":
             otvet = trap(vk, upload)
     if otvet:
         if "chat_id" in dir(event):
