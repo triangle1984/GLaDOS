@@ -1,28 +1,28 @@
 import vk_api, requests, random
 from vk_api.utils import get_random_id
-def phootowallrandom(groups, vk, upload, albid="wall"):
+def phootowallrandom(groups, vk, albid="wall"):
     group_id = random.choice(groups)
     max_num = vk.photos.get(owner_id=group_id, album_id=albid, count=0)['count']
     num = random.randint(0, max_num)
     photo = vk.photos.get(owner_id=group_id, album_id='wall',
                           count=1, offset=num)['items'][0]['id']
     return f"photo{group_id}_{photo}"
-def yuri(vk, upload):
-    photo = phootowallrandom(["-170165000", "-63092480", "-153284406"], vk, upload)
+def yuri(vk):
+    photo = phootowallrandom(["-170165000", "-63092480", "-153284406"], vk)
     return {"message":"Юрец~~🌚", "attachment":photo}
-def gebbels(vk, upload):
-    photo = phootowallrandom(["-174482230"], vk, upload)
+def gebbels(vk):
+    photo = phootowallrandom(["-174482230"], vk)
     return {"message":"ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ?", "attachment":photo}
-def yaoi(vk, upload):
-    photo = phootowallrandom(["-98467405", "-113004231", "-57807542"], vk, upload)
+def yaoi(vk):
+    photo = phootowallrandom(["-98467405", "-113004231", "-57807542"], vk)
     return {"message":"Яойчег~~🌚", "attachment":photo}
-def trap(vk, upload):
-    photo = phootowallrandom(["-171834188"], vk, upload)
+def trap(vk):
+    photo = phootowallrandom(["-171834188"], vk)
     return {"message":"Трапы~~🌚", "attachment":photo}
-def cats(vk, upload):
-    photo = phootowallrandom(["-43228812", "-34137527", "-152424758"], vk, upload)
+def cats(vk):
+    photo = phootowallrandom(["-43228812", "-34137527", "-152424758"], vk)
     return {"message":"Шавухенция на заказ", "attachment":photo}
-def loli(vk, upload):
-    photo = phootowallrandom(["-127518015", "-157516431", "-69721869"], vk, upload)
+def loli(vk):
+    photo = phootowallrandom(["-127518015", "-157516431", "-69721869"], vk)
     return {"message":"FBI OPEN UP", "attachment":photo}
 
