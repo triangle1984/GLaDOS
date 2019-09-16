@@ -51,7 +51,7 @@ for event in longpoll.listen():
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                             message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+                             message=otvet["message"], attachment=otvet["attachment"])
         else:
             vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
-                            message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+                            message=otvet["message"], attachment=otvet["attachment"])
