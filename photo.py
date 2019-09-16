@@ -31,3 +31,6 @@ def mahno(vk):
 def citati(vk):
     photo = phootowallrandom(["-173186389"], vk)
     return {"message":"Цитатки на заказ", "attachment":photo}
+def colyan(vk):
+    photo = phootowallrandom(["501108826"],vk,  albid=268143008)
+    return {"message":"БОЖЕЕЕЕЕЕЕ, ЦАРЯ ХРАНИ", "attachment":photo}

@@ -55,6 +55,8 @@ for event in longpoll.listen():
                 otvet = mahno(vk)
             elif zapros == "/цитаты":
                 otvet = citati(vk)
+            elif zapros == "/калян":
+                otvet = colyan(vk)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
