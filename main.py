@@ -8,7 +8,7 @@ vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 upload = vk_api.VkUpload(vk_session)
-allowuser = [271595905]
+allowuser = [271595905, 367919273]
 for event in longpoll.listen():
     otvet = None
     if "text" in dir(event):
@@ -49,6 +49,8 @@ for event in longpoll.listen():
                 otvet = loli(vk)
             elif zapros == "/оцени":
                 otvet = doulikethis(text)
+            elif zapros == "/вики":
+                otvet = wiki(text)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

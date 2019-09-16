@@ -1,5 +1,7 @@
 import vk_api, requests, math, random, os
 from vk_api.utils import get_random_id
+import wikipedia
+wikipedia.set_lang("ru")
 help = """Дроу. Ето бот от андрея. Возможности:
 🧾Калькулятор - передавать значения через пробел: /калькулятор 2 + 2
 ☁/погода - мона писать город на русском, не сработает = ингиш, игнор = ошибка
@@ -92,3 +94,14 @@ def doulikethis(text):
     osenka = random.randint(0, 10)
     text = " ".join(text[1:])
     return {"message": f"Моя оценка на {text}: {osenka}/10", "attachment": None}
+def wiki(text):
+    text = text[0:]
+    try:
+        wikiotvet = wikipedia.summary(text, sentences=3)
+    except wikipedia.exceptions.DisambiguationError:
+        wikiotvet = "точнее, пожалуйста"
+    except wikipedia.exceptions.PageError:
+        wikiotvet = "такого нет"
+    return {"message":wikiotvet, "attachment":None}
+
+
