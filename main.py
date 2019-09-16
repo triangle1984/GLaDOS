@@ -33,7 +33,7 @@ for event in longpoll.listen():
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                              message="Krasyliv")
         elif zapros == "/каты":
-            otvet = cats(vk, upload)
+            otvet = cats(vk)
         # elif zapros == "/переводчик":
         #     otvet = translit(text, vk)
         elif zapros == "/юри":

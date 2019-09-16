@@ -34,8 +34,8 @@ for event in longpoll.listen():
                              message="Krasyliv")
         elif zapros == "/каты":
             otvet = cats(vk2)
-        # elif zapros == "/переводчик":
-        #     otvet = translit(text, vk)
+        elif zapros == "/переводчик":
+            otvet = translit(text, vk)
         elif zapros == "/юри":
             otvet = yuri(vk2)
         elif zapros == "/геббельс":
