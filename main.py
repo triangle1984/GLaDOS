@@ -8,11 +8,11 @@ vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 upload = vk_api.VkUpload(vk_session)
-allowuser = [271595905, 367919273]
+allowuser = [271595905]
 for event in longpoll.listen():
     otvet = None
     if "text" in dir(event):
-        if event.user_id in allowuser:
+        if event.user_id in allowuser and "chat_id" not in dir(event):
             text = event.text.split()
             try:
                 zapros = text[0].lower()
@@ -50,11 +50,10 @@ for event in longpoll.listen():
             elif zapros == "/оцени":
                 otvet = doulikethis(text)
         if otvet:
-            if "chat_id" in dir(event):
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                message="от бота: " + otvet["message"], attachment=otvet["attachment"])
-            else:
-                vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+            # if "chat_id" in dir(event):
+            #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+            #                     message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+            vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                            message="от бота: " + otvet["message"], attachment=otvet["attachment"])
 
 
