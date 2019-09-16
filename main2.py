@@ -51,6 +51,8 @@ for event in longpoll.listen():
             otvet = doulikethis(text)
         elif zapros == "/вики":
             otvet = wiki(text)
+        elif zapros == "/махно":
+            otvet = mahno(vk)
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
