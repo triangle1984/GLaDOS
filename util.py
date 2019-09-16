@@ -96,7 +96,7 @@ def doulikethis(text):
     text = " ".join(text[1:])
     return {"message": f"Моя оценка на {text}: {osenka}/10", "attachment": None}
 def wiki(text):
-    text = " ".join(text[0:])
+    text = text[0:]
     try:
         wikiotvet = wikipedia.summary(text, sentences=3)
     except wikipedia.exceptions.DisambiguationError:
