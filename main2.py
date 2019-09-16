@@ -49,6 +49,8 @@ for event in longpoll.listen():
             otvet = loli(vk2)
         elif zapros == "/оцени":
             otvet = doulikethis(text)
+        elif zapros == "/вики":
+            otvet = wiki(text)
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
