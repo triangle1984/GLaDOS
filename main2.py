@@ -53,6 +53,8 @@ for event in longpoll.listen():
             otvet = wiki(text)
         elif zapros == "/махно":
             otvet = mahno(vk2)
+        elif zapros == "/цитаты":
+            otvet = citati(vk2)
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

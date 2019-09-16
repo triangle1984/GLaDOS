@@ -28,4 +28,6 @@ def loli(vk):
 def mahno(vk):
     photo = phootowallrandom(["367919273"],vk,  albid=262361216)
     return {"message":"СВОБОДА АБО ИДИТЕ НАХУЙ", "attachment":photo}
-
+def citati(vk):
+    photo = phootowallrandom(["-173186389"], vk)
+    return {"message":"Цитатки на заказ", "attachment":photo}
