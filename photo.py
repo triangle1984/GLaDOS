@@ -14,7 +14,7 @@ def gebbels(vk):
     photo = phootowallrandom(["-174482230"], vk)
     return {"message":"ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ?", "attachment":photo}
 def yaoi(vk):
-    photo = phootowallrandom(["-98467405", "-113004231", "-57807542"], vk)
+    photo = phootowallrandom(["-98467405", "-113004231", "-57807542", "-38230251"], vk)
     return {"message":"Яойчег~~🌚", "attachment":photo}
 def trap(vk):
     photo = phootowallrandom(["-171834188"], vk)
