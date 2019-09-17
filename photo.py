@@ -34,3 +34,6 @@ def citati(vk):
 def colyan(vk):
     photo = phootowallrandom(["501108826"],vk,  albid=268143008)
     return {"message":"БОЖЕЕЕЕЕЕЕ, ЦАРЯ ХРАНИ", "attachment":photo}
+def hentai(vk):
+    photo = phootowallrandom(["-161403814", "-170993976"], vk)
+    return {"message":"Хентай~~🌚", "attachment":photo}
