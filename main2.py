@@ -4,6 +4,7 @@ from vk_api.utils import get_random_id
 from token2 import *
 from util import *
 from photo import *
+from smeh import *
 import vk_api, requests, sys
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
