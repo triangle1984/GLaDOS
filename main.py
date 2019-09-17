@@ -65,6 +65,8 @@ for event in longpoll.listen():
                 otvet = oror(text)
             elif zapros == "/смех":
                 otvet = smex(text)
+            elif zapros == "/повтори":
+                otvet = repeat(text)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

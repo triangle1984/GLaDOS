@@ -94,7 +94,7 @@ def answer(text):
                   ,"Сладких снов", "Эротишных снов🌚🌚🌚"]
     else:
         answer = ["Кук", "зиг хайль", "куку нахуй",
-                   "с🇺🇦лава украине🇺🇦", "здравствуй", "здравия желаю"]
+                   "🇺🇦слава украине🇺🇦", "здравствуй", "здравия желаю"]
     return {"message":random.choice(answer),"attachment": None}
 def doulikethis(text):
     osenka = random.randint(0, 10)
@@ -130,3 +130,6 @@ def oror(text):
     text = " ".join(text[1:])
     text = random.choice(text.split("или"))
     return {"message":f"я выбираю: {text}", "attachment": None}
+def repeat(text):
+    text = " ".join(text[1:])
+    return{"message": text, "attachment": None}
