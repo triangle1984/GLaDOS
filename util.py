@@ -108,7 +108,10 @@ def wiki(text):
 def video(vk, text):
     text = " ".join(text[1:])
     video = vk.video.search(q=text, count=50)
-    videor = random.choice(video["items"])
+    try:
+        videor = random.choice(video["items"])
+    except:
+        return
     videoid = videor["id"]
     videoow = videor["owner_id"]
     video = f"video{videoow}_{videoid}"
