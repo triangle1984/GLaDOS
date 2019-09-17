@@ -7,11 +7,19 @@ def args():
     args.add_argument("-s2", "--smexslova", default=None)
     return args
 def smex(text):
+    helps = """а це посложнее. Для этой хуйни я проработал целую систему аргументов:
+    /смех -c (число) = количество символов в смехе
+    /смех -s (буквы) = символы для генерации смеха
+    /смех -s2 (слово) = слово для генерации смеха
+    -c и -s/s2 можно использовать одновременно
+    /смех -s2 .exe -c 69
+    /смех -s хпх -c 50"""
     ss = args()
     try:
         ss = ss.parse_args(text[1:])
+        proverta = text[1]
     except:
-        return
+        return {"message":helps, "attachment": None}
     test = 0
     main = ["Х", "Ы", "Ъ"]
     if ss.smex != None:
