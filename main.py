@@ -60,6 +60,8 @@ for event in longpoll.listen():
                 otvet = video(vk, text)
             elif zapros == "/вероятность" or zapros == "/шансы":
                 otvet = chance(text)
+            elif zapros == "/выбери":
+                otvet = oror(text)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

@@ -124,3 +124,7 @@ def chance(text):
     rnd =  random.randint(0, 100)
     message = f"Вероятность {text} равна {rnd}%"
     return {"message":message, "attachment": None}
+def oror(text):
+    text = " ".join(text[1:])
+    text = random.choice(text.split("или"))
+    return {"message":f"я выбираю: {text}", "attachment": None}
