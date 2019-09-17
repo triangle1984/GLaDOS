@@ -11,7 +11,7 @@ upload = vk_api.VkUpload(vk_session)
 allowuser = [271595905, 367919273]
 for event in longpoll.listen():
     otvet = None
-    if "text" in dir(event):
+    if "text" in dir(event) and "user_id" in dir(event):
         if event.user_id in allowuser and "chat_id" not in dir(event):
             text = event.text.split()
             try:
@@ -57,6 +57,8 @@ for event in longpoll.listen():
                 otvet = citati(vk)
             elif zapros == "/калян":
                 otvet = colyan(vk)
+            elif zapros == "/видео":
+                otvet = video(vk, text)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

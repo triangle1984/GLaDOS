@@ -105,3 +105,11 @@ def wiki(text):
     except wikipedia.exceptions.PageError:
         wikiotvet = "такого нет"
     return {"message":wikiotvet, "attachment":None}
+def video(vk, text):
+    text = " ".join(text[1:])
+    video = vk.video.search(q=text, count=50)
+    videor = random.choice(video["items"])
+    videoid = videor["id"]
+    videoow = videor["owner_id"]
+    video = f"video{videoow}_{videoid}"
+    return{"message": f"Ведосик по заказу - {text}:", "attachment":video}
