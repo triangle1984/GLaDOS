@@ -6,10 +6,12 @@ def args():
     args.add_argument("-s", "--smex", default=None)
     args.add_argument("-s2", "--smexslova", default=None)
     return args
-
-def smex():
+def smex(text):
     ss = args()
-    ss = ss.parse_args(sys.argv[1:])
+    try:
+        ss = ss.parse_args(text[1:])
+    except:
+        return
     test = 0
     main = ["Х", "Ы", "Ъ"]
     if ss.smex != None:
@@ -20,7 +22,4 @@ def smex():
     for _ in range(ss.count):
         mainsmex.append(random.choice(main))
     mainsmex = "".join(mainsmex)
-    print(mainsmex)
-    mainsmex = []
-
-smex()
+    return {"message":mainsmex, "attachment": None}

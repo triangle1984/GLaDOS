@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 from token2 import *
 from util import *
 from photo import *
+from smeh import *
 import vk_api, requests, sys
 vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
@@ -62,6 +63,8 @@ for event in longpoll.listen():
                 otvet = chance(text)
             elif zapros == "/выбери":
                 otvet = oror(text)
+            elif zapros == "/смех":
+                otvet = smex(text)
         if otvet:
             # if "chat_id" in dir(event):
             #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

@@ -65,6 +65,8 @@ for event in longpoll.listen():
             otvet = hentai(vk2)
         elif zapros == "/выбери":
             otvet = oror(text)
+        elif zapros == "/смех":
+            otvet = smex(text)
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
