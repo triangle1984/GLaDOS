@@ -59,6 +59,8 @@ for event in longpoll.listen():
             otvet = colyan(vk2)
         elif zapros == "/видео":
             otvet = video(vk2, text)
+        elif zapros == "/вероятность":
+            otvet = chance(text)
     if otvet:
         if event.chat_id:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

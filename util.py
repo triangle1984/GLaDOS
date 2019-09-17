@@ -12,6 +12,7 @@ help = """Дроу. Ето бот от *slava_a_i_r(андрея) Возможн
 👍🏻/оцени - оценка по 10ти бальной шкале
 📚 /вики - информация из вики
 🎬/видео название - рандомное видео с вашим названием
+✔/вероятность - вероятность чего либо
 github.com/anar66/vk-bot"""
 def calc(text):
     try:
@@ -117,3 +118,8 @@ def video(vk, text):
     videoow = videor["owner_id"]
     video = f"video{videoow}_{videoid}"
     return{"message": f"Ведосик по заказу - {text}:", "attachment":video}
+def chance(text):
+    text = " ".join(text[1:])
+    rnd =  random.randint(0, 100)
+    message = f"Вероятность {text} равна {rnd}%"
+    return {"message":message, "attachment": None}
