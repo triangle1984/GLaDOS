@@ -8,7 +8,7 @@ vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 upload = vk_api.VkUpload(vk_session)
-allowuser = [271595905, 367919273]
+allowuser = [271595905, 367919273, 184694514]
 for event in longpoll.listen():
     otvet = None
     if "text" in dir(event) and "user_id" in dir(event):
