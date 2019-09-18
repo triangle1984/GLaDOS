@@ -148,6 +148,7 @@ def rdocs(vk, text):
     docs = f"doc{docsow}_{docsid}"
     return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
 def nowtime():
-    return datetime.datetime.now()
+    vrema = datetime.datetime.now()
+    return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}(мск)"
 def status(vk, msgcount, timestatus):
     vk.status.set(text=f"✉сообщений: {msgcount}, бот был запущен в: {timestatus}мск", group_id=183493220)
