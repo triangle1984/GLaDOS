@@ -11,6 +11,7 @@ vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 vk2 = vk_session2.get_api()
 longpoll = VkBotLongPoll(vk_session, 183493220)
+msgcount = 0
 try:
     for event in longpoll.listen():
         otvet = None
@@ -80,5 +81,7 @@ try:
             else:
                 vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
                                 message=otvet["message"], attachment=otvet["attachment"])
+            msgcount += 1
+            status(vk2, msgcount)
 except KeyboardInterrupt:
     sys.exit()

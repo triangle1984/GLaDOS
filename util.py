@@ -147,3 +147,5 @@ def rdocs(vk, text):
     docsow = docs["owner_id"]
     docs = f"doc{docsow}_{docsid}"
     return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
+def status(vk, msgcount):
+    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=183493220)
