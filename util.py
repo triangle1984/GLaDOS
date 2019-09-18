@@ -151,4 +151,4 @@ def nowtime():
     vrema = datetime.datetime.now()
     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}(мск)"
 def status(vk, msgcount, timestatus):
-    vk.status.set(text=f"✉сообщений: {msgcount}, бот был запущен в: {timestatus}мск", group_id=183493220)
+    vk.status.set(text=f"✉сообщений: {msgcount}. ✅Бот был запущен в: {timestatus}мск", group_id=183493220)
