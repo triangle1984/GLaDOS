@@ -68,6 +68,8 @@ try:
                     otvet = smex(text)
                 elif zapros == "/повтори":
                     otvet = repeat(text)
+                elif zapros == "/док" or zapros == "/гиф":
+                    otvet = rdocs(vk, text)
             if otvet:
                 # if "chat_id" in dir(event):
                 #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
