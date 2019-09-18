@@ -147,8 +147,8 @@ def rdocs(vk, text):
     docsow = docs["owner_id"]
     docs = f"doc{docsow}_{docsid}"
     return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
-def nowtime():
-    vrema = datetime.datetime.now()
-    return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
+# def nowtime():
+#     vrema = datetime.datetime.now()
+#     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
 def status(vk, msgcount, timestatus):
-    vk.status.set(text=f"✉сообщений: {msgcount}. ✅Бот был запущен: {timestatus}", group_id=183493220)
+    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=183493220)
