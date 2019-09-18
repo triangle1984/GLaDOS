@@ -1,4 +1,4 @@
-import vk_api, requests, math, random, os
+import vk_api, requests, math, random, os, datetime
 from vk_api.utils import get_random_id
 import wikipedia
 wikipedia.set_lang("ru")
@@ -147,5 +147,7 @@ def rdocs(vk, text):
     docsow = docs["owner_id"]
     docs = f"doc{docsow}_{docsid}"
     return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
-def status(vk, msgcount):
-    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=183493220)
+def nowtime():
+    return datetime.datetime.now()
+def status(vk, msgcount, timestatus):
+    vk.status.set(text=f"✉сообщений: {msgcount}, бот был запущен в: {timestatus}мск", group_id=183493220)

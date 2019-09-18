@@ -23,6 +23,8 @@ def smex(text):
         proverta = text[1]
     except:
         return {"message":helps, "attachment": None}
+    if ss.count > 9999:
+        return
     test = 0
     main = ["Х", "Ы", "Ъ"]
     if ss.smex != None:
