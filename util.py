@@ -56,9 +56,9 @@ def translit(text, vk=None):
                 "lang":"ru-en"}
         r = requests.get(url, params=params)
         encode = r.json()
-        # if vk:
-        #     encode = " ".join(encode["text"][1:])
-        #     return {"message":"Перевод: {}".format(encode),"attachment": None}
+        if vk:
+            encode = " ".join(encode["text"][1:])
+            return {"message":"Перевод: {}".format(encode),"attachment": None}
         return encode["text"][0]
 def weather(text):
     try:
