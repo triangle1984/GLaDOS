@@ -103,9 +103,10 @@ def doulikethis(text):
     return {"message": f"Моя оценка на {text}: {osenka}/10", "attachment": None}
 def wiki(text):
     text = " ".join(text[1:])
-    print(text)
     try:
         wikiotvet = wikipedia.summary(text, sentences=3)
+        if len(wikiotvet) < 355:
+            wikiotvet = wikipedia.summary(text, sentences=6)
     except wikipedia.exceptions.DisambiguationError:
         wikiotvet = "точнее, пожалуйста"
     except wikipedia.exceptions.PageError:
