@@ -150,5 +150,5 @@ def rdocs(vk, text):
 # def nowtime():
 #     vrema = datetime.datetime.now()
 #     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
-def status(vk, msgcount, timestatus):
+def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=183493220)
