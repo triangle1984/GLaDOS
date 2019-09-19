@@ -166,10 +166,13 @@ def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
 
 def who(vk, event, text):
-    whotext = ' '.join(text[1:])
-    whoid = random.choice(vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles'])
-    whofirstname = whoid['first_name']
-    wholastname = whoid['last_name']
-    whoidstr = whoid['id']
-    return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
+    try:
+        whotext = ' '.join(text[1:])
+        whoid = random.choice(vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles'])
+        whofirstname = whoid['first_name']
+        wholastname = whoid['last_name']
+        whoidstr = whoid['id']
+        return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
+    except vk_api.exceptions.ApiError:
+        return {"message":"Для работы этой команды нужна админка!", "attachment": None}
 
