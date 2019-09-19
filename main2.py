@@ -35,13 +35,13 @@ try:
             elif requests == "/погода":
                 response = weather(text)
             elif requests == "слава":
-                response = {"message":"🇺🇦украине🇺🇦", "attachment":None}
+                response = {"message":"🇺🇦украине🇺🇦"}
             elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
                 response = answer(text)
             elif requests == "/off" and event.user_id == 367919273:
                 sys.exit()
             elif requests in helpspisok:
-                response = {"message":help, "attachment":None}
+                response = {"message":help}
             elif requests == "/красилов":
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                 message="Krasyliv")
@@ -95,6 +95,8 @@ try:
                 response = date(text)
             elif requests == "/число":
                 response = number(text)
+            elif requests == "/онлайн" or requests == "/online":
+                response = online(vk, event)
         try:
             if response["message"]:
                 if "attachment" not in response:
