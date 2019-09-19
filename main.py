@@ -82,13 +82,16 @@ try:
                     response = date(text)
                 elif requests == "/число":
                     response = number(text)
-            if response["message"]:
-                if "attachment" not in response:
-                    response["attachment"] = None
-                # if "chat_id" in dir(event):
-                #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                #                     message="от бота: " + response["message"], attachment=response["attachment"])
-                vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                message="от бота: " + response["message"], attachment=response["attachment"])
+            try:
+                if response["message"]:
+                    if "attachment" not in response:
+                        response["attachment"] = None
+                    # if "chat_id" in dir(event):
+                    #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+                    #                     message="от бота: " + response["message"], attachment=response["attachment"])
+                    vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
+                                    message="от бота: " + response["message"], attachment=response["attachment"])
+            except TypeError:
+                continue
 except KeyboardInterrupt:
     sys.exit()

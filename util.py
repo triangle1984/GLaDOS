@@ -54,7 +54,7 @@ def calc(text):
         result = math.cos(x), math.cos(y)
     else:
         return
-    return {"message":"Ваш результат: {}".format(result), "attachment": None}
+    return {"message":"Ваш результат: {}".format(result), }
 def translit(text, vk=None):
         apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
@@ -65,7 +65,7 @@ def translit(text, vk=None):
         encode = r.json()
         if vk:
             encode = " ".join(encode["text"][1:])
-            return {"message":"Перевод: {}".format(encode),"attachment": None}
+            return {"message":"Перевод: {}".format(encode),}
         return encode["text"][0]
 def weather(text):
     try:
@@ -95,7 +95,7 @@ def weather(text):
     🌡Температура: {temp}°
     💧Влажность: {vlaga}
     💨Скорость ветра: {wind}м/с""",
-    "attachment": None}
+    }
 def answer(text):
     zapros = text[0].lower()
     if zapros == "споки" or zapros == "спокойной":
@@ -104,11 +104,11 @@ def answer(text):
     else:
         answer = ["Кук", "зиг хайль", "куку нахуй",
                    "🇺🇦слава украине🇺🇦", "здравствуй", "здравия желаю"]
-    return {"message":random.choice(answer),"attachment": None}
+    return {"message":random.choice(answer),}
 def doulikethis(text):
     osenka = random.randint(0, 10)
     text = " ".join(text[1:])
-    return {"message": f"Моя оценка на {text}: {osenka}/10", "attachment": None}
+    return {"message": f"Моя оценка на {text}: {osenka}/10", }
 def wiki(text):
     text = " ".join(text[1:])
     try:
@@ -141,14 +141,14 @@ def chance(text):
     text = " ".join(text[1:])
     rnd =  random.randint(0, 100)
     message = f"Вероятность {text} равна {rnd}%"
-    return {"message":message, "attachment": None}
+    return {"message":message, }
 def oror(text):
     text = " ".join(text[1:])
     text = random.choice(text.split("или"))
-    return {"message":f"я выбираю: {text}", "attachment": None}
+    return {"message":f"я выбираю: {text}", }
 def repeat(text):
     text = " ".join(text[1:])
-    return{"message": text, "attachment": None}
+    return{"message": text, }
 def rdocs(vk, text):
     text = " ".join(text[1:])
     docs = vk.docs.search(q=text, count=200)
@@ -173,16 +173,16 @@ def who(vk, event, text):
         whofirstname = whoid['first_name']
         wholastname = whoid['last_name']
         whoidstr = whoid['id']
-        return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
+        return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", }
     except:
-        return {"message":"Для работы этой команды нужна админка!", "attachment": None}
+        return {"message":"Для работы этой команды нужна админка!", }
 def valute(text):
         api = "https://www.cbr-xml-daily.ru/daily_json.js"
         r = requests.get(api)
         encode = r.json()
         usd = encode["Valute"]["USD"]["Value"]
         eur = encode["Valute"]["EUR"]["Value"]
-        return {"message":"Доллар: {}₽\nЕвро: {}₽".format(usd, eur), "attachment": None}
+        return {"message":"Доллар: {}₽\nЕвро: {}₽".format(usd, eur), }
 def date(text):
     text = " ".join(text[1:])
     day = random.randint(1,31)
@@ -190,7 +190,7 @@ def date(text):
     year = random.randint(2019, 2100)
     when = year-2019
     event = f"Дата {text}: {day}.{moth}.{year}, через {when} лет"
-    return {"message":event, "attachment": None}
+    return {"message":event, }
 def number(text):
     try:
         x = int(text[1])

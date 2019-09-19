@@ -95,16 +95,19 @@ try:
                 response = date(text)
             elif requests == "/число":
                 response = number(text)
-        if response["message"]:
-            if "attachment" not in response:
-                response["attachment"] = None
-            if event.chat_id:
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                message=response["message"], attachment=response["attachment"])
-            else:
-                vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
-                                message=response["message"], attachment=response["attachment"])
-            msgcount += 1
-            status(vk2, msgcount)
+        try:
+            if response["message"]:
+                if "attachment" not in response:
+                    response["attachment"] = None
+                if event.chat_id:
+                    vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
+                                    message=response["message"], attachment=response["attachment"])
+                else:
+                    vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
+                                    message=response["message"], attachment=response["attachment"])
+                msgcount += 1
+                status(vk2, msgcount)
+        except TypeError:
+            continue
 except KeyboardInterrupt:
     sys.exit()
