@@ -84,6 +84,8 @@ def mainlobby():
                         response = date(text)
                     elif requests == "/число":
                         response = number(text)
+                    elif requests == "/адольф" or requests == "/гитлер":
+                        response = adolf(vk, text)
                 try:
                     if response["message"]:
                         if "attachment" not in response:

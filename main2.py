@@ -97,6 +97,8 @@ try:
                 response = number(text)
             elif requests == "/онлайн" or requests == "/online":
                 response = online(vk, event)
+            elif requests == "/адольф" or requests == "/гитлер":
+                response = adolf(vk2, text)
         try:
             if response["message"]:
                 if "attachment" not in response:
