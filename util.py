@@ -174,7 +174,7 @@ def who(vk, event, text):
         wholastname = whoid['last_name']
         whoidstr = whoid['id']
         return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
-    except vk_api.exceptions.ApiError:
+    except:
         return {"message":"Для работы этой команды нужна админка!", "attachment": None}
 def valute(text):
         api = "https://www.cbr-xml-daily.ru/daily_json.js"
