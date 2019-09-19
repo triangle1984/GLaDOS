@@ -89,6 +89,8 @@ try:
                 otvet = mem(vk2)
             elif zapros == "/кто":
                 otvet = who(vk, event, text)
+            elif zapros == "/курс":
+                otvet = valute(text)
         if otvet:
             if event.chat_id:
                 vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

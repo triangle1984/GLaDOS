@@ -1,4 +1,4 @@
-import vk_api, math, random, os, datetime, time
+import vk_api, math, random, os, datetime, time, requests
 from vk_api.utils import get_random_id
 import wikipedia
 from token2 import group_idd
@@ -175,4 +175,11 @@ def who(vk, event, text):
         return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
     except vk_api.exceptions.ApiError:
         return {"message":"Для работы этой команды нужна админка!", "attachment": None}
+def valute(text):
+        api = "https://www.cbr-xml-daily.ru/daily_json.js"
+        r = requests.get(api)
+        encode = r.json()
+        usd = encode["Valute"]["USD"]["Value"]
+        eur = encode["Valute"]["EUR"]["Value"]
+        return {"message":"Доллар: {}₽\nЕвро: {}₽".format(usd, eur), "attachment": None}
 
