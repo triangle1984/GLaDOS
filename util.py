@@ -24,6 +24,7 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 &#128181;/курс - курс доллара и евро
 ⚰/дата - когда произойдет переданное вами событие
 🎲/число - выбрать число из диапазона. Пример: /число 1 500
+&#128101;/онлайн - покажет онлайн беседы
 github.com/anar66/vk-bot
 """
 def calc(text):
@@ -119,7 +120,7 @@ def wiki(text):
         wikiotvet = "точнее, пожалуйста"
     except wikipedia.exceptions.PageError:
         wikiotvet = "такого нет"
-    return {"message":wikiotvet, "attachment":None}
+    return {"message":wikiotvet}
 def video(vk, text):
     text = " ".join(text[1:])
     max_num = vk.video.search(q=text, count=0)['count']
@@ -199,3 +200,11 @@ def number(text):
     except:
         return
     return {"message":f"Число: {nubmer2}"}
+def online(vk, event):
+    onlinelist = []
+    onlineid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles']
+    for a in onlineid:
+        if a['online'] == 1:
+            onlinelist.append(a['first_name'] + " " + a['last_name'])
+    onlinejoin = "\n".join(onlinelist)
+    return {"message":f"Участники онлайн:\n{onlinejoin}"}
