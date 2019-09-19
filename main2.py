@@ -85,6 +85,8 @@ try:
                 otvet = rdocs(vk2, text)
             elif zapros == "/ноги" or zapros == "/ножки":
                 otvet = legs(vk2)
+            elif zapros == "/мем":
+                otvet = mem(vk2)
         if otvet:
             if event.chat_id:
                 vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

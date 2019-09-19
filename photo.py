@@ -40,3 +40,6 @@ def hentai(vk):
 def legs(vk):
     photo = phootowallrandom(["-174842315", "-102853758", "-134982584", "-138265009", "-114279288"], vk)
     return {"message": "Ножки &#127773;", "attachment": photo}
+def mem(vk):
+    photo = phootowallrandom(["-154306815", "-142918020", "-120254617", "-79805359", "-150550417"], vk)
+    return {"message": None, "attachment": photo}
