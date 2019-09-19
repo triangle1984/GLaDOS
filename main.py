@@ -80,6 +80,8 @@ try:
                     otvet = valute(text)
                 elif zapros == "/дата":
                     otvet = date(text)
+                elif zapros == "/число":
+                    otvet = number(text)
             if otvet:
                 # if "chat_id" in dir(event):
                 #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),

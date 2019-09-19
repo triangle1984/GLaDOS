@@ -189,3 +189,8 @@ def date(text):
     when = year-2019
     event = f"Дата {text}: {day}.{moth}.{year}, через {when} лет"
     return {"message":event, "attachment": None}
+def number(text):
+    x = int(text[1])
+    y = int(text[2])
+    nubmer2 = random.randint(x, y)
+    return {"message":f"Число: {nubmer2}", "attachment": None}
