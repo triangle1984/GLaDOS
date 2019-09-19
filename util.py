@@ -183,4 +183,11 @@ def valute(text):
         usd = encode["Valute"]["USD"]["Value"]
         eur = encode["Valute"]["EUR"]["Value"]
         return {"message":"Доллар: {}₽\nЕвро: {}₽".format(usd, eur), "attachment": None}
-
+def date(text):
+    text = " ".join(text[1:])
+    day = random.randint(1,31)
+    moth = random.randint(1,12)
+    year = random.randint(2019, 2100)
+    when = year-2019
+    event = f"Дата {text}: {day}.{moth}.{year}, через {when} лет"
+    return {"message":event, "attachment": None}
