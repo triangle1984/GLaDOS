@@ -12,7 +12,7 @@ vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 vk2 = vk_session2.get_api()
-longpoll = VkBotLongPoll(vk_session, 183493220)
+longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
 # timestatus = nowtime()
 # varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
@@ -20,7 +20,7 @@ msgcount = 0
 try:
     for event in longpoll.listen():
         try:
-            vk.groups.enableOnline(group_id=183493220)
+            vk.groups.enableOnline(group_id=group_idd)
         except vk_api.exceptions.ApiError:
             None
         otvet = None

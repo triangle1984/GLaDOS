@@ -1,6 +1,7 @@
 import vk_api, math, random, os, datetime, time
 from vk_api.utils import get_random_id
 import wikipedia
+from token2 import group_idd
 wikipedia.set_lang("ru")
 help = """Дроу. Ето бот от *slava_a_i_r(андрея) Возможности:
 🧾Калькулятор - передавать значения через пробел: /калькулятор 2 + 2
@@ -157,4 +158,4 @@ def rdocs(vk, text):
 #     vrema = datetime.datetime.now()
 #     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
 def status(vk, msgcount):
-    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=183493220)
+    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
