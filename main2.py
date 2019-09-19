@@ -40,7 +40,7 @@ try:
                 otvet = answer(text)
             elif zapros == "/off" and event.user_id == 367919273:
                 sys.exit()
-            elif zapros == "/help" or zapros == "/хелп":
+            elif zapros == "/help" or zapros == "/хелп" or zapros == "/начать" or zapros == "/помощь" or zapros == "/команды":
                 otvet = {"message":help, "attachment":None}
             elif zapros == "/красилов":
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
@@ -83,6 +83,8 @@ try:
                 otvet = repeat(text)
             elif zapros == "/док" or zapros == "/гиф":
                 otvet = rdocs(vk2, text)
+            elif zapros == "/ноги" or zapros == "/ножки":
+                otvet = legs(vk2)
         if otvet:
             if event.chat_id:
                 vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
