@@ -42,4 +42,4 @@ def legs(vk):
     return {"message": "Ножки &#127773;", "attachment": photo}
 def mem(vk):
     photo = phootowallrandom(["-154306815", "-142918020", "-120254617", "-79805359", "-150550417"], vk)
-    return {"message": None, "attachment": photo}
+    return {"message": "Держи мемас", "attachment": photo}

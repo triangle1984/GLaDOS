@@ -70,6 +70,14 @@ try:
                     otvet = repeat(text)
                 elif zapros == "/док" or zapros == "/гиф":
                     otvet = rdocs(vk, text)
+                elif zapros == "/ноги" or zapros == "/ножки":
+                    otvet = legs(vk)
+                elif zapros == "/мем":
+                    otvet = mem(vk)
+                elif zapros == "/кто":
+                    otvet = who(vk, event, text)
+                elif zapros == "/курс":
+                    otvet = valute(text)
             if otvet:
                 # if "chat_id" in dir(event):
                 #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
