@@ -198,4 +198,4 @@ def number(text):
         nubmer2 = random.randint(x, y)
     except:
         return
-    return {"message":f"Число: {nubmer2}", "attachment": None}
+    return {"message":f"Число: {nubmer2}"}

@@ -23,7 +23,7 @@ try:
             vk.groups.enableOnline(group_id=group_idd)
         except vk_api.exceptions.ApiError:
             None
-        response = None
+        response = {"message":None}
         if event.object.text:
             text = event.object.text.split()
             try:
@@ -95,7 +95,9 @@ try:
                 response = date(text)
             elif requests == "/число":
                 response = number(text)
-        if response:
+        if response["message"]:
+            if "attachment" not in response:
+                response["attachment"] = None
             if event.chat_id:
                 vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                                 message=response["message"], attachment=response["attachment"])
