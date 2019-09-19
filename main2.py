@@ -19,7 +19,10 @@ varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
 varlalle.start()
 try:
     for event in longpoll.listen():
-        vk.groups.enableOnline(group_id=183493220)
+        try:
+            vk.groups.enableOnline(group_id=183493220)
+        except vk_api.exceptions.ApiError:
+            None
         otvet = None
         if event.object.text:
             text = event.object.text.split()
