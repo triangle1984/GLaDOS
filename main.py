@@ -11,82 +11,82 @@ longpoll = VkLongPoll(vk_session)
 upload = vk_api.VkUpload(vk_session)
 try:
     for event in longpoll.listen():
-        otvet = None
+        response = None
         if "text" in dir(event) and "user_id" in dir(event):
             if event.user_id in allowuser and "chat_id" not in dir(event):
                 text = event.text.split()
                 try:
-                    zapros = text[0].lower()
+                    requests = text[0].lower()
                 except IndexError:
                     continue
-                if zapros == "/калькулятор":
-                    otvet = calc(text)
-                elif zapros == "/погода":
-                    otvet = weather(text)
-                elif zapros == "слава":
-                    otvet = {"message":"🇺🇦украине🇺🇦", "attachment":None}
-                elif zapros in ["привет", "ку", "зиг", "споки", "спокойной"]:
-                    otvet = answer(text)
-                elif zapros == "/off" and event.user_id == 367919273:
+                if requests == "/калькулятор":
+                    response = calc(text)
+                elif requests == "/погода":
+                    response = weather(text)
+                elif requests == "слава":
+                    response = {"message":"🇺🇦украине🇺🇦", "attachment":None}
+                elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
+                    response = answer(text)
+                elif requests == "/off" and event.user_id == 367919273:
                     sys.exit()
-                elif zapros == "/help" or zapros == "/хелп":
-                    otvet = {"message":help, "attachment":None}
-                elif zapros == "/красилов":
+                elif requests == "/help" or requests == "/хелп":
+                    response = {"message":help, "attachment":None}
+                elif requests == "/красилов":
                     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                     message="Krasyliv")
-                elif zapros == "/каты":
-                    otvet = cats(vk)
-                elif zapros == "/переводчик":
-                    otvet = translit(text, vk)
-                elif zapros == "/юри":
-                    otvet = yuri(vk)
-                elif zapros == "/геббельс":
-                    otvet = gebbels(vk)
-                elif zapros == "/яой":
-                    otvet = yaoi(vk)
-                elif zapros == "/трапы":
-                    otvet = trap(vk)
-                elif zapros == "/лоли":
-                    otvet = loli(vk)
-                elif zapros == "/оцени":
-                    otvet = doulikethis(text)
-                elif zapros == "/вики":
-                    otvet = wiki(text)
-                elif zapros == "/махно":
-                    otvet = mahno(vk)
-                elif zapros == "/цитаты":
-                    otvet = citati(vk)
-                elif zapros == "/калян":
-                    otvet = colyan(vk)
-                elif zapros == "/видео":
-                    otvet = video(vk, text)
-                elif zapros == "/вероятность" or zapros == "/шансы":
-                    otvet = chance(text)
-                elif zapros == "/выбери":
-                    otvet = oror(text)
-                elif zapros == "/смех":
-                    otvet = smex(text)
-                elif zapros == "/повтори":
-                    otvet = repeat(text)
-                elif zapros == "/док" or zapros == "/гиф":
-                    otvet = rdocs(vk, text)
-                elif zapros == "/ноги" or zapros == "/ножки":
-                    otvet = legs(vk)
-                elif zapros == "/мем":
-                    otvet = mem(vk)
-                elif zapros == "/кто":
-                    otvet = who(vk, event, text)
-                elif zapros == "/курс":
-                    otvet = valute(text)
-                elif zapros == "/дата":
-                    otvet = date(text)
-                elif zapros == "/число":
-                    otvet = number(text)
-            if otvet:
+                elif requests == "/каты":
+                    response = cats(vk)
+                elif requests == "/переводчик":
+                    response = translit(text, vk)
+                elif requests == "/юри":
+                    response = yuri(vk)
+                elif requests == "/геббельс":
+                    response = gebbels(vk)
+                elif requests == "/яой":
+                    response = yaoi(vk)
+                elif requests == "/трапы":
+                    response = trap(vk)
+                elif requests == "/лоли":
+                    response = loli(vk)
+                elif requests == "/оцени":
+                    response = doulikethis(text)
+                elif requests == "/вики":
+                    response = wiki(text)
+                elif requests == "/махно":
+                    response = mahno(vk)
+                elif requests == "/цитаты":
+                    response = citati(vk)
+                elif requests == "/калян":
+                    response = colyan(vk)
+                elif requests == "/видео":
+                    response = video(vk, text)
+                elif requests == "/вероятность" or requests == "/шансы":
+                    response = chance(text)
+                elif requests == "/выбери":
+                    response = oror(text)
+                elif requests == "/смех":
+                    response = smex(text)
+                elif requests == "/повтори":
+                    response = repeat(text)
+                elif requests == "/док" or requests == "/гиф":
+                    response = rdocs(vk, text)
+                elif requests == "/ноги" or requests == "/ножки":
+                    response = legs(vk)
+                elif requests == "/мем":
+                    response = mem(vk)
+                elif requests == "/кто":
+                    response = who(vk, event, text)
+                elif requests == "/курс":
+                    response = valute(text)
+                elif requests == "/дата":
+                    response = date(text)
+                elif requests == "/число":
+                    response = number(text)
+            if response:
                 # if "chat_id" in dir(event):
                 #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                #                     message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+                #                     message="от бота: " + response["message"], attachment=response["attachment"])
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                message="от бота: " + otvet["message"], attachment=otvet["attachment"])
+                                message="от бота: " + response["message"], attachment=response["attachment"])
 except KeyboardInterrupt:
     sys.exit()
