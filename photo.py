@@ -5,7 +5,7 @@ def args2():
     args.add_argument("-c", "--count", type=int, default=1)
     return args
 def phootowallrandom(groups, vk, text, albid="wall"):
-    try
+    try:
         a = args2()
         a = a.parse_args(text[1:])
     except:
