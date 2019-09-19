@@ -123,7 +123,7 @@ def video(vk, text):
     text = " ".join(text[1:])
     max_num = vk.video.search(q=text, count=0)['count']
     while 1:
-        num = random.randint(0, max_num-1)
+        num = random.randint(0, max_num)
         if num > 4000:
             continue
         else:
