@@ -46,35 +46,35 @@ try:
                 vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                 message="Krasyliv")
             elif requests == "/каты":
-                response = cats(vk2)
+                response = cats(vk2, text)
             elif requests == "/переводчик":
                 response = translit(text, vk)
             elif requests == "/юри":
-                response = yuri(vk2)
+                response = yuri(vk2, text)
             elif requests == "/геббельс":
-                response = gebbels(vk2)
+                response = gebbels(vk2, text)
             elif requests == "/яой":
-                response = yaoi(vk2)
+                response = yaoi(vk2, text)
             elif requests == "/трапы":
-                response = trap(vk2)
+                response = trap(vk2, text)
             elif requests == "/лоли":
-                response = loli(vk2)
+                response = loli(vk2,text)
             elif requests == "/оцени":
                 response = doulikethis(text)
             elif requests == "/вики":
                 response = wiki(text)
             elif requests == "/махно":
-                response = mahno(vk2)
+                response = mahno(vk2, text)
             elif requests == "/цитаты":
-                response = citati(vk2)
+                response = citati(vk2, text)
             elif requests == "/калян":
-                response = colyan(vk2)
+                response = colyan(vk2, text)
             elif requests == "/видео":
                 response = video(vk2, text)
             elif requests == "/вероятность" or requests == "/шансы":
                 response = chance(text)
             elif requests == "/хентай":
-                response = hentai(vk2)
+                response = hentai(vk2, text)
             elif requests == "/выбери":
                 response = oror(text)
             elif requests == "/смех":
@@ -84,9 +84,9 @@ try:
             elif requests == "/док" or requests == "/гиф":
                 response = rdocs(vk2, text)
             elif requests == "/ноги" or requests == "/ножки":
-                response = legs(vk2)
+                response = legs(vk2, text)
             elif requests == "/мем":
-                response = mem(vk2)
+                response = mem(vk2, text)
             elif requests == "/кто":
                 response = who(vk, event, text)
             elif requests == "/курс":
