@@ -5,7 +5,7 @@ from token2 import *
 from util import *
 from photo import *
 from smeh import *
-from wall import post
+# from wall import post
 import vk_api, requests, sys
 from threading import Thread
 vk_session = vk_api.VkApi(token=token)
@@ -15,8 +15,8 @@ vk2 = vk_session2.get_api()
 longpoll = VkBotLongPoll(vk_session, 183493220)
 msgcount = 0
 # timestatus = nowtime()
-varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
-varlalle.start()
+# varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
+# varlalle.start()
 try:
     for event in longpoll.listen():
         try:

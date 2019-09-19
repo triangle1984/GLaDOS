@@ -1,4 +1,4 @@
-import vk_api, requests, math, random, os, datetime
+import vk_api, math, random, os, datetime, time
 from vk_api.utils import get_random_id
 import wikipedia
 wikipedia.set_lang("ru")
@@ -115,13 +115,19 @@ def wiki(text):
     return {"message":wikiotvet, "attachment":None}
 def video(vk, text):
     text = " ".join(text[1:])
-    video = vk.video.search(q=text, count=50)
+    max_num = vk.video.search(q=text, count=0)['count']
+    while 1:
+        num = random.randint(0, max_num-1)
+        if num > 4000:
+            continue
+        else:
+            break
     try:
-        videor = random.choice(video["items"])
-    except:
+        video = vk.video.search(q=text, count=1, offset=num)["items"][0]
+    except KeyboardInterrupt:
         return
-    videoid = videor["id"]
-    videoow = videor["owner_id"]
+    videoid = video["id"]
+    videoow = video["owner_id"]
     video = f"video{videoow}_{videoid}"
     return{"message": f"Ведосик по заказу - {text}:", "attachment":video}
 def chance(text):
