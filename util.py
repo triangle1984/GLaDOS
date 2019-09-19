@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 import wikipedia
 from token2 import group_idd
 wikipedia.set_lang("ru")
+helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
 🧾Калькулятор - передавать значения через пробел: /калькулятор 2 + 2
 ☁/погода - мона писать город на русском, не сработает = ингиш, игнор = ошибка
@@ -21,7 +22,9 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 💾/гиф или /док - скинет вам гифку или документ с переданным названием
 &#127773;/ноги - ножки 2д или 3д тянок
 &#128516;/мем - кидает рандомный мем
-github.com/anar66/vk-bot"""
+&#128064;/кто - выбирает рандомного человека в беседе под вашим предлогом
+github.com/anar66/vk-bot
+"""
 def calc(text):
     try:
         x = text[1]; x = int(x)
@@ -161,3 +164,12 @@ def rdocs(vk, text):
 #     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
 def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
+
+def who(vk, event, text):
+    whotext = ' '.join(text[1:])
+    whoid = random.choice(vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles'])
+    whofirstname = whoid['first_name']
+    wholastname = whoid['last_name']
+    whoidstr = whoid['id']
+    return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", "attachment": None}
+
