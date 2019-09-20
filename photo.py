@@ -9,7 +9,7 @@ def phootowallrandom(groups, vk, text, albid="wall"):
         a = args2()
         a = a.parse_args(text[1:])
     except:
-        return
+        exit(1)
     photo2 = []
     if a.count > 10:
         a.count = 10
