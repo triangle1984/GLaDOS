@@ -2,7 +2,7 @@
 import random, sys, argparse
 def args():
     args = argparse.ArgumentParser(description="генератор смеха")
-    args.add_argument("-c", "--count", type=int, default=25)
+    args.add_argument("-c","-с", "--count", type=int, default=25)
     args.add_argument("-s", "--smex", default=None)
     args.add_argument("-s2", "--smexslova", default=None)
     return args
