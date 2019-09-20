@@ -203,10 +203,12 @@ def number(text):
         return
     return {"message":f"Число: {nubmer2}"}
 def online(vk, event):
+    onlinenumber = 0
     onlinelist = []
     onlineid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles']
     for a in onlineid:
         if a['online'] == 1:
-            onlinelist.append(a['first_name'] + " " + a['last_name'])
+            onlinenumber+=1
+            onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
     onlinejoin = "\n".join(onlinelist)
     return {"message":f"Участники онлайн:\n{onlinejoin}"}
