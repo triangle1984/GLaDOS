@@ -111,3 +111,4 @@ botutil.py
 pull.py
 test.sh
 wall.py
+.vscode/
