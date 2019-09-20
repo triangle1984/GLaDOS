@@ -93,7 +93,7 @@ def weather(text):
         wind = encode["list"][0]["wind"]["speed"]
     except:
         return
-    return {"message":f"""Город: {qr}
+    return {"message":f"""Город: {q}
     🌥Погода: {w}
     🌡Температура: {temp}°
     💧Влажность: {vlaga}
