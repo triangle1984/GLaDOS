@@ -6,14 +6,12 @@ from photo import *
 from smeh import *
 import vk_api, requests, sys
 def mainlobby():
-    global text
     vk_session = vk_api.VkApi(token=token22)
     vk = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
-    upload = vk_api.VkUpload(vk_session)
     try:
         for event in longpoll.listen():
-            response = {"message":None}
+            Response = {"message":None}
             if "text" in dir(event) and "user_id" in dir(event):
                 if event.user_id in allowuser and "chat_id" not in dir(event):
                     text = event.text.split()

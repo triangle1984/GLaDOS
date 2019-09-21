@@ -222,3 +222,7 @@ def callall(vk, event):
         calllist.append(f"@id{str(a['id'])} ({a['first_name']} {a['last_name']})")
     calljoin = ", ".join(calllist)
     return {"message":f"Я ПРИЗЫВАЮ ВАС:\n{calljoin}"}
+def getusername(vk, uid):
+    requests = vk.users.get(user_ids=uid, fields="first_name")
+    response = requests[0]["first_name"]
+    return response
