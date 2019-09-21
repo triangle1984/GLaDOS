@@ -214,3 +214,10 @@ def online(vk, event):
             onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
     onlinejoin = "\n".join(onlinelist)
     return {"message":f"Участники онлайн:\n{onlinejoin}"}
+def callall(vk, event):
+    calllist = []
+    callid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles']
+    for a in callid:
+        calllist.append(f"@id{str(a['id'])} ({a['first_name']} {a['last_name']})")
+    calljoin = ", ".join(calllist)
+    return {"message":f"Я ПРИЗЫВАЮ ВАС:\n{calljoin}"}
