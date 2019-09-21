@@ -136,6 +136,8 @@ def video(vk, text):
         video = vk.video.search(q=text, count=1, offset=num)["items"][0]
     except KeyboardInterrupt:
         return
+    except IndexError:
+        return{"message": f"Ничего не найдено!"}
     videoid = video["id"]
     videoow = video["owner_id"]
     video = f"video{videoow}_{videoid}"
