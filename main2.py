@@ -99,8 +99,13 @@ try:
                 response = online(vk, event)
             elif requests == "/адольф" or requests == "/гитлер":
                 response = adolf(vk2, text)
+            elif requests == "/призыв":
+                response = callall(vk, event)
         try:
-            if response["message"]:
+            if event.type == VkBotEventType.GROUP_JOIN:
+                idjoin = f"*id{event.object['user_id']}"
+                vk.messages.send(user_id=recipient, random_id=get_random_id(), message=f'В группу вступил новый пользователь! {idjoin}', attachment=None)
+            elif response["message"]:
                 if "attachment" not in response:
                     response["attachment"] = None
                 if event.chat_id:
