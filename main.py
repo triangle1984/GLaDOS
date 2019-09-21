@@ -11,7 +11,7 @@ def mainlobby():
     longpoll = VkLongPoll(vk_session)
     try:
         for event in longpoll.listen():
-            Response = {"message":None}
+            response = {"message":None}
             if "text" in dir(event) and "user_id" in dir(event):
                 if event.user_id in allowuser and "chat_id" not in dir(event):
                     text = event.text.split()
