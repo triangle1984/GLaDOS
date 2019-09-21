@@ -2,7 +2,7 @@ import vk_api, requests, random, argparse
 from vk_api.utils import get_random_id
 def args2():
     args = argparse.ArgumentParser(description="картинки")
-    args.add_argument("-c", "--count", type=int, default=1)
+    args.add_argument("-с", "-c", "--count", type=int, default=1)
     return args
 def phootowallrandom(groups, vk, text, albid="wall"):
     try:
