@@ -137,7 +137,7 @@ def video(vk, text):
     except KeyboardInterrupt:
         return
     except IndexError:
-        return{"message": f"Ничего не найдено!"}
+        return{"message": "Ничего не найдено!"}
     videoid = video["id"]
     videoow = video["owner_id"]
     video = f"video{videoow}_{videoid}"
@@ -156,11 +156,11 @@ def repeat(text):
     return{"message": text, }
 def rdocs(vk, text):
     text = " ".join(text[1:])
-    docs = vk.docs.search(q=text, count=200)
     try:
+        docs = vk.docs.search(q=text, count=200)
         docs = random.choice(docs["items"])
-    except:
-        return
+    except IndexError:
+        return{"message": "Ничего не найдено!"}
     docsid = docs["id"]
     docsow = docs["owner_id"]
     docs = f"doc{docsow}_{docsid}"
