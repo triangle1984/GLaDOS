@@ -3,7 +3,7 @@ from pymysql.cursors import DictCursor
 from contextlib import closing
 def auth():
     # не пытайтесь подключиться, айпишники локальные
-    conn = pymysql.connect(host="10.59.111.63",
+    conn = pymysql.connect(host=ip,
                              user="root",
                              password="123",
                              db="mydb",
