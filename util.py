@@ -181,7 +181,7 @@ def who(vk, event, text):
         whoidstr = whoid['id']
         return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", }
     except:
-        return {"message":"Для работы этой команды нужна админка!", }
+        return {"message":"Для работы этой команды боту нужна админка в беседе!", }
 def valute(text):
         api = "https://www.cbr-xml-daily.ru/daily_json.js"
         r = requests.get(api)

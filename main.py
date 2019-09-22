@@ -5,6 +5,7 @@ from util import *
 from photo import *
 from smeh import *
 import vk_api, requests, sys
+from vksql import *
 def mainlobby():
     vk_session = vk_api.VkApi(token=token22)
     vk = vk_session.get_api()
@@ -88,11 +89,14 @@ def mainlobby():
                     if response["message"]:
                         if "attachment" not in response:
                             response["attachment"] = None
+                        uname = getusername(vk, event.user_id)
+                        prefix = saveload(event.user_id, uname)
                         # if "chat_id" in dir(event):
                         #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                         #                     message="от бота: " + response["message"], attachment=response["attachment"])
                         vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                        message="от бота: " + response["message"], attachment=response["attachment"])
+                                         message=f"от бота: {prefix['name']}, {response['message']}",
+                                         attachment=response["attachment"])
                 except TypeError:
                     continue
     except KeyboardInterrupt:

@@ -8,6 +8,7 @@ from smeh import *
 # from wall import post
 import vk_api, requests, sys
 from threading import Thread
+from vksql import saveload
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
@@ -104,16 +105,23 @@ try:
         try:
             if event.type == VkBotEventType.GROUP_JOIN:
                 idjoin = f"*id{event.object['user_id']}"
-                vk.messages.send(user_id=recipient, random_id=get_random_id(), message=f'В группу вступил новый пользователь! {idjoin}', attachment=None)
-            elif response["message"]:
+                vk.messages.send(user_id=recipient, random_id=get_random_id(),
+                                 message=f'В группу вступил новый пользователь! {idjoin}',
+                                 attachment=None)
+            if response["message"]:
                 if "attachment" not in response:
                     response["attachment"] = None
+                uname = getusername(vk, event.object.from_id)
+                prefix = saveload(event.object.from_id, uname)
+
                 if event.chat_id:
                     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                    message=response["message"], attachment=response["attachment"])
+                                    message=f"{prefix['name']}, {response['message']}",
+                                     attachment=response["attachment"])
                 else:
                     vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
-                                    message=response["message"], attachment=response["attachment"])
+                                    message=f"{prefix['name']}, {response['message']}",
+                                    attachment=response["attachment"])
                 msgcount += 1
                 status(vk2, msgcount)
         except TypeError:
