@@ -22,6 +22,8 @@ from botutil import *
 # varlalle.start()
 try:
     for event in longpoll.listen():
+        if event.type == VkBotEventType.GROUP_JOIN:
+            groupjoin(vk, event)
         try:
             vk.groups.enableOnline(group_id=group_idd)
         except vk_api.exceptions.ApiError:
@@ -31,10 +33,17 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
+            if checkban(uid) == "kill him":
+                continue
             try:
                 requests = text[0].lower()
             except IndexError:
                 continue
+            if checktable("admins","id", uid):
+                if requests == "/бан":
+                        ban(event.object.reply_message['from_id'])
+                elif requests == "/разбан":
+                        unban(event.object.reply_message['from_id'])
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
@@ -108,16 +117,8 @@ try:
                 response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
-            elif requests == "/бан":
-                if event.object.reply_message:
-                    ban(event.object.reply_message['from_id'])
-            elif requests == "/разбан":
-                if event.object.reply_message:
-                    unban(event.object.reply_message['from_id'])
-                
+
         try:
-            if event.type == VkBotEventType.GROUP_JOIN:
-                groupjoin(vk, event)
             if response["message"]:
                 prefix = saveload(uid, uname)
                 if "attachment" not in response:
