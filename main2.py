@@ -117,6 +117,8 @@ try:
                 response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
+            elif requests == "/кик":
+                response = kick(vk, event)
 
         try:
             if response["message"]:
