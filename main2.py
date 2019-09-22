@@ -109,6 +109,13 @@ try:
                 response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
+            elif requests == "/бан":
+                if event.object.reply_message:
+                    ban(event.object.reply_message['from_id'])
+            elif requests == "/разбан":
+                if event.object.reply_message:
+                    unban(event.object.reply_message['from_id'])
+                
         try:
             if event.type == VkBotEventType.GROUP_JOIN:
                 groupjoin(vk, event)

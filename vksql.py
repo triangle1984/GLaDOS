@@ -37,3 +37,21 @@ def update(uid, name, text):
         cursor.execute(query)
         conn.commit()
     return {"message":"се ваш префикс сменен"}
+def ban(uid):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"INSERT INTO ban (id) VALUES ({uid})"
+        cursor.execute(query)
+        conn.commit()
+def unban(uid):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"DELETE FROM ban WHERE id = {uid}"
+        cursor.execute(query)
+        conn.commit()
+#def checkban(uid):
+#    conn = auth()
+#    with conn.cursor() as cursor:
+#        query = f"SELECT * FROM ban WHERE id = '{uid}'"
+#        cursor.execute(query)
+#        if cursor.fetchone():
