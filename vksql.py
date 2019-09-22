@@ -3,7 +3,6 @@ from token2 import ip
 from pymysql.cursors import DictCursor
 from contextlib import closing
 def auth():
-    # не пытайтесь подключиться, айпишники локальные
     conn = pymysql.connect(host=ip,
                              user="root",
                              password="123",
@@ -27,3 +26,14 @@ def saveload(uid, uname):
             query = f"SELECT * FROM prefix WHERE id = '{uid}'"
             cursor.execute(query)
             return cursor.fetchone()
+def update(uid, name, text):
+    saveload(uid, name)
+    conn = auth()
+    newname = " ".join(text[1:])
+    if len(newname) > 29:
+        return {"message":"максимальная длинна префикса: 30 символов"}
+    with conn.cursor() as cursor:
+        query = f"UPDATE prefix SET name = '{newname}' WHERE id = '{uid}'"
+        cursor.execute(query)
+        conn.commit()
+    return {"message":"се ваш префикс сменен"}

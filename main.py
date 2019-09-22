@@ -20,6 +20,8 @@ def mainlobby():
                         requests = text[0].lower()
                     except IndexError:
                         continue
+                    uid = event.user_id
+                    uname = getusername(vk,uid)
                     if requests == "/калькулятор":
                         response = calc(text)
                     elif requests == "/погода":
@@ -85,12 +87,13 @@ def mainlobby():
                         response = number(text)
                     elif requests == "/адольф" or requests == "/гитлер":
                         response = adolf(vk, text)
+                    elif requests == "/префикс":
+                        response = update(uid, uname, text)
                 try:
                     if response["message"]:
                         if "attachment" not in response:
                             response["attachment"] = None
-                        uname = getusername(vk, event.user_id)
-                        prefix = saveload(event.user_id, uname)
+                        prefix = saveload(uid, uname)
                         # if "chat_id" in dir(event):
                         #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                         #                     message="от бота: " + response["message"], attachment=response["attachment"])

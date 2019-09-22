@@ -15,6 +15,7 @@ vk = vk_session.get_api()
 vk2 = vk_session2.get_api()
 longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
+from vksql import *
 # timestatus = nowtime()
 # varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
 # varlalle.start()
@@ -27,6 +28,8 @@ try:
         response = {"message":None}
         if event.object.text:
             text = event.object.text.split()
+            uid = event.object.from_id
+            uname = getusername(vk,uid)
             try:
                 requests = text[0].lower()
             except IndexError:
@@ -39,7 +42,7 @@ try:
                 response = {"message":"🇺🇦украине🇺🇦"}
             elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
                 response = answer(text)
-            elif requests == "/off" and event.user_id == 367919273:
+            elif requests == "/off" and event.from_id == 367919273:
                 sys.exit()
             elif requests in helpspisok:
                 response = {"message":help}
@@ -102,6 +105,8 @@ try:
                 response = adolf(vk2, text)
             elif requests == "/призыв":
                 response = callall(vk, event)
+            elif requests == "/префикс":
+                response = update(uid, uname, text)
         try:
             if event.type == VkBotEventType.GROUP_JOIN:
                 idjoin = f"*id{event.object['user_id']}"
