@@ -31,7 +31,6 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
-            prefix = saveload(uid, uname)
             try:
                 requests = text[0].lower()
             except IndexError:
@@ -113,6 +112,7 @@ try:
             if event.type == VkBotEventType.GROUP_JOIN:
                 groupjoin(vk, event)
             if response["message"]:
+                prefix = saveload(uid, uname)
                 if "attachment" not in response:
                     response["attachment"] = None
 
