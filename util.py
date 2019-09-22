@@ -233,9 +233,3 @@ def getusername(vk, uid):
         return
     response = requests[0]["first_name"]
     return response
-def kick(vk, event):
-    checkadmin = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['items']
-    try:
-        vk.messages.removeChatUser(chat_id=event.chat_id, user_id=event.object.reply_message['from_id'])
-    except:
-        return {'message':"Вы не можете кикнуть этого пользователя!"}
