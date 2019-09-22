@@ -16,6 +16,7 @@ vk2 = vk_session2.get_api()
 longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
 from vksql import *
+from botutil import *
 # timestatus = nowtime()
 # varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
 # varlalle.start()
@@ -30,6 +31,7 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
+            prefix = saveload(uid, uname)
             try:
                 requests = text[0].lower()
             except IndexError:
@@ -109,15 +111,10 @@ try:
                 response = update(uid, uname, text)
         try:
             if event.type == VkBotEventType.GROUP_JOIN:
-                idjoin = f"*id{event.object['user_id']}"
-                vk.messages.send(user_id=recipient, random_id=get_random_id(),
-                                 message=f'В группу вступил новый пользователь! {idjoin}',
-                                 attachment=None)
+                groupjoin(vk, event)
             if response["message"]:
                 if "attachment" not in response:
                     response["attachment"] = None
-                uname = getusername(vk, event.object.from_id)
-                prefix = saveload(event.object.from_id, uname)
 
                 if event.chat_id:
                     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
