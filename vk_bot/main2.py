@@ -127,8 +127,8 @@ try:
                 response = online(vk, event)
             elif requests == "/адольф" or requests == "/гитлер":
                 response = adolf(vk2, text)
-            elif requests == "/призыв":
-                response = callall(vk, event)
+            # elif requests == "/призыв":
+            #     response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
 
