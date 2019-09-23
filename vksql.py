@@ -9,6 +9,13 @@ def auth():
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
+def test():
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"SELECT * FROM mailing"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
 def checktable(table, value, should):
     conn = auth()
     with conn.cursor() as cursor:
@@ -69,3 +76,12 @@ def checkban(uid):
         cursor.execute(query)
         if cursor.fetchone():
             return "kill him"
+def tablerm(table, value, uid):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"DELETE FROM {table} WHERE {value} = {uid}"
+        cursor.execute(query)
+        query = f"INSERT INTO {table} WHERE {value} = {uid}"
+        cursor.execute(query)
+        conn.commit()
+test()

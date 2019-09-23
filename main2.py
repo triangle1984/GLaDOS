@@ -22,6 +22,14 @@ from botutil import *
 # varlalle.start()
 try:
     for event in longpoll.listen():
+        try:
+            check = checktable('mailing', 'id', event.chat_id)
+            if check:
+                tablerm('mailing', 'id', event.chat_id)
+            else:
+                tableadd('mailing', 'id', event.chat_id)
+        except:
+            None
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
         try:
@@ -44,6 +52,10 @@ try:
                         ban(event.object.reply_message['from_id'])
                 elif requests == "/разбан":
                         unban(event.object.reply_message['from_id'])
+                elif requests == "/рассылка":
+                    text = " ".join(text[1:])
+                    for a in test():
+                        vk.messages.send(chat_id=a['id'], random_id=get_random_id(), message=text)
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
