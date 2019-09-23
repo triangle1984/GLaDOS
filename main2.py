@@ -104,7 +104,9 @@ try:
             elif requests == "/выбери":
                 response = oror(text)
             elif requests == "/смех":
-                response = smex(text)
+                response = smex(text, uid)
+            elif requests == "/смехк":
+                response = smex(text, uid, db=True)
             elif requests == "/повтори":
                 response = repeat(text)
             elif requests == "/док" or requests == "/гиф":
