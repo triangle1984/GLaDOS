@@ -48,6 +48,8 @@ def calc(text):
     elif encalc == "*" or encalc == "умножение":
         result = x * y
     elif encalc == "**" or encalc == "степень" or encalc == "^":
+        if x > 999999 or y > 999999:
+            return
         result = x ** y
     elif encalc == "/":
         try:
