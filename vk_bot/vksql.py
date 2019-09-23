@@ -1,5 +1,6 @@
 import pymysql
-from token2 import ip
+from token2 import ip, tablechat
+from vk_api.utils import get_random_id
 from pymysql.cursors import DictCursor
 from contextlib import closing
 def auth():
@@ -9,13 +10,16 @@ def auth():
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
-def test():
+def sendall(event, text, vk):
+    text = " ".join(text[1:])
     conn = auth()
     with conn.cursor() as cursor:
-        query = f"SELECT * FROM mailing"
+        query = f"SELECT * FROM {tablechat}"
         cursor.execute(query)
         result = cursor.fetchall()
-        return result
+        for a in result:
+            vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
+                             message=text)
 def checktable(table, value, should):
     conn = auth()
     with conn.cursor() as cursor:
@@ -96,3 +100,7 @@ def smehdb(ss,uid, db=False):
             ss.smex = check["smeh"]
             ss.smexslova = check["smehslova"]
             return ss
+def checkchat(event):
+    check = checktable(tablechat, 'id', event.chat_id)
+    if check == None:
+        tableadd(tablechat, 'id', event.chat_id)
