@@ -9,6 +9,13 @@ def auth():
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
+def test():
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"SELECT * FROM mailing"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
 def checktable(table, value, should):
     conn = auth()
     with conn.cursor() as cursor:
