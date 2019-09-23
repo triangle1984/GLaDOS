@@ -17,7 +17,11 @@ def smex(text, uid, db=False):
     /смех -s2 .exe -c 69
     /смех -s хпх -c 50
     /смех -s хпхп
-    /смех -c 69 """
+    /смех -c 69
+    А так же, все тоже самое, но со /смехк - запишет ваши настройки для генератора
+    То есть: после /смехк -s2 .exe -c 69 , в /смех без аргументов - будет
+    использоваться то, что вы передали в /смехк
+    """
     ss = args()
     try:
         ss = ss.parse_args(text[1:])
@@ -26,6 +30,8 @@ def smex(text, uid, db=False):
         ss2 =  smehdb(ss, uid, db)
         if ss2:
             ss = ss2
+    except:
+        return {"message":helps}
     if db:
         smehdb(ss, uid, db)
     if ss.count > 9999:
