@@ -20,7 +20,10 @@ def mainlobby():
                         requests = text[0].lower()
                     except IndexError:
                         continue
-                    uid = event.user_id
+                    if event.from_me:
+                        uid = recipient
+                    else:
+                        uid = event.user_id
                     uname = getusername(vk,uid)
                     if requests == "/калькулятор":
                         response = calc(text)
