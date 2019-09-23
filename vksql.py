@@ -15,10 +15,16 @@ def checktable(table, value, should):
         query = f"SELECT * FROM {table} WHERE {value} = '{should}'"
         cursor.execute(query)
     return cursor.fetchone()
-def tableadd(table, value, add):
+def tableadd(table, value, add, one=False):
     conn = auth()
     with conn.cursor() as cursor:
         query = f"INSERT INTO {table} ({value}) VALUES ({add})"
+        cursor.execute(query)
+        conn.commit()
+def tablerm(table, value, rm):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"DELETE FROM {table} WHERE {value} = '{rm}'"
         cursor.execute(query)
         conn.commit()
 def saveload(uid, uname):
@@ -69,3 +75,17 @@ def checkban(uid):
         cursor.execute(query)
         if cursor.fetchone():
             return "kill him"
+def smehdb(ss,uid, db=False):
+    check = checktable("smehgen","id", uid)
+    if db:
+        value = f"id, count, smeh, smehslova"
+        add = f"{uid}, {ss.count}, '{ss.smex}', '{ss.smexslova}'"
+        if check:
+            tablerm("smehgen", "id", uid)
+        tableadd("smehgen", value, add)
+    else:
+        if check:
+            ss.count = check["count"]
+            ss.smex = check["smeh"]
+            ss.smexslova = check["smehslova"]
+            return ss
