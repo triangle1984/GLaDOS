@@ -1,3 +1,4 @@
 # тест
 vk_api
 requests
+pymysql
