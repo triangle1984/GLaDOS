@@ -100,6 +100,9 @@ def mainlobby():
                         response = update(uid, uname, text)
                     elif requests == "/жив?":
                         response = ping()
+                    elif requests == "/конвертер":
+                        response = convvalute(text)
+
                 try:
                     if response["message"]:
                         if "attachment" not in response:
