@@ -14,7 +14,11 @@ def mainlobby():
         for event in longpoll.listen():
             response = {"message":None}
             if "text" in dir(event) and "user_id" in dir(event):
-                if event.user_id in allowuser and "chat_id" not in dir(event):
+                if event.from_me:
+                    uid = recipient
+                else:
+                    uid = event.user_id
+                if uid in allowuser and "chat_id" not in dir(event):
                     text = event.text.split()
                     try:
                         requests = text[0].lower()
