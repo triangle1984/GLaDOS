@@ -22,7 +22,6 @@ from botutil import *
 # varlalle.start()
 try:
     for event in longpoll.listen():
-        checkchat(event)
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
         try:
@@ -31,6 +30,7 @@ try:
             None
         response = {"message":None}
         if event.object.text:
+            checkchat(event)
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)

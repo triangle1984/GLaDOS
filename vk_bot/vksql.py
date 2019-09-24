@@ -101,6 +101,9 @@ def smehdb(ss,uid, db=False):
             ss.smexslova = check["smehslova"]
             return ss
 def checkchat(event):
-    check = checktable(tablechat, 'id', event.chat_id)
+    try:
+        check = checktable(tablechat, 'id', event.chat_id)
+    except:
+        return
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
