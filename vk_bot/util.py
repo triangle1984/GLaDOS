@@ -132,19 +132,8 @@ def wiki(text):
     return {"message":wikiotvet}
 def video(vk, text):
     text = " ".join(text[1:])
-    max_num = vk.video.search(q=text, count=0)['count']
-    while 1:
-        num = random.randint(0, max_num)
-        if num > 4000:
-            continue
-        else:
-            break
-    try:
-        video = vk.video.search(q=text, count=1, offset=num)["items"][0]
-    except KeyboardInterrupt:
-        return
-    except IndexError:
-        return{"message": "Ничего не найдено!"}
+    video = vk.video.search(q=text, count=50)
+    video = random.choice(video["items"])
     videoid = video["id"]
     videoow = video["owner_id"]
     video = f"video{videoow}_{videoid}"
