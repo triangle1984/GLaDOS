@@ -127,6 +127,8 @@ try:
                 response = ping()
             elif requests == "/конвертер":
                 response = convvalute(text)
+            elif requests == "/новость":
+                response = news()
 
         try:
             if response["message"]:
