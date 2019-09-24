@@ -236,8 +236,10 @@ def convvalute(text):
         encode = r.json()
         usd = encode["Valute"]["USD"]["Value"]
         eur = encode["Valute"]["EUR"]["Value"]
-        val = int(text[1])
-        if text[2] == "usd":
-            return {"message": f"💰{val}$:\nВ рублях: {round(val*usd, 3)}₽\nВ евро: {round(val*usd/eur, 3)}€"}
+        val = float(text[1])
+        if val <= 0:
+            return {"message": "Число должно быть больше 0!"}
+        elif text[2] == "usd":
+            return {"message": f"💰{'%g'%val}$:\nВ рублях: {round(val*usd, 3)}₽\nВ евро: {round(val*usd/eur, 3)}€"}
         elif text[2] == "eur":
-            return {"message": f"💰{val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
+            return {"message": f"💰{'%g'%val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
