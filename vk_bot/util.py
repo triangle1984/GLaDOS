@@ -132,10 +132,13 @@ def wiki(text):
     return {"message":wikiotvet}
 def video(vk, text):
     text = " ".join(text[1:])
-    video = vk.video.search(q=text, count=50)
-    video = random.choice(video["items"])
-    videoid = video["id"]
-    videoow = video["owner_id"]
+    try:
+        video = vk.video.search(q=text, count=50)
+        video = random.choice(video["items"])
+        videoid = video["id"]
+        videoow = video["owner_id"]
+    except IndexError:
+        return {"message":"ничо не найдено"}
     video = f"video{videoow}_{videoid}"
     return{"message": f"Ведосик по заказу - {text}:", "attachment":video}
 def chance(text):
