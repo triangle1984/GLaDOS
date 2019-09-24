@@ -98,6 +98,8 @@ def mainlobby():
                         response = adolf(vk, text)
                     elif requests == "/префикс":
                         response = update(uid, uname, text)
+                    elif requests == "/жив?":
+                        response = ping()
                 try:
                     if response["message"]:
                         if "attachment" not in response:

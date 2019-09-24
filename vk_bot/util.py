@@ -227,3 +227,5 @@ def getusername(vk, uid):
         return
     response = requests[0]["first_name"]
     return response
+def ping():
+    return {"message":"JA JA Führer"}

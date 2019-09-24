@@ -123,6 +123,8 @@ try:
             #     response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
+            elif requests == "/жив?":
+                response = ping()
 
         try:
             if response["message"]:
