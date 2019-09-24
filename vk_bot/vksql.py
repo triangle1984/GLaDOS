@@ -28,10 +28,13 @@ def checktable(table, value, should):
     return cursor.fetchone()
 def tableadd(table, value, add, one=False):
     conn = auth()
-    with conn.cursor() as cursor:
-        query = f"INSERT INTO {table} ({value}) VALUES ({add})"
-        cursor.execute(query)
-        conn.commit()
+    try:
+        with conn.cursor() as cursor:
+            query = f"INSERT INTO {table} ({value}) VALUES ({add})"
+            cursor.execute(query)
+            conn.commit()
+    except pymysql.err.InternalError:
+        return
 def tablerm(table, value, rm):
     conn = auth()
     with conn.cursor() as cursor:
@@ -101,9 +104,6 @@ def smehdb(ss,uid, db=False):
             ss.smexslova = check["smehslova"]
             return ss
 def checkchat(event):
-    try:
-        check = checktable(tablechat, 'id', event.chat_id)
-    except:
-        return
+    check = checktable(tablechat, 'id', event.chat_id)
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)

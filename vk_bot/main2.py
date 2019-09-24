@@ -30,7 +30,8 @@ try:
             None
         response = {"message":None}
         if event.object.text:
-            checkchat(event)
+            if event.chat_id:
+                checkchat(event)
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
