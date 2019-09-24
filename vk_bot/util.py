@@ -240,4 +240,4 @@ def convvalute(text):
         if text[2] == "usd":
             return {"message": f"💰{val}$:\nВ рублях: {round(val*usd, 3)}₽\nВ евро: {round(val*usd/eur, 3)}€"}
         elif text[2] == "eur":
-            return {"message": f"{💰val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
+            return {"message": f"💰{val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
