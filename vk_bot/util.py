@@ -1,7 +1,7 @@
 import vk_api, math, random, os, datetime, time, requests
 from vk_api.utils import get_random_id
 import wikipedia
-from token2 import group_idd
+from token2 import group_idd, apinews
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -236,10 +236,25 @@ def convvalute(text):
         encode = r.json()
         usd = encode["Valute"]["USD"]["Value"]
         eur = encode["Valute"]["EUR"]["Value"]
-        val = float(text[1])
+        try:
+            val = float(text[1])
+        except ValueError:
+            return {"message": "Ты должен ввести цифру!\nНапример: /конвертер 5 usd"}
         if val <= 0:
             return {"message": "Число должно быть больше 0!"}
         elif text[2] == "usd":
             return {"message": f"💰{'%g'%val}$:\nВ рублях: {round(val*usd, 3)}₽\nВ евро: {round(val*usd/eur, 3)}€"}
         elif text[2] == "eur":
             return {"message": f"💰{'%g'%val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
+        else:
+            return {"message": "Выбери: usd или eur!\nНапример: /конвертер 5 usd"}
+def news():
+    api = 'https://newsapi.org/v2/top-headlines'
+    params = {
+                'apiKey': apinews,
+                'country': 'ru'
+                }
+    r = requests.get(api, params=params, timeout=5)
+    encode = r.json()
+    newsjson = random.choice(encode['articles'])
+    return {'message': f"{newsjson['title']}\n\n{newsjson['description']}\n\nПолную статью вы можете прочитать здесь: {newsjson['url']}"}

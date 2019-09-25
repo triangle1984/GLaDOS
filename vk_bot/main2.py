@@ -129,6 +129,8 @@ try:
                 response = convvalute(text)
             elif requests == "/альбомы":
                 response = photoadd(uid, text)
+            elif requests == "/новость":
+                response = news()
 
         try:
             if response["message"]:
