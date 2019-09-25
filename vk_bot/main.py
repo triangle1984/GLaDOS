@@ -102,6 +102,10 @@ def mainlobby():
                         response = ping()
                     elif requests == "/конвертер":
                         response = convvalute(text)
+                    elif requests == "/зашифровать":
+                        response = vkbase64(text, encode=True)
+                    elif requests == "/расшифровать":
+                        response = vkbase64(text, decode=True)
 
                 try:
                     if response["message"]:

@@ -131,6 +131,11 @@ try:
                 response = photoadd(uid, text)
             elif requests == "/новость":
                 response = news()
+            elif requests == "/зашифровать":
+                 response = vkbase64(text, encode=True)
+            elif requests == "/расшифровать":
+                 response = vkbase64(text, decode=True)
+
 
         try:
             if response["message"]:

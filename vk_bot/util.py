@@ -1,4 +1,4 @@
-import vk_api, math, random, os, datetime, time, requests
+import vk_api, math, random, os, datetime, time, requests, base64
 from vk_api.utils import get_random_id
 import wikipedia
 from token2 import group_idd, apinews
@@ -30,6 +30,8 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 🔔/призыв - призовет всех участников в беседе
 👤/префикс - как вас будет называть бот
 💱/конвертер - конвертер валюты, с usd и eur (/конвертер 5000 usd)
+💬/профиль - ваш профиль
+🔒/зашифровать <ваш текст> /расшифровать <Текст, который вернул бот после шифрования>
 для админов:
     ⛔ - /бан - забанит юзера(Бот не будет ему отвечать)
     ✅ - /разбан - следовательно, разбанит
@@ -267,3 +269,10 @@ def news():
     encode = r.json()
     newsjson = random.choice(encode['articles'])
     return {'message': f"{newsjson['title']}\n\n{newsjson['description']}\n\nПолную статью вы можете прочитать здесь: {newsjson['url']}"}
+def vkbase64(text, encode=False, decode=False):
+    text = " ".join(text[1:])
+    if encode:
+        result = base64.b64encode(bytes(text, 'utf-8'))
+    else:
+        result = base64.b64decode(text)
+    return {"message":result.decode('utf-8')}
