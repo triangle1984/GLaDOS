@@ -1,3 +1,4 @@
+from token2 import recipient
 from vk_api.utils import get_random_id
 def groupjoin(vk, event):
     idjoin = f"*id{event.object['user_id']}"
