@@ -273,10 +273,13 @@ def news():
     return {'message': f"{newsjson['title']}\n\n{newsjson['description']}\n\nПолную статью вы можете прочитать здесь: {newsjson['url']}"}
 def vkbase64(text, encode=False, decode=False):
     text = " ".join(text[1:])
-    if encode:
-        result = base64.b64encode(bytes(text, 'utf-8'))
-    else:
-        result = base64.b64decode(text)
+    try:
+        if encode:
+            result = base64.b64encode(bytes(text, 'utf-8'))
+        else:
+            result = base64.b64decode(text)
+    except:
+        return {"message":"!error"}
     return {"message":result.decode('utf-8')}
 def profile(event, uid, uname):
     if checktable("admins","id", uid):
