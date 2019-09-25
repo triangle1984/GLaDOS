@@ -29,3 +29,6 @@ ban, с (id int)
 то, что вы указали в tablechat, так же с (id int)  
 prefix с (id int, name varchar)  
 smehgen с (id int, count int, smeh varchar, smehslova varchar)  
+
+# раскаяние
+Реадме сделан не очень качественно, знаю  
