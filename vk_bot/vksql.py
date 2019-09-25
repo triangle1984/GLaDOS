@@ -112,3 +112,11 @@ def photoadd(uid, text):
     if checktable("yourphoto","id", uid):
         tablerm("yourphoto", "id", uid)
     tableadd("yourphoto", "id, idpublic",f"{uid}, {text}")
+def setmessages(uid):
+    conn = auth()
+    if checktable('messages', 'id', uid) == None:
+        tableadd('messages', 'id, msg', uid, one=False)
+    with conn.cursor() as cursor:
+        query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
+        cursor.execute(query)
+        conn.commit()

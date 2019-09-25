@@ -35,6 +35,7 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
+            setmessages(event.object.from_id)
             if checkban(uid) == "kill him":
                 continue
             try:

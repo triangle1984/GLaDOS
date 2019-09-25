@@ -289,4 +289,5 @@ def profile(event, uid, uname):
     return {"message": f"""Твой профиль:
 👦| Роль: {user}
 🔑| Префикс: {saveload(uid, uname)['name']}
-📃| Айди: id{event.object.from_id}"""}
+📃| Айди: id{event.object.from_id}
+✉| Сообщения: {checktable('messages', 'id', uid)['msg']}"""}
