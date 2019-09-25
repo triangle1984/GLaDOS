@@ -69,9 +69,15 @@ def calc(text):
 def translit(text, vk=None):
         apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
         url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
+        url2 = "https://translate.yandex.net/api/v1.5/tr.json/detect"
+        params = {"key": apikey,
+                  "text":text[1:]}
+        r = requests.get(url2, params=params)
+        encode = r.json()
+        lang = f"{encode['lang']}-ru"
         params = {"key": apikey,
                 "text":text[0:],
-                "lang":"ru-en"}
+                "lang":lang}
         r = requests.get(url, params=params)
         encode = r.json()
         if vk:
