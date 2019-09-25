@@ -2,6 +2,7 @@ import vk_api, math, random, os, datetime, time, requests
 from vk_api.utils import get_random_id
 import wikipedia
 from token2 import group_idd, apinews
+from vksql import *
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -267,3 +268,12 @@ def news():
     encode = r.json()
     newsjson = random.choice(encode['articles'])
     return {'message': f"{newsjson['title']}\n\n{newsjson['description']}\n\nПолную статью вы можете прочитать здесь: {newsjson['url']}"}
+def profile(event, uid, uname): 
+    if checktable("admins","id", uid): 
+        user = "Админ😎" 
+    else: 
+        user = "Юзер" 
+    return {"message": f"""Твой профиль: 
+👦| Роль: {user} 
+🔑| Префикс: {saveload(uid, uname)['name']} 
+📃| Айди: id{event.object.from_id}"""}

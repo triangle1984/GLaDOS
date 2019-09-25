@@ -131,7 +131,8 @@ try:
                 response = photoadd(uid, text)
             elif requests == "/новость":
                 response = news()
-
+            elif requests == "/профиль": 
+                response = profile(event, uid, uname)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
