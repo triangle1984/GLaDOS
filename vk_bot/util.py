@@ -282,7 +282,7 @@ def vkbase64(text, encode=False, decode=False):
         return {"message":"!error"}
     return {"message":result.decode('utf-8')}
 def profile(event, uid, uname):
-    msg = checktable('messages', 'id', uid)
+    msg = checktable('messages', 'id', uid)["msg"]
     if checktable("admins","id", uid):
         user = "Админ😎"
     else:
