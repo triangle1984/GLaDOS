@@ -107,3 +107,8 @@ def checkchat(event):
     check = checktable(tablechat, 'id', event.chat_id)
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
+def photoadd(uid, text):
+    text = " ".join(text[2])
+    if checktable("yourphoto","id", uid):
+        tablerm("yourphoto", "id", uid)
+    tableadd("yourphoto", "id, idpublic",f"{uid}, {text}")

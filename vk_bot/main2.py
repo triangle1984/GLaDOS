@@ -127,6 +127,8 @@ try:
                 response = ping()
             elif requests == "/конвертер":
                 response = convvalute(text)
+            elif requests == "/альбомы":
+                response = photoadd(uid, text)
 
         try:
             if response["message"]:
