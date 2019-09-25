@@ -24,8 +24,8 @@ apinews = "a8443b51a5544447a5a919bcbca46b8a" для /новость
                              db="mydb",  
                              cursorclass=DictCursor) ```
 ### Нужные таблицы
-admins с (id int)
-ban, с (id int)
-то, что вы указали в tablechat, так же с (id int)
-prefix с (id int, name varchar)
-smehgen с (id int, count int, smeh varchar, smehslova varchar)
+admins с (id int)  
+ban, с (id int)  
+то, что вы указали в tablechat, так же с (id int)  
+prefix с (id int, name varchar)  
+smehgen с (id int, count int, smeh varchar, smehslova varchar)  
