@@ -5,9 +5,7 @@ from token2 import *
 from util import *
 from photo import *
 from smeh import *
-# from wall import post
 import vk_api, requests, sys
-from threading import Thread
 from vksql import saveload
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
@@ -35,7 +33,7 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
-            setmessages(event.object.from_id)
+            setmessages(uid)
             if checkban(uid) == "kill him":
                 continue
             try:
@@ -136,7 +134,7 @@ try:
                  response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
                  response = vkbase64(text, decode=True)
-            elif requests == "/профиль": 
+            elif requests == "/профиль":
                 response = profile(event, uid, uname)
         try:
             if response["message"]:

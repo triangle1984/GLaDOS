@@ -115,7 +115,7 @@ def photoadd(uid, text):
 def setmessages(uid):
     conn = auth()
     if checktable('messages', 'id', uid) == None:
-        tableadd('messages', 'id, msg', uid, one=False)
+        tableadd('messages', 'id, msg', f"{uid}, 0")
     with conn.cursor() as cursor:
         query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
         cursor.execute(query)
