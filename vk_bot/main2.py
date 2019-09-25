@@ -135,8 +135,8 @@ try:
                  response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
                  response = vkbase64(text, decode=True)
-
-
+            elif requests == "/профиль": 
+                response = profile(event, uid, uname)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
