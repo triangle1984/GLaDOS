@@ -61,3 +61,6 @@ def mem(vk  , text):
 def adolf(vk , text):
     photo = phootowallrandom(["-183493220"],vk, text,  albid=266718794)
     return {"message":"Хай фюрер", "attachment":photo}
+def hesus(vk, text):
+    photo = phootowallrandom(["-156059526"],vk, text)
+    return {"message": "Лови красавчика😎", "attachment": photo}

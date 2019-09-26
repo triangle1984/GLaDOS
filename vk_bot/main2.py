@@ -146,6 +146,8 @@ try:
                 response = text_from_bits(text)
             elif requests == "/перешли":
                 response = forward(event, vk, session, upload)
+            elif requests == "/хес" or requests == "/хесус":
+                response = hesus(vk2, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
