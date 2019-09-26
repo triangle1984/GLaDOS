@@ -295,3 +295,16 @@ def shellrun(text):
     except:
         return {"message":"!error"}
     return {"message":result}
+def text_to_bits(text):
+    text = ' '.join(text[1:])
+    bits = bin(int.from_bytes(text.encode('utf-8', 'surrogatepass'), 'big'))[2:]
+    encode = bits.zfill(8 * ((len(bits) + 7) // 8))
+    return {"message": str(onetwo)}
+def text_from_bits(text):
+    text = " ".join(text[1:])
+    try:
+        n = int(text, 2)
+    except ValueError:
+        return {"message": "Введи двоичный код!"}
+    decode = n.to_bytes((n.bit_length() + 7) // 8, 'big').decode('utf-8', 'surrogatepass') or '\0'
+    return {"message": de}

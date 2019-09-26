@@ -41,7 +41,6 @@ try:
             except IndexError:
                 continue
             if checktable("admins","id", uid):
-                print("ку")
                 if requests == "/бан":
                     ban(event.object.reply_message['from_id'])
                 elif requests == "/разбан":
@@ -139,6 +138,10 @@ try:
                  response = vkbase64(text, decode=True)
             elif requests == "/профиль":
                 response = profile(event, uid, uname)
+            elif requests == "/бинарный0":
+                response = text_to_bits(text)
+            elif requests == "/бинарный1":
+                response = text_from_bits(text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
