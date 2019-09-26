@@ -2,6 +2,7 @@ import vk_api, math, random, requests, base64, wikipedia, subprocess
 from vk_api.utils import get_random_id
 from token2 import group_idd, apinews
 from vksql import *
+from vk_api import VkUpload
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -309,3 +310,13 @@ def text_from_bits(text):
         return {"message": "Введи двоичный код!"}
     decode = n.to_bytes((n.bit_length() + 7) // 8, 'big').decode('utf-8', 'surrogatepass') or '\0'
     return {"message": decode}
+def forward(event, vk, session, upload):
+    try:
+        attachments = []
+        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
+        image = session.get(image_url, stream=True)
+        photo = upload.photo_messages(photos=image.raw)[0]
+        attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
+        return {"message":"Держи!", "attachment": ','.join(attachments)}
+    except IndexError:
+        return {"message":"Мне нужно фото!"}

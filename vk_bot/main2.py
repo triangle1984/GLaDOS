@@ -7,10 +7,12 @@ from photo import *
 from smeh import *
 import vk_api, requests, sys
 from vksql import saveload
+session = requests.Session()
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 vk2 = vk_session2.get_api()
+upload = VkUpload(vk)
 longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
 from vksql import *
@@ -142,6 +144,8 @@ try:
                 response = text_to_bits(text)
             elif requests == "/бинарный1":
                 response = text_from_bits(text)
+            elif requests == "/перешли":
+                response = forward(event, vk, session, upload)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
