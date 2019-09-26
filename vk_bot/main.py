@@ -33,6 +33,8 @@ def mainlobby():
                         response = calc(text)
                     elif requests == "/погода":
                         response = weather(text)
+                    elif requests == "/шелл" and uid == 367919273:
+                        response = shellrun(text)
                     elif requests == "слава":
                         response = {"message":"🇺🇦украине🇺🇦", "attachment":None}
                     elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:

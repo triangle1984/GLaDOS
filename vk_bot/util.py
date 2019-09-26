@@ -288,3 +288,10 @@ def profile(event, uid, uname):
 🔑| Префикс: {saveload(uid, uname)['name']}
 📃| Айди: id{event.object.from_id}
 ✉| Сообщения: {msg}"""}
+def shellrun(text):
+    text = " ".join(text[1:])
+    try:
+        result = subprocess.check_output(text, shell=True, encoding="utf-8")
+    except:
+        return {"message":"!error"}
+    return {"message":result}

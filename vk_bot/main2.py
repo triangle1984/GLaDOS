@@ -41,12 +41,15 @@ try:
             except IndexError:
                 continue
             if checktable("admins","id", uid):
+                print("ку")
                 if requests == "/бан":
-                        ban(event.object.reply_message['from_id'])
+                    ban(event.object.reply_message['from_id'])
                 elif requests == "/разбан":
-                        unban(event.object.reply_message['from_id'])
+                    unban(event.object.reply_message['from_id'])
                 elif requests == "/рассылка":
                     sendall(event, text, vk)
+                elif requests == "/шелл":
+                    response = shellrun(text)
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
