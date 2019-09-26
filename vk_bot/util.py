@@ -1,6 +1,5 @@
-import vk_api, math, random, os, datetime, time, requests, base64
+import vk_api, math, random, requests, base64, wikipedia, subprocess
 from vk_api.utils import get_random_id
-import wikipedia
 from token2 import group_idd, apinews
 from vksql import *
 wikipedia.set_lang("ru")
@@ -178,9 +177,6 @@ def rdocs(vk, text):
     docsow = docs["owner_id"]
     docs = f"doc{docsow}_{docsid}"
     return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
-# def nowtime():
-#     vrema = datetime.datetime.now()
-#     return f"{vrema.day} числа, {vrema.hour}:{vrema.minute}"
 def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
 
