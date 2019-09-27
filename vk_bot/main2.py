@@ -148,6 +148,8 @@ try:
                 response = forward(event, vk, session, upload)
             elif requests == "/хес" or requests == "/хесус":
                 response = hesus(vk2, text)
+            elif requests == "/анименафото":
+                response = anime(event)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)

@@ -36,6 +36,7 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 &#128102;/профиль - информация о вашем профиле
 📝/бинарный0/1: 0 - зашифрует текст в бинарный код, а 1 - расшифрует
 🏝/перешли - пересылает фото для сохранения
+🔍/аниме на фото - подскажет вам аниме изображенное на фото
 для админов:
     ⛔ - /бан - забанит юзера(Бот не будет ему отвечать)
     ✅ - /разбан - следовательно, разбанит
@@ -321,5 +322,29 @@ def forward(event, vk, session, upload):
         photo = upload.photo_messages(photos=image.raw)[0]
         attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
         return {"message":"Держи!", "attachment": ','.join(attachments)}
+    except IndexError:
+        return {"message":"Мне нужно фото!"}
+def anime(event):
+    try:
+        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
+        api = f'https://trace.moe/api/search'
+        params = {
+            'url': image_url
+        }
+        r = requests.get(api, params=params, timeout=5)
+        encode = r.json()
+        name = encode["docs"][0]["title_english"]
+        episode = encode["docs"][0]["episode"]
+        chance = round(encode['docs'][0]["similarity"] * 100)
+        minute = round(math.modf(encode["docs"][0]["from"] / 60)[1])
+        sec = round(math.modf(encode["docs"][0]["from"] / 60)[0] * 100)
+        if sec < 10:
+            sec = f"0{round(sec, 2)}"
+        else:
+            sec = round(sec, 2)
+        return {"message": f"""Я думаю это: {name}
+        Серия: {episode}
+        Точность: {chance}%
+        Тайминг: {minute}:{sec}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
