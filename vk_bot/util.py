@@ -72,7 +72,7 @@ def calc(text):
     else:
         return
     return {"message":"Ваш результат: {}".format(result), }
-def translit(text, vk=None):
+def translit(text, vk=False, english=False):
     apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
     url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
     url2 = "https://translate.yandex.net/api/v1.5/tr.json/detect"
@@ -81,6 +81,8 @@ def translit(text, vk=None):
     r = requests.get(url2, params=params)
     encode = r.json()
     lang = f"{encode['lang']}-ru"
+    if english:
+        lang = "ru-en"
     params = {"key": apikey,
             "text":text[0:],
             "lang":lang}
@@ -98,7 +100,7 @@ def weather(text):
         qr = text[1]
     except:
         return
-    q = translit(text=qr); q.lower()
+    q = translit(text=qr, english=True); q.lower()
     apiurl = "http://api.openweathermap.org/data/2.5/find"
     appid = '22c7bf8e593c47b0cf88f390e8e5376a'
     params = {
