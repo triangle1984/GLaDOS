@@ -17,9 +17,6 @@ longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
 from vksql import *
 from botutil import *
-# timestatus = nowtime()
-# varlalle = Thread(target=post, args=(vk, vk2), daemon=True)
-# varlalle.start()
 try:
     for event in longpoll.listen():
         if event.type == VkBotEventType.GROUP_JOIN:
@@ -40,6 +37,8 @@ try:
                 continue
             try:
                 requests = text[0].lower()
+                uberequests = " ".join(text[0:]).lower()
+                print(uberequests)
             except IndexError:
                 continue
             if checktable("admins","id", uid):
@@ -148,7 +147,7 @@ try:
                 response = forward(event, vk, session, upload)
             elif requests == "/хес" or requests == "/хесус":
                 response = hesus(vk2, text)
-            elif requests == "/анименафото":
+            elif uberequests == "/аниме на фото":
                 response = anime(event)
         try:
             if response["message"]:
