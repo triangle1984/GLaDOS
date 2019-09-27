@@ -35,7 +35,7 @@ def trap(vk , text):
     photo = phootowallrandom(["-171834188"], vk, text)
     return {"message":"Трапы~~🌚", "attachment":photo}
 def cats(vk , text):
-    photo = phootowallrandom(["-43228812", "-34137527", "-152424758"], vk, text)
+    photo = phootowallrandom(["-43228812"], vk, text)
     return {"message":"Шавухенция на заказ", "attachment":photo}
 def loli(vk , text):
     photo = phootowallrandom(["-127518015", "-157516431", "-69721869"], vk, text)
