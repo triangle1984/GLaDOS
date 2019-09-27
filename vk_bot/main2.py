@@ -38,7 +38,6 @@ try:
             try:
                 requests = text[0].lower()
                 uberequests = " ".join(text[0:]).lower()
-                print(uberequests)
             except IndexError:
                 continue
             if checktable("admins","id", uid):

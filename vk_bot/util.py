@@ -326,7 +326,7 @@ def forward(event, vk, session, upload):
         return {"message":"Мне нужно фото!"}
 def anime(event):
     try:
-        image_url = event['attachments'][0]['photo']['sizes'][-1]['url']
+        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
         api = f'https://trace.moe/api/search'
         params = {
             'url': image_url
