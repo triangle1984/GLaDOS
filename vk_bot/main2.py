@@ -148,6 +148,13 @@ try:
                 response = hesus(vk2, text)
             elif uberequests == "/аниме на фото":
                 response = anime(event)
+            elif requests == "/альбомы":
+                response = photoadd(uid, text)
+            elif requests == "/айди":
+                response = nametoid(vk2, text)
+            elif requests == getcommand(uid):
+                response = sendyourphoto(vk2, text, uid)
+
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
