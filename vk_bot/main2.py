@@ -28,7 +28,7 @@ try:
         response = {"message":None}
         try:
             if event.object.action['type'] == 'chat_invite_user':
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable('chathello', 'id', event.chat_id)['hello'])
+                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable(chathello, 'id', event.chat_id)['hello'])
         except TypeError:
             None
         except vk_api.exceptions.ApiError:
