@@ -19,7 +19,6 @@ from vksql import *
 from botutil import *
 try:
     for event in longpoll.listen():
-        print(event)
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
         try:
