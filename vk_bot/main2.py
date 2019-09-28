@@ -26,6 +26,13 @@ try:
         except vk_api.exceptions.ApiError:
             None
         response = {"message":None}
+        try:
+            if event.object.action['type'] == 'chat_invite_user':
+                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable(chathello, 'id', event.chat_id)['hello'])
+        except TypeError:
+            None
+        except vk_api.exceptions.ApiError:
+            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
         if event.object.text:
             if event.chat_id:
                 checkchat(event)
@@ -155,6 +162,8 @@ try:
             elif requests == getcommand(uid):
                 response = sendyourphoto(vk2, text, uid)
 
+            elif requests == "/приветствие":
+                response = hello(chathello, event, vk, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
@@ -173,5 +182,7 @@ try:
                 status(vk2, msgcount)
         except TypeError:
             continue
+        except NameError:
+            None
 except KeyboardInterrupt:
     sys.exit()

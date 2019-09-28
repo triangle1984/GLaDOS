@@ -140,3 +140,11 @@ def sendyourphoto(vk, text, uid):
         public = check["public"]
         public = public.split(",")
         return yourpic(vk, text, public)
+def hellosql(chathello, uid, text):
+    conn = auth()
+    if checktable(chathello, 'id', uid) == None:
+        tableadd(chathello, 'id', f"{uid}")
+    with conn.cursor() as cursor:
+        query = f"UPDATE {chathello} SET hello = '{text}' WHERE id ='{uid}' "
+        cursor.execute(query)
+        conn.commit()

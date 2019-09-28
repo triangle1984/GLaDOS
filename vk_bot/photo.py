@@ -60,7 +60,7 @@ def legs(vk , text):
     photo = phootowallrandom(["-174842315", "-102853758", "-134982584", "-138265009", "-114279288"], vk, text)
     return {"message": "Ножки &#127773;", "attachment": photo}
 def mem(vk  , text):
-    photo = phootowallrandom(["-154306815", "-103083994", "-159146575", "-150550417", "-163452344", "-79805359"], vk, text)
+    photo = phootowallrandom(["-154306815"], vk, text)
     return {"message": "Держи мемас", "attachment": photo}
 def adolf(vk , text):
     photo = phootowallrandom(["-183493220"],vk, text,  albid=266718794)
