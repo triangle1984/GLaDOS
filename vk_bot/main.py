@@ -108,7 +108,12 @@ def mainlobby():
                         response = vkbase64(text, encode=True)
                     elif requests == "/расшифровать":
                         response = vkbase64(text, decode=True)
-
+                    elif requests == "/альбомы":
+                        response = photoadd(uid, text)
+                    elif requests == "/айди":
+                        response = nametoid(vk,  text)
+                    elif requests == getcommand(uid):
+                         response = sendyourphoto(vk, text, uid)
                 try:
                     if response["message"]:
                         if "attachment" not in response:

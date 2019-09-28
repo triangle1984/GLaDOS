@@ -348,3 +348,14 @@ def anime(event):
         Тайминг: {minute}:{sec}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
+def nametoid(vk, text):
+    try:
+        text = text[1]
+        result = vk.utils.resolveScreenName(screen_name=text)
+        if result["type"] == "group":
+            result = "-" + str(result["object_id"])
+        else:
+            result = result["object_id"]
+    except KeyboardInterrupt:
+        return {"message":"!error"}
+    return {"message":f"Айди: {result}"}

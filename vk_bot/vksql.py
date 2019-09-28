@@ -3,6 +3,7 @@ from token2 import ip, tablechat
 from vk_api.utils import get_random_id
 from pymysql.cursors import DictCursor
 from contextlib import closing
+from photo import yourpic
 def auth():
     conn = pymysql.connect(host=ip,
                              user="root",
@@ -108,10 +109,17 @@ def checkchat(event):
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
 def photoadd(uid, text):
-    text = " ".join(text[2])
+    try:
+        command = text[1]
+        public = "".join(text[2:])
+    except IndexError:
+        return {"message": """ /альбомы <команда> <айди пабликов, через запятую>
+                поскольку словесные айди нельзя,  вы можете воспользоваться /айди
+                например: /айди  mtt_resort (минус часть айди)"""}
     if checktable("yourphoto","id", uid):
         tablerm("yourphoto", "id", uid)
-    tableadd("yourphoto", "id, idpublic",f"{uid}, {text}")
+    tableadd("yourphoto", "id,command,public",f"{uid}, '{command}','{public}'")
+    return {"message":f"Ваш личный альбом настроен, паблики: {public}, команда: {command}"}
 def setmessages(uid):
     conn = auth()
     if checktable('messages', 'id', uid) == None:
@@ -120,3 +128,15 @@ def setmessages(uid):
         query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
         cursor.execute(query)
         conn.commit()
+def getcommand(uid):
+    check = checktable("yourphoto", "id", uid)
+    if check:
+        return check["command"]
+    else:
+        return 666
+def sendyourphoto(vk, text, uid):
+    check = checktable("yourphoto", "id", uid)
+    if check:
+        public = check["public"]
+        public = public.split(",")
+        return yourpic(vk, text, public)

@@ -13,13 +13,17 @@ def phootowallrandom(groups, vk, text, albid="wall"):
     photo2 = []
     if a.count > 10:
         a.count = 10
-    for _ in range(a.count):
-        group_id = random.choice(groups)
-        max_num = vk.photos.get(owner_id=group_id, album_id=albid, count=0)['count']
-        num = random.randint(0, max_num)
-        photo = vk.photos.get(owner_id=group_id, album_id=albid,
-                            count=1, offset=num)['items'][0]['id']
+    try:
+        for _ in range(a.count):
+            group_id = random.choice(groups)
+            max_num = vk.photos.get(owner_id=group_id, album_id=albid, count=0)['count']
+            num = random.randint(0, max_num)
+            photo = vk.photos.get(owner_id=group_id, album_id=albid,
+                                count=1, offset=num)['items'][0]['id']
+
         photo2.append(f"photo{group_id}_{photo}")
+    except vk_api.exceptions.ApiError:
+        return {"message":"!error от вк"}
     photo2 = ",".join(photo2)
     return photo2
 def yuri(vk, text):
@@ -64,3 +68,6 @@ def adolf(vk , text):
 def hesus(vk, text):
     photo = phootowallrandom(["-156059526"],vk, text)
     return {"message": "Лови красавчика😎", "attachment": photo}
+def yourpic(vk, text, public):
+    photo = phootowallrandom(public, vk, text)
+    return {"message":"Пикча из личного альбома~", "attachment":photo}
