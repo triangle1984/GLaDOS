@@ -348,3 +348,12 @@ def anime(event):
         Тайминг: {minute}:{sec}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
+def hello(chathello, event, vk, text):
+    text = " ".join(text[1:])
+    if event.object['attachments']:
+        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Никаких вложений! Только текст")
+    elif len(text) > 500:
+        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
+    else:
+        response = hellosql(chathello, event.chat_id, text)
+        return {"message": f"Вы установили приветствие: \"{text}\""}

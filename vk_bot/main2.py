@@ -156,13 +156,7 @@ try:
             elif uberequests == "/аниме на фото":
                 response = anime(event)
             elif requests == "/приветствие":
-                text = " ".join(text[1:])
-                if event.object['attachments']:
-                    vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Никаких вложений! Только текст")
-                elif len(text) > 500:
-                    vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
-                else:
-                    response = hellosql(chathello, event.chat_id, text)
+                response = hello(chathello, event, vk, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
