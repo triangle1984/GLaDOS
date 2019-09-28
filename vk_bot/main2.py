@@ -162,7 +162,7 @@ try:
                 elif len(text) > 500:
                     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
                 else:
-                    response = hellosql(event.chat_id, text)
+                    response = hellosql(chathello, event.chat_id, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
