@@ -120,3 +120,11 @@ def setmessages(uid):
         query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
         cursor.execute(query)
         conn.commit()
+def hellosql(uid, text):
+    conn = auth()
+    if checktable('chathello', 'id', uid) == None:
+        tableadd('chathello', 'id', f"{uid}")
+    with conn.cursor() as cursor:
+        query = f"UPDATE chathello SET hello = '{text}' WHERE id ='{uid}' "
+        cursor.execute(query)
+        conn.commit()

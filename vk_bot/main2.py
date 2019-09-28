@@ -19,6 +19,7 @@ from vksql import *
 from botutil import *
 try:
     for event in longpoll.listen():
+        print(event)
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
         try:
@@ -26,6 +27,13 @@ try:
         except vk_api.exceptions.ApiError:
             None
         response = {"message":None}
+        try:
+            if event.object.action['type'] == 'chat_invite_user':
+                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable('chathello', 'id', event.chat_id)['hello'])
+        except TypeError:
+            None
+        except vk_api.exceptions.ApiError:
+            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
         if event.object.text:
             if event.chat_id:
                 checkchat(event)
@@ -148,6 +156,14 @@ try:
                 response = hesus(vk2, text)
             elif uberequests == "/аниме на фото":
                 response = anime(event)
+            elif requests == "/приветствие":
+                text = " ".join(text[1:])
+                if event.object['attachments']:
+                    vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Никаких вложений! Только текст")
+                elif len(text) > 500:
+                    vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
+                else:
+                    response = hellosql(event.chat_id, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
@@ -166,5 +182,7 @@ try:
                 status(vk2, msgcount)
         except TypeError:
             continue
+        except NameError:
+            None
 except KeyboardInterrupt:
     sys.exit()
