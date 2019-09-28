@@ -21,7 +21,7 @@ def phootowallrandom(groups, vk, text, albid="wall"):
             photo = vk.photos.get(owner_id=group_id, album_id=albid,
                                 count=1, offset=num)['items'][0]['id']
 
-        photo2.append(f"photo{group_id}_{photo}")
+            photo2.append(f"photo{group_id}_{photo}")
     except vk_api.exceptions.ApiError:
         return {"message":"!error от вк"}
     photo2 = ",".join(photo2)
