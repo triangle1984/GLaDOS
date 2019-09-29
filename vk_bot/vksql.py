@@ -51,7 +51,7 @@ def nametoid2(vk, names):
             if r["type"] == "group":
                 uid.append(f"-{r['object_id']}")
             else:
-                uid.append(r["object_id"])
+                uid.append(str(r["object_id"]))
         else:
             uid.append(convert)
     return uid
