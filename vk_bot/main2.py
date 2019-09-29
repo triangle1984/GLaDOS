@@ -163,13 +163,10 @@ try:
                 response = nametoid(vk2, text)
             elif requests == "/идеи":
                 response = tasks()
-            elif requests == getcommand(uid):
-                response = sendyourphoto(vk2, text, uid)
-            elif requests == "тест":
-                print(memory_usage())
-
             elif requests == "/приветствие":
                 response = hello(chathello, event, vk, text)
+            elif requests == getcommand(uid):
+                response = sendyourphoto(vk2, text, uid)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
