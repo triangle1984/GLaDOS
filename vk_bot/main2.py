@@ -159,6 +159,8 @@ try:
                 response = photoadd(uid, text)
             elif requests == "/айди":
                 response = nametoid(vk2, text)
+            elif requests == "/идеи":
+                response = tasks()
             elif requests == getcommand(uid):
                 response = sendyourphoto(vk2, text, uid)
 

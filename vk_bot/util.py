@@ -371,3 +371,19 @@ def hello(chathello, event, vk, text):
     else:
         response = hellosql(chathello, event.chat_id, text)
         return {"message": f"Вы установили приветствие: \"{text}\""}
+def tasks():
+    ltasks = """🚫мать панель
+    🚫рассылка
+    🚫ооп
+    🚫многопоток
+    🚫работа с пикчами
+    🚫экономика\рпг
+    🚫sqlite
+    🚫кеш
+    🚫несколько личных альбомов для випов
+    🚫автоконвентор айди в тех же альбомах
+    ✅список идей
+    ✅приветствие
+    ✅личные альбомы
+    ✅аниме на фото"""
+    return {"message":ltasks}

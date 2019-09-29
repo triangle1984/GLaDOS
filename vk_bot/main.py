@@ -112,6 +112,8 @@ def mainlobby():
                         response = photoadd(uid, text)
                     elif requests == "/айди":
                         response = nametoid(vk,  text)
+                    elif requests == "/идеи":
+                        response = tasks()
                     elif requests == getcommand(uid):
                          response = sendyourphoto(vk, text, uid)
                 try:
