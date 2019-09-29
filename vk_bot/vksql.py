@@ -42,6 +42,18 @@ def tablerm(table, value, rm):
         query = f"DELETE FROM {table} WHERE {value} = '{rm}'"
         cursor.execute(query)
         conn.commit()
+def nametoid2(vk, names):
+    uid = []
+    for convert in names:
+        r = vk.utils.resolveScreenName(screen_name=convert)
+        if r:
+            if r["type"] == "group":
+                uid.append(f"-{r['object_id']}")
+            else:
+                uid.append(r["object_id"])
+        else:
+            uid.append(convert)
+    return uid
 def saveload(uid, uname):
     conn = auth()
     with conn.cursor() as cursor:
@@ -108,14 +120,14 @@ def checkchat(event):
     check = checktable(tablechat, 'id', event.chat_id)
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
-def photoadd(uid, text):
+def photoadd(vk, uid, text):
     try:
         command = text[1]
-        public = "".join(text[2:])
+        public = "".join(text[2:]);public = public.split(",")
+        public = ",".join(nametoid2(vk, public))
     except IndexError:
         return {"message": """ /альбомы <команда> <айди пабликов, через запятую>
-                поскольку словесные айди нельзя,  вы можете воспользоваться /айди
-                например: /айди  mtt_resort (минус часть айди)"""}
+                например: /альбомы /шедевр mtt_resort,rimworld (паблик можно и один указать)"""}
     if checktable("yourphoto","id", uid):
         tablerm("yourphoto", "id", uid)
     tableadd("yourphoto", "id,command,public",f"{uid}, '{command}','{public}'")

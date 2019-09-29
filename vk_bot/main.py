@@ -109,7 +109,7 @@ def mainlobby():
                     elif requests == "/расшифровать":
                         response = vkbase64(text, decode=True)
                     elif requests == "/альбомы":
-                        response = photoadd(uid, text)
+                        response = photoadd(vk, uid, text)
                     elif requests == "/айди":
                         response = nametoid(vk,  text)
                     elif requests == "/идеи":
