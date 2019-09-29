@@ -37,11 +37,9 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 📝/бинарный0/1: 0 - зашифрует текст в бинарный код, а 1 - расшифрует
 🏝/перешли - пересылает фото для сохранения
 🔍/аниме на фото - подскажет вам аниме изображенное на фото
-📚/альбомы - настройка вашего личного альбома. Вызов без всего скинет справку
-📋/айди - скинуть цифровой айди группы\человека, например: /айди slava_air
 👋🏻/приветствие - устанавливает приветствие для новых участников беседы
 для админов:
-    ⛔ - /бан - забанит юзера(Бот не будет ему отвечать
+    ⛔ - /бан - забанит юзера(Бот не будет ему отвечать)
     ✅ - /разбан - следовательно, разбанит
 github.com/anar66/vk-bot
 """
@@ -234,7 +232,7 @@ def online(vk, event):
     return {"message":f"Участники онлайн:\n{onlinejoin}"}
 def callall(vk, event):
     calllist = []
-    callid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles']
+    callid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)
     for a in callid:
         calllist.append(f"@id{str(a['id'])} ({a['first_name']} {a['last_name']})")
     calljoin = ", ".join(calllist)
@@ -334,7 +332,7 @@ def anime(event):
         params = {
             'url': image_url
         }
-        r = requests.get(api, params=params, timeout=5)
+        r = requests.get(api, params=params)
         encode = r.json()
         name = encode["docs"][0]["title_english"]
         episode = encode["docs"][0]["episode"]
@@ -351,17 +349,6 @@ def anime(event):
         Тайминг: {minute}:{sec}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
-def nametoid(vk, text):
-    try:
-        text = text[1]
-        result = vk.utils.resolveScreenName(screen_name=text)
-        if result["type"] == "group":
-            result = "-" + str(result["object_id"])
-        else:
-            result = result["object_id"]
-    except KeyboardInterrupt:
-        return {"message":"!error"}
-    return {"message":f"Айди: {result}"}
 def hello(chathello, event, vk, text):
     text = " ".join(text[1:])
     if event.object['attachments']:
@@ -371,20 +358,3 @@ def hello(chathello, event, vk, text):
     else:
         response = hellosql(chathello, event.chat_id, text)
         return {"message": f"Вы установили приветствие: \"{text}\""}
-def tasks():
-    ltasks = """🚫мать панель
-    🚫рассылка
-    🚫ооп
-    🚫многопоток
-    🚫работа с пикчами
-    🚫экономика\рпг
-    🚫sqlite
-    🚫кеш
-    🚫несколько личных альбомов для випов
-    🚫отношения с детоводством
-    ✅автоконвентор айди в тех же альбомах
-    ✅список идей
-    ✅приветствие
-    ✅личные альбомы
-    ✅аниме на фото"""
-    return {"message":ltasks}
