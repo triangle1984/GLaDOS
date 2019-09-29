@@ -21,6 +21,8 @@ try:
     for event in longpoll.listen():
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
+        if event.type == VkBotEventType.WALL_POST_NEW:
+            sendpost(vk,event)
         try:
             vk.groups.enableOnline(group_id=group_idd)
         except vk_api.exceptions.ApiError:
@@ -34,7 +36,7 @@ try:
         except vk_api.exceptions.ApiError:
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
         if event.object.text:
-            if event.chat_id:
+            if "chat_id" in dir(event):
                 checkchat(event)
             text = event.object.text.split()
             uid = event.object.from_id

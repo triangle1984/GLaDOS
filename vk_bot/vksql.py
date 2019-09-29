@@ -11,8 +11,9 @@ def auth():
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
-def sendall(event, text, vk):
-    text = " ".join(text[1:])
+def sendall(vk, text, attachment=None):
+    if attachment == None:
+        text = " ".join(text[1:])
     conn = auth()
     with conn.cursor() as cursor:
         query = f"SELECT * FROM {tablechat}"
@@ -20,7 +21,7 @@ def sendall(event, text, vk):
         result = cursor.fetchall()
         for a in result:
             vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
-                             message=text)
+                             message=text, attachment=attachment)
 def checktable(table, value, should):
     conn = auth()
     with conn.cursor() as cursor:
