@@ -338,7 +338,7 @@ def anime(event):
         episode = encode["docs"][0]["episode"]
         chance = round(encode['docs'][0]["similarity"] * 100)
         minute = round(math.modf(encode["docs"][0]["from"] / 60)[1])
-        sec = round(math.modf(encode["docs"][0]["from"])[0] / 60 * 100)
+        sec = round(math.modf(encode["docs"][0]["from"] / 60)[0] * 100)
         if sec < 10:
             sec = f"0{round(sec, 2)}"
         else:
