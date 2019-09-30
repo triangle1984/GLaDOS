@@ -158,17 +158,26 @@ try:
             elif uberequests == "/аниме на фото":
                 response = anime(event)
             elif requests == "/альбомы":
-                response = photoadd(uid, text)
+                response = photoadd(vk, uid, text, number=1)
+            elif requests == "/альбомы2":
+                response = photoadd(vk, uid, text, number=2)
+            elif requests == "/альбомы3":
+                response = photoadd(vk, uid, text, number=3)
             elif requests == "/айди":
                 response = nametoid(vk2, text)
             elif requests == "/идеи":
                 response = tasks()
             elif requests == "/приветствие":
                 response = hello(chathello, event, vk, text)
-            elif requests == getcommand(uid):
-                response = sendyourphoto(vk2, text, uid)
             elif requests == "/вип":
                 tableadd("vips", "id", event.object.reply_message['from_id'])
+            elif requests == getcommand(uid, number=1):
+                response = sendyourphoto(vk2, text, uid, number=1)
+            elif requests == getcommand(uid, number=2):
+                response = sendyourphoto(vk2, text, uid, number=2)
+            elif requests == getcommand(uid, number=3):
+                response = sendyourphoto(vk2, text, uid, number=3)
+
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
