@@ -18,6 +18,8 @@ msgcount = 0
 from vksql import *
 from botutil import *
 from yourphoto import *
+from yourgroup import *
+
 try:
     for event in longpoll.listen():
         if event.type == VkBotEventType.GROUP_JOIN:
@@ -59,6 +61,8 @@ try:
                     sendall(event, text, vk)
                 elif requests == "/шелл":
                     response = shellrun(text)
+                elif requests == "/вип":
+                    tableadd("vips", "id", event.object.reply_message['from_id'])
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
@@ -168,8 +172,6 @@ try:
                 response = tasks()
             elif requests == "/приветствие":
                 response = hello(chathello, event, vk, text)
-            elif requests == "/вип":
-                tableadd("vips", "id", event.object.reply_message['from_id'])
             elif requests == getcommand(uid, number=1):
                 response = sendyourphoto(vk2, text, uid, number=1)
             elif requests == getcommand(uid, number=2):
@@ -180,6 +182,10 @@ try:
                 response = qrcode(text, vk, upload, session)
             elif requests == "/encodeqr":
                 response = encodeqr(event)
+            elif requests == getcommandpost(uid):
+                response = sendyourpost(vk2, text, uid) 
+            elif requests == "/группы":
+                response = groupadd(vk, uid, text)
 
         try:
             if response["message"]:
