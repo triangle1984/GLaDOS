@@ -175,6 +175,10 @@ try:
                 response = sendyourphoto(vk2, text, uid, number=2)
             elif requests == getcommand(uid, number=3):
                 response = sendyourphoto(vk2, text, uid, number=3)
+            elif requests == "/codeqr":
+                response = qrcode(text, vk, upload, session)
+            elif requests == "/encodeqr":
+                response = encodeqr(event)
 
         try:
             if response["message"]:

@@ -41,6 +41,7 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 👋🏻/приветствие - устанавливает приветствие для новых участников беседы
 📚/альбомы - настройка вашего личного альбома. Вызов без всего скинет справку
 📋/айди - скинуть цифровой айди группы\человека, например: /айди slava_air
+🔒/codeqr - зашифрует текст в qrcode , /encodeqr - расшифрует qrcode
 для админов:
     ⛔/бан - забанит юзера(Бот не будет ему отвечать)
     ✅/разбан - следовательно, разбанит
@@ -388,3 +389,29 @@ def tasks():
     ✅личные альбомы
     ✅аниме на фото"""
     return {"message":ltasks}
+def qrcode(text, vk, upload, session):
+    try:
+        attachments = []
+        text = " ".join(text[1:])
+        image_url = f"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={text}"
+        image = session.get(image_url, stream=True)
+        photo = upload.photo_messages(photos=image.raw)[0]
+        attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
+        return {"message":"Держи!", "attachment": ','.join(attachments)}
+    except vk_api.exceptions.ApiError:
+        return {"message":"Только текст!"}
+def encodeqr(event):
+    try:
+        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
+        api = "http://api.qrserver.com/v1/read-qr-code/"
+        params = {
+            'fileurl' : image_url
+        }
+        r = requests.get(api, params=params)
+        encode = r.json()
+        if encode[0]['symbol'][0]["data"] == None:
+            return {"message":"Не вижу здесь qrcode"}
+        else:
+            return {"message":encode[0]['symbol'][0]["data"]}
+    except:
+        return {"message":"Мне нужно фото!"}
