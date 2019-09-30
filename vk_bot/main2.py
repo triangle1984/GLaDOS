@@ -17,6 +17,7 @@ longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
 from vksql import *
 from botutil import *
+from yourphoto import *
 try:
     for event in longpoll.listen():
         if event.type == VkBotEventType.GROUP_JOIN:
