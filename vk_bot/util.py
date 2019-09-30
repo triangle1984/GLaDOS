@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 from token2 import group_idd, apinews
 from vksql import *
 from vk_api import VkUpload
+from datetime import timedelta
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -339,16 +340,12 @@ def anime(event):
         name = encode["docs"][0]["title_english"]
         episode = encode["docs"][0]["episode"]
         chance = round(encode['docs'][0]["similarity"] * 100)
-        minute = round(math.modf(encode["docs"][0]["from"] / 60)[1])
-        sec = round(math.modf(encode["docs"][0]["from"] / 60)[0] * 100)
-        if sec < 10:
-            sec = f"0{round(sec, 2)}"
-        else:
-            sec = round(sec, 2)
+        sec = encode["docs"][0]["from"]
+        time = timedelta(seconds = sec)
         return {"message": f"""Я думаю это: {name}
         Серия: {episode}
         Точность: {chance}%
-        Тайминг: {minute}:{sec}"""}
+        Тайминг: {time}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
 def hello(chathello, event, vk, text):
