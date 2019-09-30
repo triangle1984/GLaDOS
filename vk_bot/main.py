@@ -6,6 +6,7 @@ from photo import *
 from smeh import *
 import vk_api, requests, sys
 from vksql import *
+from yourphoto import *
 def mainlobby():
     vk_session = vk_api.VkApi(token=token22)
     vk = vk_session.get_api()
