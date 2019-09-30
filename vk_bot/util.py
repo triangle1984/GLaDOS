@@ -340,7 +340,7 @@ def anime(event):
         name = encode["docs"][0]["title_english"]
         episode = encode["docs"][0]["episode"]
         chance = round(encode['docs'][0]["similarity"] * 100)
-        sec = encode["docs"][0]["from"]
+        sec = round(encode["docs"][0]["from"])
         time = timedelta(seconds = sec)
         return {"message": f"""Я думаю это: {name}
         Серия: {episode}
