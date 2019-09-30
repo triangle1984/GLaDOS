@@ -1,9 +1,10 @@
-import pymysql
+import pymysql, vk_api
 from token2 import ip, tablechat
 from vk_api.utils import get_random_id
 from pymysql.cursors import DictCursor
 from contextlib import closing
 from photo import yourpic
+from token2 import *
 def auth():
     conn = pymysql.connect(host=ip,
                              user="root",
@@ -22,10 +23,12 @@ def sendall(vk, text, attachment=None):
         for a in result:
             vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
                              message=text, attachment=attachment)
-def checktable(table, value, should):
+def checktable(table, value, should, andd=False):
     conn = auth()
     with conn.cursor() as cursor:
         query = f"SELECT * FROM {table} WHERE {value} = '{should}'"
+        if andd:
+            query = f"SELECT * FROM {table} WHERE {value} = '{should}' and {andd}"
         cursor.execute(query)
     return cursor.fetchone()
 def tableadd(table, value, add, one=False):
@@ -37,10 +40,12 @@ def tableadd(table, value, add, one=False):
             conn.commit()
     except pymysql.err.InternalError:
         return
-def tablerm(table, value, rm):
+def tablerm(table, value, rm, andd=False):
     conn = auth()
     with conn.cursor() as cursor:
         query = f"DELETE FROM {table} WHERE {value} = '{rm}'"
+        if andd:
+            query = f"DELETE FROM {table} WHERE {value} = '{rm}' and {andd}"
         cursor.execute(query)
         conn.commit()
 def nametoid2(vk, names):
@@ -121,7 +126,7 @@ def checkchat(event):
     check = checktable(tablechat, 'id', event.chat_id)
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
-def photoadd(vk, uid, text):
+def photoadd(vk, uid, text, number):
     try:
         command = text[1]
         public = "".join(text[2:]);public = public.split(",")
@@ -136,9 +141,9 @@ def photoadd(vk, uid, text):
                 так же можно использовать ключи для количества
                 /шедевр -c 10 - скинет 10 пикч с вашей команды
                 (10 максимум в вк)"""}
-    if checktable("yourphoto","id", uid):
-        tablerm("yourphoto", "id", uid)
-    tableadd("yourphoto", "id,command,public",f"{uid}, '{command}','{public}'")
+    if checktable("yourphoto","id", uid, andd=f"number = {number}"):
+        tablerm("yourphoto", "id", uid, andd=f"number = {number}")
+    tableadd("yourphoto", "id,command,public,number",f"{uid}, '{command}','{public}', '{number}'")
     return {"message":f"Ваш личный альбом настроен, паблики: {public}, команда: {command}"}
 def setmessages(uid):
     conn = auth()
@@ -148,14 +153,14 @@ def setmessages(uid):
         query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
         cursor.execute(query)
         conn.commit()
-def getcommand(uid):
-    check = checktable("yourphoto", "id", uid)
+def getcommand(uid, number):
+    check = checktable("yourphoto", "id", uid, andd=f"number = '{number}'")
     if check:
         return check["command"]
     else:
         return 666
-def sendyourphoto(vk, text, uid):
-    check = checktable("yourphoto", "id", uid)
+def sendyourphoto(vk, text, uid, number):
+    check = checktable("yourphoto", "id", uid, andd=f"number = {number}")
     if check:
         public = check["public"]
         public = public.split(",")
