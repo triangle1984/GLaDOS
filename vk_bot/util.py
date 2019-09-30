@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 from token2 import group_idd, apinews
 from vksql import *
 from vk_api import VkUpload
+from datetime import timedelta
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -41,8 +42,9 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 📚/альбомы - настройка вашего личного альбома. Вызов без всего скинет справку
 📋/айди - скинуть цифровой айди группы\человека, например: /айди slava_air
 для админов:
-    ⛔ - /бан - забанит юзера(Бот не будет ему отвечать)
-    ✅ - /разбан - следовательно, разбанит
+    ⛔/бан - забанит юзера(Бот не будет ему отвечать)
+    ✅/разбан - следовательно, разбанит
+    👑/вип - дает випку юзеру
 github.com/anar66/vk-bot
 """
 def calc(text):
@@ -290,6 +292,8 @@ def profile(event, uid, uname):
     msg = checktable('messages', 'id', uid)["msg"]
     if checktable("admins","id", uid):
         user = "Админ😎"
+    elif checktable("vips", "id", uid):
+        user = "Вип🤵"
     else:
         user = "Юзер"
     return {"message": f"""Твой профиль:
@@ -339,16 +343,12 @@ def anime(event):
         name = encode["docs"][0]["title_english"]
         episode = encode["docs"][0]["episode"]
         chance = round(encode['docs'][0]["similarity"] * 100)
-        minute = round(math.modf(encode["docs"][0]["from"] / 60)[1])
-        sec = round(math.modf(encode["docs"][0]["from"] / 60)[0] * 100)
-        if sec < 10:
-            sec = f"0{round(sec, 2)}"
-        else:
-            sec = round(sec, 2)
+        sec = round(encode["docs"][0]["from"])
+        time = timedelta(seconds = sec)
         return {"message": f"""Я думаю это: {name}
         Серия: {episode}
         Точность: {chance}%
-        Тайминг: {minute}:{sec}"""}
+        Тайминг: {time}"""}
     except IndexError:
         return {"message":"Мне нужно фото!"}
 def hello(chathello, event, vk, text):

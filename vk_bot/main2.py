@@ -167,6 +167,8 @@ try:
                 response = hello(chathello, event, vk, text)
             elif requests == getcommand(uid):
                 response = sendyourphoto(vk2, text, uid)
+            elif requests == "/вип":
+                tableadd("vips", "id", event.object.reply_message['from_id'])
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
