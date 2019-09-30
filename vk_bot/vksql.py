@@ -21,8 +21,11 @@ def sendall(vk, text, attachment=None):
         cursor.execute(query)
         result = cursor.fetchall()
         for a in result:
-            vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
-                             message=text, attachment=attachment)
+            try:
+                vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
+                                message=text, attachment=attachment)
+            except:
+                continue
 def checktable(table, value, should, andd=False):
     conn = auth()
     with conn.cursor() as cursor:
