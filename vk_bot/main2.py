@@ -137,8 +137,6 @@ try:
                 response = ping()
             elif requests == "/конвертер":
                 response = convvalute(text)
-            elif requests == "/альбомы":
-                response = photoadd(vk2, uid, text)
             elif requests == "/новость":
                 response = news()
             elif requests == "/зашифровать":
