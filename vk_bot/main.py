@@ -112,6 +112,8 @@ def mainlobby():
                         response = photoadd(vk, uid, text, number=1)
                     elif requests == "/альбомы2":
                         response = photoadd(vk, uid, text, number=2)
+                    elif requests == "/альбомы3":
+                        response = photoadd(vk, uid, text, number=3)
                     elif requests == "/айди":
                         response = nametoid(vk,  text)
                     elif requests == "/идеи":
@@ -120,6 +122,8 @@ def mainlobby():
                          response = sendyourphoto(vk, text, uid, number=1)
                     elif requests == getcommand(uid, number=2):
                          response = sendyourphoto(vk, text, uid, number=2)
+                    elif requests == getcommand(uid, number=3):
+                         response = sendyourphoto(vk, text, uid, number=3)
                 try:
                     if response["message"]:
                         if "attachment" not in response:

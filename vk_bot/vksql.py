@@ -144,7 +144,7 @@ def photoadd(vk, uid, text, number):
     if checktable("yourphoto","id", uid, andd=f"number = {number}"):
         tablerm("yourphoto", "id", uid, andd=f"number = {number}")
     tableadd("yourphoto", "id,command,public,number",f"{uid}, '{command}','{public}', '{number}'")
-    return {"message":f"Ваш личный альбом настроен, паблики: {public}, команда: {command}"}
+    return {"message":f"Ваш личный альбом№{number} настроен, паблики: {public}, команда: {command}"}
 def setmessages(uid):
     conn = auth()
     if checktable('messages', 'id', uid) == None:
