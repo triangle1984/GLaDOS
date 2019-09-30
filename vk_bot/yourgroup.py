@@ -9,7 +9,7 @@ def groupadd(vk, uid, text):
     except IndexError:
         return {"message": """Тут вы можете указать группы, из которых хотите брать рандомный пост.
                 /группы <команда> <айди пабликов, через запятую>
-                например: /группы /шедевр mtt_resort,rimworld (паблик можно и один указать)
+                например: /группы /шедевр pepe_the_bot,singi_01 (паблик можно и один указать)
                 и потом можно ее вызывать на /шедевр"""}
     if checktable("yourgroup","id", uid):
         tablerm("yourgroup", "id", uid)
