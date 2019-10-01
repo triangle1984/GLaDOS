@@ -26,6 +26,12 @@ def sendall(vk, text, attachment=None):
                                 message=text, attachment=attachment)
             except:
                 continue
+def tablecount(table, value, count):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"SELECT COUNT(*) FROM {table} WHERE {value} = '{count}'"
+        cursor.execute(query)
+        return cursor.fetchone()
 def checktable(table, value, should, andd=False):
     conn = auth()
     with conn.cursor() as cursor:

@@ -109,12 +109,6 @@ def mainlobby():
                         response = vkbase64(text, encode=True)
                     elif requests == "/расшифровать":
                         response = vkbase64(text, decode=True)
-                    elif requests == "/альбомы":
-                        response = photoadd(vk, uid, text, number=1)
-                    elif requests == "/альбомы2":
-                        response = photoadd(vk, uid, text, number=2)
-                    elif requests == "/альбомы3":
-                        response = photoadd(vk, uid, text, number=3)
                     elif requests == "/айди":
                         response = nametoid(vk,  text)
                     elif requests == "/идеи":
@@ -123,13 +117,14 @@ def mainlobby():
                         response = text_to_bits(text)
                     elif requests == "/бинарный1":
                         response = text_from_bits(text)
+                    elif requests == getcommand(uid, requests):
+                        response = sendyourphoto(vk, text, uid, requests)
+                    if checktable("vips","id", uid):
+                        if "".join(text)[:8] == "/альбомы":
+                            response = photoadd(vk, uid, text, number=text)
+                    elif requests == "/альбомы":
+                        response = photoadd(vk, uid, text)
 
-                    elif requests == getcommand(uid, number=1):
-                         response = sendyourphoto(vk, text, uid, number=1)
-                    elif requests == getcommand(uid, number=2):
-                         response = sendyourphoto(vk, text, uid, number=2)
-                    elif requests == getcommand(uid, number=3):
-                         response = sendyourphoto(vk, text, uid, number=3)
                 try:
                     if response["message"]:
                         if "attachment" not in response:
