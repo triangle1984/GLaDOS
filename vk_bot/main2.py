@@ -25,7 +25,7 @@ try:
         if event.type == VkBotEventType.GROUP_JOIN:
             groupjoin(vk, event)
         if event.type == VkBotEventType.WALL_POST_NEW:
-            sendpost(vk,event)
+            sendpost(vk, event)
         try:
             vk.groups.enableOnline(group_id=group_idd)
         except vk_api.exceptions.ApiError:

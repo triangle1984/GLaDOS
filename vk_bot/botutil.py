@@ -10,6 +10,6 @@ def sendpost(vk, event):
     owner_id = event.object["owner_id"]
     attachment = f"wall{owner_id}_{post}"
     text = "Новый пост в группе~"
-    sendall(vk, text, attachment)
+    sendall(event, text, vk, attachment)
 def botmain(vk, event):
     pass
