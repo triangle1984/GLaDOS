@@ -160,33 +160,25 @@ try:
                 response = hesus(vk2, text)
             elif uberequests == "/аниме на фото":
                 response = anime(event)
-            elif requests == "/альбомы":
-                response = photoadd(vk, uid, text, number=1)
-            elif requests == "/альбомы2":
-                response = photoadd(vk, uid, text, number=2)
-            elif requests == "/альбомы3":
-                response = photoadd(vk, uid, text, number=3)
             elif requests == "/айди":
                 response = nametoid(vk2, text)
             elif requests == "/идеи":
                 response = tasks()
             elif requests == "/приветствие":
                 response = hello(chathello, event, vk, text)
-            elif requests == getcommand(uid, number=1):
-                response = sendyourphoto(vk2, text, uid, number=1)
-            elif requests == getcommand(uid, number=2):
-                response = sendyourphoto(vk2, text, uid, number=2)
-            elif requests == getcommand(uid, number=3):
-                response = sendyourphoto(vk2, text, uid, number=3)
             elif requests == "/codeqr":
                 response = qrcode(text, vk, upload, session)
             elif requests == "/encodeqr":
                 response = encodeqr(event)
-            elif requests == getcommandpost(uid):
-                response = sendyourpost(vk2, text, uid) 
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
-
+            elif requests == getcommand(uid, requests):
+                response = sendyourphoto(vk2, text, uid, requests)
+            if checktable("vips","id", uid):
+                if "".join(text)[:8] == "/альбомы":
+                    response = photoadd(vk2, uid, text, number=text)
+            elif requests == "/альбомы":
+                response = photoadd(vk2, uid, text)
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)
