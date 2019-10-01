@@ -12,7 +12,7 @@ def auth():
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
-def sendall(vk, text, attachment=None):
+def sendall(event, text,vk, attachment=None):
     if attachment == None:
         text = " ".join(text[1:])
     conn = auth()
@@ -24,8 +24,8 @@ def sendall(vk, text, attachment=None):
             try:
                 vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
                                 message=text, attachment=attachment)
-            except:
-                None
+            except vk_api.exceptions.ApiError:
+                break
 def tablecount(table, value, count):
     conn = auth()
     with conn.cursor() as cursor:
