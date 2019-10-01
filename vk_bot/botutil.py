@@ -11,3 +11,5 @@ def sendpost(vk, event):
     attachment = f"wall{owner_id}_{post}"
     text = "Новый пост в группе~"
     sendall(vk, text, attachment)
+def botmain(vk, event):
+    pass

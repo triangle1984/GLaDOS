@@ -119,6 +119,11 @@ def mainlobby():
                         response = nametoid(vk,  text)
                     elif requests == "/идеи":
                         response = tasks()
+                    elif requests == "/бинарный0":
+                        response = text_to_bits(text)
+                    elif requests == "/бинарный1":
+                        response = text_from_bits(text)
+
                     elif requests == getcommand(uid, number=1):
                          response = sendyourphoto(vk, text, uid, number=1)
                     elif requests == getcommand(uid, number=2):
