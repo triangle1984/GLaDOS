@@ -20,6 +20,7 @@ def photoadd(vk, uid, text, number=1):
         public = ",".join(nametoid2(vk, public))
         if number != 1:
             number = "".join(text[0])[8:]
+        number = int(number)
     except IndexError:
         return {"message": """ Это личные альбомы. Их смысл в том, что каждый человек,
                 может создать себе личную команду с пикчами из указанных пабликов.
