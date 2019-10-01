@@ -25,7 +25,7 @@ def sendall(vk, text, attachment=None):
                 vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
                                 message=text, attachment=attachment)
             except:
-                continue
+                None
 def tablecount(table, value, count):
     conn = auth()
     with conn.cursor() as cursor:
