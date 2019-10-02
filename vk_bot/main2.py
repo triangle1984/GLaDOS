@@ -19,6 +19,7 @@ from vksql import *
 from botutil import *
 from yourphoto import *
 from yourgroup import *
+from relation import *
 
 try:
     for event in longpoll.listen():
@@ -172,6 +173,12 @@ try:
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
+            elif text[:2] == ['/отношения', 'встречаться']:
+                response = relationmeet(text, vk, event)
+            elif uberequests == "/отношения отклонить":
+                response = reject(event)
+            elif uberequests == "/отношения принять":
+                response = accept(event)
             elif requests == "/длина":
                 response = lentomsg(text)
             elif requests == getcommandpost(uid):

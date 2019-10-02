@@ -141,3 +141,15 @@ def hellosql(chathello, uid, text):
         query = f"UPDATE {chathello} SET hello = '{text}' WHERE id ='{uid}' "
         cursor.execute(query)
         conn.commit()
+def relationaccept(uid):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"INSERT INTO relation (id,id2) SELECT id,id2 FROM waitmeet where id2 = '{uid}' "
+        cursor.execute(query)
+        conn.commit()
+def checkrelation(table, uid):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"SELECT * FROM {table} WHERE id = '{uid}' or id2 = '{uid}'"
+        cursor.execute(query)
+    return cursor.fetchone()
