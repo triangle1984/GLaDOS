@@ -80,6 +80,8 @@ def update(uid, name, text):
     newname = " ".join(text[1:])
     if len(newname) > 29:
         return {"message":"максимальная длинна префикса: 30 символов"}
+    if  "*" in list(newname) or "@" in list(newname):
+        return {"message":"упоминать низя"}
     with conn.cursor() as cursor:
         query = f"UPDATE prefix SET name = '{newname}' WHERE id = '{uid}'"
         cursor.execute(query)
