@@ -23,6 +23,7 @@ def mainlobby():
                     text = event.text.split()
                     try:
                         requests = text[0].lower()
+                        uberequests = " ".join(text[0:]).lower()
                     except IndexError:
                         continue
                     if event.from_me:

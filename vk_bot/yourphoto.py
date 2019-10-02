@@ -1,4 +1,4 @@
-from vksql import checktable, tablerm, tableadd, tablecount
+from vksql import checktable, tablerm, tableadd, tablecount, auth
 from photo import yourpic
 def nametoid2(vk, names):
     uid = []
@@ -15,12 +15,15 @@ def nametoid2(vk, names):
 
 def photoadd(vk, uid, text, number=1):
     try:
-        command = text[1]
-        public = "".join(text[2:]);public = public.split(",")
-        public = ",".join(nametoid2(vk, public))
-        if number != 1:
-            number = "".join(text[0])[8:]
-        number = int(number)
+        if text[1] == "список":
+            return {"message": getyourphoto(uid)}
+        else:
+            command = text[1]
+            public = "".join(text[2:]);public = public.split(",")
+            public = ",".join(nametoid2(vk, public))
+            if number != 1:
+                number = "".join(text[0])[8:]
+            number = int(number)
     except IndexError:
         return {"message": """ Это личные альбомы. Их смысл в том, что каждый человек,
                 может создать себе личную команду с пикчами из указанных пабликов.
@@ -31,6 +34,7 @@ def photoadd(vk, uid, text, number=1):
                 так же можно использовать ключи для количества
                 /шедевр -c 10 - скинет 10 пикч с вашей команды
                 (10 максимум в вк)
+                Так же, /альбомы список - выведет список ваших альбомов
                 так же, ежели вы не вип, то создание альбома заменяет старый.
                 А теперь о випах:
                 випы могут делать бесконечное количество альбомов
@@ -59,3 +63,12 @@ def sendyourphoto(vk, text, uid, command):
         public = check["public"]
         public = public.split(",")
         return yourpic(vk, text, public)
+def getyourphoto(uid):
+    conn = auth()
+    total = "\n"
+    with conn.cursor() as cursor:
+        query = f"SELECT * FROM yourphoto WHERE id = '{uid}'"
+        cursor.execute(query)
+        for row in cursor:
+            total += f"Команда: {row['command']}, паблики: {row['public']}, айди: {row['number']}\n"
+        return total
