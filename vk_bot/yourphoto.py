@@ -17,6 +17,8 @@ def photoadd(vk, uid, text, number=1):
     try:
         if text[1] == "список":
             return {"message": getyourphoto(uid)}
+        elif text[1] == "удалить":
+            return {"message":rmyourphoto(uid, text)}
         else:
             command = text[1]
             public = "".join(text[2:]);public = public.split(",")
@@ -35,6 +37,8 @@ def photoadd(vk, uid, text, number=1):
                 /шедевр -c 10 - скинет 10 пикч с вашей команды
                 (10 максимум в вк)
                 Так же, /альбомы список - выведет список ваших альбомов
+                Так же, /альбомы удалить *айди из /альбомы список* удалит альбом
+                либо, /альбомы удалить все - удалит все ваши альбомы
                 так же, ежели вы не вип, то создание альбома заменяет старый.
                 А теперь о випах:
                 випы могут делать бесконечное количество альбомов
@@ -72,3 +76,10 @@ def getyourphoto(uid):
         for row in cursor:
             total += f"Команда: {row['command']}, паблики: {row['public']}, айди: {row['number']}\n"
         return total
+def rmyourphoto(uid, text):
+    number = text[2]
+    if number != "все":
+        tablerm("yourphoto", "id", uid, andd=f"number = '{number}'")
+    else:
+        tablerm("yourphoto", "id", uid)
+    return "Се, удалил"
