@@ -166,9 +166,9 @@ try:
                 response = tasks()
             elif requests == "/приветствие":
                 response = hello(chathello, event, vk, text)
-            elif requests == "/codeqr":
-                response = qrcode(text, vk, upload, session)
             elif requests == "/encodeqr":
+                response = qrcode(text, vk, upload, session)
+            elif requests == "/decodeqr":
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
