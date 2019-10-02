@@ -117,6 +117,8 @@ def mainlobby():
                         response = text_to_bits(text)
                     elif requests == "/бинарный1":
                         response = text_from_bits(text)
+                    elif requests == "/длина":
+                        response = lentomsg(text)
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
                     if checktable("vips","id", uid):

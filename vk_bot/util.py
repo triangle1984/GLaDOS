@@ -416,3 +416,7 @@ def encodeqr(event):
             return {"message":encode[0]['symbol'][0]["data"]}
     except:
         return {"message":"Мне нужно фото!"}
+def lentomsg(text):
+    text = " ".join(text[1:])
+    length = len(text)
+    return {"message": f"Символов в сообщение: {length}"}

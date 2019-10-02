@@ -172,6 +172,8 @@ try:
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
+            elif requests == "/длина":
+                response = lentomsg(text)
             elif requests == getcommandpost(uid):
                 response = sendyourpost(vk2, text, uid)
             elif requests == getcommand(uid, requests):
