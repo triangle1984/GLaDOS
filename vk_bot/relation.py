@@ -17,9 +17,25 @@ def relationmeet(text, vk, event):
     else:
         return {"message": "Ты уже отправил приглашение!"}
 def reject(event):
-    tablerm('waitmeet', "id2", event.object.from_id)
-    return {'message':"Вы отклонили предложение"}
+    check = checkrelation('waitmeet', event.object.from_id)
+    if check == None:
+        return {'message': 'У тебя нет предложений встречаться!'}
+    else:
+        tablerm('waitmeet', "id2", event.object.from_id)  
+        return {'message':"Вы отклонили предложение"}
+
 def accept(event):
-    relationaccept(event.object.from_id)
-    tablerm('waitmeet', "id2", event.object.from_id)
-    return {'message':"Вы приняли предложение! Поздравляем!"}
+    check = checkrelation('waitmeet', event.object.from_id)
+    if check == None:
+        return {'message': 'У тебя нет предложений встречаться!'}
+    else:
+        relationaccept(event.object.from_id)
+        tablerm('waitmeet', "id2", event.object.from_id)
+        return {'message':"Вы приняли предложение! Поздравляем!"}
+def relation(event):
+    check = checkrelation('relation', event.object.from_id)
+    if check == None:
+        return {'message': 'Ты ни с кем не встречаешься :('}
+    else:
+        userid = checktable('relation', 'id', event.object.from_id)
+        return {'message':f"Ты встречаешься с *id{userid}"}
