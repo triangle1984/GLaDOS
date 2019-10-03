@@ -173,13 +173,13 @@ try:
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
-            elif text[:2] == ['/отношения', 'встречаться1']:
+            elif text[:2] == ['/отношения', 'встречаться']:
                 response = relationmeet(text, vk, event)
-            elif uberequests == "/отношения отклонить1":
+            elif uberequests == "/отношения отклонить":
                 response = reject(event)
-            elif uberequests == "/отношения принять1":
+            elif uberequests == "/отношения принять":
                 response = accept(event)
-            elif uberequests == "/отношения1":
+            elif uberequests == "/отношения":
                 response = relation(event)
             elif requests == "/длина":
                 response = lentomsg(text)
