@@ -173,14 +173,8 @@ try:
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
-            elif text[:2] == ['/отношения', 'встречаться']:
-                response = relationmeet(text, vk, event)
-            elif uberequests == "/отношения отклонить":
-                response = reject(event)
-            elif uberequests == "/отношения принять":
-                response = accept(event)
-            elif uberequests == "/отношения":
-                response = relation(event, vk)
+            elif requests == "/отношения":
+                response = relation(event, vk, text)
             elif requests == "/длина":
                 response = lentomsg(text)
             elif requests == getcommandpost(uid):
