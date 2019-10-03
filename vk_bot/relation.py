@@ -17,7 +17,7 @@ def relationmeet(text, vk, event):
     else:
         return {"message": "Ты уже отправил приглашение!"}
 def reject(event):
-    check = checkrelation('waitmeet', event.object.from_id)
+    check = checktable('waitmeet', 'id', event.object.from_id)
     if check == None:
         return {'message': 'У тебя нет предложений встречаться!'}
     else:
@@ -25,7 +25,7 @@ def reject(event):
         return {'message':"Вы отклонили предложение"}
 
 def accept(event):
-    check = checkrelation('waitmeet', event.object.from_id)
+    check = checktable('waitmeet', 'id', event.object.from_id)
     if check == None:
         return {'message': 'У тебя нет предложений встречаться!'}
     else:
