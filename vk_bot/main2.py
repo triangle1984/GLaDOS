@@ -5,7 +5,7 @@ from token2 import *
 from util import *
 from photo import *
 from smeh import *
-import vk_api, requests, sys
+import vk_api, requests
 from vksql import saveload
 session = requests.Session()
 vk_session = vk_api.VkApi(token=token)
@@ -45,7 +45,6 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
-            setmessages(uid)
             if checkban(uid) == "kill him":
                 continue
             try:
@@ -72,8 +71,6 @@ try:
                 response = {"message":"🇺🇦героям слава🇺🇦"}
             elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
                 response = answer(text)
-            elif requests == "/off" and event.from_id == 367919273:
-                sys.exit()
             elif requests in helpspisok:
                 response = {"message":help}
             elif requests == "/красилов":
@@ -135,8 +132,6 @@ try:
                 response = online(vk, event)
             elif requests == "/адольф" or requests == "/гитлер":
                 response = adolf(vk2, text)
-            # elif requests == "/призыв":
-            #     response = callall(vk, event)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
             elif requests == "/жив?":
@@ -201,9 +196,10 @@ try:
                                     attachment=response["attachment"])
                 msgcount += 1
                 status(vk2, msgcount)
+                setmessages(uid)
         except TypeError:
             continue
         except NameError:
             None
 except KeyboardInterrupt:
-    sys.exit()
+    exit(0)
