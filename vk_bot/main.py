@@ -122,11 +122,8 @@ def mainlobby():
                         response = lentomsg(text)
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
-                    if checktable("vips","id", uid):
-                        if "".join(text)[:8] == "/альбомы":
-                            response = photoadd(vk, uid, text, number=text)
-                    elif requests == "/альбомы":
-                        response = photoadd(vk, uid, text)
+                    elif "".join(text)[:8] == "/альбомы":
+                        response = photoadd(vk, uid, text, number=text)
 
                 try:
                     if response["message"]:

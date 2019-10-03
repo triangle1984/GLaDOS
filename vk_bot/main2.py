@@ -185,11 +185,10 @@ try:
                 response = sendyourpost(vk2, text, uid)
             elif requests == getcommand(uid, requests):
                 response = sendyourphoto(vk2, text, uid, requests)
-            if checktable("vips","id", uid):
-                if "".join(text)[:8] == "/альбомы":
-                    response = photoadd(vk2, uid, text, number=text)
-            elif requests == "/альбомы":
-                response = photoadd(vk2, uid, text)
+            elif "".join(text)[:8] == "/альбомы":
+                response = photoadd(vk, uid, text, number=text)
+
+
         try:
             if response["message"]:
                 prefix = saveload(uid, uname)

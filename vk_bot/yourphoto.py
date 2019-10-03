@@ -23,9 +23,10 @@ def photoadd(vk, uid, text, number=1):
             command = text[1]
             public = "".join(text[2:]);public = public.split(",")
             public = ",".join(nametoid2(vk, public))
-            if number != 1:
-                number = "".join(text[0])[8:]
+            number = "".join(text[0])[8:]
             number = int(number)
+            if checktable("vips","id", uid) == None and tablecount("yourphoto", "id", uid) >=3:
+                return {"message":"А больше трех альбомов юзерам низя"}
     except IndexError:
         return {"message": """ Это личные альбомы. Их смысл в том, что каждый человек,
                 может создать себе личную команду с пикчами из указанных пабликов.
@@ -49,8 +50,6 @@ def photoadd(vk, uid, text, number=1):
                 """}
     except ValueError:
         return {"message": "номер альбома должон быть цифровым"}
-    if checktable("vips", "id", uid) == None:
-        tablerm("yourphoto", "id", uid)
     if checktable("yourphoto","id", uid, andd=f"number = {number}"):
         tablerm("yourphoto", "id", uid, andd=f"number = {number}")
     tableadd("yourphoto", "id,command,public,number",f"{uid}, '{command}','{public}', '{number}'")
