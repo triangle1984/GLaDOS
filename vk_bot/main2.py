@@ -180,7 +180,7 @@ try:
             elif uberequests == "/отношения принять":
                 response = accept(event)
             elif uberequests == "/отношения":
-                response = relation(event)
+                response = relation(event, vk)
             elif requests == "/длина":
                 response = lentomsg(text)
             elif requests == getcommandpost(uid):

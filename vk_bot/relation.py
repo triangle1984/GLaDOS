@@ -32,10 +32,17 @@ def accept(event):
         relationaccept(event.object.from_id)
         tablerm('waitmeet', "id2", event.object.from_id)
         return {'message':"Вы приняли предложение! Поздравляем!"}
-def relation(event):
+def relation(event, vk):
     check = checkrelation('relation', event.object.from_id)
     if check == None:
         return {'message': 'Ты ни с кем не встречаешься :('}
     else:
         userid = checktable('relation', 'id', event.object.from_id)
-        return {'message':f"Ты встречаешься с *id{userid}"}
+        if userid == None:
+            userid = checktable('relation', 'id2', event.object.from_id)
+        if userid['id2'] == event.object.from_id:
+            userid = f"*id{userid['id']}({vk.users.get(user_ids=userid['id'], name_case='ins')[0]['first_name']})"
+            return {'message':f"Ты встречаешься с {userid}"}
+        elif userid['id'] == event.object.from_id:
+            userid = f"*id{userid['id2']}({vk.users.get(user_ids=userid['id2'], name_case='ins')[0]['first_name']})"
+            return {'message':f"Ты встречаешься с {userid}"}
