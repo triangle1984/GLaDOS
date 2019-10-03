@@ -68,8 +68,8 @@ try:
                 response = calc(text)
             elif requests == "/погода":
                 response = weather(text)
-            elif requests == "слава":
-                response = {"message":"🇺🇦украине🇺🇦"}
+            elif uberequests == "слава украине":
+                response = {"message":"🇺🇦героям слава🇺🇦"}
             elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
                 response = answer(text)
             elif requests == "/off" and event.from_id == 367919273:
@@ -173,12 +173,8 @@ try:
                 response = encodeqr(event)
             elif requests == "/группы":
                 response = groupadd(vk, uid, text)
-            elif text[:2] == ['/отношения', 'встречаться']:
-                response = relationmeet(text, vk, event)
-            elif uberequests == "/отношения отклонить":
-                response = reject(event)
-            elif uberequests == "/отношения принять":
-                response = accept(event)
+            elif requests == "/отношения":
+                response = relation(event, vk, text)
             elif requests == "/длина":
                 response = lentomsg(text)
             elif requests == getcommandpost(uid):
