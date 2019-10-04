@@ -46,6 +46,21 @@ def accept(event, vk):
         vk.messages.send(user_id=int(userid['id']), random_id=get_random_id(),
                             message=f"*id{event.object.from_id}(Пользователь) принял твое предложение! Поздравляем!")
         return "Вы приняли предложение! Поздравляем!"
+def test(event, vk, message, case):
+    check = checkrelation('relation', event.object.from_id)
+    if check == None:
+        return {'message': 'Ты ни с кем не встречаешься :('}
+    else:
+        userid = checktable('relation', 'id', event.object.from_id)
+        if userid == None:
+            userid = checktable('relation', 'id2', event.object.from_id)
+        if userid['id2'] == event.object.from_id:
+            userid = f"*id{userid['id']}({vk.users.get(user_ids=userid['id'], name_case=case)[0]['first_name']})"
+            return {'message':f"{message} {userid}"}
+        elif userid['id'] == event.object.from_id:
+            userid = f"*id{userid['id2']}({vk.users.get(user_ids=userid['id2'], name_case=case)[0]['first_name']})"
+            return {'message':f"{message} {userid}"}
+
 def relation(event, vk, text):
     try:
         if text[1] == "принять":
@@ -55,16 +70,4 @@ def relation(event, vk, text):
         elif text[:2] == ['/отношения', 'встречаться']:
             return {"message": relationmeet(text, vk, event)}
     except IndexError:
-        check = checkrelation('relation', event.object.from_id)
-        if check == None:
-            return {'message': 'Ты ни с кем не встречаешься :('}
-        else:
-            userid = checktable('relation', 'id', event.object.from_id)
-            if userid == None:
-                userid = checktable('relation', 'id2', event.object.from_id)
-            if userid['id2'] == event.object.from_id:
-                userid = f"*id{userid['id']}({vk.users.get(user_ids=userid['id'], name_case='ins')[0]['first_name']})"
-                return {'message':f"Ты встречаешься с {userid}"}
-            elif userid['id'] == event.object.from_id:
-                userid = f"*id{userid['id2']}({vk.users.get(user_ids=userid['id2'], name_case='ins')[0]['first_name']})"
-                return {'message':f"Ты встречаешься с {userid}"}
+        return test(event, vk, "Ты встречаешься с", "ins")
