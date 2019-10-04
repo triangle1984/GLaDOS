@@ -24,11 +24,14 @@ def relationmeet(text, vk, event):
             return "Ай-яй-яй! Изменять нехорошо"
     else:
         return "Ты уже отправил приглашение!"
-def reject(event):
+def reject(event, vk):
     check = checktable('waitmeet', 'id2', event.object.from_id)
     if check == None:
         return 'У тебя нет предложений встречаться!'
     else:
+        userid = checktable('waitmeet', 'id2', event.object.from_id)
+        vk.messages.send(user_id=int(userid['id']), random_id=get_random_id(),
+                            message=f"*id{event.object.from_id}(Пользователь) отклонил твое предложение :()")
         tablerm('waitmeet', "id2", event.object.from_id)  
         return "Вы отклонили предложение"
 
@@ -40,7 +43,7 @@ def accept(event, vk):
         relationaccept(event.object.from_id)
         tablerm('waitmeet', "id2", event.object.from_id)
         userid = checktable('relation', 'id2', event.object.from_id)
-        vk.messages.send(user_id=int(userid['id2']), random_id=get_random_id(),
+        vk.messages.send(user_id=int(userid['id']), random_id=get_random_id(),
                             message=f"*id{event.object.from_id}(Пользователь) принял твое предложение! Поздравляем!")
         return "Вы приняли предложение! Поздравляем!"
 def relation(event, vk, text):
@@ -48,7 +51,7 @@ def relation(event, vk, text):
         if text[1] == "принять":
             return {"message": accept(event, vk)}
         elif text[1] == "отклонить":
-            return {"message": reject(event)}
+            return {"message": reject(event, vk)}
         elif text[:2] == ['/отношения', 'встречаться']:
             return {"message": relationmeet(text, vk, event)}
     except IndexError:
