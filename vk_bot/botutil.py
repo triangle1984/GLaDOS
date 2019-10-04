@@ -1,6 +1,8 @@
-from token2 import recipient
+from token2 import recipient, group_idd
 from vk_api.utils import get_random_id
-from vksql import sendall, checktable
+from vksql import *
+from vk_api.bot_longpoll import VkBotEventType
+import vk_api
 def groupjoin(vk, event):
     idjoin = f"*id{event.object['user_id']}"
     vk.messages.send(user_id=recipient, random_id=get_random_id(), attachment="photo271595905_457261640",
@@ -11,6 +13,24 @@ def sendpost(vk, event):
     attachment = f"wall{owner_id}_{post}"
     text = "Новый пост в группе~"
     sendall(event, text, vk, attachment)
+def botmain(vk, event):
+        if event.type == VkBotEventType.GROUP_JOIN:
+            groupjoin(vk, event)
+        if event.type == VkBotEventType.WALL_POST_NEW:
+            sendpost(vk, event)
+        try:
+            vk.groups.enableOnline(group_id=group_idd)
+        except vk_api.exceptions.ApiError:
+            None
+        try:
+            if event.object.action['type'] == 'chat_invite_user':
+                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable(chathello, 'id', event.chat_id)['hello'])
+        except TypeError:
+            None
+        except vk_api.exceptions.ApiError:
+            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
+        if "chat_id" in dir(event):
+            checkchat(event)
 def sqlcache(mc, uid):
     uid = str(uid)
     if uid in mc:

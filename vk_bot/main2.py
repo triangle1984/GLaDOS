@@ -21,25 +21,9 @@ from yourgroup import *
 from relation import *
 try:
     for event in longpoll.listen():
-        if event.type == VkBotEventType.GROUP_JOIN:
-            groupjoin(vk, event)
-        if event.type == VkBotEventType.WALL_POST_NEW:
-            sendpost(vk, event)
-        try:
-            vk.groups.enableOnline(group_id=group_idd)
-        except vk_api.exceptions.ApiError:
-            None
+        botmain(vk, event)
         response = {"message":None}
-        try:
-            if event.object.action['type'] == 'chat_invite_user':
-                vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message=checktable(chathello, 'id', event.chat_id)['hello'])
-        except TypeError:
-            None
-        except vk_api.exceptions.ApiError:
-            vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
         if event.object.text:
-            if "chat_id" in dir(event):
-                checkchat(event)
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
@@ -139,9 +123,9 @@ try:
             elif requests == "/новость":
                 response = news()
             elif requests == "/зашифровать":
-                 response = vkbase64(text, encode=True)
+                    response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
-                 response = vkbase64(text, decode=True)
+                    response = vkbase64(text, decode=True)
             elif requests == "/профиль":
                 response = profile(event, uid, uname)
             elif requests == "/бинарный0":
