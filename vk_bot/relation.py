@@ -9,9 +9,17 @@ def relationmeet(text, vk, event):
         if check == None:
             userid = "".join(text[2][3:])
             userid = userid.split('|')[0]
-            tableadd("waitmeet", "id, id2", (f"{event.object.from_id}, {userid}"))
-            vk.messages.send(user_id=int(userid), random_id=get_random_id(),
+            check = checkrelation('relation', userid)
+            if check == None:
+                check = checkrelation('waitmeet', userid)
+                if check == None:
+                    tableadd("waitmeet", "id, id2", (f"{event.object.from_id}, {userid}"))
+                    vk.messages.send(user_id=int(userid), random_id=get_random_id(),
                                     message=f"*id{event.object.from_id}(Пользователь) предложил тебе встречаться!\nНапиши: '/отношения принять' или '/отношения отклонить'")
+                else:
+                    return "Этому пользователю уже кто-то предложил встречатся!"
+            else:
+                return "Этот пользователь уже встречается с кем-то!"
         else:
             return "Ай-яй-яй! Изменять нехорошо"
     else:
