@@ -5,7 +5,7 @@ from token2 import *
 from util import *
 from photo import *
 from smeh import *
-import vk_api, requests, pylibmc
+import vk_api, requests
 session = requests.Session()
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
@@ -19,7 +19,6 @@ from botutil import *
 from yourphoto import *
 from yourgroup import *
 from relation import *
-mc = pylibmc.Client(["127.0.0.1"])
 try:
     for event in longpoll.listen():
         if event.type == VkBotEventType.GROUP_JOIN:
@@ -44,7 +43,6 @@ try:
             text = event.object.text.split()
             uid = event.object.from_id
             uname = getusername(vk,uid)
-            mc2 = sqlcache(mc, uid)
             if checkban(uid) == "kill him":
                 continue
             try:
@@ -52,7 +50,7 @@ try:
                 uberequests = " ".join(text[0:]).lower()
             except IndexError:
                 continue
-            if mc2["admins"]:
+            if checktable("admins", "id", uid):
                 if requests == "/бан":
                     ban(event.object.reply_message['from_id'])
                 elif requests == "/разбан":
