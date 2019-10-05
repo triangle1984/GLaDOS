@@ -7,7 +7,7 @@ from photo import yourpic
 from token2 import *
 def auth():
     conn = pymysql.connect(host=ip,
-                             user="root",
+                             user="bot",
                              password="123",
                              db="mydb",
                              cursorclass=DictCursor)
