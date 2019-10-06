@@ -34,7 +34,7 @@ def mainlobby():
                     else:
                         uid = event.user_id
                     uname = getusername(vk,uid)
-                    mc2 = sqlcache(mc, uid)
+                    mc2 = sqlcache(mc, uid, uname)
                     if requests == "/калькулятор":
                         response = calc(text)
                     elif requests == "/погода":
@@ -106,6 +106,8 @@ def mainlobby():
                         response = adolf(vk, text)
                     elif requests == "/префикс":
                         response = update(uid, uname, text)
+                        del mc[str(uid)]
+                        mc2 = sqlcache(mc, uid, uname)
                     elif requests == "/жив?":
                         response = ping()
                     elif requests == "/конвертер":
