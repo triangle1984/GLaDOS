@@ -31,7 +31,7 @@ try:
             uname = getusername(vk,uid)
             if checkban(uid) == "kill him":
                 continue
-            mc2 = sqlcache(mc, uid)
+            mc2 = sqlcache(mc, uid, uname)
             try:
                 requests = text[0].lower()
                 uberequests = " ".join(text[0:]).lower()
