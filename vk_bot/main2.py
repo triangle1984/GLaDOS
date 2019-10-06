@@ -6,6 +6,12 @@ from util import *
 from photo import *
 from smeh import *
 import vk_api, requests
+from vksql import *
+from botutil import *
+from yourphoto import *
+from yourgroup import *
+from relation import *
+import pylibmc
 session = requests.Session()
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
@@ -14,11 +20,7 @@ vk2 = vk_session2.get_api()
 upload = VkUpload(vk)
 longpoll = VkBotLongPoll(vk_session, group_idd)
 msgcount = 0
-from vksql import *
-from botutil import *
-from yourphoto import *
-from yourgroup import *
-from relation import *
+mc = pylibmc.Client(["127.0.0.1"])
 try:
     for event in longpoll.listen():
         botmain(vk, event)
@@ -29,12 +31,13 @@ try:
             uname = getusername(vk,uid)
             if checkban(uid) == "kill him":
                 continue
+            mc2 = sqlcache(mc, uid)
             try:
                 requests = text[0].lower()
                 uberequests = " ".join(text[0:]).lower()
             except IndexError:
                 continue
-            if checktable("admins", "id", uid):
+            if mc2["admins"]:
                 if requests == "/бан":
                     ban(event.object.reply_message['from_id'])
                 elif requests == "/разбан":
@@ -45,6 +48,7 @@ try:
                     response = shellrun(text)
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
+                    del mc[str(event.object.from_id)]
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
@@ -159,22 +163,22 @@ try:
             elif requests == getcommand(uid, requests):
                 response = sendyourphoto(vk2, text, uid, requests)
             elif "".join(text)[:8] == "/альбомы":
-                response = photoadd(vk, uid, text, number=text)
-
+                response = photoadd(vk, uid, text, mc2, number=text)
+                del mc[str(uid)]
 
         try:
             if response["message"]:
-                prefix = saveload(uid, uname)
+                prefix = mc2["prefix"]
                 if "attachment" not in response:
                     response["attachment"] = None
 
                 if event.chat_id:
                     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                    message=f"{prefix['name']}, {response['message']}",
+                                    message=f"{prefix}, {response['message']}",
                                      attachment=response["attachment"])
                 else:
                     vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
-                                    message=f"{prefix['name']}, {response['message']}",
+                                    message=f"{prefix}, {response['message']}",
                                     attachment=response["attachment"])
                 msgcount += 1
                 status(vk2, msgcount)

@@ -7,6 +7,9 @@ from smeh import *
 import vk_api, requests, sys
 from vksql import *
 from yourphoto import *
+import pylibmc
+from botutil import sqlcache
+mc = pylibmc.Client(["127.0.0.1"])
 def mainlobby():
     vk_session = vk_api.VkApi(token=token22)
     vk = vk_session.get_api()
@@ -31,6 +34,7 @@ def mainlobby():
                     else:
                         uid = event.user_id
                     uname = getusername(vk,uid)
+                    mc2 = sqlcache(mc, uid)
                     if requests == "/калькулятор":
                         response = calc(text)
                     elif requests == "/погода":
@@ -123,18 +127,19 @@ def mainlobby():
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
                     elif "".join(text)[:8] == "/альбомы":
-                        response = photoadd(vk, uid, text, number=text)
+                        response = photoadd(vk, uid, text,mc2, number=text)
+                        del mc[str(uid)]
 
                 try:
                     if response["message"]:
                         if "attachment" not in response:
                             response["attachment"] = None
-                        prefix = saveload(uid, uname)
+                        prefix = mc2["prefix"]
                         # if "chat_id" in dir(event):
                         #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                         #                     message="от бота: " + response["message"], attachment=response["attachment"])
                         vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                         message=f"от бота: {prefix['name']}, {response['message']}",
+                                         message=f"от бота: {prefix}, {response['message']}",
                                          attachment=response["attachment"])
                 except TypeError:
                     continue

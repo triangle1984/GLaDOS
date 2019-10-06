@@ -34,10 +34,14 @@ def botmain(vk, event):
 def sqlcache(mc, uid):
     uid = str(uid)
     if uid in mc:
-        return mc.get(uid)
+        None
     else:
         prefix = checktable("prefix", "id", uid)["name"]
         vips = bool(checktable("vips", "id", uid))
         admins = bool(checktable("admins", "id", uid))
-        mc.set(uid, {"vips":vips, "prefix": prefix, "admins":admins})
-        return mc.get(uid)
+        count = tablecount("yourphoto", "id", uid)
+        mc.set(uid, {"vips":vips,
+                     "prefix": prefix,
+                     "admins":admins,
+                     "count":count})
+    return mc.get(uid)

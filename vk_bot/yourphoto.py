@@ -13,7 +13,7 @@ def nametoid2(vk, names):
             uid.append(convert)
     return uid
 
-def photoadd(vk, uid, text, number=1):
+def photoadd(vk, uid, text, mc, number=1):
     try:
         if text[1] == "список":
             return {"message": getyourphoto(uid)}
@@ -25,7 +25,7 @@ def photoadd(vk, uid, text, number=1):
             public = ",".join(nametoid2(vk, public))
             number = "".join(text[0])[8:]
             number = int(number)
-            if checktable("vips","id", uid) == None and tablecount("yourphoto", "id", uid) >=3:
+            if mc["vips"] == False and mc["count"] >=3:
                 return {"message":"А больше трех альбомов юзерам низя"}
     except IndexError:
         return {"message": """ Это личные альбомы. Их смысл в том, что каждый человек,
