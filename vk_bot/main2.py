@@ -120,6 +120,8 @@ try:
                 response = adolf(vk2, text)
             elif requests == "/префикс":
                 response = update(uid, uname, text)
+                del mc[str(uid)]
+                mc2 = sqlcache(mc, uid)
             elif requests == "/жив?":
                 response = ping()
             elif requests == "/конвертер":
