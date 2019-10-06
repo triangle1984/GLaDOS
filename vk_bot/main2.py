@@ -182,7 +182,7 @@ try:
                                     attachment=response["attachment"])
                 msgcount += 1
                 status(vk2, msgcount)
-                setmessages(uid)
+            setmessages(uid)
         except TypeError:
             continue
         except NameError:
