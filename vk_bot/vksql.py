@@ -75,25 +75,13 @@ def update(uid, text):
         conn.commit()
     return {"message":"се ваш префикс сменен"}
 def ban(uid):
-    conn = auth()
     if checktable("ban", "id", uid) == None:
-        with conn.cursor() as cursor:
-            query = f"INSERT INTO ban (id) VALUES ({uid})"
-            cursor.execute(query)
-            conn.commit()
+        tableadd("ban", "id", uid)
 def unban(uid):
-    conn = auth()
-    with conn.cursor() as cursor:
-        query = f"DELETE FROM ban WHERE id = {uid}"
-        cursor.execute(query)
-        conn.commit()
+    tablerm("ban", "id", uid)
 def checkban(uid):
-    conn = auth()
-    with conn.cursor() as cursor:
-        query = f"SELECT * FROM ban WHERE id = '{uid}'"
-        cursor.execute(query)
-        if cursor.fetchone():
-            return "kill him"
+    if bool(checktable("ban", "id", uid)):
+        return "kill him"
 def smehdb(ss,uid, db=False):
     check = checktable("smehgen","id", uid)
     if db:
