@@ -81,7 +81,6 @@ def ban(uid):
             query = f"INSERT INTO ban (id) VALUES ({uid})"
             cursor.execute(query)
             conn.commit()
-tableadd("prefix","id, name", "49494334,'тест'")
 def unban(uid):
     conn = auth()
     with conn.cursor() as cursor:
