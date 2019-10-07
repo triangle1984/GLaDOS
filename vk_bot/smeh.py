@@ -3,7 +3,7 @@ import random, sys, argparse
 from vksql import smehdb
 def args():
     args = argparse.ArgumentParser(description="генератор смеха")
-    args.add_argument("-c","-с", "--count", type=int, default=random.randint(0, 50))
+    args.add_argument("-c","-с", "--count", type=int, default=random.randint(5, 50))
     args.add_argument("-s", "--smex", default='None')
     args.add_argument("-s2", "--smexslova", default='None')
     return args
