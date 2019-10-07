@@ -28,10 +28,9 @@ try:
         if event.object.text:
             text = event.object.text.split()
             uid = event.object.from_id
-            uname = getusername(vk,uid)
             if checkban(uid) == "kill him":
                 continue
-            mc2 = sqlcache(mc, uid, uname)
+            mc2 = sqlcache(mc, uid)
             try:
                 requests = text[0].lower()
                 uberequests = " ".join(text[0:]).lower()
@@ -119,9 +118,9 @@ try:
             elif requests == "/адольф" or requests == "/гитлер":
                 response = adolf(vk2, text)
             elif requests == "/префикс":
-                response = update(uid, uname, text)
+                response = update(uid,text)
                 del mc[str(uid)]
-                mc2 = sqlcache(mc, uid, uname)
+                mc2 = sqlcache(mc, uid)
             elif requests == "/жив?":
                 response = ping()
             elif requests == "/конвертер":
@@ -133,7 +132,7 @@ try:
             elif requests == "/расшифровать":
                     response = vkbase64(text, decode=True)
             elif requests == "/профиль":
-                response = profile(event, uid, uname)
+                response = profile(event, uid, mc2["prefix"])
             elif requests == "/бинарный0":
                 response = text_to_bits(text)
             elif requests == "/бинарный1":

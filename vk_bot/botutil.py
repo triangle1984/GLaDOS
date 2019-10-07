@@ -31,12 +31,12 @@ def botmain(vk, event):
             vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(), message="Приветствие настроено не правильно!")
         if "chat_id" in dir(event):
             checkchat(event)
-def sqlcache(mc, uid, uname):
+def sqlcache(mc, uid):
     uid = str(uid)
     if uid in mc:
         None
     else:
-        saveload(uid, uname)
+        saveload(uid)
         prefix = checktable("prefix", "id", uid)["name"]
         vips = bool(checktable("vips", "id", uid))
         admins = bool(checktable("admins", "id", uid))

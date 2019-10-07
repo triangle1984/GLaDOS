@@ -291,7 +291,7 @@ def vkbase64(text, encode=False, decode=False):
     except:
         return {"message":"!error"}
     return {"message":result.decode('utf-8')}
-def profile(event, uid, uname):
+def profile(event, uid, prefix):
     msg = checktable('messages', 'id', uid)["msg"]
     if checktable("admins","id", uid):
         user = "Админ😎"
@@ -301,7 +301,7 @@ def profile(event, uid, uname):
         user = "Юзер"
     return {"message": f"""Твой профиль:
 👦| Роль: {user}
-🔑| Префикс: {saveload(uid, uname)['name']}
+🔑| Префикс: {prefix}
 📃| Айди: id{event.object.from_id}
 ✉| Сообщения: {msg}"""}
 def shellrun(text):

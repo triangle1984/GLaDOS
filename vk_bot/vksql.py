@@ -57,25 +57,12 @@ def tablerm(table, value, rm, andd=False):
             query = f"DELETE FROM {table} WHERE {value} = '{rm}' and {andd}"
         cursor.execute(query)
         conn.commit()
-def saveload(uid, uname):
-    conn = auth()
-    with conn.cursor() as cursor:
-        query = f"SELECT * FROM prefix WHERE id = '{uid}'"
-        cursor.execute(query)
-        # если нет, записать
-        if cursor.fetchone() == None:
-            with conn.cursor() as cursor:
-                query = f"INSERT INTO prefix (id, name) VALUES ({uid}, '{uname}')"
-                cursor.execute(query)
-                conn.commit()
-        # в любом случае получить запись из бд, даже ежели ее не было и мы
-        # только записали
-        with conn.cursor() as cursor:
-            query = f"SELECT * FROM prefix WHERE id = '{uid}'"
-            cursor.execute(query)
-            return cursor.fetchone()
-def update(uid, name, text):
-    saveload(uid, name)
+def saveload(uid):
+    if checktable("prefix", "id", uid) == None:
+        tableadd("prefix", "id, name",f"{uid}, 'Дарагуша'")
+    return checktable("prefix", "id", uid)
+def update(uid, text):
+    saveload(uid)
     conn = auth()
     newname = " ".join(text[1:])
     if len(newname) > 29:
@@ -94,6 +81,7 @@ def ban(uid):
             query = f"INSERT INTO ban (id) VALUES ({uid})"
             cursor.execute(query)
             conn.commit()
+tableadd("prefix","id, name", "49494334,'тест'")
 def unban(uid):
     conn = auth()
     with conn.cursor() as cursor:
