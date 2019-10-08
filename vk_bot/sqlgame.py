@@ -1,5 +1,6 @@
 from vksql import *
 import vk_api
+from vk_api import get_random_id
 def sendall(event, text,vk, attachment=None):
     if attachment == None:
         text = " ".join(text[1:])
