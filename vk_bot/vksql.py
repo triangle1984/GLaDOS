@@ -57,22 +57,24 @@ def tablerm(table, value, rm, andd=False):
             query = f"DELETE FROM {table} WHERE {value} = '{rm}' and {andd}"
         cursor.execute(query)
         conn.commit()
+def tableupdate(table, value, should, where):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"UPDATE {table} SET {value} = '{should}' WHERE {where}"
+        cursor.execute(query)
+        conn.commit()
 def saveload(uid):
     if checktable("prefix", "id", uid) == None:
         tableadd("prefix", "id, name",f"{uid}, 'Дарагуша'")
     return checktable("prefix", "id", uid)
 def update(uid, text):
-    saveload(uid)
     conn = auth()
     newname = " ".join(text[1:])
     if len(newname) > 29:
         return {"message":"максимальная длинна префикса: 30 символов"}
     if  "*" in list(newname) or "@" in list(newname) or "[" in list(newname):
         return {"message":"упоминать низя"}
-    with conn.cursor() as cursor:
-        query = f"UPDATE prefix SET name = '{newname}' WHERE id = '{uid}'"
-        cursor.execute(query)
-        conn.commit()
+    tableupdate("prefix", "name", newname, f"id = {uid}")
     return {"message":"се ваш префикс сменен"}
 def ban(uid):
     if checktable("ban", "id", uid) == None:
@@ -101,13 +103,9 @@ def checkchat(event):
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
 def setmessages(uid):
-    conn = auth()
     if checktable('messages', 'id', uid) == None:
         tableadd('messages', 'id, msg', f"{uid}, 0")
-    with conn.cursor() as cursor:
-        query = f"UPDATE messages SET msg = (msg + 1) WHERE id ='{uid}' "
-        cursor.execute(query)
-        conn.commit()
+    tableupdate("messages","msg", "(msg + 1)", f"id = {uid}")
 def hellosql(chathello, uid, text):
     conn = auth()
     if checktable(chathello, 'id', uid) == None:
