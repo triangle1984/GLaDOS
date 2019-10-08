@@ -162,6 +162,8 @@ try:
                 response = lentomsg(text)
             elif requests == "/пароль":
                 response = genpass(text)
+            elif uberequests == "/чекни донат":
+                response = checkdonate(uid)
             elif requests == getcommandpost(uid):
                 response = sendyourpost(vk2, text, uid)
             elif requests == getcommand(uid, requests):

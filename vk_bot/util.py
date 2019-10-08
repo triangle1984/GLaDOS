@@ -436,3 +436,12 @@ def genpass(text):
     result = subprocess.check_output(text, shell=True, encoding="utf-8")
     url = pyPrivnote.create_note(result)
     return {"message": f"Пароль тута: {url} . Ссылка на сгорающую записку, которая удалится после просмотра кем либо"}
+def checkdonate(uid):
+    url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"
+    r = requests.get(url)
+    text = r.json()
+    msg = "ниеть, донатов не было"
+    for donate in text["donates"]:
+        if donate["uid"] == uid:
+            msg = f"а вы мисье донатер. Надонатил: {donate['sum']}₽"
+    return {"message":msg}

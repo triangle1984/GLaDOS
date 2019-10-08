@@ -133,6 +133,8 @@ def mainlobby():
                         response = gethistorytols(vk, event)
                     elif requests == "/пароль":
                         response = genpass(text)
+                    elif uberequests == "/чекни донат":
+                        response = checkdonate(uid)
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
                     elif "".join(text)[:8] == "/альбомы":
