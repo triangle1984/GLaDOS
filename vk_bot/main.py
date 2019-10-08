@@ -125,6 +125,8 @@ def mainlobby():
                         response = text_from_bits(text)
                     elif requests == "/длина":
                         response = lentomsg(text)
+                    elif requests == "/сообщений":
+                        response = gethistorytols(vk, event)
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
                     elif "".join(text)[:8] == "/альбомы":
