@@ -133,7 +133,7 @@ try:
             elif requests == "/расшифровать":
                     response = vkbase64(text, decode=True)
             elif requests == "/профиль":
-                response = profile(event, uid, mc2["prefix"])
+                response = profile(uid, mc2)
             elif requests == "/бинарный0":
                 response = text_to_bits(text)
             elif requests == "/бинарный1":

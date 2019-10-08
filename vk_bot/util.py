@@ -291,19 +291,21 @@ def vkbase64(text, encode=False, decode=False):
     except:
         return {"message":"!error"}
     return {"message":result.decode('utf-8')}
-def profile(event, uid, prefix):
+def profile(uid, mc2):
     msg = checktable('messages', 'id', uid)["msg"]
-    if checktable("admins","id", uid):
+    if mc2["admins"]:
         user = "Админ😎"
-    elif checktable("vips", "id", uid):
+    elif mc2["vips"]:
         user = "Вип🤵"
     else:
         user = "Юзер"
+    G = checktable("economy","id", uid)["money"]
     return {"message": f"""Твой профиль:
 👦| Роль: {user}
-🔑| Префикс: {prefix}
-📃| Айди: id{event.object.from_id}
-✉| Сообщения: {msg}"""}
+🔑| Префикс: {mc2['prefix']}
+📃| Айди: id{uid}
+✉ | Сообщения: {msg}
+💰| G: {G}$ """}
 def shellrun(text):
     text = " ".join(text[1:])
     try:

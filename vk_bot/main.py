@@ -10,6 +10,7 @@ from vksql import *
 from yourphoto import *
 import pylibmc
 from botutil import sqlcache
+from economy import *
 mc = pylibmc.Client(["127.0.0.1"])
 def mainlobby():
     vk_session = vk_api.VkApi(token=token22)
@@ -35,6 +36,7 @@ def mainlobby():
                     else:
                         uid = event.user_id
                     mc2 = sqlcache(mc, uid)
+                    givemoney(uid,mc2)
                     if requests == "/калькулятор":
                         response = calc(text)
                     elif requests == "/погода":
@@ -125,6 +127,8 @@ def mainlobby():
                         response = text_from_bits(text)
                     elif requests == "/длина":
                         response = lentomsg(text)
+                    elif requests == "/профиль":
+                        response = profile(uid, mc2)
                     elif requests == "/сообщений":
                         response = gethistorytols(vk, event)
                     elif requests == getcommand(uid, requests):

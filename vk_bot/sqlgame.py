@@ -67,6 +67,8 @@ def checkrelation(table, uid):
 def saveload(uid):
     if checktable("prefix", "id", uid) == None:
         tableadd("prefix", "id, name",f"{uid}, 'Дарагуша'")
+    if checktable("economy","id", uid) == None:
+        tableadd("economy", "id, money", f"{uid}, 0")
     return checktable("prefix", "id", uid)
 def update(uid, text, mc):
     conn = auth()

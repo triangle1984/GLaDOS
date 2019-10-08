@@ -40,10 +40,11 @@ def tablerm(table, value, rm, andd=False):
             query = f"DELETE FROM {table} WHERE {value} = '{rm}' and {andd}"
         cursor.execute(query)
         conn.commit()
-def tableupdate(table, value, should, where):
+def tableupdate(table, value, should, where, add=False):
     conn = auth()
     with conn.cursor() as cursor:
         query = f"UPDATE {table} SET {value} = '{should}' WHERE {where}"
-        print(query)
+        if add:
+            query = f"UPDATE {table} SET {value} = ({should}) WHERE {where}"
         cursor.execute(query)
         conn.commit()
