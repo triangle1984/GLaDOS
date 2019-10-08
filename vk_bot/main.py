@@ -135,6 +135,7 @@ def mainlobby():
                         response = genpass(text)
                     elif uberequests == "/чекни донат":
                         response = checkdonate(uid)
+                        del mc[str(uid)]
                     elif requests == getcommand(uid, requests):
                         response = sendyourphoto(vk, text, uid, requests)
                     elif "".join(text)[:8] == "/альбомы":
