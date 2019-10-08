@@ -4,3 +4,4 @@ requests
 pymysql
 wikipedia
 pylibmc
+pyPrivnote
