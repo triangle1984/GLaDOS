@@ -29,9 +29,9 @@ try:
         if event.object.text:
             text = event.object.text.split()
             uid = event.object.from_id
-            if checkban(uid) == "kill him":
-                continue
             mc2 = sqlcache(mc, uid)
+            if mc2["ban"]:
+                continue
             try:
                 requests = text[0].lower()
                 uberequests = " ".join(text[0:]).lower()

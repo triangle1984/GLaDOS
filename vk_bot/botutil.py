@@ -42,8 +42,10 @@ def sqlcache(mc, uid):
         vips = bool(checktable("vips", "id", uid))
         admins = bool(checktable("admins", "id", uid))
         count = tablecount("yourphoto", "id", uid)
+        ban = bool(checktable("ban", "id", uid))
         mc.set(uid, {"vips":vips,
                      "prefix": prefix,
                      "admins":admins,
-                     "count":count})
+                     "count":count,
+                     "ban":ban})
     return mc.get(uid)
