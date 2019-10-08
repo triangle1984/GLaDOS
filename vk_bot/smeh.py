@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import random, sys, argparse
-from vksql import smehdb
+from sqlgame import smehdb
 def args():
     args = argparse.ArgumentParser(description="генератор смеха")
     args.add_argument("-c","-с", "--count", type=int, default=random.randint(5, 50))

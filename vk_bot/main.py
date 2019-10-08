@@ -1,5 +1,6 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.utils import get_random_id
+from sqlgame import *
 from token2 import *
 from util import *
 from photo import *
@@ -104,9 +105,8 @@ def mainlobby():
                     elif requests == "/адольф" or requests == "/гитлер":
                         response = adolf(vk, text)
                     elif requests == "/префикс":
-                        response = update(uid, text)
-                        del mc[str(uid)]
-                        mc2 = sqlcache(mc, uid)
+                        response = update(uid, text, mc)
+                        mc2["prefix"] = " ".join(text[1:])
                     elif requests == "/жив?":
                         response = ping()
                     elif requests == "/конвертер":

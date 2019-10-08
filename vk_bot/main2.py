@@ -12,6 +12,7 @@ from yourphoto import *
 from yourgroup import *
 from relation import *
 import pylibmc
+from sqlgame import *
 session = requests.Session()
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
@@ -118,7 +119,7 @@ try:
             elif requests == "/адольф" or requests == "/гитлер":
                 response = adolf(vk2, text)
             elif requests == "/префикс":
-                response = update(uid,text)
+                response = update(uid,text, mc)
                 del mc[str(uid)]
                 mc2 = sqlcache(mc, uid)
             elif requests == "/жив?":

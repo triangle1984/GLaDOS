@@ -3,6 +3,7 @@ from vk_api.utils import get_random_id
 from vksql import *
 from vk_api.bot_longpoll import VkBotEventType
 import vk_api
+from sqlgame import *
 def groupjoin(vk, event):
     idjoin = f"*id{event.object['user_id']}"
     vk.messages.send(user_id=recipient, random_id=get_random_id(), attachment="photo271595905_457261640",
