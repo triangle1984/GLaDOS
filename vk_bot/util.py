@@ -444,5 +444,5 @@ def checkdonate(uid):
     for donate in text["donates"]:
         if donate["uid"] == uid:
             msg = f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой"
-            tableadd("vips", "id", uid)
+            tableadd("vips", "id", uid, one=True)
     return {"message":msg}

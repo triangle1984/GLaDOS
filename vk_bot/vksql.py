@@ -28,6 +28,9 @@ def tableadd(table, value, add, one=False):
     try:
         with conn.cursor() as cursor:
             query = f"INSERT INTO {table} ({value}) VALUES ({add})"
+            if one:
+                if bool(checktable(table, value, add)):
+                    return
             cursor.execute(query)
             conn.commit()
     except pymysql.err.InternalError:
