@@ -160,6 +160,8 @@ try:
                 response = relation(event, vk, text)
             elif requests == "/длина":
                 response = lentomsg(text)
+            elif requests == "/пароль":
+                response = genpass(text)
             elif requests == getcommandpost(uid):
                 response = sendyourpost(vk2, text, uid)
             elif requests == getcommand(uid, requests):

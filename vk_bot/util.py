@@ -4,6 +4,7 @@ from token2 import group_idd, apinews
 from vksql import *
 from vk_api import VkUpload
 from datetime import timedelta
+import pyPrivnote
 wikipedia.set_lang("ru")
 helpspisok = ["/help", "/хелп", "/начать", "/помощь", "/команды", "/старт"]
 help = """Дроу. Ето бот команды овощей. Возможности:
@@ -425,3 +426,12 @@ def lentomsg(text):
 def gethistorytols(vk, event):
     history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
     return {"message":f"сообщений в лс: {history}"}
+def genpass(text):
+    try:
+        length = int(text[1])
+    except:
+        length = 64
+    text = f"openssl rand -base64 {length}"
+    result = subprocess.check_output(text, shell=True, encoding="utf-8")
+    url = pyPrivnote.create_note(result)
+    return {"message": f"Пароль тута: {url} . Ссылка на сгорающую записку, которая удалится после просмотра кем либо"}
