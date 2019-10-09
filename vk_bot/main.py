@@ -18,6 +18,7 @@ def mainlobby():
     longpoll = VkLongPoll(vk_session)
     try:
         for event in longpoll.listen():
+            print(event)
             response = {"message":None}
             if "text" in dir(event) and "user_id" in dir(event):
                 if event.from_me:
@@ -154,9 +155,9 @@ def mainlobby():
                         vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                          message=f"от бота: {prefix}, {response['message']}",
                                          attachment=response["attachment"])
+                    givemoney(uid,mc2)
                 except TypeError:
                     continue
-                givemoney(uid,mc2)
     except KeyboardInterrupt:
         sys.exit()
 mainlobby()
