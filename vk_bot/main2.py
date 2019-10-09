@@ -154,8 +154,9 @@ try:
                 response = qrcode(text, vk, upload, session)
             elif requests == "/decodeqr":
                 response = encodeqr(event)
-            elif requests == "/группы":
-                response = groupadd(vk, uid, text)
+            elif "".join(text)[:8] == "/группы":
+                response = groupadd(vk, uid, text, mc2, number=text)
+                del mc[str(uid)]
             elif requests == "/отношения":
                 response = relation(event, vk, text)
             elif requests == "/длина":
@@ -164,8 +165,6 @@ try:
                 response = genpass(text)
             elif uberequests == "/чекни донат":
                 response = checkdonate(uid)
-            elif requests == getcommandpost(uid):
-                response = sendyourpost(vk2, text, uid)
             elif requests == getcommand(uid, requests):
                 response = sendyourphoto(vk2, text, uid, requests)
             elif "".join(text)[:8] == "/альбомы":
