@@ -433,6 +433,8 @@ def genpass(text):
         length = int(text[1])
     except:
         length = 64
+    if length > 999999:
+        length = 99999
     text = f"openssl rand -base64 {length}"
     result = subprocess.check_output(text, shell=True, encoding="utf-8")
     url = pyPrivnote.create_note(result)
