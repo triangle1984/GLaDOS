@@ -36,7 +36,6 @@ def mainlobby():
                     else:
                         uid = event.user_id
                     mc2 = sqlcache(mc, uid)
-                    givemoney(uid,mc2)
                     if requests == "/калькулятор":
                         response = calc(text)
                     elif requests == "/погода":
@@ -157,6 +156,7 @@ def mainlobby():
                                          attachment=response["attachment"])
                 except TypeError:
                     continue
+                givemoney(uid,mc2)
     except KeyboardInterrupt:
         sys.exit()
 mainlobby()
