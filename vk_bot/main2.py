@@ -154,7 +154,7 @@ try:
                 response = qrcode(text, vk, upload, session)
             elif requests == "/decodeqr":
                 response = encodeqr(event)
-            elif "".join(text)[:8] == "/группы":
+            elif "".join(text)[:7] == "/группы":
                 response = groupadd(vk, uid, text, mc2, number=text)
                 del mc[str(uid)]
             elif requests == "/отношения":
