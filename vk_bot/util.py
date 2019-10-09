@@ -443,9 +443,10 @@ def checkdonate(uid):
     url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"
     r = requests.get(url)
     text = r.json()
-    msg = "ниеть, донатов не было"
+    msg = {"message":"ниеть, донатов от вас не было", "attachment":"video-157509098_456239021"}
     for donate in text["donates"]:
         if donate["uid"] == uid:
-            msg = f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой"
+            msg = {"message":f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой",
+                   "attachment":"video139157356_456239665"}
             tableadd("vips", "id", uid, one=True)
-    return {"message":msg}
+    return msg
