@@ -133,6 +133,8 @@ def mainlobby():
                         response = gethistorytols(vk, event)
                     elif requests == "/пароль":
                         response = genpass(text)
+                    elif requests == "/капитализм":
+                        response = economylobby(uid, mc2, text)
                     elif uberequests == "/чекни донат":
                         response = checkdonate(uid)
                         del mc[str(uid)]
