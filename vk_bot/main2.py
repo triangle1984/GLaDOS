@@ -191,4 +191,4 @@ mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
 futures = []
 for event in longpoll.listen():
-    futures.append(pool.submit(lobby2, vk, vk2, mc, event))
+    futures.append(pool.submit(lobby, vk, vk2, mc, event))
