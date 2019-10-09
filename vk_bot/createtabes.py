@@ -19,4 +19,15 @@ with conn.cursor() as cursor:
     cursor.execute(query)
     query = f"CREATE TABLE IF NOT EXISTS {chathello} (id int)"
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS {chathello} (id int)"
+    query = f"CREATE TABLE IF NOT EXISTS {mailing} (id int)"
+    cursor.execute(query)
+    query = f"CREATE TABLE IF NOT EXISTS relation (id int, id2 int)"
+    cursor.execute(query)
+    query = "CREATE TABLE IF NOT EXISTS vips (id int)"
+    cursor.execute(query)
+    query = "CREATE TABLE IF NOT EXISTS yourphoto (id int, command varchar(40), public varchar(666), number int)"
+    cursor.execute(query)
+    query = "CREATE TABLE IF NOT EXISTS yourgroup (id int, command varchar(40), public varchar(666), number int)"
+    cursor.execute(query)
+    query = "CREATE TABLE IF NOT EXISTS economy (id int, money int)"
+    cursor.execute(query)
