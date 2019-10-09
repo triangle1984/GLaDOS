@@ -1,8 +1,8 @@
 import pymysql
 from pymysql.cursors import DictCursor
 from contextlib import closing
-from vksql import authW
-from token import *
+from vksql import auth
+from token2 import *
 conn = auth()
 with conn.cursor() as cursor:
     query = "CREATE TABLE IF NOT EXISTS admins (id int)"
@@ -18,8 +18,6 @@ with conn.cursor() as cursor:
     query = f"CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
     cursor.execute(query)
     query = f"CREATE TABLE IF NOT EXISTS {chathello} (id int)"
-    cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS {mailing} (id int)"
     cursor.execute(query)
     query = f"CREATE TABLE IF NOT EXISTS relation (id int, id2 int)"
     cursor.execute(query)
