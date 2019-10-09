@@ -31,3 +31,4 @@ with conn.cursor() as cursor:
     cursor.execute(query)
     query = "CREATE TABLE IF NOT EXISTS economy (id int, money int)"
     cursor.execute(query)
+    conn.commit()
