@@ -4,8 +4,8 @@ from contextlib import closing
 from token2 import *
 def auth():
     conn = pymysql.connect(host=ip,
-                             user="bot",
-                             password="123",
+                             user="root",
+                             password="Mtz|m7iC{kj%KUA{",
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
