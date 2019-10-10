@@ -30,7 +30,8 @@ def lobby(vk,vk2, mc, event):
             return
         if mc2["admins"]:
             if requests == "/бан":
-                ban(event.object.reply_message['from_id'])
+                response = ban(event.object.reply_message['from_id'])
+                del mc[str(event.object.reply_message['from_id'])]
             elif requests == "/разбан":
                 unban(event.object.reply_message['from_id'])
             elif requests == "/рассылка":
