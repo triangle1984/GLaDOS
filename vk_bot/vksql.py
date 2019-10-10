@@ -5,7 +5,7 @@ from token2 import *
 def auth():
     conn = pymysql.connect(host=ip,
                              user="root",
-                             password="Mtz|m7iC{kj%KUA{",
+                             password=password,
                              db="mydb",
                              cursorclass=DictCursor)
     return conn
