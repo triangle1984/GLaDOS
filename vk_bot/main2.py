@@ -34,6 +34,7 @@ def lobby(vk,vk2, mc, event):
                 del mc[str(event.object.reply_message['from_id'])]
             elif requests == "/разбан":
                 unban(event.object.reply_message['from_id'])
+                del mc[str(event.object.reply_message['from_id'])]
             elif requests == "/рассылка":
                 sendall(event, text, vk)
             elif requests == "/шелл":
