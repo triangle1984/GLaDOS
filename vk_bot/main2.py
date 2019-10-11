@@ -202,8 +202,8 @@ upload = VkUpload(vk)
 longpoll = VkBotLongPoll(vk_session, group_idd)
 mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
-logging.basicConfig(filename="info.log", level=logging.INFO, filemode="w")
-# logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(filename="info.log", level=logging.INFO, filemode="w")
+logging.basicConfig(level=logging.INFO)
 futures = []
 for event in longpoll.listen():
     futures.append(pool.submit(lobby, vk, vk2, mc, event))
