@@ -25,8 +25,8 @@ def economygame1(uid, text):
     else:
         color, multiply = "красный", 2
     if ucolor == color:
-        tableupdate("economy", "money", f"money + {money * multiply}", uid, add=True)
+        tableupdate("economy", "money", f"money + {money * multiply}", f"id = '{uid}'", add=True)
         return {"message": f"Выпал {color}, ваше бабло: {money * multiply}"}
     else:
-        tableupdate("economy", "money", f"money - {money}", uid, add=True)
+        tableupdate("economy", "money", f"money - {money}", f"id = '{uid}'", add=True)
         return {"message": "Вы проиграли"}
