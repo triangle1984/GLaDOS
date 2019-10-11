@@ -7,7 +7,7 @@ def givemoney(uid,mc2):
         money = 150
     else:
         money = 50
-    tableupdate("economy","money", f"money + {money}", uid, add=True)
+    tableupdate("economy","money", f"money + {money}", f"id = {uid}", add=True)
 def economylobby(uid, mc2, text):
     try:
         if text[1] == "магазин":
