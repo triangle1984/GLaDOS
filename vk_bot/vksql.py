@@ -49,6 +49,5 @@ def tableupdate(table, value, should, where, add=False):
         query = f"UPDATE {table} SET {value} = '{should}' WHERE {where}"
         if add:
             query = f"UPDATE {table} SET {value} = ({should}) WHERE {where}"
-        print(query)
         cursor.execute(query)
         conn.commit()
