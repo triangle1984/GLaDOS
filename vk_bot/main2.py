@@ -15,6 +15,7 @@ import pylibmc, vk_api, logging, datetime
 from sqlgame import *
 from economy import *
 def lobby(vk,vk2, mc, event):
+    then = datetime.datetime.now()
     botmain(vk, event)
     response = {"message":None}
     if event.object.text:
@@ -181,19 +182,18 @@ def lobby(vk,vk2, mc, event):
                 vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
                                 message=f"{prefix}, {response['message']}",
                                 attachment=response["attachment"])
+            now = datetime.datetime.now()
+            delta = now - then
+            logging.info(f"На команду ушло {delta.total_seconds()}")
         setmessages(uid)
     except TypeError:
         return
     except NameError:
         None
 def checkthread(futures):
-    then = datetime.datetime.now()
     for x in as_completed(futures):
         if x.exception() != None:
             logging.error(x.exception())
-    now = datetime.datetime.now()
-    delta = now - then
-    logging.info(f"На команду ушло {delta.total_seconds()}")
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
