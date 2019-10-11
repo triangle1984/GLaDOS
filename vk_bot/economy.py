@@ -15,7 +15,6 @@ def economylobby(uid, mc2, text):
     except IndexError:
         return {"message": "Будущая подсказка буит тут"}
 def economygame1(uid, text):
-    print('1')
     ucolor = text[1]
     money = int(text[2])
     b = random.randrange(1, 100)

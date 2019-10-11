@@ -14,6 +14,7 @@ from yourgroup import *
 from relation import *
 import pylibmc
 from sqlgame import *
+from economy import *
 def lobby(vk,vk2, mc, event):
     botmain(vk, event)
     response = {"message":None}
