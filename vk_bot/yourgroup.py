@@ -11,7 +11,7 @@ def groupadd(vk, uid, text, mc, number=1):
             command = text[1]
             public = "".join(text[2:]);public = public.split(",")
             public = ",".join(nametoid2(vk, public))
-            number = "".join(text[0])[8:]
+            number = "".join(text[0])[7:]
             number = int(number)
             if mc["vips"] == False and mc["count"] >=3:
                 return {"message":"А больше трех групп юзерам низя"}
