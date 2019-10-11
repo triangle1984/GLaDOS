@@ -183,6 +183,10 @@ def lobby(vk,vk2, mc, event):
         return
     except NameError:
         None
+def checkthread(futures):
+    for x in as_completed(futures):
+        if x.exception() != None:
+            print(x.exception())
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
@@ -191,5 +195,7 @@ upload = VkUpload(vk)
 longpoll = VkBotLongPoll(vk_session, group_idd)
 mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
+futures = []
 for event in longpoll.listen():
-    pool.submit(lobby, vk, vk2, mc, event)
+    futures.append(pool.submit(lobby, vk, vk2, mc, event))
+    pool.submit(checkthread, futures)
