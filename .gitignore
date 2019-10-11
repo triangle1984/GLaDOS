@@ -113,3 +113,4 @@ wall.py
 .vscode/
 vk_bot/token*
 *token*
+info.log
