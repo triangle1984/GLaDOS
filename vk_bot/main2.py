@@ -5,14 +5,13 @@ from token2 import *
 from util import *
 from photo import *
 from smeh import *
-import vk_api
 from vksql import *
 from botutil import *
 from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from yourgroup import *
 from relation import *
-import pylibmc
+import pylibmc, vk_api, logging, datetime
 from sqlgame import *
 from economy import *
 def lobby(vk,vk2, mc, event):
@@ -188,9 +187,13 @@ def lobby(vk,vk2, mc, event):
     except NameError:
         None
 def checkthread(futures):
+    then = datetime.datetime.now()
     for x in as_completed(futures):
         if x.exception() != None:
-            print(x.exception())
+            logging.error(x.exception())
+    now = datetime.datetime.now()
+    delta = now - then
+    logging.info(f"На команду ушло {delta.total_seconds()}")
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
@@ -199,6 +202,8 @@ upload = VkUpload(vk)
 longpoll = VkBotLongPoll(vk_session, group_idd)
 mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
+logging.basicConfig(filename="info.log", level=logging.INFO, filemode="w")
+# logging.basicConfig(level=logging.INFO)
 futures = []
 for event in longpoll.listen():
     futures.append(pool.submit(lobby, vk, vk2, mc, event))
