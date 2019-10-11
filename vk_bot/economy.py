@@ -1,4 +1,5 @@
 from vksql import *
+import random
 def givemoney(uid,mc2):
     if mc2["admins"]:
         money = 200
@@ -13,3 +14,20 @@ def economylobby(uid, mc2, text):
             return {"message":"а здеся ничаво нет)0"}
     except IndexError:
         return {"message": "Будущая подсказка буит тут"}
+def economygame1(uid, text):
+    ucolor = text[1]
+    money = int(text[2])
+    b = random.randrange(1, 100)
+    if b <= 15:
+        color, multiply = "зеленый", 8
+    elif b <= 40:
+        color, multiply = "белый", 2
+    else:
+        color, multiply = "красный", 2
+    if ucolor == color:
+        tableupdate("economy", "money", f"money + {money * multiply}", uid, add=True)
+        print(f"Выпал {color}, ваше бабло: {money * multiply}")
+    else:
+        tableupdate("economy", "money", f"money - {money}", uid, add=True)
+        print("Вы проиграли")
+economygame1(367919273, ["ы", "красный", "40"])
