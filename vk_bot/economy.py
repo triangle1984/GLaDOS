@@ -15,6 +15,7 @@ def economylobby(uid, mc2, text):
     except IndexError:
         return {"message": "Будущая подсказка буит тут"}
 def economygame1(uid, text):
+    print('1')
     ucolor = text[1]
     money = int(text[2])
     b = random.randrange(1, 100)
@@ -26,8 +27,7 @@ def economygame1(uid, text):
         color, multiply = "красный", 2
     if ucolor == color:
         tableupdate("economy", "money", f"money + {money * multiply}", uid, add=True)
-        print(f"Выпал {color}, ваше бабло: {money * multiply}")
+        return {"message": f"Выпал {color}, ваше бабло: {money * multiply}"}
     else:
         tableupdate("economy", "money", f"money - {money}", uid, add=True)
-        print("Вы проиграли")
-economygame1(367919273, ["ы", "красный", "40"])
+        return {"message": "Вы проиграли"}
