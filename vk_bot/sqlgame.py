@@ -14,7 +14,7 @@ def sendall(event, text,vk, attachment=None):
                 vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
                                 message=text, attachment=attachment)
             except vk_api.exceptions.ApiError:
-                break
+                pass
 def ban(uid):
     if checktable("ban", "id", uid) == None:
         tableadd("ban", "id", uid)
