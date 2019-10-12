@@ -22,7 +22,6 @@ def lobby(vk,vk2, mc, event):
         text = event.object.text.split()
         uid = event.object.from_id
         mc2 = sqlcache(mc, uid)
-        setmessages(uid)
         givemoney(uid,mc2)
         if mc2["ban"]:
             return
