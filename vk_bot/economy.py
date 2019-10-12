@@ -40,7 +40,7 @@ def economygame1(uid, text):
             return {"message": "Вы проиграли"}
     except ValueError:
         return {"message": "Введи число!"}
-def giftmoney(text, uid):
+def moneygift(text, uid):
     try:
         userid = "".join(text[1][3:])
         userid = userid.split('|')[0]
