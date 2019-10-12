@@ -164,6 +164,8 @@ def lobby(vk,vk2, mc, event):
             response = sendyourphoto(vk2, text, uid, requests)
         elif requests == "/казино":
             response = economygame1(uid, text)
+        elif requests == "/передать":
+            response = giftmoney(text, uid)
         elif "".join(text)[:8] == "/альбомы":
             response = photoadd(vk, uid, text, mc2, number=text)
             del mc[str(uid)]
