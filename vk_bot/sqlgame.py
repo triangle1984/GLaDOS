@@ -43,6 +43,7 @@ def checkchat(event):
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)
 def setmessages(uid):
+    conn = auth()
     if checktable('messages', 'id', uid) == None:
         tableadd('messages', 'id, msg', f"{uid}, 0")
     with conn.cursor() as cursor:
