@@ -40,3 +40,24 @@ def economygame1(uid, text):
             return {"message": "Вы проиграли"}
     except ValueError:
         return {"message": "Введи число!"}
+def giftmoney(text, uid):
+    try:
+        userid = "".join(text[1][3:])
+        userid = userid.split('|')[0]
+        money = int(text[2])
+        check = checktable('economy', 'id', userid)
+        if int(userid) == uid:
+            return {"message": "Нельзя передать деньги самому себе!"}
+        elif not check:
+            return {"message": "Этого юзера нет в бд"}
+        else:
+            if money <= 0:
+                return {"message": "Введи число больше 0!"}
+            elif checktable('economy', 'id', uid)['money'] < money:
+                return {"message": "Не хватает денег!"}
+            else:
+                tableupdate("economy", "money", f"money + {money}", f"id = '{userid}'", add=True)
+                tableupdate("economy", "money", f"money - {money}", f"id = '{uid}'", add=True)
+                return {"message": f"Вы передали {money}$ *id{userid} (этому) пользователю"}
+    except ValueError:
+        return {"message": "Введи число!"}
