@@ -118,7 +118,7 @@ def lobby(vk,vk2, mc, event):
             response = update(uid,text, mc)
             del mc[str(uid)]
             mc2 = sqlcache(mc, uid)
-        elif requests == "/жив?":
+        elif requests == "/жив?" or requests == "/пинг":
             response = ping()
         elif requests == "/конвертер":
             response = convvalute(text)
