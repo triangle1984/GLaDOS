@@ -13,7 +13,7 @@ def economylobby(uid, mc2, text):
         if text[1] == "магазин":
             return {"message":"а здеся ничаво нет)0"}
         elif text[1] == "передать":
-            moneygift(text, uid)
+            return moneygift(text, uid)
     except IndexError:
         return {"message": "Будущая подсказка буит тут"}
 def economygame1(uid, text):
