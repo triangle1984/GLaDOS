@@ -114,3 +114,4 @@ wall.py
 vk_bot/token*
 *token*
 info.log
+config.env
