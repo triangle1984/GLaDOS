@@ -97,7 +97,7 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/повтори":
             response = repeat(text)
         elif requests == "/док" or requests == "/гиф":
-            response = rdocs()
+            response = rdocs(vk, text)
         elif requests == "/ноги" or requests == "/ножки":
             response = photos.legs()
         elif requests == "/мем":
