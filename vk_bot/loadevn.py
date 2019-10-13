@@ -4,7 +4,10 @@ token = parsed["token"]
 token22 = parsed["token22"]
 group_idd = parsed["group_idd"]
 recipient = parsed["recipient"]
-allowuser = parsed["allowuser"].split(",")
+try:
+    allowuser = parsed["allowuser"].split(",")
+except KeyError:
+    None
 ip = parsed["ip"]
 tablechat = parsed["tablechat"]
 apinews = parsed["apinews"]
