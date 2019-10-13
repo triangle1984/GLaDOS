@@ -43,13 +43,13 @@ class Photo:
         photo = self.phootowallrandom(["-98467405", "-113004231", "-57807542", "-38230251"], )
         return {"message":"Яойчег~~🌚", "attachment":photo}
     def trap(self):
-        photo = self.phootowallrandom(["-171834188"], )
+        photo = self.phootowallrandom(["-171834188"])
         return {"message":"Трапы~~🌚", "attachment":photo}
     def cats(self):
-        photo = self.phootowallrandom(["-43228812"], )
+        photo = self.phootowallrandom(["-43228812"])
         return {"message":"Шавухенция на заказ", "attachment":photo}
     def loli(self):
-        photo = self.phootowallrandom(["-127518015", "-157516431", "-69721869"], )
+        photo = self.phootowallrandom(["-127518015", "-157516431", "-69721869"])
         return {"message":"FBI OPEN UP", "attachment":photo}
     def mahno(self):
         photo = self.phootowallrandom(["367919273"], albid=262361216)
