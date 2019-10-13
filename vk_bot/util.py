@@ -1,6 +1,6 @@
 import vk_api, math, random, requests, base64, wikipedia, subprocess
 from vk_api.utils import get_random_id
-from token2 import group_idd, apinews
+from loadevn import group_idd, apinews
 from vksql import *
 from sqlgame import hellosql
 from vk_api import VkUpload

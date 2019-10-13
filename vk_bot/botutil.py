@@ -1,4 +1,4 @@
-from token2 import recipient, group_idd
+from loadevn import recipient, group_idd
 from vk_api.utils import get_random_id
 from vksql import *
 from vk_api.bot_longpoll import VkBotEventType
