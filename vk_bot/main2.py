@@ -83,7 +83,7 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/калян":
             response = photos.colyan()
         elif requests == "/видео":
-            response = video()
+            response = video(vk2, text)
         elif requests == "/вероятность" or requests == "/шансы":
             response = chance(text)
         elif requests == "/хентай":
