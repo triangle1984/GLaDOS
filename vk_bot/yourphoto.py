@@ -1,5 +1,5 @@
 from vksql import checktable, tablerm, tableadd, tablecount, auth
-from photo import *
+from photo import Photo
 def nametoid2(vk, names):
     uid = []
     for convert in names:
@@ -44,9 +44,10 @@ def getcommand(uid, command):
 def sendyourphoto(vk, text, uid, command):
     check = checktable("yourphoto", "id", uid, andd=f"command = '{command}'")
     if check:
+        photos = Photo(vk, text)
         public = check["public"]
         public = public.split(",")
-        return yourpic(vk, text, public)
+        return photos.yourpic(public)
 def getyourphoto(uid):
     conn = auth()
     total = "\n"
