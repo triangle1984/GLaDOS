@@ -159,6 +159,8 @@ def lobby(vk,vk2, mc, event):
             response = lentomsg(text)
         elif requests == "/пароль":
             response = genpass(text)
+        elif requests == "/посты":
+            response = postsearch(vk2, text)
         elif uberequests == "/чекни донат":
             response = checkdonate(uid)
         elif requests == getcommand(uid, requests):
