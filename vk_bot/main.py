@@ -4,12 +4,13 @@ from sqlgame import *
 from loadevn import *
 from util import *
 from photo import *
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from smeh import *
 import vk_api, requests, sys
 from vksql import *
 from yourphoto import *
 import pylibmc
+import logging
 from botutil import sqlcache
 from economy import *
 def mainlobby(vk, mc, event):
@@ -20,7 +21,7 @@ def mainlobby(vk, mc, event):
                 uid = recipient
             else:
                 uid = event.user_id
-            if uid in allowuser and "chat_id" not in dir(event):
+            if str(uid) in allowuser and "chat_id" not in dir(event):
                 text = event.text.split()
                 try:
                     requests = text[0].lower()
@@ -32,6 +33,7 @@ def mainlobby(vk, mc, event):
                 else:
                     uid = event.user_id
                 mc2 = sqlcache(mc, uid)
+                photos = Photo(vk, text)
                 if requests == "/калькулятор":
                     response = calc(text)
                 elif requests == "/погода":
@@ -50,29 +52,29 @@ def mainlobby(vk, mc, event):
                     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                     message="Krasyliv")
                 elif requests == "/каты":
-                    response = cats(vk,text)
+                    response = photos.cats()
                 elif requests == "/переводчик":
                     response = translit(text, vk)
                 elif requests == "/юри":
-                    response = yuri(vk, text)
+                    response = photos.yuri()
                 elif requests == "/геббельс":
-                    response = gebbels(vk, text)
+                    response = photos.gebbels()
                 elif requests == "/яой":
-                    response = yaoi(vk, text)
+                    response = photos.yaoi()
                 elif requests == "/трапы":
-                    response = trap(vk, text)
+                    response = photos.trap()
                 elif requests == "/лоли":
-                    response = loli(vk, text)
+                    response = photos.loli()
                 elif requests == "/оцени":
                     response = doulikethis(text)
                 elif requests == "/вики":
                     response = wiki(text)
                 elif requests == "/махно":
-                    response = mahno(vk, text)
+                    response = photos.mahno()
                 elif requests == "/цитаты":
-                    response = citati(vk, text)
+                    response = photos.citati()
                 elif requests == "/калян":
-                    response = colyan(vk, text)
+                    response = photos.colyan()
                 elif requests == "/видео":
                     response = video(vk, text)
                 elif requests == "/вероятность" or requests == "/шансы":
@@ -88,9 +90,9 @@ def mainlobby(vk, mc, event):
                 elif requests == "/док" or requests == "/гиф":
                     response = rdocs(vk, text)
                 elif requests == "/ноги" or requests == "/ножки":
-                    response = legs(vk,text)
+                    response = photos.legs(vk,text)
                 elif requests == "/мем":
-                    response = mem(vk, text)
+                    response = photos.mem()
                 elif requests == "/кто":
                     response = who(vk, event, text)
                 elif requests == "/курс":
@@ -100,7 +102,7 @@ def mainlobby(vk, mc, event):
                 elif requests == "/число":
                     response = number(text)
                 elif requests == "/адольф" or requests == "/гитлер":
-                    response = adolf(vk, text)
+                    response = photos.adolf()
                 elif requests == "/префикс":
                     response = update(uid, text, mc)
                     mc2["prefix"] = " ".join(text[1:])
@@ -133,6 +135,9 @@ def mainlobby(vk, mc, event):
                 elif uberequests == "/чекни донат":
                     response = checkdonate(uid)
                     del mc[str(uid)]
+                elif requests == "/посты":
+                    response = postsearch(vk, text)
+
                 elif requests == getcommand(uid, requests):
                     response = sendyourphoto(vk, text, uid, requests)
                 elif "".join(text)[:8] == "/альбомы":
@@ -155,10 +160,17 @@ def mainlobby(vk, mc, event):
                 return
     except KeyboardInterrupt:
         sys.exit()
+def checkthread(futures):
+    for x in as_completed(futures):
+        if x.exception() != None:
+            logging.error(x.exception())
 vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
+logging.basicConfig(level=logging.INFO)
+futures = []
 for event in longpoll.listen():
-    pool.submit(mainlobby, vk, mc, event)
+    futures.append(pool.submit(mainlobby, vk, mc, event))
+    pool.submit(checkthread, futures)
