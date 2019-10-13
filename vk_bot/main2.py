@@ -3,7 +3,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.utils import get_random_id
 from token2 import *
 from util import *
-from photo import *
+from photo import Photo
 from smeh import *
 from vksql import *
 from botutil import *

@@ -1,4 +1,4 @@
-from vksql import checktable, tablerm, tableadd, tablecount, auth
+from vksql import *
 from photo import Photo
 def nametoid2(vk, names):
     uid = []
