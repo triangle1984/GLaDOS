@@ -8,7 +8,7 @@ class Photo:
         try:
             a = self.args2()
             a = a.parse_args(self.text[1:])
-        except KeyboardInterrupt:
+        except:
             try:
                 a.count = int(self.text[1])
             except:

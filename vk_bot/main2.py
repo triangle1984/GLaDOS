@@ -7,7 +7,7 @@ from photo import *
 from smeh import *
 from vksql import *
 from botutil import *
-from yourphoto import Photo
+from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from yourgroup import *
 from relation import *
