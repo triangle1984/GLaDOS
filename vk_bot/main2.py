@@ -29,6 +29,7 @@ def lobby(vk,vk2, mc, event):
             uberequests = " ".join(text[0:]).lower()
         except IndexError:
             return
+        photos = Photo(vk2, text)
         if mc2["admins"]:
             if requests == "/бан":
                 response = ban(event.object.reply_message['from_id'])
@@ -57,35 +58,35 @@ def lobby(vk,vk2, mc, event):
             vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                             message="Krasyliv")
         elif requests == "/каты":
-            response = cats(vk2, text)
+            response = photos.cats()
         elif requests == "/переводчик":
             response = translit(text, vk)
         elif requests == "/юри":
-            response = yuri(vk2, text)
+            response = photos.yuri()
         elif requests == "/геббельс":
-            response = gebbels(vk2, text)
+            response = photos.gebbels()
         elif requests == "/яой":
-            response = yaoi(vk2, text)
+            response = photos.yaoi()
         elif requests == "/трапы":
-            response = trap(vk2, text)
+            response = photos.trap()
         elif requests == "/лоли":
-            response = loli(vk2,text)
+            response = photos.loli(vk2,text)
         elif requests == "/оцени":
             response = doulikethis(text)
         elif requests == "/вики":
             response = wiki(text)
         elif requests == "/махно":
-            response = mahno(vk2, text)
+            response = photos.mahno()
         elif requests == "/цитаты":
-            response = citati(vk2, text)
+            response = citati()
         elif requests == "/калян":
-            response = colyan(vk2, text)
+            response = photos.colyan()
         elif requests == "/видео":
-            response = video(vk2, text)
+            response = video()
         elif requests == "/вероятность" or requests == "/шансы":
             response = chance(text)
         elif requests == "/хентай":
-            response = hentai(vk2, text)
+            response = photos.hentai()
         elif requests == "/выбери":
             response = oror(text)
         elif requests == "/смех":
@@ -95,11 +96,11 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/повтори":
             response = repeat(text)
         elif requests == "/док" or requests == "/гиф":
-            response = rdocs(vk2, text)
+            response = rdocs()
         elif requests == "/ноги" or requests == "/ножки":
-            response = legs(vk2, text)
+            response = photos.legs()
         elif requests == "/мем":
-            response = mem(vk2, text)
+            response = photos.mem()
         elif requests == "/кто":
             response = who(vk, event, text)
         elif requests == "/курс":
@@ -111,7 +112,7 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/онлайн" or requests == "/online":
             response = online(vk, event)
         elif requests == "/адольф" or requests == "/гитлер":
-            response = adolf(vk2, text)
+            response = photos.adolf()
         elif requests == "/префикс":
             response = update(uid,text, mc)
             del mc[str(uid)]
@@ -135,11 +136,11 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/перешли":
             response = forward(event, vk, session, upload)
         elif requests == "/хес" or requests == "/хесус":
-            response = hesus(vk2, text)
+            response = photos.hesus()
         elif uberequests == "/аниме на фото":
             response = anime(event)
         elif requests == "/айди":
-            response = nametoid(vk2, text)
+            response = nametoid()
         elif requests == "/идеи":
             response = tasks()
         elif requests == "/приветствие":

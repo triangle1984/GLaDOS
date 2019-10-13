@@ -1,5 +1,5 @@
 from vksql import checktable, tablerm, tableadd, tablecount, auth
-from photo import yourpic
+from photo import *
 def nametoid2(vk, names):
     uid = []
     for convert in names:
