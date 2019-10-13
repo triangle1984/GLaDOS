@@ -34,7 +34,7 @@ class Photo:
         args.add_argument("-с", "-c", "--count", type=int, default=1)
         return args
     def yuri(self):
-        photo = self.self.phootowallrandom(["-170165000", "-63092480", "-153284406"])
+        photo = self.phootowallrandom(["-170165000", "-63092480", "-153284406"])
         return {"message":"Юрец~~🌚", "attachment":photo}
     def gebbels(self):
         photo = self.phootowallrandom(["-174482230"])

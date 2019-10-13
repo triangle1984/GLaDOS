@@ -62,6 +62,7 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/переводчик":
             response = translit(text, vk)
         elif requests == "/юри":
+            print("текст")
             response = photos.yuri()
         elif requests == "/геббельс":
             response = photos.gebbels()
