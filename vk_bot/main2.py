@@ -185,7 +185,7 @@ def lobby(vk,vk2, mc, event):
                                 attachment=response["attachment"])
             now = datetime.datetime.now()
             delta = now - then
-            logging.info(f"На команду ушло {delta.total_seconds()}")
+            logging.info(f"На команду {requests} ушло {delta.total_seconds()}")
         setmessages(uid)
         givemoney(uid,mc2)
     except TypeError:
