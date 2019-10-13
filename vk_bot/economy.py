@@ -12,6 +12,8 @@ def economylobby(uid, mc2, text):
     try:
         if text[1] == "магазин":
             return {"message":"а здеся ничаво нет)0"}
+        elif text[1] == "передать":
+            moneygift(text, uid)
     except IndexError:
         return {"message": "Будущая подсказка буит тут"}
 def economygame1(uid, text):
@@ -42,9 +44,9 @@ def economygame1(uid, text):
         return {"message": "Введи число!"}
 def moneygift(text, uid):
     try:
-        userid = "".join(text[1][3:])
+        userid = "".join(text[2][3:])
         userid = userid.split('|')[0]
-        money = int(text[2])
+        money = int(text[3])
         check = checktable('economy', 'id', userid)
         if int(userid) == uid:
             return {"message": "Нельзя передать деньги самому себе!"}
