@@ -452,8 +452,11 @@ def checkdonate(uid):
             tableadd("vips", "id", uid, one=True)
     return msg
 def postsearch(vk, text):
-    text = " ".join(text[1:])
-    result = random.choice(vk.newsfeed.search(q=text, count=50)["items"])
-    owner_id = result["owner_id"]
-    idd = result["id"]
+    try:
+        text = " ".join(text[1:])
+        result = random.choice(vk.newsfeed.search(q=text, count=50)["items"])
+        owner_id = result["owner_id"]
+        idd = result["id"]
+    except:
+        return {"message":"ничо не нашел"}
     return {"message":"Найденный пост, по вашему запросу", "attachment":f"wall{owner_id}_{idd}"}
