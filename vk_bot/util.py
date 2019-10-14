@@ -460,3 +460,5 @@ def postsearch(vk, text):
     except:
         return {"message":"ничо не нашел"}
     return {"message":"Найденный пост, по вашему запросу", "attachment":f"wall{owner_id}_{idd}"}
+def nuke():
+    return {"message":"ВСЕ ПИЗДА ИВАНУ. /запустил ядерную боеголовку в максбота", "attachment":"video162900694_456239801"}

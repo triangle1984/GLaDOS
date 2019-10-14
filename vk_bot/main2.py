@@ -169,6 +169,8 @@ def lobby(vk,vk2, mc, event):
             response = economygame1(uid, text)
         elif requests == "/экономика":
             response = economylobby(uid, mc2, text)
+        elif uberequests == "/холодная война":
+            response = nuke()
         elif "".join(text)[:8] == "/альбомы":
             response = photoadd(vk, uid, text, mc2, number=text)
             del mc[str(uid)]
