@@ -6,7 +6,7 @@
 ### Бд (mysql)
 Поднимете msql аль его форки, в инете гайдов на это много
 ### config.env
-заполните конфиг в vk_bot/config.env.example 
+заполните конфиг в vk_bot/config.env.example и переименуйте его в config.env
 ### Создание таблиц в бд
 Запустите скрипт, по созданию всех нужных таблиц: ``` python vk_bot/createtabes.py ```
 ### Запуск
