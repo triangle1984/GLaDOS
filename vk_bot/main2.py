@@ -62,7 +62,6 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/переводчик":
             response = translit(text, vk)
         elif requests == "/юри":
-            print("текст")
             response = photos.yuri()
         elif requests == "/геббельс":
             response = photos.gebbels()
@@ -162,6 +161,7 @@ def lobby(vk,vk2, mc, event):
         elif requests == "/посты":
             response = postsearch(vk2, text)
         elif uberequests == "/чекни донат":
+            print("текс")
             response = checkdonate(uid)
         elif requests == getcommand(uid, requests):
             response = sendyourphoto(vk2, text, uid, requests)
