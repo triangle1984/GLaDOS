@@ -30,6 +30,8 @@ def lobby(vk,vk2, mc, event):
         except IndexError:
             return
         photos = Photo(vk2, text)
+        setmessages(uid)
+        givemoney(uid,mc2)
         if mc2["admins"]:
             if requests == "/бан":
                 response = ban(event.object.reply_message['from_id'])
@@ -192,8 +194,6 @@ def lobby(vk,vk2, mc, event):
             now = datetime.datetime.now()
             delta = now - then
             logging.info(f"На команду {requests} ушло {delta.total_seconds()}")
-        setmessages(uid)
-        givemoney(uid,mc2)
     except TypeError:
         return
     except NameError:
