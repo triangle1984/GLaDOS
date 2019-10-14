@@ -66,7 +66,7 @@ class Photo:
     def legs(self):
         photo = self.phootowallrandom(["-174842315", "-102853758", "-134982584", "-138265009", "-114279288"])
         return {"message": "Ножки &#127773;", "attachment": photo}
-    def mem(vk, text):
+    def mem(self):
         photo = self.phootowallrandom(["-154306815"])
         return {"message": "Держи мемас", "attachment": photo}
     def adolf(self):
