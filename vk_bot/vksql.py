@@ -6,7 +6,7 @@ def auth():
     conn = pymysql.connect(host=ip,
                              user=user,
                              password=password,
-                             db="mydb",
+                             db=db,
                              cursorclass=DictCursor)
     return conn
 def tablecount(table, value, count):
