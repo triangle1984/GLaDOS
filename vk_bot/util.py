@@ -454,7 +454,7 @@ def checkdonate(uid):
 def postsearch(vk, text):
     try:
         text = " ".join(text[1:])
-        result = random.choice(vk.newsfeed.search(q=text, count=50)["items"])
+        result = random.choice(vk.newsfeed.search(q=text, count=100)["items"])
         owner_id = result["owner_id"]
         idd = result["id"]
     except:
