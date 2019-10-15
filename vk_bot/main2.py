@@ -50,7 +50,7 @@ def lobby(vk,vk2, mc, event):
                 del mc[str(event.object.from_id)]
         for module in mods.modules:
             if module.__command__ == requests:
-                print(".")
+                response = module.main()
         if requests == "/калькулятор":
             response = calc(text)
         elif requests == "/погода":
