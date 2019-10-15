@@ -36,6 +36,8 @@ def photoadd(vk, uid, text, mc, number=1):
     tableadd("yourphoto", "id,command,public,number",f"{uid}, '{command}','{public}', '{number}'")
     return {"message":f"Ваш личный альбом №{number} настроен, паблики: {public}, команда: {command}"}
 def getcommand(uid, command):
+    if bool(command) == False:
+        return
     check = checktable("yourphoto", "id", uid, andd=f"command = '{command}'")
     if check:
         return check["command"]

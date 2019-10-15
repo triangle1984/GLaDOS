@@ -1,6 +1,8 @@
 from vksql import *
 import random
 def givemoney(uid,mc2):
+    if bool(mc2) == False:
+        return
     if mc2["admins"]:
         money = 200
     elif mc2["vips"]:

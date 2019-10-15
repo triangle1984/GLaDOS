@@ -46,6 +46,8 @@ def yourpost(vk, public):
     return {"message":"Рандомный пост!", "attachment":post}
 
 def sendyourpost(vk, text, uid, command):
+    if bool(command) == False:
+        return
     check = checktable("yourgroup", "id", uid, andd=f"command = '{command}'")
     if check:
         public = check["public"]
