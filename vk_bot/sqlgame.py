@@ -82,3 +82,12 @@ def update(uid, text, mc):
         return {"message":"упоминать низя"}
     tableupdate("prefix", "name", newname, f"id = {uid}")
     return {"message":"се ваш префикс сменен"}
+
+def setxp(uid, xp):
+    conn = auth()
+    if checktable('level', 'id', uid) == None:
+        tableadd('level', 'id, xp', f"{uid}, 0")
+    with conn.cursor() as cursor:
+        query = f"UPDATE level SET xp = (xp + {xp}) WHERE id ='{uid}' "
+        cursor.execute(query)
+        conn.commit()
