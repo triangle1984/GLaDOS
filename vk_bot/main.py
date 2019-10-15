@@ -33,6 +33,7 @@ def mainlobby(vk, mc, event):
                 else:
                     uid = event.user_id
                 mc2 = sqlcache(mc, uid)
+                givemoney(uid,mc2)
                 photos = Photo(vk, text)
                 if requests == "/калькулятор":
                     response = calc(text)
@@ -155,7 +156,6 @@ def mainlobby(vk, mc, event):
                     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                         message=f"от бота: {prefix}, {response['message']}",
                                         attachment=response["attachment"])
-                givemoney(uid,mc2)
             except TypeError:
                 return
     except KeyboardInterrupt:
