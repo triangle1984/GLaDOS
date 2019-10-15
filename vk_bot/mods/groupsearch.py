@@ -1,6 +1,6 @@
 import random
 __doc__ = "Найти паблики по названию  и скинуть айди"
-__command__ = "/паблики"
+__command__ = ["/паблики"]
 def main(**args):
     vk = args["vk2"]
     result = vk.groups.search(q=" ".join(args["text"][1:]), count=15)["items"]
