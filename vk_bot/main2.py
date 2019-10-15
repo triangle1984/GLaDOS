@@ -31,6 +31,7 @@ def lobby(vk,vk2, mc, event):
         except IndexError:
             return
         if mc2["admins"]:
+            setxp(uid, random.randint(75, 100))
             if requests == "/бан":
                 response = ban(event.object.reply_message['from_id'])
                 del mc[str(event.object.reply_message['from_id'])]
@@ -44,6 +45,10 @@ def lobby(vk,vk2, mc, event):
             elif requests == "/вип":
                 tableadd("vips", "id", event.object.reply_message['from_id'])
                 del mc[str(event.object.from_id)]
+        elif mc2["vips"]: 
+            setxp(uid, random.randint(50, 75)) 
+        else: 
+            setxp(uid, random.randint(25, 50))
         if requests == "/калькулятор":
             response = calc(text)
         elif requests == "/погода":

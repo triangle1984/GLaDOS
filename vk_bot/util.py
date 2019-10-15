@@ -296,6 +296,25 @@ def vkbase64(text, encode=False, decode=False):
     return {"message":result.decode('utf-8')}
 def profile(uid, mc2):
     msg = checktable('messages', 'id', uid)["msg"]
+    xp = checktable('level', 'id', uid)["xp"]
+    if xp >= 20000:
+        level = 10
+    elif xp >= 13500:
+        level = 9
+    elif xp >= 10000:
+        level = 8
+    elif xp >= 7500:
+        level = 7
+    elif xp >= 5000:
+        level = 5
+    elif xp >= 3000:
+        level = 4
+    elif xp >= 1500:
+        level = 3
+    elif xp >= 500:
+        level = 2
+    else:
+        level = 1
     if mc2["admins"]:
         user = "Админ😎"
     elif mc2["vips"]:
@@ -308,7 +327,9 @@ def profile(uid, mc2):
 🔑| Префикс: {mc2['prefix']}
 📃| Айди: id{uid}
 ✉ | Сообщения: {msg}
-💰| G: {G}$ """}
+💰| G: {G}$
+🎮| XP: {xp}
+⭐| Уровень: {level}"""}
 def shellrun(text):
     text = " ".join(text[1:])
     try:
