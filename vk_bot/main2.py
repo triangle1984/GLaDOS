@@ -14,6 +14,7 @@ from relation import *
 import pylibmc, vk_api, logging, datetime
 from sqlgame import *
 from economy import *
+import mods
 def lobby(vk,vk2, mc, event):
     then = datetime.datetime.now()
     botmain(vk, event)
@@ -46,6 +47,10 @@ def lobby(vk,vk2, mc, event):
             elif requests == "/вип":
                 tableadd("vips", "id", event.object.reply_message['from_id'])
                 del mc[str(event.object.from_id)]
+        for module in mods.modules:
+            if module.__command__ == requests:
+                print(".")
+                response = module.main()
         if requests == "/калькулятор":
             response = calc(text)
         elif requests == "/погода":
