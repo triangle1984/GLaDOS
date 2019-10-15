@@ -34,6 +34,7 @@ def lobby(vk,vk2, mc, event):
         setmessages(uid)
         givemoney(uid,mc2)
         if mc2["admins"]:
+            setxp(uid, random.randint(75, 100))
             if requests == "/бан":
                 response = ban(event.object.reply_message['from_id'])
                 del mc[str(event.object.reply_message['from_id'])]
@@ -50,7 +51,6 @@ def lobby(vk,vk2, mc, event):
         for module in mods.modules:
             if module.__command__ == requests:
                 print(".")
-                response = module.main()
         if requests == "/калькулятор":
             response = calc(text)
         elif requests == "/погода":
