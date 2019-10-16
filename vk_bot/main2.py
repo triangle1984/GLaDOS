@@ -207,10 +207,12 @@ def lobby(vk,vk2, mc, event):
         return
     except NameError:
         None
-def checkthread(futures):
+def checkthread():
+    global futures
     for x in as_completed(futures):
         if x.exception() != None:
             logging.error(x.exception())
+        futures.remove(x)
 vk_session = vk_api.VkApi(token=token)
 vk_session2 = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
@@ -224,4 +226,4 @@ logging.basicConfig(level=logging.INFO)
 futures = []
 for event in longpoll.listen():
     futures.append(pool.submit(lobby, vk, vk2, mc, event))
-    pool.submit(checkthread, futures)
+    pool.submit(checkthread)
