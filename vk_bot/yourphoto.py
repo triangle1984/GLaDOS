@@ -20,7 +20,7 @@ def photoadd(vk, uid, text, mc, number=1):
         elif text[1] == "удалить":
             return {"message":rmyourphoto(uid, text)}
         else:
-            command = text[1]
+            command = text[1].lower()
             public = "".join(text[2:]);public = public.split(",")
             public = ",".join(nametoid2(vk, public))
             number = "".join(text[0])[8:]

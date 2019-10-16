@@ -160,10 +160,12 @@ def mainlobby(vk, mc, event):
                 return
     except KeyboardInterrupt:
         sys.exit()
-def checkthread(futures):
+def checkthread():
+    global futures
     for x in as_completed(futures):
         if x.exception() != None:
             logging.error(x.exception())
+        futures.remove(x)
 vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
@@ -173,4 +175,4 @@ logging.basicConfig(level=logging.INFO)
 futures = []
 for event in longpoll.listen():
     futures.append(pool.submit(mainlobby, vk, mc, event))
-    pool.submit(checkthread, futures)
+    pool.submit(checkthread)
