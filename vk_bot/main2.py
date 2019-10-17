@@ -148,9 +148,9 @@ class Main:
             elif requests == "/адольф" or requests == "/гитлер":
                 response = photos.adolf()
             elif requests == "/префикс":
-                response = update(uid,text, mc)
-                del mc[str(uid)]
-                mc2 = sqlcache(mc, uid)
+                response = update(uid,text, self.mc)
+                del self.mc[str(uid)]
+                mc2 = sqlcache(self.mc, uid)
             elif requests == "/жив?" or " ".join(text[0:]) == "/ ping":
                 response = ping()
             elif requests == "/конвертер":
