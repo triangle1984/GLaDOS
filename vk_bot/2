@@ -31,12 +31,6 @@ class Main:
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
-    def initmodules(self):
-        modules = []
-        for moduli in mods.modules:
-            t = moduli(self.vk)
-            modules.append(t)
-        print(modules)
     def checkthread(self):
         for x in as_completed(self.futures):
             if x.exception() != None:
@@ -240,4 +234,3 @@ class Main:
             None
 logging.basicConfig(level=logging.INFO)
 t = Main(token, token22)
-t.initmodules()
