@@ -80,7 +80,7 @@ class Main:
                     del mc[str(event.object.from_id)]
             for module in self.modules:
                 if module.included:
-                    module.givedata(text=text, uid=uid, mc2=mc2)
+                    module.givedata(uid=uid, text=text, event=event, mc2=mc2)
                     if requests in module.command and module.types == "msg":
                         response = module.main()
                     elif module.types == "runalways":

@@ -12,10 +12,13 @@ def test(pkgname):
             if name[0] == "_":
                 continue
             atribute = t.__getattribute__(name)
-            if atribute not in modules and atribute.__module__ == t.__name__:
-                if isinstance(atribute, type):
-                    if issubclass(atribute, BacisPlug):
-                        modules.append(atribute)
+            try:
+                if atribute not in modules and atribute.__module__ == t.__name__:
+                    if isinstance(atribute, type):
+                        if issubclass(atribute, BacisPlug):
+                            modules.append(atribute)
+            except AttributeError:
+                continue
         if is_pkg:
             test(full_name)
 test(__name__)
