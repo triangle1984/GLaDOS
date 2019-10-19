@@ -1,5 +1,6 @@
 import pkgutil
 from importlib import import_module
+from vk_bot.modutil import BacisPlug
 modules = []
 def test(pkgname):
     global modules
@@ -11,8 +12,12 @@ def test(pkgname):
             if name[0] == "_":
                 continue
             atribute = t.__getattribute__(name)
-            if atribute not in modules:
-                modules.append(atribute)
+            if atribute not in modules and atribute.__module__ == t.__name__:
+                if isinstance(atribute, type):
+                    if issubclass(atribute, BacisPlug):
+                        modules.append(atribute)
+                elif callable(atribute):
+                        modules.append(atribute)
         if is_pkg:
             test(full_name)
 test(__name__)
