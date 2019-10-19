@@ -23,6 +23,7 @@ def lobby(vk,vk2, mc, event):
         uid = event.object.from_id
         mc2 = sqlcache(mc, uid)
         givemoney(uid,mc2)
+        setmessages(uid)
         if mc2["ban"]:
             return
         try:
@@ -192,7 +193,6 @@ def lobby(vk,vk2, mc, event):
             now = datetime.datetime.now()
             delta = now - then
             logging.info(f"На команду ушло {delta.total_seconds()}")
-        setmessages(uid)
     except TypeError:
         return
     except NameError:
