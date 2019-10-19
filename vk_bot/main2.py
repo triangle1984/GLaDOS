@@ -21,6 +21,7 @@ class Main:
         self.token22 = token22
         self.authorization()
         self.thread()
+        self.initmodules()
     def authorization(self):
         vk_session = vk_api.VkApi(token=token)
         vk_session2 = vk_api.VkApi(token=token22)
@@ -32,11 +33,10 @@ class Main:
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
     def initmodules(self):
-        modules = []
+        self.modules = []
         for moduli in mods.modules:
-            t = moduli(self.vk)
-            modules.append(t)
-        print(modules)
+            t = moduli(self.vk, self.vk2)
+            self.modules.append(t)
     def checkthread(self):
         for x in as_completed(self.futures):
             if x.exception() != None:
@@ -78,12 +78,13 @@ class Main:
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
-            for module in mods.modules:
-                if module.__type__ == "msg":
-                    if requests in module.__command__:
-                        response = module.main(vk2=vk2, text=text)
-                else:
-                    module.main(vk2=self.vk2, text=text)
+            for module in self.modules:
+                if module.included:
+                    module.givedata(text=text, uid=uid, mc2=mc2)
+                    if requests in module.command and module.types == "msg":
+                        response = module.main()
+                    elif module.types == "runalways":
+                        module.main()
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
@@ -201,7 +202,6 @@ class Main:
             elif requests == "/посты":
                 response = postsearch(self.vk2, text)
             elif uberequests == "/чекни донат":
-                print("текс")
                 response = checkdonate(uid)
             elif requests == getcommand(uid, requests):
                 response = sendyourphoto(self.vk2, text, uid, requests)
@@ -240,4 +240,4 @@ class Main:
             None
 logging.basicConfig(level=logging.INFO)
 t = Main(token, token22)
-t.initmodules()
+t.run()

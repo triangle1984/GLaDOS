@@ -8,12 +8,7 @@
 """
 from vk_bot.modutil import BacisPlug
 class Test(BacisPlug):
-    command__ = ["/hello"]
-    types = "msg"
-    doc__ = "первый модуль, тест"
+    command = ["/hello"]
+    doc = "первый модуль, тест"
     def main(self):
         return {"message":"Хелоу ворлд из модуля"}
-def test():
-    pass
-def _test():
-    pass

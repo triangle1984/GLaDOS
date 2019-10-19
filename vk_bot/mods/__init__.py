@@ -16,8 +16,6 @@ def test(pkgname):
                 if isinstance(atribute, type):
                     if issubclass(atribute, BacisPlug):
                         modules.append(atribute)
-                elif callable(atribute):
-                        modules.append(atribute)
         if is_pkg:
             test(full_name)
 test(__name__)
