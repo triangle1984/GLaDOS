@@ -6,8 +6,9 @@
     вне зависимости от команды, написанной пользователем
     __doc__ - шо буит писать о вашем модуле в /хелп
 """
-__command__ = ["/hello"]
-__type__ = "msg"
-__doc__ = "первый модуль, тест"
-def main(**args):
-    return {"message":"Хелоу ворлд из модуля"}
+from vk_bot.modutil import BacisPlug
+class Test(BacisPlug):
+    command = ["/hello"]
+    doc = "первый модуль, тест"
+    def main(self):
+        return {"message":"Хелоу ворлд из модуля"}
