@@ -158,9 +158,9 @@ class Main:
             elif requests == "/новость":
                 response = news()
             elif requests == "/зашифровать":
-                    response = self.vkbase64(text, encode=True)
+                    response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
-                    response = self.vkbase64(text, decode=True)
+                    response = vkbase64(text, decode=True)
             elif requests == "/профиль":
                 response = profile(uid, mc2)
             elif requests == "/бинарный0":
@@ -185,7 +185,7 @@ class Main:
                 response = encodeqr(event)
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
-                del mc[str(uid)]
+                del self.mc[str(uid)]
             elif requests == "/отношения":
                 response = relation(event, self.vk, text)
             elif requests == "/длина":
@@ -207,7 +207,7 @@ class Main:
                 response = nuke()
             elif "".join(text)[:8] == "/альбомы":
                 response = photoadd(self.vk, uid, text, mc2, number=text)
-                del mc[str(uid)]
+                del self.mc[str(uid)]
 
         try:
             if response["message"]:
