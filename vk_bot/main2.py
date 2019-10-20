@@ -29,6 +29,7 @@ class Main:
         self.vk2 = vk_session2.get_api()
         self.upload = VkUpload(self.vk)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
+        self.message = 0
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
@@ -229,6 +230,8 @@ class Main:
                     self.vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
                                     message=f"{prefix}, {response['message']}",
                                     attachment=response["attachment"])
+                self.message += 1
+                status(self.vk2, self.message)
                 now = datetime.datetime.now()
                 delta = now - then
                 logging.info(f"На команду {requests} ушло {delta.total_seconds()}")
