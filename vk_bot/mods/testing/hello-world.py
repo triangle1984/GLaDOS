@@ -11,4 +11,4 @@ class Test(BacisPlug):
     command = ["/hello"]
     doc = "первый модуль, тест"
     def main(self):
-        return {"message":"Хелоу ворлд, это модуль"}
+        return {"message":"Хелоу ворлд"}
