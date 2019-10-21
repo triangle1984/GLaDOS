@@ -1,7 +1,7 @@
 import pymysql
 from pymysql.cursors import DictCursor
 from contextlib import closing
-from loadevn import *
+from vk_bot.loadevn import *
 def auth():
     conn = pymysql.connect(host=ip,
                              user=user,

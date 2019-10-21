@@ -21,7 +21,8 @@ class Main:
         self.token22 = token22
         self.authorization()
         self.thread()
-        self.initmodules()
+        # self.initmodules()
+        self.modules = mods.modules
     def authorization(self):
         vk_session = vk_api.VkApi(token=token)
         vk_session2 = vk_api.VkApi(token=token22)
@@ -82,10 +83,9 @@ class Main:
                     del mc[str(event.object.from_id)]
             for module in self.modules:
                 if module.included:
-                    module.givedata(uid=uid, text=text, event=event, mc2=mc2, prefix=prefix)
-                    if requests in module.command and module.types == "msg":
-                        module.main()
-                    elif module.types == "runalways":
+                    if requests in module.command and module.types == "msg" or module.types == "runalways":
+                        module = module(self.vk, self.vk2)
+                        module.givedata(uid=uid, text=text, event=event, mc2=mc2, prefix=prefix)
                         module.main()
             if requests == "/калькулятор":
                 response = calc(text)
@@ -132,10 +132,6 @@ class Main:
                 response = photos.hentai()
             elif requests == "/выбери":
                 response = oror(text)
-            elif requests == "/смех":
-                response = smex(text, uid)
-            elif requests == "/смехк":
-                response = smex(text, uid, db=True)
             elif requests == "/повтори":
                 response = repeat(text)
             elif requests == "/док" or requests == "/гиф":
