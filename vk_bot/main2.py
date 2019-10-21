@@ -56,6 +56,7 @@ class Main:
             text = event.object.text.split()
             uid = event.object.from_id
             mc2 = sqlcache(self.mc, uid)
+            prefix = mc2["prefix"]
             if mc2["ban"]:
                 return
             try:
@@ -81,9 +82,9 @@ class Main:
                     del mc[str(event.object.from_id)]
             for module in self.modules:
                 if module.included:
-                    module.givedata(uid=uid, text=text, event=event, mc2=mc2)
+                    module.givedata(uid=uid, text=text, event=event, mc2=mc2, prefix=prefix)
                     if requests in module.command and module.types == "msg":
-                        response = module.main()
+                        module.main()
                     elif module.types == "runalways":
                         module.main()
             if requests == "/калькулятор":
@@ -218,7 +219,6 @@ class Main:
 
         try:
             if response["message"]:
-                prefix = mc2["prefix"]
                 if "attachment" not in response:
                     response["attachment"] = None
                 self.vk.messages.send(peer_id=event.object.peer_id, random_id=get_random_id(),
