@@ -221,15 +221,9 @@ class Main:
                 prefix = mc2["prefix"]
                 if "attachment" not in response:
                     response["attachment"] = None
-
-                if event.chat_id:
-                    self.vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
-                                    message=f"{prefix}, {response['message']}",
-                                    attachment=response["attachment"])
-                else:
-                    self.vk.messages.send(user_id=event.object.from_id, random_id=get_random_id(),
-                                    message=f"{prefix}, {response['message']}",
-                                    attachment=response["attachment"])
+                self.vk.messages.send(peer_id=event.object.peer_id, random_id=get_random_id(),
+                                message=f"{prefix}, {response['message']}",
+                                attachment=response["attachment"])
                 self.message += 1
                 status(self.vk2, self.message)
                 now = datetime.datetime.now()
