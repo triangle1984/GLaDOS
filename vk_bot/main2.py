@@ -40,7 +40,7 @@ class Main:
             self.futures.remove(x)
         now = datetime.datetime.now()
         delta = now - then
-        logging.info(f"На команду ушло {delta.total_seconds()}")
+        logging.info(f"Поток закрылся через {delta.total_seconds()}")
     def run(self):
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
