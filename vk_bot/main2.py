@@ -33,10 +33,14 @@ class Main:
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
     def checkthread(self):
+        then = datetime.datetime.now()
         for x in as_completed(self.futures):
             if x.exception() != None:
                 logging.error(x.exception())
             self.futures.remove(x)
+        now = datetime.datetime.now()
+        delta = now - then
+        logging.info(f"На команду ушло {delta.total_seconds()}")
     def run(self):
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
@@ -45,7 +49,6 @@ class Main:
     def lobby(self, event):
         events = event.type.value
         logging.debug(f"Событие: {events}")
-        then = datetime.datetime.now()
         botmain(self.vk, event)
         response = {"message":None}
         if event.object.text:
@@ -218,9 +221,6 @@ class Main:
                                 attachment=response["attachment"])
                 self.message += 1
                 status(self.vk2, self.message)
-                now = datetime.datetime.now()
-                delta = now - then
-                logging.info(f"На команду {requests} ушло {delta.total_seconds()}")
             setmessages(uid)
             givemoney(uid,mc2)
         except TypeError:
