@@ -13,4 +13,4 @@ class Groupsearch(BacisPlug):
             if idd not in gid and closed == False:
                 gid.append("-" + idd)
         gid = ",".join(gid)
-        return {"message":f"Паблики: {gid}"}
+        self.sendmsg(f"Паблики: {gid}")
