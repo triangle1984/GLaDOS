@@ -20,7 +20,6 @@ class Main:
         self.token22 = token22
         self.authorization()
         self.thread()
-        # self.initmodules()
         self.modules = mods.modules
     def authorization(self):
         vk_session = vk_api.VkApi(token=token)
@@ -33,11 +32,6 @@ class Main:
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
-    def initmodules(self):
-        self.modules = []
-        for moduli in mods.modules:
-            t = moduli(self.vk, self.vk2)
-            self.modules.append(t)
     def checkthread(self):
         for x in as_completed(self.futures):
             if x.exception() != None:
@@ -49,6 +43,8 @@ class Main:
             self.futures.append(self.pool.submit(self.lobby, event))
             self.pool.submit(self.checkthread)
     def lobby(self, event):
+        events = event.type.value
+        logging.debug(f"Событие: {events}")
         then = datetime.datetime.now()
         botmain(self.vk, event)
         response = {"message":None}
@@ -82,7 +78,7 @@ class Main:
                     del mc[str(event.object.from_id)]
             for module in self.modules:
                 if module.included:
-                    if requests in module.command and module.types == "msg" or module.types == "runalways":
+                    if requests in module.command and events in module.types or module.types == "runalways":
                         module = module(self.vk, self.vk2)
                         module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                         prefix=prefix, peer=event.object.peer_id)
