@@ -5,7 +5,6 @@ from loadevn import *
 from util import *
 from photo import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-from smeh import *
 import vk_api, requests, sys
 from vksql import *
 from yourphoto import *
