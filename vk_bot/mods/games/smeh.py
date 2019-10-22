@@ -45,7 +45,7 @@ class Smeh(BacisPlug):
             if ss2:
                 ss = ss2
         except:
-            return {"message":helps}
+            self.sendmsg(helps)
         if db:
             smehdb(ss, self.uid, db)
         if ss.count > 9999:
@@ -56,7 +56,7 @@ class Smeh(BacisPlug):
         if ss.smexslova != 'None':
             main = ss.smexslova.split()
         if ss.smehcount > scmax:
-            self.sendmsg({"message":f"Ваш лимит sc - {scmax}"})
+            self.sendmsg(f"Ваш лимит sc - {scmax}")
             return
         for _ in range(ss.smehcount):
             mainsmex = "".join(random.choice(main) for _ in range(ss.count))
