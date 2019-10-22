@@ -84,7 +84,8 @@ class Main:
                 if module.included:
                     if requests in module.command and module.types == "msg" or module.types == "runalways":
                         module = module(self.vk, self.vk2)
-                        module.givedata(uid=uid, text=text, event=event, mc2=mc2, prefix=prefix)
+                        module.givedata(uid=uid, text=text, event=event, mc2=mc2,
+                                        prefix=prefix, peer=event.object.peer_id)
                         module.main()
             if requests == "/калькулятор":
                 response = calc(text)

@@ -6,12 +6,13 @@ class BacisPlug:
     def __init__(self, vk, vk2):
         self.vk = vk
         self.vk2 = vk2
-    def givedata(self, uid, text, event, mc2, prefix):
+    def givedata(self, uid, text, event, mc2, prefix, peer):
         self.uid = uid
         self.text = text
         self.event = event
         self.mc2 = mc2
         self.prefix = prefix
+        self.peer_id = peer
     def sendmsg(self, response):
         if "attachment" not in response:
             response["attachment"] = None

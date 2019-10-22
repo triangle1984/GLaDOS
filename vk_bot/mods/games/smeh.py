@@ -28,7 +28,6 @@ class Smeh(BacisPlug):
         использоваться то, что вы передали в /смехк
         """
         scmax = 5
-        print(self.mc2)
         if self.mc2["vips"]:
             scmax = 12
         db = False
