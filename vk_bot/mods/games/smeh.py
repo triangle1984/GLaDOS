@@ -27,9 +27,9 @@ class Smeh(BacisPlug):
         То есть: после /смехк -s2 .exe -c 69 , в /смех без аргументов - будет
         использоваться то, что вы передали в /смехк
         """
-        scmax = 5
+        scmax = 3
         if self.mc2["vips"]:
-            scmax = 12
+            scmax = 8
         db = False
         try:
             if "".join(self.text)[5].lower() == "к":
