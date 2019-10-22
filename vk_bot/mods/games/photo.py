@@ -1,9 +1,7 @@
 import vk_api, requests, random, argparse
 from vk_api.utils import get_random_id
-class Photo:
-    def __init__(self, vk,text):
-        self.vk = vk
-        self.text = text
+from vk_bot.modutil import BacisPlug
+class Photo(BacisPlug):
     def phootowallrandom(self, groups, albid="wall"):
         try:
             a = self.args2()

@@ -60,5 +60,5 @@ class Smeh(BacisPlug):
             return
         for _ in range(ss.smehcount):
             mainsmex = "".join(random.choice(main) for _ in range(ss.count))
-            self.sendmsg({"message":mainsmex})
+            self.sendmsg(mainsmex)
             ss.count = random.randint(5, 69)

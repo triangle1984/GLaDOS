@@ -13,10 +13,8 @@ class BacisPlug:
         self.mc2 = mc2
         self.prefix = prefix
         self.peer_id = peer
-    def sendmsg(self, response):
-        if "attachment" not in response:
-            response["attachment"] = None
+    def sendmsg(self, msg, attachmentst=None):
         self.vk.messages.send(peer_id=self.event.object.peer_id, random_id=get_random_id(),
-                        message=f"{self.prefix}, {response['message']}",
-                        attachment=response["attachment"])
+                        message=f"{self.prefix}, {msg}",
+                        attachment=attachmentst)
 
