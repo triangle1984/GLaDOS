@@ -1,5 +1,5 @@
 from vk_bot.vksql import *
-import vk_api
+import vk_api, json, base64
 from vk_api.utils import get_random_id
 def sendall(event, text,vk, attachment=None):
     if attachment == None:
@@ -27,16 +27,25 @@ def checkban(uid):
 def smehdb(ss,uid, db=False):
     check = checktable("smehgen","id", uid)
     if db:
-        value = f"id, count, smeh, smehslova"
-        add = f"{uid}, {ss.count}, '{ss.smex}', '{ss.smexslova}'"
+        ssd = {"count":ss.count,
+              "smex": ss.smex,
+              "smexslova": ss.smexslova,
+               "smehcount":ss.smehcount}
+        ssj = json.dumps(ssd)
+        ss64 = base64.b64encode(bytes(ssj, 'utf-8')).decode('utf-8')
+        add = f"{uid}, '{ss64}'"
         if check:
             tablerm("smehgen", "id", uid)
-        tableadd("smehgen", value, add)
+        tableadd("smehgen", 'id, ss', add)
     else:
         if check:
-            ss.count = check["count"]
-            ss.smex = check["smeh"]
-            ss.smexslova = check["smehslova"]
+            check = check["ss"]
+            check = base64.b64decode(check).decode('utf-8')
+            ss2 = json.loads(check)
+            ss.count = ss2["count"]
+            ss.smex = ss2["smex"]
+            ss.smexslova = ss2["smexslova"]
+            ss.smehcount = ss2["smehcount"]
             return ss
 def checkchat(event):
     check = checktable(tablechat, 'id', event.chat_id)
