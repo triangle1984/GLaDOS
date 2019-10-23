@@ -40,7 +40,7 @@ class Main:
             self.futures.remove(x)
         now = datetime.datetime.now()
         delta = now - then
-        logging.info(f"Поток закрылся через {delta.total_seconds()}")
+        logging.debug(f"Поток закрылся через {delta.total_seconds()}")
     def run(self):
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
@@ -51,19 +51,27 @@ class Main:
         logging.debug(f"Событие: {events}")
         botmain(self.vk, event)
         response = {"message":None}
+        text = event.object.text.split()
+        uid = event.object.from_id
+        mc2 = sqlcache(self.mc, uid)
+        prefix = mc2["prefix"]
+        if mc2["ban"]:
+            return
+        try:
+            requests = text[0].lower()
+            uberequests = " ".join(text[0:]).lower()
+        except IndexError:
+            requests = None
+            uberequests = None
+        photos = Photo(self.vk2, text)
+        for module in self.modules:
+            if module.included:
+                if requests in module.command and events in module.types or module.types == "runalways":
+                    module = module(self.vk, self.vk2)
+                    module.givedata(uid=uid, text=text, event=event, mc2=mc2,
+                                    prefix=prefix, peer=event.object.peer_id)
+                    module.main()
         if event.object.text:
-            text = event.object.text.split()
-            uid = event.object.from_id
-            mc2 = sqlcache(self.mc, uid)
-            prefix = mc2["prefix"]
-            if mc2["ban"]:
-                return
-            try:
-                requests = text[0].lower()
-                uberequests = " ".join(text[0:]).lower()
-            except IndexError:
-                return
-            photos = Photo(self.vk2, text)
             if mc2["admins"]:
                 setxp(uid, random.randint(75, 100))
                 if requests == "/бан":
@@ -79,13 +87,6 @@ class Main:
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
-            for module in self.modules:
-                if module.included:
-                    if requests in module.command and events in module.types or module.types == "runalways":
-                        module = module(self.vk, self.vk2)
-                        module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                        prefix=prefix, peer=event.object.peer_id)
-                        module.main()
             if requests == "/калькулятор":
                 response = calc(text)
             elif requests == "/погода":
