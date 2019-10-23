@@ -156,6 +156,7 @@ class Main:
                 response = update(uid,text, self.mc)
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
+                prefix = mc2["prefix"]
             elif requests == "/жив?" or " ".join(text[0:]) == "/ ping":
                 response = ping()
             elif requests == "/конвертер":
