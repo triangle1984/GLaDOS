@@ -24,7 +24,7 @@ class Autdiototext(BacisPlug):
             audio = r.record(source) # Считывает весь файл
         try:
             result = r.recognize_google(audio, language = "ru_RU")
-            self.sendmsg(f"*id{self.uid} сказал: {result}")
+            self.sendmsg(f"сказал: {result}")
         except sr.UnknownValueError:
             self.sendmsg(f"", "video367919273_456240252")
         except sr.RequestError:
