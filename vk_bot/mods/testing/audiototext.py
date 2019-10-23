@@ -26,7 +26,7 @@ class Autdiototext(BacisPlug):
             result = r.recognize_google(audio, language = "ru_RU")
             self.sendmsg(f"*id{self.uid} сказал: {result}")
         except sr.UnknownValueError:
-            self.sendmsg(f"Блять, говори четьче, не хуя ")
+            self.sendmsg(f"Нэразборчивая речь")
         except sr.RequestError:
             self.sendmsg(f"Ошибка при отправки запроса")
         finally:
