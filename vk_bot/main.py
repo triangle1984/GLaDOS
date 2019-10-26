@@ -12,7 +12,9 @@ import pylibmc
 import logging
 from botutil import sqlcache
 from economy import *
+import mods
 def mainlobby(vk, mc, event):
+    events = event.type.name.lower()
     try:
         response = {"message":None}
         if "text" in dir(event) and "user_id" in dir(event):
@@ -34,6 +36,14 @@ def mainlobby(vk, mc, event):
                 mc2 = sqlcache(mc, uid)
                 givemoney(uid,mc2)
                 photos = Photo(vk, text)
+                prefix = mc2["prefix"]
+                for module in mods.modules:
+                    if module.included:
+                        if requests in module.command and events in module.types or module.types == "runalways":
+                            module = module(vk, vk)
+                            module.givedata(uid=uid, text=text, event=event, mc2=mc2,
+                                            prefix=prefix, peer=event.peer_id)
+                            module.main()
                 if requests == "/калькулятор":
                     response = calc(text)
                 elif requests == "/погода":
@@ -81,10 +91,10 @@ def mainlobby(vk, mc, event):
                     response = chance(text)
                 elif requests == "/выбери":
                     response = oror(text)
-                elif requests == "/смех":
-                    response = smex(text, uid)
-                elif requests == "/смехк":
-                    response = smex(text, uid, db=True)
+                # elif requests == "/смех":
+                #     response = smex(text, uid)
+                # elif requests == "/смехк":
+                #     response = smex(text, uid, db=True)
                 elif requests == "/повтори":
                     response = repeat(text)
                 elif requests == "/док" or requests == "/гиф":

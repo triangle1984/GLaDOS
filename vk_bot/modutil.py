@@ -14,7 +14,12 @@ class BacisPlug:
         self.prefix = prefix
         self.peer_id = peer
     def sendmsg(self, msg, attachmentst=None):
-        self.vk.messages.send(peer_id=self.event.object.peer_id, random_id=get_random_id(),
+        try:
+            peer_id = self.event.object.peer_id
+        except:
+            print(".")
+            peer_id = self.event.peer_id
+        self.vk.messages.send(peer_id=peer_id, random_id=get_random_id(),
                         message=f"{self.prefix}, {msg}",
                         attachment=attachmentst)
 
