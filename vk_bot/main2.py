@@ -26,7 +26,7 @@ class Main:
         vk_session2 = vk_api.VkApi(token=token22)
         self.vk = vk_session.get_api()
         self.vk2 = vk_session2.get_api()
-        self.upload = VkUpload(self.vk)
+        self.upload = VkUpload(vk_session)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
         self.message = 0
     def thread(self):
@@ -67,7 +67,7 @@ class Main:
         for module in self.modules:
             if module.included:
                 if requests in module.command and events in module.types or module.types == "runalways":
-                    module = module(self.vk, self.vk2)
+                    module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id)
                     module.main()

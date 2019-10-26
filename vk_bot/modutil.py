@@ -3,9 +3,10 @@ class BacisPlug:
     included = True
     types = ["message_new"]
     doc = "Заполните справку в модуле"
-    def __init__(self, vk, vk2):
+    def __init__(self, vk, vk2, upload):
         self.vk = vk
         self.vk2 = vk2
+        self.upload = upload
     def givedata(self, uid, text, event, mc2, prefix, peer):
         self.uid = uid
         self.text = text
@@ -22,4 +23,6 @@ class BacisPlug:
         self.vk.messages.send(peer_id=peer_id, random_id=get_random_id(),
                         message=f"{self.prefix}, {msg}",
                         attachment=attachmentst)
-
+    def uploadphoto(self, photo):
+        response = self.upload.photo_messages(photos=photo)[0]
+        return f"photo{response['owner_id']}_{response['id']}"
