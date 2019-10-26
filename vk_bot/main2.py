@@ -51,7 +51,10 @@ class Main:
         logging.debug(f"Событие: {events}")
         botmain(self.vk, event)
         response = {"message":None}
-        text = event.object.text.split()
+        try:
+            text = event.object.text.split()
+        except:
+            text = []
         uid = event.object.from_id
         mc2 = sqlcache(self.mc, uid)
         prefix = mc2["prefix"]
