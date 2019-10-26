@@ -64,8 +64,8 @@ class Main:
             requests = text[0].lower()
             uberequests = " ".join(text[0:]).lower()
         except IndexError:
-            requests = None
-            uberequests = None
+            requests = [None]
+            uberequests = [None]
         photos = Photo(self.vk2, text)
         for module in self.modules:
             if module.included:
