@@ -1,24 +1,29 @@
 from PIL import Image, ImageDraw, ImageFont
 from loadevn import *
-import textwrap, io, requests, random, os
+import textwrap, io, requests, random, os, datetime
 from vk_bot.modutil import BacisPlug
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
     def main(self):
-        if not self.event.object.fwd_messages:
-            msg = self.event.object.reply_message
-            astr = msg['text']
-        else:
-            msg = self.event.object.fwd_messages[0]
-            msgl = self.event.object.fwd_messages
-            astrlist = []
-            for a in msgl:
-                astrlist.append(a['text'])
-            astr = "\n".join(astrlist)
-        url = self.vk.users.get(user_ids=msg['from_id'], fields='photo_max')[0]['photo_max']
-        firstname = self.vk.users.get(user_ids=msg['from_id'])[0]['first_name']
-        lastname =  self.vk.users.get(user_ids=msg['from_id'])[0]['last_name']
+        try:
+            if not self.event.object.fwd_messages:
+                msg = self.event.object.reply_message
+                astr = msg['text']
+            else:
+                msg = self.event.object.fwd_messages[0]
+                msgl = self.event.object.fwd_messages
+                astrlist = []
+                for a in msgl:
+                    astrlist.append(a['text'])
+                astr = "\n".join(astrlist)
+            url = self.vk.users.get(user_ids=msg['from_id'], fields='photo_max')[0]['photo_max']
+            firstname = self.vk.users.get(user_ids=msg['from_id'])[0]['first_name']
+            lastname =  self.vk.users.get(user_ids=msg['from_id'])[0]['last_name']
+        except:
+            self.sendmsg("!error")
+            return
+        today = datetime.datetime.today().strftime("Дата: %Y-%m-%d, время: %H.%M.%S")
         para = textwrap.wrap(astr, width=30)
         MAX_W, MAX_H = 700, 400
         im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
