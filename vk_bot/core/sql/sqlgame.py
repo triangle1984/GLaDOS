@@ -1,4 +1,4 @@
-from vk_bot.vksql import *
+from vk_bot.core.sql.vksql import *
 import vk_api, json, base64
 from vk_api.utils import get_random_id
 def sendall(event, text,vk, attachment=None):

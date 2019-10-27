@@ -1,4 +1,4 @@
-from vksql import *
+from vk_bot.core.sql.vksql import *
 from photo import Photo
 def nametoid2(vk, names):
     uid = []

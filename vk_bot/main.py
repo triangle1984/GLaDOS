@@ -1,12 +1,12 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.utils import get_random_id
-from sqlgame import *
+from vk_bot.core.sql.sqlgame import *
 from loadevn import *
 from util import *
 from photo import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 import vk_api, requests, sys
-from vksql import *
+from vk_bot.core.sql.vksql import *
 from yourphoto import *
 import pylibmc
 import logging

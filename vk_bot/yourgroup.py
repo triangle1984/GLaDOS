@@ -1,4 +1,4 @@
-from vksql import checktable, tablerm, tableadd, tablecount, auth
+from vk_bot.core.sql.vksql import checktable, tablerm, tableadd, tablecount, auth
 from yourphoto import nametoid2
 import random
 def groupadd(vk, uid, text, mc, number=1):

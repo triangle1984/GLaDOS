@@ -4,14 +4,14 @@ from vk_api.utils import get_random_id
 from loadevn import *
 from util import *
 from photo import Photo
-from vksql import *
+from vk_bot.core.sql.vksql import *
 from botutil import *
 from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from yourgroup import *
 from relation import *
 import pylibmc, vk_api, logging, datetime
-from sqlgame import *
+from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
 class Main:

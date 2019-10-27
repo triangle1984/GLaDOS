@@ -1,6 +1,6 @@
 import vk_api
 from vk_api.utils import get_random_id
-from vksql import *
+from vk_bot.core.sql.vksql import *
 
 def relationmeet(text, vk, event):
     check = checkrelation('waitmeet', event.object.from_id)

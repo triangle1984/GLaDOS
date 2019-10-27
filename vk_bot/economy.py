@@ -1,4 +1,4 @@
-from vksql import *
+from vk_bot.core.sql.vksql import *
 import random
 def givemoney(uid,mc2):
     if bool(mc2) == False:

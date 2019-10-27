@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import random, sys, argparse
-from vk_bot.sqlgame import smehdb
+from vk_bot.core.sql.sqlgame import smehdb
 from vk_bot.modutil import BacisPlug
 class Smeh(BacisPlug):
     command = ["/смех", "/смехк"]
