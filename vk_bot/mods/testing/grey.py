@@ -3,8 +3,8 @@ from loadevn import *
 import io, requests, random, os
 from vk_bot.modutil import BacisPlug
 class Quote(BacisPlug):
-    doc = "Фильтр Вьетнам"
-    command = ["/вьетнам"]
+    doc = "Черно-белый фильтр"
+    command = ["/чб"]
     def main(self):
         url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         img = requests.get(url).content
@@ -20,10 +20,6 @@ class Quote(BacisPlug):
                 c = pix[i, j][2]
                 S = (a + b + c) // 3
                 draw.point((i, j), (S, S, S))
-        vietnam = Image.open('/usr/local/bin/danila/vk-bot/vk_bot/mods/testing/u-s-_helicopters_vietnam.jpg')
-        resized_img = vietnam.resize((width, height), Image.ANTIALIAS)
-        #resized_img = ImageEnhance.Brightness(resized_img).enhance(1.2)
-        image.paste(resized_img.convert('RGB'), (0, 0), resized_img)
         name = f"name{random.randint(0, 1000)}.jpg"
         image.save(name)
         try:
