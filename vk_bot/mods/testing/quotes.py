@@ -29,6 +29,8 @@ class Quote(BacisPlug):
         draw.text((30, 310), f'{firstname} {lastname}', font=fontu)
         name = f"name{random.randint(0, 1000)}.jpg"
         im.save(name)
-        attachment  = self.uploadphoto(name)
-        self.sendmsg("Дэржите цитатку", attachment)
-        os.remove(name)
+        try:
+            attachment  = self.uploadphoto(name)
+            self.sendmsg("Дэржите цитатку", attachment)
+        finally:
+            os.remove(name)
