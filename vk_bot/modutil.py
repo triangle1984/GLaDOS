@@ -14,13 +14,13 @@ class BacisPlug:
         self.mc2 = mc2
         self.prefix = prefix
         self.peer_id = peer
-    def sendmsg(self, msg, attachmentst=None):
+    def sendmsg(self, msg, attachmentst=None, disable_mentions=True):
         try:
             peer_id = self.event.object.peer_id
         except:
             peer_id = self.event.peer_id
         self.vk.messages.send(peer_id=peer_id, random_id=get_random_id(),
-                        message=f"{self.prefix}, {msg}",
+                        message=f"{self.prefix}, {msg}", disable_mentions=disable_mentions,
                         attachment=attachmentst)
     def uploadphoto(self, photo):
         response = self.upload.photo_messages(photos=photo)[0]
