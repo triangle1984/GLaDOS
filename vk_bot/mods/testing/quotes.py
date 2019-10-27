@@ -4,7 +4,7 @@ import textwrap, io, requests, random, os
 from vk_bot.modutil import BacisPlug
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
-    command = ["/цитата"]
+    command = ["/цитата", "/цитаты"]
     def main(self):
         if not self.event.object.fwd_messages:
             msg = self.event.object.reply_message
