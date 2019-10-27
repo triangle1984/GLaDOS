@@ -8,19 +8,17 @@ class Quote(BacisPlug):
     def main(self):
         if not self.event.object.fwd_messages:
             msg = self.event.object.reply_message
-            astr = self.event.object.reply_message['text']
-            url = self.vk.users.get(user_ids=self.event.object.reply_message['from_id'], fields='photo_max')[0]['photo_max']
-            firstname = self.vk.users.get(user_ids=self.event.object.reply_message['from_id'])[0]['first_name']
-            lastname =  self.vk.users.get(user_ids=self.event.object.reply_message['from_id'])[0]['last_name']
+            astr = msg['text']
         else:
-            msg = self.event.object.fwd_messages
+            msg = self.event.object.fwd_messages[0]
+            msgl = self.event.object.fwd_messages
             astrlist = []
-            for a in self.event.object.fwd_messages:
+            for a in msgl:
                 astrlist.append(a['text'])
             astr = "\n".join(astrlist)
-            url = self.vk.users.get(user_ids=self.event.object.fwd_messages[0]['from_id'], fields='photo_max')[0]['photo_max']
-            firstname = self.vk.users.get(user_ids=self.event.object.fwd_messages[0]['from_id'])[0]['first_name']
-            lastname =  self.vk.users.get(user_ids=self.event.object.fwd_messages[0]['from_id'])[0]['last_name']
+        url = self.vk.users.get(user_ids=msg['from_id'], fields='photo_max')[0]['photo_max']
+        firstname = self.vk.users.get(user_ids=msg['from_id'])[0]['first_name']
+        lastname =  self.vk.users.get(user_ids=msg['from_id'])[0]['last_name']
         para = textwrap.wrap(astr, width=30)
         MAX_W, MAX_H = 700, 400
         im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
