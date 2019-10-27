@@ -23,7 +23,7 @@ class Quote(BacisPlug):
         except:
             self.sendmsg("!error")
             return
-        today = datetime.datetime.today().strftime("Дата: %Y-%m-%d, время: %H.%M.%S")
+        today = datetime.datetime.today().strftime("время: %H:%M:%S, дата: %Y-%m-%d")
         para = textwrap.wrap(astr, width=30)
         MAX_W, MAX_H = 700, 400
         im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
@@ -41,7 +41,8 @@ class Quote(BacisPlug):
 
         watermark = Image.open(f).convert("RGBA")
         im.paste(watermark, (10, 100),  watermark)
-        draw.text((30, 310), f'{firstname} {lastname}', font=fontu)
+        draw.text((10, 310), f'{firstname} {lastname}', font=fontu)
+        draw.text((10, 325), today, font=fontu)
         name = f"name{random.randint(0, 1000)}.jpg"
         im.save(name)
         try:
