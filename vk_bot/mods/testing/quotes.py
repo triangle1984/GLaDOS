@@ -7,11 +7,13 @@ class Quote(BacisPlug):
     command = ["/цитата"]
     def main(self):
         if not self.event.object.fwd_messages:
+            msg = self.event.object.reply_message
             astr = self.event.object.reply_message['text']
             url = self.vk.users.get(user_ids=self.event.object.reply_message['from_id'], fields='photo_max')[0]['photo_max']
             firstname = self.vk.users.get(user_ids=self.event.object.reply_message['from_id'])[0]['first_name']
             lastname =  self.vk.users.get(user_ids=self.event.object.reply_message['from_id'])[0]['last_name']
         else:
+            msg = self.event.object.fwd_messages
             astrlist = []
             for a in self.event.object.fwd_messages:
                 astrlist.append(a['text'])

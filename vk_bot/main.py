@@ -13,7 +13,7 @@ import logging
 from botutil import sqlcache
 from economy import *
 import mods
-def mainlobby(vk, mc, event):
+def mainlobby(vk, mc, event, upload):
     events = event.type.name.lower()
     try:
         response = {"message":None}
@@ -40,7 +40,7 @@ def mainlobby(vk, mc, event):
                 for module in mods.modules:
                     if module.included:
                         if requests in module.command and events in module.types or module.types == "runalways":
-                            module = module(vk, vk)
+                            module = module(vk, vk, upload)
                             module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                             prefix=prefix, peer=event.peer_id)
                             module.main()
@@ -177,11 +177,12 @@ def checkthread():
         futures.remove(x)
 vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
+upload = vk_api.VkUpload(vk_session)
 longpoll = VkLongPoll(vk_session)
 mc = pylibmc.Client(["127.0.0.1"])
 pool = ThreadPoolExecutor(8)
 logging.basicConfig(level=logging.INFO)
 futures = []
 for event in longpoll.listen():
-    futures.append(pool.submit(mainlobby, vk, mc, event))
+    futures.append(pool.submit(mainlobby, vk, mc, event, upload))
     pool.submit(checkthread)
