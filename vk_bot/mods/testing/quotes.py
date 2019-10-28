@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from loadevn import *
 import textwrap, io, requests, random, os, datetime
-from vk_bot.modutil import BacisPlug
+from vk_bot.core.utils.modutil import BacisPlug
 from vk_bot.core.utils.pillowhelper import Pillowhelper
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"

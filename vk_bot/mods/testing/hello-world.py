@@ -6,7 +6,7 @@
     вне зависимости от команды, написанной пользователем
     __doc__ - шо буит писать о вашем модуле в /хелп
 """
-from vk_bot.modutil import BacisPlug
+from vk_bot.core.utils.modutil import BacisPlug
 class Test(BacisPlug):
     command = ["/hello"]
     doc = "первый модуль, тест"
