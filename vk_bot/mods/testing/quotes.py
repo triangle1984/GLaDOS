@@ -6,6 +6,12 @@ from vk_bot.core.utils.pillowhelper import Pillowhelper
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
+    def main(self):
+        if len(self.text) > 1:
+            if self.text[1] == "фон":
+                self.__setbackground()
+        else:
+            self.makequotes()
     def __checkbackground(self):
         MAX_W, MAX_H = 700, 400
         check = os.path.exists(f"photos/{self.uid}")
@@ -15,11 +21,12 @@ class Quote(BacisPlug):
             self.im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
     def __setbackground(self):
         try:
-            url = self.msg['attachments'][0]['photo']['sizes'][-1]['url']
+            url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         except:
             self.sendmsg(f"а пикчу вы видимо забыли")
         os.system(f'wget {url} -O photos/{self.uid}')
-    def main(self):
+        self.sendmsg("установлено")
+    def makequotes(self):
         try:
             if not self.event.object.fwd_messages:
                 self.msg = self.event.object.reply_message
@@ -40,10 +47,6 @@ class Quote(BacisPlug):
         except KeyboardInterrupt:
             self.sendmsg("!error")
             return
-        if len(self.text) > 1:
-            if self.text[1] == "фон":
-                self.__setbackground()
-                return
         self.__checkbackground()
         today = datetime.datetime.today().strftime("время: %H:%M:%S, дата: %Y-%m-%d")
         para = textwrap.wrap(astr, width=30)
