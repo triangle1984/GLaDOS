@@ -120,3 +120,4 @@ vk_bot/mods/testing/ofont.ru_PetersburgITT.ttf
 run.sh
 *.png
 *.jpg
+vk_bot/photos/*
