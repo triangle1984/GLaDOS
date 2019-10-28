@@ -50,6 +50,8 @@ class Quote(BacisPlug):
         draw = ImageDraw.Draw(self.im)
         font = ImageFont.truetype(fontc,16)
         fontu = ImageFont.truetype(fontc,14)
+        draw.text((10, 310), f'{firstname} {lastname}', font=fontu)
+        draw.text((10, 325), today, font=fontu)
         current_h, pad = 130, 10
         for line in para:
             w, h = draw.textsize(line, font=font)
@@ -60,9 +62,15 @@ class Quote(BacisPlug):
         f = io.BytesIO(self.img)
 
         watermark = Image.open(f).convert("RGBA")
+        bigsize = watermark.size[0] * 3, watermark.size[1] * 3
+        mask = Image.new('L', bigsize, 0)
+
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0) + bigsize, fill=255)
+
+        mask = mask.resize(watermark.size, Image.ANTIALIAS)
+        watermark.putalpha(mask)
         self.im.paste(watermark, (10, 100),  watermark)
-        draw.text((10, 310), f'{firstname} {lastname}', font=fontu)
-        draw.text((10, 325), today, font=fontu)
         name = f"name{random.randint(0, 1000)}.jpg"
         self.im.save(name)
         try:
