@@ -16,7 +16,7 @@ class Quote(BacisPlug):
         MAX_W, MAX_H = 700, 400
         check = os.path.exists(f"photos/{self.uid}")
         if check:
-           self.im = Pillowhelper.resize_image(f'photos/{self.uid}', (MAX_W, MAX_H))
+           self.im = Image.open(f'photos/{self.uid}')
         else:
             self.im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
     def __setbackground(self):
@@ -24,7 +24,10 @@ class Quote(BacisPlug):
             url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         except:
             self.sendmsg(f"а пикчу вы видимо забыли")
-        os.system(f'wget {url} -O photos/{self.uid}')
+        os.system(f'wget {url} -O photos/{self.uid}.jpg')
+        result = Pillowhelper.resize_image(f'photos/{self.uid}.jpg', (700, 400))
+        result.save(f'photos/{self.uid}.jpg')
+        os.system(f'mv photos/{self.uid}.jpg photos/{self.uid}')
         self.sendmsg("установлено")
     def makequotes(self):
         try:
