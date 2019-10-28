@@ -9,7 +9,6 @@ from vk_bot.core.utils.botutil import *
 from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from yourgroup import *
-from relation import *
 import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
@@ -195,8 +194,6 @@ class Main:
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
-            elif requests == "/отношения":
-                response = relation(event, self.vk, text)
             elif requests == "/длина":
                 response = lentomsg(text)
             elif requests == "/пароль":
