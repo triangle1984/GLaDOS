@@ -52,10 +52,10 @@ class Quote(BacisPlug):
         fontu = ImageFont.truetype(fontc,14)
         draw.text((10, 310), f'{firstname} {lastname}', font=fontu)
         draw.text((10, 325), today, font=fontu)
-        current_h, pad = 130, 10
+        current_h, pad = 170, 10
         for line in para:
             w, h = draw.textsize(line, font=font)
-            draw.text((250, current_h), line, font=font)
+            draw.text(((850 - w) / 2, current_h), line, font=font)
             current_h += h + pad
 
         self.img = requests.get(url).content
