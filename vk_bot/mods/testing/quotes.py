@@ -6,6 +6,8 @@ from vk_bot.core.utils.pillowhelper import Pillowhelper
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
+    def __checkbackground(self):
+        pass
     def main(self):
         try:
             if not self.event.object.fwd_messages:
@@ -15,8 +17,10 @@ class Quote(BacisPlug):
                 msg = self.event.object.fwd_messages[0]
                 msgl = self.event.object.fwd_messages
                 astrlist = []
+                uid = msg["from_id"]
                 for a in msgl:
-                    astrlist.append(a['text'])
+                    if a["from_id"] == uid:
+                        astrlist.append(a['text'])
                 astr = "\n".join(astrlist)
             url = self.vk.users.get(user_ids=msg['from_id'], fields='photo_max')[0]['photo_max']
             firstname = self.vk.users.get(user_ids=msg['from_id'])[0]['first_name']
