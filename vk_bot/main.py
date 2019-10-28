@@ -10,7 +10,7 @@ from vk_bot.core.sql.vksql import *
 from yourphoto import *
 import pylibmc
 import logging
-from botutil import sqlcache
+from vk_bot.core.utils.botutil import sqlcache
 from economy import *
 import mods
 def mainlobby(vk, mc, event, upload):
