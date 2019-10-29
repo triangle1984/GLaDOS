@@ -126,8 +126,6 @@ class Main:
                 response = photos.legs()
             elif requests == "/мем":
                 response = photos.mem()
-            elif requests == "/онлайн" or requests == "/online":
-                response = online(self.vk, event)
             elif requests == "/адольф" or requests == "/гитлер":
                 response = photos.adolf()
             elif requests == "/префикс":
@@ -170,10 +168,6 @@ class Main:
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
-            elif requests == "/длина":
-                response = lentomsg(text)
-            elif requests == "/пароль":
-                response = genpass(text)
             elif requests == "/посты":
                 response = postsearch(self.vk2, text)
             elif uberequests == "/чекни донат":

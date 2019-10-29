@@ -113,16 +113,6 @@ def answer(text):
     return {"message":random.choice(answer),}
 def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
-def online(vk, event):
-    onlinenumber = 0
-    onlinelist = []
-    onlineid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles']
-    for a in onlineid:
-        if a['online'] == 1:
-            onlinenumber+=1
-            onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
-    onlinejoin = "\n".join(onlinelist)
-    return {"message":f"Участники онлайн:\n{onlinejoin}"}
 def callall(vk, event):
     calllist = []
     callid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)
@@ -157,16 +147,6 @@ def convvalute(text):
             return {"message": f"💰{'%g'%val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
         else:
             return {"message": "Выбери: usd или eur!\nНапример: /конвертер 5 usd"}
-def news():
-    api = 'https://newsapi.org/v2/top-headlines'
-    params = {
-                'apiKey': apinews,
-                'country': 'ru'
-                }
-    r = requests.get(api, params=params, timeout=5)
-    encode = r.json()
-    newsjson = random.choice(encode['articles'])
-    return {'message': f"{newsjson['title']}\n\n{newsjson['description']}\n\nПолную статью вы можете прочитать здесь: {newsjson['url']}"}
 def vkbase64(text, encode=False, decode=False):
     text = " ".join(text[1:])
     try:
@@ -312,10 +292,6 @@ def encodeqr(event):
             return {"message":encode[0]['symbol'][0]["data"]}
     except:
         return {"message":"Мне нужно фото!"}
-def lentomsg(text):
-    text = " ".join(text[1:])
-    length = len(text)
-    return {"message": f"Символов в сообщение: {length}"}
 def gethistorytols(vk, event):
     history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
     return {"message":f"сообщений в лс: {history}"}
