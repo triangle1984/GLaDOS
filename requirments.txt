@@ -7,3 +7,4 @@ pylibmc
 pyPrivnote
 SpeechRecognition
 pydub
+boltons
