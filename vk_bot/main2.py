@@ -126,8 +126,6 @@ class Main:
                 response = photos.legs()
             elif requests == "/мем":
                 response = photos.mem()
-            elif requests == "/онлайн" or requests == "/online":
-                response = online(self.vk, event)
             elif requests == "/адольф" or requests == "/гитлер":
                 response = photos.adolf()
             elif requests == "/префикс":
