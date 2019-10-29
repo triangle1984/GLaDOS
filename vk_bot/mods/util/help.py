@@ -13,8 +13,9 @@ class GetHelp(BacisPlug):
         try:
             number = int(self.text[1])
             lhelp2 = lhelp[number]
-        except KeyboardInterrupt:
-            self.sendmsg("такого номера справки нет. Смотрим 1ый")
+            nubmer = 0
+        except:
+            self.sendmsg("такого номера справки нет. Смотрим 0ой")
             lhelp2 = lhelp[0]
         for moduli in lhelp2:
             mhelp += f"Команда: {moduli['command']}, хелп: {moduli['doc']} \n"
