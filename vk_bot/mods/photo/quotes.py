@@ -43,6 +43,7 @@ class Quote(BacisPlug):
                     if a["from_id"] == uid:
                         astrlist.append(a['text'])
                 astr = "\n".join(astrlist)
+            self.uid = self.msg['from_id']
             url = self.vk.users.get(user_ids=self.msg['from_id'], fields='photo_max')[0]['photo_max']
             firstname = self.vk.users.get(user_ids=self.msg['from_id'])[0]['first_name']
             lastname =  self.vk.users.get(user_ids=self.msg['from_id'])[0]['last_name']
