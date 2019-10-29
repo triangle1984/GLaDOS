@@ -89,9 +89,7 @@ class Main:
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
-            if requests == "/калькулятор":
-                response = calc(text)
-            elif requests == "/погода":
+            if requests == "/погода":
                 response = weather(text)
             elif uberequests == "слава украине":
                 response = {"message":"🇺🇦героям слава🇺🇦"}
@@ -116,40 +114,18 @@ class Main:
                 response = photos.trap()
             elif requests == "/лоли":
                 response = photos.loli(self.vk2,text)
-            elif requests == "/оцени":
-                response = doulikethis(text)
-            elif requests == "/вики":
-                response = wiki(text)
             elif requests == "/махно":
                 response = photos.mahno()
             elif requests == "/цитаты":
                 response = citati()
             elif requests == "/калян":
                 response = photos.colyan()
-            elif requests == "/видео":
-                response = video(self.vk2, text)
-            elif requests == "/вероятность" or requests == "/шансы":
-                response = chance(text)
             elif requests == "/хентай":
                 response = photos.hentai()
-            elif requests == "/выбери":
-                response = oror(text)
-            elif requests == "/повтори":
-                response = repeat(text)
-            elif requests == "/док" or requests == "/гиф":
-                response = rdocs(self.vk, text)
             elif requests == "/ноги" or requests == "/ножки":
                 response = photos.legs()
             elif requests == "/мем":
                 response = photos.mem()
-            elif requests == "/кто":
-                response = who(self.vk, event, text)
-            elif requests == "/курс":
-                response = valute(text)
-            elif requests == "/дата":
-                response = date(text)
-            elif requests == "/число":
-                response = number(text)
             elif requests == "/онлайн" or requests == "/online":
                 response = online(self.vk, event)
             elif requests == "/адольф" or requests == "/гитлер":

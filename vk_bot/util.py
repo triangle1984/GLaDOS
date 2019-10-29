@@ -50,37 +50,6 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 📺/посты - поисков постов, по переданным тегам или тексту
 github.com/anar66/vk-bot
 """
-def calc(text):
-    try:
-        x = text[1]; x = int(x)
-        encalc = text[2]; encalc = encalc.lower()
-        y = text[3]; y = int(y)
-    except:
-        return
-    if encalc == "+" or encalc == "сложение":
-        result = x + y
-    elif encalc == "-" or encalc == "вычитание":
-        result = x - y
-    elif encalc == "*" or encalc == "умножение":
-        result = x * y
-    elif encalc == "**" or encalc == "степень" or encalc == "^":
-        if x > 999 or y > 999:
-            return
-        result = x ** y
-    elif encalc == "/":
-        try:
-            x / y
-        except ZeroDivisionError:
-            result = "взорвать планету хочешь?"
-    elif encalc == "корень":
-        result = math.sqrt(x), math.sqrt(y)
-    elif encalc == "синус":
-        result = math.sin(x), math.sin(y)
-    elif encalc == "косинус":
-        result = math.cos(x), math.cos(y)
-    else:
-        return
-    return {"message":"Ваш результат: {}".format(result), }
 def translit(text, vk=False, english=False):
     apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
     url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
@@ -142,91 +111,8 @@ def answer(text):
         answer = ["Кук", "зиг хайль", "куку нахуй",
                    "🇺🇦слава украине🇺🇦", "здравствуй", "здравия желаю"]
     return {"message":random.choice(answer),}
-def doulikethis(text):
-    osenka = random.randint(0, 10)
-    text = " ".join(text[1:])
-    return {"message": f"Моя оценка на {text}: {osenka}/10", }
-def wiki(text):
-    text = " ".join(text[1:])
-    try:
-        wikiotvet = wikipedia.summary(text, sentences=3)
-        if len(wikiotvet) < 355:
-            wikiotvet = wikipedia.summary(text, sentences=6)
-    except wikipedia.exceptions.DisambiguationError:
-        wikiotvet = "точнее, пожалуйста"
-    except wikipedia.exceptions.PageError:
-        wikiotvet = "такого нет"
-    return {"message":wikiotvet}
-def video(vk, text):
-    text = " ".join(text[1:])
-    try:
-        video = vk.video.search(q=text, count=50)
-        video = random.choice(video["items"])
-        videoid = video["id"]
-        videoow = video["owner_id"]
-    except IndexError:
-        return {"message":"ничо не найдено"}
-    video = f"video{videoow}_{videoid}"
-    return{"message": f"Ведосик по заказу - {text}:", "attachment":video}
-def chance(text):
-    text = " ".join(text[1:])
-    rnd =  random.randint(0, 100)
-    message = f"Вероятность {text} равна {rnd}%"
-    return {"message":message, }
-def oror(text):
-    text = " ".join(text[1:])
-    text = random.choice(text.split("или"))
-    return {"message":f"я выбираю: {text}", }
-def repeat(text):
-    text = " ".join(text[1:])
-    return{"message": text, }
-def rdocs(vk, text):
-    text = " ".join(text[1:])
-    try:
-        docs = vk.docs.search(q=text, count=200)
-        docs = random.choice(docs["items"])
-    except IndexError:
-        return{"message": "Ничего не найдено!"}
-    docsid = docs["id"]
-    docsow = docs["owner_id"]
-    docs = f"doc{docsow}_{docsid}"
-    return{"message": f"Гифка/документ по заказу - {text}:", "attachment":docs}
 def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
-
-def who(vk, event, text):
-    try:
-        whotext = ' '.join(text[1:])
-        whoid = random.choice(vk.messages.getConversationMembers(peer_id=event.object.peer_id)['profiles'])
-        whofirstname = whoid['first_name']
-        wholastname = whoid['last_name']
-        whoidstr = whoid['id']
-        return {"message":f"Кто {whotext}? Я думаю, это @id{whoidstr} ({whofirstname} {wholastname})", }
-    except:
-        return {"message":"Для работы этой команды боту нужна админка в беседе!", }
-def valute(text):
-        api = "https://www.cbr-xml-daily.ru/daily_json.js"
-        r = requests.get(api)
-        encode = r.json()
-        usd = encode["Valute"]["USD"]["Value"]
-        eur = encode["Valute"]["EUR"]["Value"]
-        return {"message":"Доллар: {}₽\nЕвро: {}₽".format(usd, eur), }
-def date(text):
-    text = " ".join(text[1:])
-    day = random.randint(1,31)
-    moth = random.randint(1,12)
-    year = random.randint(2019, 2100)
-    when = year-2019
-    event = f"Дата {text}: {day}.{moth}.{year}, через {when} лет"
-    return {"message":event, }
-def number(text):
-    try:
-        x = int(text[1])
-        y = int(text[2])
-        nubmer2 = random.randint(x, y)
-    except:
-        return
-    return {"message":f"Число: {nubmer2}"}
 def online(vk, event):
     onlinenumber = 0
     onlinelist = []
