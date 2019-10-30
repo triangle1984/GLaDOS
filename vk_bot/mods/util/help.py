@@ -13,11 +13,12 @@ class GetHelp(BacisPlug):
         try:
             number = int(self.text[1])
             lhelp2 = lhelp[number]
-            nubmer = 0
         except:
-            self.sendmsg("такого номера справки нет. Смотрим 0ой")
+            self.sendmsg("такой страницы нет. Смотрим 0ую")
+            number = 0
             lhelp2 = lhelp[0]
         for moduli in lhelp2:
             mhelp += f"Команда: {moduli['command']}, хелп: {moduli['doc']} \n"
-        mhelp += f"Номер: {number}"
+        mhelp += f"Страница: {number} \n"
+        mhelp += f"Всего страниц: {len(lhelp)}"
         self.sendmsg(mhelp)
