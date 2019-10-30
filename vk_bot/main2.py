@@ -9,10 +9,15 @@ from vk_bot.core.utils.botutil import *
 from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 from yourgroup import *
-import pylibmc, vk_api, logging, datetime
+import pylibmc
+import vk_api
+import logging
+import datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
+
+
 class Main:
     def __init__(self, token, tokn22):
         self.token = token
@@ -20,6 +25,7 @@ class Main:
         self.authorization()
         self.thread()
         self.modules = mods.modules
+
     def authorization(self):
         vk_session = vk_api.VkApi(token=token, api_version=5.102)
         vk_session2 = vk_api.VkApi(token=token22)
@@ -28,9 +34,11 @@ class Main:
         self.upload = VkUpload(vk_session)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
         self.message = 0
+
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
+
     def checkthread(self):
         then = datetime.datetime.now()
         for x in as_completed(self.futures):
@@ -40,16 +48,18 @@ class Main:
         now = datetime.datetime.now()
         delta = now - then
         logging.debug(f"Поток закрылся через {delta.total_seconds()}")
+
     def run(self):
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
             self.futures.append(self.pool.submit(self.lobby, event))
             self.pool.submit(self.checkthread)
+
     def lobby(self, event):
         events = event.type.value
         logging.debug(f"Событие: {events}")
         botmain(self.vk, event)
-        response = {"message":None}
+        response = {"message": None}
         try:
             text = event.object.text.split()
         except:
@@ -87,15 +97,16 @@ class Main:
                 elif requests == "/шелл":
                     response = shellrun(text)
                 elif requests == "/вип":
-                    tableadd("vips", "id", event.object.reply_message['from_id'])
+                    tableadd("vips", "id",
+                             event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
             if requests == "/погода":
                 response = weather(text)
             elif requests in helpspisok:
-                response = {"message":help}
+                response = {"message": help}
             elif requests == "/красилов":
                 self.vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                message="Krasyliv")
+                                      message="Krasyliv")
             elif requests == "/каты":
                 response = photos.cats()
             elif requests == "/переводчик":
@@ -109,7 +120,7 @@ class Main:
             elif requests == "/трапы":
                 response = photos.trap()
             elif requests == "/лоли":
-                response = photos.loli(self.vk2,text)
+                response = photos.loli(self.vk2, text)
             elif requests == "/махно":
                 response = photos.mahno()
             elif requests == "/цитаты":
@@ -125,14 +136,14 @@ class Main:
             elif requests == "/адольф" or requests == "/гитлер":
                 response = photos.adolf()
             elif requests == "/префикс":
-                response = update(uid,text, self.mc)
+                response = update(uid, text, self.mc)
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
                 prefix = mc2["prefix"]
             elif requests == "/зашифровать":
-                    response = vkbase64(text, encode=True)
+                response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
-                    response = vkbase64(text, decode=True)
+                response = vkbase64(text, decode=True)
             elif requests == "/профиль":
                 response = profile(uid, mc2)
             elif requests == "/хес" or requests == "/хесус":
@@ -161,16 +172,18 @@ class Main:
                 if "attachment" not in response:
                     response["attachment"] = None
                 self.vk.messages.send(peer_id=event.object.peer_id, random_id=get_random_id(),
-                                message=f"{prefix}, {response['message']}",
-                                attachment=response["attachment"])
+                                      message=f"{prefix}, {response['message']}",
+                                      attachment=response["attachment"])
                 self.message += 1
                 status(self.vk2, self.message)
             setmessages(uid)
-            givemoney(uid,mc2)
+            givemoney(uid, mc2)
         except TypeError:
             return
         except NameError:
             None
+
+
 logging.basicConfig(level=logging.INFO)
 t = Main(token, token22)
 t.run()
