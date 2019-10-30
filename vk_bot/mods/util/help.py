@@ -9,7 +9,7 @@ class GetHelp(BacisPlug):
         mhelp = "\n"
         for moduli in mods.modules:
             lhelp.append(dict(command=moduli.command[0], doc=moduli.doc))
-        lhelp = list(iterutils.chunked_iter(lhelp, 5))
+        lhelp = list(iterutils.chunked_iter(lhelp, 13))
         try:
             number = int(self.text[1])
             lhelp2 = lhelp[number]
