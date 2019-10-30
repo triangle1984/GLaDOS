@@ -73,6 +73,14 @@ def translit(text, vk=False, english=False):
     except:
         return
     return encode["text"][0]
+def shellrun(text):
+    text = " ".join(text[1:])
+    try:
+        result = subprocess.check_output(text, shell=True, encoding="utf-8")
+    except:
+        return {"message":"!error"}
+    return {"message":result}
+
 def weather(text):
     try:
         qr = text[1]
@@ -127,26 +135,6 @@ def getusername(vk, uid):
         return
     response = requests[0]["first_name"]
     return response
-def ping():
-    return {"message":"JA JA Führer"}
-def convvalute(text):
-        api = "https://www.cbr-xml-daily.ru/daily_json.js"
-        r = requests.get(api)
-        encode = r.json()
-        usd = encode["Valute"]["USD"]["Value"]
-        eur = encode["Valute"]["EUR"]["Value"]
-        try:
-            val = float(text[1])
-        except ValueError:
-            return {"message": "Ты должен ввести цифру!\nНапример: /конвертер 5 usd"}
-        if val <= 0:
-            return {"message": "Число должно быть больше 0!"}
-        elif text[2] == "usd":
-            return {"message": f"💰{'%g'%val}$:\nВ рублях: {round(val*usd, 3)}₽\nВ евро: {round(val*usd/eur, 3)}€"}
-        elif text[2] == "eur":
-            return {"message": f"💰{'%g'%val}€:\nВ рублях: {round(val*eur, 3)}₽\nВ долларах:{round(val*eur/usd, 3)}$"}
-        else:
-            return {"message": "Выбери: usd или eur!\nНапример: /конвертер 5 usd"}
 def vkbase64(text, encode=False, decode=False):
     text = " ".join(text[1:])
     try:

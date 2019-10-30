@@ -91,10 +91,6 @@ class Main:
                     del mc[str(event.object.from_id)]
             if requests == "/погода":
                 response = weather(text)
-            elif uberequests == "слава украине":
-                response = {"message":"🇺🇦героям слава🇺🇦"}
-            elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
-                response = answer(text)
             elif requests in helpspisok:
                 response = {"message":help}
             elif requests == "/красилов":
@@ -133,10 +129,6 @@ class Main:
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
                 prefix = mc2["prefix"]
-            elif requests == "/жив?" or " ".join(text[0:]) == "/ ping":
-                response = ping()
-            elif requests == "/конвертер":
-                response = convvalute(text)
             elif requests == "/зашифровать":
                     response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
