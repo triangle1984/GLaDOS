@@ -180,65 +180,6 @@ def profile(uid, mc2):
 💰| G: {G}$
 🎮| XP: {xp}
 ⭐| Уровень: {level}"""}
-def shellrun(text):
-    text = " ".join(text[1:])
-    try:
-        result = subprocess.check_output(text, shell=True, encoding="utf-8")
-    except:
-        return {"message":"!error"}
-    return {"message":result}
-def text_to_bits(text):
-    text = ' '.join(text[1:])
-    bits = bin(int.from_bytes(text.encode('utf-8', 'surrogatepass'), 'big'))[2:]
-    encode = bits.zfill(8 * ((len(bits) + 7) // 8))
-    return {"message": str(encode)}
-def text_from_bits(text):
-    text = " ".join(text[1:])
-    try:
-        n = int(text, 2)
-    except ValueError:
-        return {"message": "Введи двоичный код!"}
-    decode = n.to_bytes((n.bit_length() + 7) // 8, 'big').decode('utf-8', 'surrogatepass') or '\0'
-    return {"message": decode}
-def forward(event, vk, session, upload):
-    try:
-        attachments = []
-        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
-        image = session.get(image_url, stream=True)
-        photo = upload.photo_messages(photos=image.raw)[0]
-        attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
-        return {"message":"Держи!", "attachment": ','.join(attachments)}
-    except IndexError:
-        return {"message":"Мне нужно фото!"}
-def anime(event):
-    try:
-        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
-        api = f'https://trace.moe/api/search'
-        params = {
-            'url': image_url
-        }
-        r = requests.get(api, params=params)
-        encode = r.json()
-        name = encode["docs"][0]["title_english"]
-        episode = encode["docs"][0]["episode"]
-        chance = round(encode['docs'][0]["similarity"] * 100)
-        sec = round(encode["docs"][0]["from"])
-        time = timedelta(seconds = sec)
-        return {"message": f"""Я думаю это: {name}
-        Серия: {episode}
-        Точность: {chance}%
-        Тайминг: {time}"""}
-    except IndexError:
-        return {"message":"Мне нужно фото!"}
-def hello(chathello, event, vk, text):
-    text = " ".join(text[1:])
-    if event.object['attachments']:
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Никаких вложений! Только текст")
-    elif len(text) > 500:
-        vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
-    else:
-        response = hellosql(chathello, event.chat_id, text)
-        return {"message": f"Вы установили приветствие: \"{text}\""}
 def nametoid(vk, text):
     try:
         text = text[1]
@@ -266,46 +207,9 @@ def tasks():
     ✅личные альбомы
     ✅аниме на фото"""
     return {"message":ltasks}
-def qrcode(text, vk, upload, session):
-    try:
-        attachments = []
-        text = " ".join(text[1:])
-        image_url = f"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={text}"
-        image = session.get(image_url, stream=True)
-        photo = upload.photo_messages(photos=image.raw)[0]
-        attachments.append('photo{}_{}'.format(photo['owner_id'], photo['id']))
-        return {"message":"Держи!", "attachment": ','.join(attachments)}
-    except vk_api.exceptions.ApiError:
-        return {"message":"Только текст!"}
-def encodeqr(event):
-    try:
-        image_url = event.object['attachments'][0]['photo']['sizes'][-1]['url']
-        api = "http://api.qrserver.com/v1/read-qr-code/"
-        params = {
-            'fileurl' : image_url
-        }
-        r = requests.get(api, params=params)
-        encode = r.json()
-        if encode[0]['symbol'][0]["data"] == None:
-            return {"message":"Не вижу здесь qrcode"}
-        else:
-            return {"message":encode[0]['symbol'][0]["data"]}
-    except:
-        return {"message":"Мне нужно фото!"}
 def gethistorytols(vk, event):
     history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
     return {"message":f"сообщений в лс: {history}"}
-def genpass(text):
-    try:
-        length = int(text[1])
-    except:
-        length = 64
-    if length > 999999:
-        length = 99999
-    text = f"openssl rand -base64 {length}"
-    result = subprocess.check_output(text, shell=True, encoding="utf-8")
-    url = pyPrivnote.create_note(result)
-    return {"message": f"Пароль тута: {url} . Ссылка на сгорающую записку, которая удалится после просмотра кем либо"}
 def checkdonate(uid):
     url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"
     r = requests.get(url)

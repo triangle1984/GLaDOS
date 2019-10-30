@@ -137,34 +137,18 @@ class Main:
                 response = ping()
             elif requests == "/конвертер":
                 response = convvalute(text)
-            elif requests == "/новость":
-                response = news()
             elif requests == "/зашифровать":
                     response = vkbase64(text, encode=True)
             elif requests == "/расшифровать":
                     response = vkbase64(text, decode=True)
             elif requests == "/профиль":
                 response = profile(uid, mc2)
-            elif requests == "/бинарный0":
-                response = text_to_bits(text)
-            elif requests == "/бинарный1":
-                response = text_from_bits(text)
-            elif requests == "/перешли":
-                response = forward(event, self.vk, session, upload)
             elif requests == "/хес" or requests == "/хесус":
                 response = photos.hesus()
-            elif uberequests == "/аниме на фото":
-                response = anime(event)
             elif requests == "/айди":
                 response = nametoid()
             elif requests == "/идеи":
                 response = tasks()
-            elif requests == "/приветствие":
-                response = hello(chathello, event, self.vk, text)
-            elif requests == "/encodeqr":
-                response = qrcode(text, self.vk, upload, session)
-            elif requests == "/decodeqr":
-                response = encodeqr(event)
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
