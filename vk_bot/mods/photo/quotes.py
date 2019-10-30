@@ -14,9 +14,9 @@ class Quote(BacisPlug):
             self.makequotes()
     def __checkbackground(self):
         MAX_W, MAX_H = 700, 400
-        check = os.path.exists(f"photos/{self.uid}")
+        check = os.path.exists(f"photos/{self.nuid}")
         if check:
-           self.im = Image.open(f'photos/{self.uid}')
+           self.im = Image.open(f'photos/{self.nuid}')
         else:
             self.im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
     def __setbackground(self):
@@ -43,7 +43,7 @@ class Quote(BacisPlug):
                     if a["from_id"] == uid:
                         astrlist.append(a['text'])
                 astr = "\n".join(astrlist)
-            self.uid = self.msg['from_id']
+            self.nuid = self.msg['from_id']
             url = self.vk.users.get(user_ids=self.msg['from_id'], fields='photo_max')[0]['photo_max']
             firstname = self.vk.users.get(user_ids=self.msg['from_id'])[0]['first_name']
             lastname =  self.vk.users.get(user_ids=self.msg['from_id'])[0]['last_name']
