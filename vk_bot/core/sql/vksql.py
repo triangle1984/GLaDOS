@@ -29,18 +29,15 @@ def checktable(table, value, should, andd=False):
         return cursor.fetchone()
     except:
         return
-def tableadd(table, value, add, one=False, onerm=False):
+def tableadd(table, value, add, one=False):
     try:
         conn = auth()
         try:
             with conn.cursor() as cursor:
                 query = f"INSERT INTO {table} ({value}) VALUES ({add})"
-                if one or onerm:
+                if one:
                     if bool(checktable(table, value, add)):
-                        if one:
-                            return
-                        elif onerm:
-                            tablerm(table, value, add)
+                        return
                 cursor.execute(query)
                 conn.commit()
         except pymysql.err.InternalError:

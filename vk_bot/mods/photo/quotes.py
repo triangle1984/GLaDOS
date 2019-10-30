@@ -9,21 +9,21 @@ class Quote(BacisPlug):
     def main(self):
         try:
             if self.text[1] == "фон":
-                self.__setbackground()
-            # elif self.text[1] == "цвета":
-            #     self.__setcolor()
+                self.setbackground()
+            elif self.text[1] == "цвета":
+                self.setcolor()
             else:
                 self.makequotes()
         except IndexError:
             self.makequotes()
-    def __checkbackground(self):
+    def checkbackground(self):
         MAX_W, MAX_H = 700, 400
         check = os.path.exists(f"photos/{self.nuid}")
         if check:
            self.im = Image.open(f'photos/{self.nuid}')
         else:
             self.im = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
-    def __setbackground(self):
+    def setbackground(self):
         try:
             url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         except:
@@ -33,10 +33,13 @@ class Quote(BacisPlug):
         result.save(f'photos/{self.uid}.jpg')
         os.system(f'mv photos/{self.uid}.jpg photos/{self.uid}')
         self.sendmsg("установлено")
-    def __setcolor(self):
-        if self.text[2] == "текст":
-            print(".")
-            tableadd('quotes', 'yourtext', 'тест', onerm=True)
+    def argsforcolor(self):
+        args = argparse.ArgumentParser(description="аргументы для цитат")
+        args.add_argument("-text", "--text", default=rgba(0, 0, 0, 1))
+        args.add_argument("-data", "--data", default=rgba(0, 0, 0, 1))
+    def setcolor(self):
+        color = self.argsforcolor()
+        color = color.parse_args(self.text[1:])
     def makequotes(self):
         try:
             if not self.event.object.fwd_messages:
@@ -58,7 +61,7 @@ class Quote(BacisPlug):
         except KeyboardInterrupt:
             self.sendmsg("!error")
             return
-        self.__checkbackground()
+        self.checkbackground()
         today = datetime.datetime.today().strftime("время: %H:%M:%S, дата: %Y-%m-%d")
         para = textwrap.wrap(astr, width=30)
         draw = ImageDraw.Draw(self.im)
