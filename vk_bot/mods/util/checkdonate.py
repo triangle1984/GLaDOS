@@ -9,10 +9,10 @@ class Checkdonate(BacisPlug):
         url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"
         r = requests.get(url)
         text = r.json()
-        if not text["donates"]:
-            self.sendmsg("ниеть, донатов от вас не было", "video-157509098_456239021")
+        for donate in text["donates"]:
+            if donate["uid"] == self.uid:
+                self.sendmsg(f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой", "video139157356_456239665")
+                tableadd("vips", "id", self.uid, one=True)
         else:
-            for donate in text["donates"]:
-                if donate["uid"] == self.uid:
-                    self.sendmsg(f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой", "video139157356_456239665")
-                    tableadd("vips", "id", self.uid, one=True)
+            self.sendmsg("ниеть, донатов от вас не было", "video-157509098_456239021")
+         
