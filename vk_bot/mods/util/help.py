@@ -18,7 +18,7 @@ class GetHelp(BacisPlug):
             number = 0
             lhelp2 = lhelp[0]
         for moduli in lhelp2:
-            mhelp += f"Команда: {moduli['command']}, хелп: {moduli['doc']} \n"
+            mhelp += f"• {moduli['command']} - {moduli['doc']} \n"
         mhelp += f"Страница: {number} \n"
         mhelp += f"Всего страниц: {len(lhelp)}"
         self.sendmsg(mhelp)
