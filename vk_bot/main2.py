@@ -21,7 +21,7 @@ class Main:
         self.thread()
         self.modules = mods.modules
     def authorization(self):
-        vk_session = vk_api.VkApi(token=token, api_version="5.101")
+        vk_session = vk_api.VkApi(token=token, api_version=5.102)
         vk_session2 = vk_api.VkApi(token=token22)
         self.vk = vk_session.get_api()
         self.vk2 = vk_session2.get_api()
