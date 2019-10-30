@@ -7,10 +7,14 @@ class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
     def main(self):
-        if len(self.text) > 1:
+        try:
             if self.text[1] == "фон":
                 self.__setbackground()
-        else:
+            # elif self.text[1] == "цвета":
+            #     self.__setcolor()
+            else:
+                self.makequotes()
+        except IndexError:
             self.makequotes()
     def __checkbackground(self):
         MAX_W, MAX_H = 700, 400
@@ -29,6 +33,10 @@ class Quote(BacisPlug):
         result.save(f'photos/{self.uid}.jpg')
         os.system(f'mv photos/{self.uid}.jpg photos/{self.uid}')
         self.sendmsg("установлено")
+    def __setcolor(self):
+        if self.text[2] == "текст":
+            print(".")
+            tableadd('quotes', 'yourtext', 'тест', onerm=True)
     def makequotes(self):
         try:
             if not self.event.object.fwd_messages:
