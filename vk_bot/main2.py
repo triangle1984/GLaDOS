@@ -152,10 +152,6 @@ class Main:
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
-            elif requests == "/посты":
-                response = postsearch(self.vk2, text)
-            elif uberequests == "/чекни донат":
-                response = checkdonate(uid)
             elif requests == getcommand(uid, requests):
                 response = sendyourphoto(self.vk2, text, uid, requests)
             elif requests == "/казино":

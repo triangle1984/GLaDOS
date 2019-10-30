@@ -210,25 +210,5 @@ def tasks():
 def gethistorytols(vk, event):
     history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
     return {"message":f"сообщений в лс: {history}"}
-def checkdonate(uid):
-    url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"
-    r = requests.get(url)
-    text = r.json()
-    msg = {"message":"ниеть, донатов от вас не было", "attachment":"video-157509098_456239021"}
-    for donate in text["donates"]:
-        if donate["uid"] == uid:
-            msg = {"message":f"а вы мисье донатер. Надонатил: {donate['sum']}₽. Терь вы с випкой",
-                   "attachment":"video139157356_456239665"}
-            tableadd("vips", "id", uid, one=True)
-    return msg
-def postsearch(vk, text):
-    try:
-        text = " ".join(text[1:])
-        result = random.choice(vk.newsfeed.search(q=text, count=100)["items"])
-        owner_id = result["owner_id"]
-        idd = result["id"]
-    except:
-        return {"message":"ничо не нашел"}
-    return {"message":"Найденный пост, по вашему запросу", "attachment":f"wall{owner_id}_{idd}"}
 def nuke():
     return {"message":"ВСЕ ПИЗДА ИВАНУ. /запустил ядерную боеголовку в максбота/", "attachment":"video162900694_456239801"}
