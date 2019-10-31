@@ -141,7 +141,8 @@ class Quote(BacisPlug):
             return
         self.checkbackground()
         self.getcolor()
-        today = datetime.datetime.today().strftime("время: %H:%M:%S, дата: %Y-%m-%d")
+        today = datetime.datetime.today().strftime("время: %H:%M:%S")
+        today2 = datetime.datetime.today().strftime("дата: %Y-%m-%d")
         para = textwrap.wrap(astr, width=30)
         draw = ImageDraw.Draw(self.im)
         font = ImageFont.truetype(fontc, 18)
@@ -149,6 +150,7 @@ class Quote(BacisPlug):
         draw.text((10, 310), f'{firstname} {lastname}',
                   font=fontu, fill=self.data)
         draw.text((10, 325), today, font=fontu, fill=self.data)
+        draw.text((10, 340), today2, font=fontu, fill=self.data)
         current_h, pad = 170, 10
         for line in para:
             w, h = draw.textsize(line, font=font)
