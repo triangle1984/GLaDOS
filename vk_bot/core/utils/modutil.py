@@ -3,6 +3,7 @@ class BacisPlug:
     included = True
     types = ["message_new"]
     doc = "Заполните справку в модуле"
+    available_for = "user"
     def __init__(self, vk, vk2, upload):
         self.vk = vk
         self.vk2 = vk2

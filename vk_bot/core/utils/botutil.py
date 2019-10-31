@@ -47,5 +47,6 @@ def sqlcache(mc, uid):
                      "prefix": prefix,
                      "admins":admins,
                      "count":count,
+                     "user": True,
                      "ban":ban})
     return mc.get(uid)

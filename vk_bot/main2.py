@@ -69,10 +69,11 @@ class Main:
         for module in self.modules:
             if module.included:
                 if requests in module.command and events in module.types or module.types == "runalways":
-                    module = module(self.vk, self.vk2, self.upload)
-                    module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                    prefix=prefix, peer=event.object.peer_id)
-                    module.main()
+                    if mc2[module.available_for]:
+                        module = module(self.vk, self.vk2, self.upload)
+                        module.givedata(uid=uid, text=text, event=event, mc2=mc2,
+                                        prefix=prefix, peer=event.object.peer_id)
+                        module.main()
         if event.object.text:
             if mc2["admins"]:
                 setxp(uid, random.randint(75, 100))
