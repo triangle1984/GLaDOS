@@ -144,8 +144,8 @@ class Quote(BacisPlug):
         today = datetime.datetime.today().strftime("время: %H:%M:%S, дата: %Y-%m-%d")
         para = textwrap.wrap(astr, width=30)
         draw = ImageDraw.Draw(self.im)
-        font = ImageFont.truetype(fontc, 16)
-        fontu = ImageFont.truetype(fontc, 14)
+        font = ImageFont.truetype(fontc, 18)
+        fontu = ImageFont.truetype(fontc, 16)
         draw.text((10, 310), f'{firstname} {lastname}',
                   font=fontu, fill=self.data)
         draw.text((10, 325), today, font=fontu, fill=self.data)
