@@ -87,8 +87,6 @@ def update(uid, text, mc):
     newname = " ".join(text[1:])
     if len(newname) > 29:
         return {"message":"максимальная длинна префикса: 30 символов"}
-    if  "*" in list(newname) or "@" in list(newname) or "[" in list(newname):
-        return {"message":"упоминать низя"}
     tableupdate("prefix", "name", newname, f"id = {uid}")
     return {"message":"се ваш префикс сменен"}
 

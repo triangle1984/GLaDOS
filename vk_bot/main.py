@@ -5,7 +5,9 @@ from loadevn import *
 from util import *
 from photo import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-import vk_api, requests, sys
+import vk_api
+import requests
+import sys
 from vk_bot.core.sql.vksql import *
 from yourphoto import *
 import pylibmc
@@ -13,10 +15,12 @@ import logging
 from vk_bot.core.utils.botutil import sqlcache
 from economy import *
 import mods
+
+
 def mainlobby(vk, mc, event, upload):
     events = event.type.name.lower()
     try:
-        response = {"message":None}
+        response = {"message": None}
         if "text" in dir(event) and "user_id" in dir(event):
             if event.from_me:
                 uid = recipient
@@ -34,7 +38,7 @@ def mainlobby(vk, mc, event, upload):
                 else:
                     uid = event.user_id
                 mc2 = sqlcache(mc, uid)
-                givemoney(uid,mc2)
+                givemoney(uid, mc2)
                 photos = Photo(vk, text)
                 prefix = mc2["prefix"]
                 for module in mods.modules:
@@ -51,16 +55,16 @@ def mainlobby(vk, mc, event, upload):
                 elif requests == "/шелл" and uid == 367919273:
                     response = shellrun(text)
                 elif requests == "слава":
-                    response = {"message":"🇺🇦украине🇺🇦", "attachment":None}
+                    response = {"message": "🇺🇦украине🇺🇦", "attachment": None}
                 elif requests in ["привет", "ку", "зиг", "споки", "спокойной"]:
                     response = answer(text)
                 elif requests == "/off" and event.user_id == 367919273:
                     sys.exit()
                 elif requests == "/help" or requests == "/хелп":
-                    response = {"message":help, "attachment":None}
+                    response = {"message": help, "attachment": None}
                 elif requests == "/красилов":
                     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                    message="Krasyliv")
+                                     message="Krasyliv")
                 elif requests == "/каты":
                     response = photos.cats()
                 elif requests == "/переводчик":
@@ -100,7 +104,7 @@ def mainlobby(vk, mc, event, upload):
                 elif requests == "/док" or requests == "/гиф":
                     response = rdocs(vk, text)
                 elif requests == "/ноги" or requests == "/ножки":
-                    response = photos.legs(vk,text)
+                    response = photos.legs(vk, text)
                 elif requests == "/мем":
                     response = photos.mem()
                 elif requests == "/кто":
@@ -151,7 +155,7 @@ def mainlobby(vk, mc, event, upload):
                 elif requests == getcommand(uid, requests):
                     response = sendyourphoto(vk, text, uid, requests)
                 elif "".join(text)[:8] == "/альбомы":
-                    response = photoadd(vk, uid, text,mc2, number=text)
+                    response = photoadd(vk, uid, text, mc2, number=text)
                     del mc[str(uid)]
 
             try:
@@ -163,18 +167,22 @@ def mainlobby(vk, mc, event, upload):
                     #     vk.messages.send(chat_id=event.chat_id, random_id=get_random_id(),
                     #                     message="от бота: " + response["message"], attachment=response["attachment"])
                     vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                        message=f"от бота: {prefix}, {response['message']}",
-                                        attachment=response["attachment"])
+                                     message=f"от бота: {prefix}, {response['message']}",
+                                     attachment=response["attachment"])
             except TypeError:
                 return
     except KeyboardInterrupt:
         sys.exit()
+
+
 def checkthread():
     global futures
     for x in as_completed(futures):
         if x.exception() != None:
             logging.error(x.exception())
         futures.remove(x)
+
+
 vk_session = vk_api.VkApi(token=token22)
 vk = vk_session.get_api()
 upload = vk_api.VkUpload(vk_session)
