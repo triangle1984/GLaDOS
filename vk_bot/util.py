@@ -50,29 +50,7 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 📺/посты - поисков постов, по переданным тегам или тексту
 github.com/anar66/vk-bot
 """
-def translit(text, vk=False, english=False):
-    apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
-    url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
-    url2 = "https://translate.yandex.net/api/v1.5/tr.json/detect"
-    params = {"key": apikey,
-                "text":text[1:]}
-    r = requests.get(url2, params=params)
-    encode = r.json()
-    lang = f"{encode['lang']}-ru"
-    if english:
-        lang = "ru-en"
-    params = {"key": apikey,
-            "text":text[0:],
-            "lang":lang}
-    r = requests.get(url, params=params)
-    encode = r.json()
-    try:
-        if vk:
-            encode = " ".join(encode["text"][1:])
-            return {"message":"Перевод: {}".format(encode),}
-    except:
-        return
-    return encode["text"][0]
+
 def shellrun(text):
     text = " ".join(text[1:])
     try:
@@ -81,44 +59,6 @@ def shellrun(text):
         return {"message":"!error"}
     return {"message":result}
 
-def weather(text):
-    try:
-        qr = text[1]
-    except:
-        return
-    q = translit(text=qr, english=True); q.lower()
-    apiurl = "http://api.openweathermap.org/data/2.5/find"
-    appid = '22c7bf8e593c47b0cf88f390e8e5376a'
-    params = {
-                'q': q,
-                'appid': appid,
-                'units': 'metric',
-                'lang': 'ru'
-                }
-    try:
-        r = requests.get(apiurl, params=params, timeout=5)
-        encode = r.json()
-        w = encode['list'][0]['weather'][0]['description']
-        temp = encode["list"][0]["main"]["temp"]
-        vlaga = encode["list"][0]["main"]["humidity"]
-        wind = encode["list"][0]["wind"]["speed"]
-    except:
-        return
-    return {"message":f"""Город: {q}
-    🌥Погода: {w}
-    🌡Температура: {temp}°
-    💧Влажность: {vlaga}
-    💨Скорость ветра: {wind}м/с""",
-    }
-def answer(text):
-    zapros = text[0].lower()
-    if zapros == "споки" or zapros == "спокойной":
-        answer = ["Спотьки", "Спокойной ночи", "Спи, но я приду и выебу тебя историей аир"
-                  ,"Сладких снов", "Эротишных снов🌚🌚🌚"]
-    else:
-        answer = ["Кук", "зиг хайль", "куку нахуй",
-                   "🇺🇦слава украине🇺🇦", "здравствуй", "здравия желаю"]
-    return {"message":random.choice(answer),}
 def status(vk, msgcount):
     vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
 def callall(vk, event):
@@ -135,68 +75,6 @@ def getusername(vk, uid):
         return
     response = requests[0]["first_name"]
     return response
-def vkbase64(text, encode=False, decode=False):
-    text = " ".join(text[1:])
-    try:
-        if encode:
-            result = base64.b64encode(bytes(text, 'utf-8'))
-        else:
-            result = base64.b64decode(text)
-    except:
-        return {"message":"!error"}
-    return {"message":result.decode('utf-8')}
-def profile(uid, mc2):
-    msg = checktable('messages', 'id', uid)["msg"]
-    xp = checktable('level', 'id', uid)["xp"]
-    levelxp = 500
-    level = 0
-    while xp > levelxp:
-        levelxp = levelxp * 2.5
-        level += 1
-    if mc2["admins"]:
-        user = "Админ😎"
-    elif mc2["vips"]:
-        user = "Вип🤵"
-    else:
-        user = "Юзер"
-    G = checktable("economy","id", uid)["money"]
-    return {"message": f"""Твой профиль:
-👦| Роль: {user}
-🔑| Префикс: {mc2['prefix']}
-📃| Айди: id{uid}
-✉ | Сообщения: {msg}
-💰| G: {G}$
-🎮| XP: {xp}
-⭐| Уровень: {level}"""}
-def nametoid(vk, text):
-    try:
-        text = text[1]
-        result = vk.utils.resolveScreenName(screen_name=text)
-        if result["type"] == "group":
-            result = "-" + str(result["object_id"])
-        else:
-            result = result["object_id"]
-    except KeyboardInterrupt:
-        return {"message":"!error"}
-    return {"message":f"Айди: {result}"}
-def tasks():
-    ltasks = """🚫мать панель
-    ✅рассылка
-    ✅ооп
-    ✅многопоток
-    ✅работа с пикчами
-    🚫экономика\рпг
-    ✅кеш
-    ✅несколько личных альбомов для випов
-    ✅отношения с детоводством
-    ✅автоконвентор айди в тех же альбомах
-    ✅список идей
-    ✅приветствие
-    ✅личные альбомы
-    ✅аниме на фото"""
-    return {"message":ltasks}
 def gethistorytols(vk, event):
     history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
     return {"message":f"сообщений в лс: {history}"}
-def nuke():
-    return {"message":"ВСЕ ПИЗДА ИВАНУ. /запустил ядерную боеголовку в максбота/", "attachment":"video162900694_456239801"}

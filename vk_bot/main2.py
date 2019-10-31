@@ -89,17 +89,13 @@ class Main:
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
-            if requests == "/погода":
-                response = weather(text)
-            elif requests in helpspisok:
+            if requests in helpspisok:
                 response = {"message":help}
             elif requests == "/красилов":
                 self.vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                 message="Krasyliv")
             elif requests == "/каты":
                 response = photos.cats()
-            elif requests == "/переводчик":
-                response = translit(text, self.vk)
             elif requests == "/юри":
                 response = photos.yuri()
             elif requests == "/геббельс":
@@ -129,18 +125,8 @@ class Main:
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
                 prefix = mc2["prefix"]
-            elif requests == "/зашифровать":
-                    response = vkbase64(text, encode=True)
-            elif requests == "/расшифровать":
-                    response = vkbase64(text, decode=True)
-            elif requests == "/профиль":
-                response = profile(uid, mc2)
             elif requests == "/хес" or requests == "/хесус":
                 response = photos.hesus()
-            elif requests == "/айди":
-                response = nametoid()
-            elif requests == "/идеи":
-                response = tasks()
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
@@ -150,8 +136,6 @@ class Main:
                 response = economygame1(uid, text)
             elif requests == "/экономика":
                 response = economylobby(uid, mc2, text)
-            elif uberequests == "/холодная война":
-                response = nuke()
             elif "".join(text)[:8] == "/альбомы":
                 response = photoadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
