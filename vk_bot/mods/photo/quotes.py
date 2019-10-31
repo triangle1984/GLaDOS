@@ -15,8 +15,6 @@ from vk_bot.core.sql.vksql import *
 class Quote(BacisPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
-    text = (255, 255, 255, 1)
-    data = (255, 255, 255, 1)
 
     def main(self):
         try:
@@ -69,6 +67,8 @@ class Quote(BacisPlug):
             f"Вы установили цвета, для даты: {color.data}, для текста: {color.text}")
 
     def getcolor(self):
+        self.text = (255, 255, 255, 1)
+        self.data = (255, 255, 255, 1)
         check = checktable("quotes", "uid", self.uid)
         if check:
             text = check["yourtext"].split(",")
@@ -108,13 +108,13 @@ class Quote(BacisPlug):
         font = ImageFont.truetype(fontc, 16)
         fontu = ImageFont.truetype(fontc, 14)
         draw.text((10, 310), f'{firstname} {lastname}',
-                  font=fontu, fill=(255, 255, 255, 1))
-        draw.text((10, 325), today, font=fontu, fill=(255, 255, 255, 1))
+                  font=fontu, fill=self.data)
+        draw.text((10, 325), today, font=fontu, fill=self.data)
         current_h, pad = 170, 10
         for line in para:
             w, h = draw.textsize(line, font=font)
             draw.text(((850 - w) / 2, current_h),
-                      line, font=font, fill=(255, 255, 255, 1))
+                      line, font=font, fill=self.text)
             current_h += h + pad
 
         self.img = requests.get(url).content
