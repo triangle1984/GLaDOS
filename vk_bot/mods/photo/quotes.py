@@ -20,7 +20,7 @@ class Quote(BacisPlug):
         try:
             if self.text[1] == "фон":
                 self.setbackground()
-            elif self.text[1] == "цвета" and self.mc2['vips'] == True:
+            elif self.text[1] == "цвета":
                 self.setcolor()
             else:
                 self.makequotes()
@@ -49,15 +49,53 @@ class Quote(BacisPlug):
 
     def argsforcolor(self):
         args = argparse.ArgumentParser(description="аргументы для цитат")
-        args.add_argument("-text", "--text", "-t", default="255,255,255,1")
-        args.add_argument("-data", "--data", "-d", default="255,255,255,1")
+        args.add_argument("-text", "--text", "-t", default="белый")
+        args.add_argument("-data", "--data", "-d", default="белый")
         return args
 
     def setcolor(self):
-        color = self.argsforcolor()
-        color = color.parse_args(self.text[2:])
-        if len(color.data.split(",")) != 4 or len(color.text.split(",")) != 4:
-            self.sendmsg("!error")
+        helps = """
+        Дроу, это цвета для цитаток
+        /цитата цвета -t     - смена цвета для текста в цитате
+        /цитата цвета -d     - смена цвета данных в цитатке, т.е дата и имя
+        Для юзеров:
+            доступно только три цвета - чернй, белый и серый
+            собсна, так и можно поменять
+            /цитата цвета -t черный -d серый
+            сделает вам черный цвет текста и серые данные
+        для випов:
+            доступны те же цвета шо и у юзеров и такая же их смена
+            но!
+            для них доступны все цвета этого мира, которые можно получить тут - https://colorscheme.ru/color-converter.html
+            мутите себе цвет и копируйте значение на RGBA
+            и, пример:
+                /цитата цвета -t 255,0,0,1 -d 0,0,0,1 (цифры через запятую и без пробела - обязательно)
+                намутит вам белый текст и черные данные
+        """
+        usercolor = {
+            'черный': '0,0,0,1',
+            'белый': '255,255,255,1',
+            'серый': '192,192,192,1'
+        }
+        try:
+            color = self.argsforcolor()
+            color = color.parse_args(self.text[2:])
+            color.data = color.data.lower()
+            color.text = color.text.lower()
+        except:
+            self.sendmsg(helps)
+            return
+        if self.mc2['vips'] == False:
+            if color.text not in usercolor or color.data not in usercolor:
+                self.sendmsg(helps)
+                return
+        try:
+            if len(color.data.split(",")) != 4:
+                color.data = usercolor[color.data]
+            if len(color.text.split(",")) != 4:
+                color.text = usercolor[color.text]
+        except:
+            self.sendmsg(helps)
             return
         if checktable('quotes', 'uid', self.uid):
             tablerm("quotes", "uid", self.uid)
