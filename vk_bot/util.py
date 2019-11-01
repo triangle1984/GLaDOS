@@ -50,17 +50,6 @@ help = """Дроу. Ето бот команды овощей. Возможно�
 📺/посты - поисков постов, по переданным тегам или тексту
 github.com/anar66/vk-bot
 """
-
-def shellrun(text):
-    text = " ".join(text[1:])
-    try:
-        result = subprocess.check_output(text, shell=True, encoding="utf-8")
-    except:
-        return {"message":"!error"}
-    return {"message":result}
-
-def status(vk, msgcount):
-    vk.status.set(text=f"✉сообщений: {msgcount}", group_id=group_idd)
 def callall(vk, event):
     calllist = []
     callid = vk.messages.getConversationMembers(peer_id=event.object.peer_id)
@@ -75,6 +64,3 @@ def getusername(vk, uid):
         return
     response = requests[0]["first_name"]
     return response
-def gethistorytols(vk, event):
-    history = vk.messages.getHistory(count=0, user_id=event.user_id)["count"]
-    return {"message":f"сообщений в лс: {history}"}

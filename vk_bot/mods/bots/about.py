@@ -10,6 +10,8 @@ class AboutBot(BacisPlug):
         первый прогер: *slava_a_i_r
         второй прогер: *pythonoglot
         модуль на распознавание гс написал: *feelan03
+        Так же, он опенсурс, репа: github.com/anar66/vk-bot
         Приятного пользования~
+        Узнать команды: /хелп
         """
         self.sendmsg(info)

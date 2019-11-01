@@ -85,8 +85,6 @@ class Main:
                     del mc[str(event.object.reply_message['from_id'])]
                 elif requests == "/рассылка":
                     sendall(event, text, self.vk)
-                elif requests == "/шелл":
-                    response = shellrun(text)
                 elif requests == "/вип":
                     tableadd("vips", "id", event.object.reply_message['from_id'])
                     del mc[str(event.object.from_id)]
@@ -121,7 +119,6 @@ class Main:
                                 message=f"{prefix}, {response['message']}",
                                 attachment=response["attachment"])
                 self.message += 1
-                status(self.vk2, self.message)
             setmessages(uid)
             givemoney(uid,mc2)
         except TypeError:
