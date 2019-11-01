@@ -6,10 +6,11 @@ class Admins(BacisPlug):
     doc = "Забанить или разбанить"
     available_for = "admins"
     def main(self):
-        requests = self.text[1]
+        requests = self.text[0]
         try:
             uid = event.object.reply_message['from_id']
         except:
+            print(".")
             None
         if requests == "/бан":
             tableadd("ban", "id", uid, one=True)
