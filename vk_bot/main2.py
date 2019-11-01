@@ -95,39 +95,11 @@ class Main:
             elif requests == "/красилов":
                 self.vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
                                 message="Krasyliv")
-            elif requests == "/каты":
-                response = photos.cats()
-            elif requests == "/юри":
-                response = photos.yuri()
-            elif requests == "/геббельс":
-                response = photos.gebbels()
-            elif requests == "/яой":
-                response = photos.yaoi()
-            elif requests == "/трапы":
-                response = photos.trap()
-            elif requests == "/лоли":
-                response = photos.loli(self.vk2,text)
-            elif requests == "/махно":
-                response = photos.mahno()
-            elif requests == "/цитаты":
-                response = citati()
-            elif requests == "/калян":
-                response = photos.colyan()
-            elif requests == "/хентай":
-                response = photos.hentai()
-            elif requests == "/ноги" or requests == "/ножки":
-                response = photos.legs()
-            elif requests == "/мем":
-                response = photos.mem()
-            elif requests == "/адольф" or requests == "/гитлер":
-                response = photos.adolf()
             elif requests == "/префикс":
                 response = update(uid,text, self.mc)
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
                 prefix = mc2["prefix"]
-            elif requests == "/хес" or requests == "/хесус":
-                response = photos.hesus()
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
