@@ -7,7 +7,7 @@ class AboutBot(BacisPlug):
     def main(self):
         info = """
         бот написан на python, двумя прогерами
-        первый прогер: *slava_a_i_rA
+        первый прогер: *slava_a_i_r
         второй прогер: *pythonoglot
         модуль на распознавание гс написал: *feelan03
         Приятного пользования~
