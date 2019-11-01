@@ -10,12 +10,13 @@ class GetHelp(BacisPlug):
         for moduli in mods.modules:
             lhelp.append(dict(command=moduli.command, doc=moduli.doc))
         lhelp = list(iterutils.chunked_iter(lhelp, 9))
+        lhelp = [dict(command="уходи от", doc="сюда мужик")] + lhelp
         try:
             number = int(self.text[1])
             lhelp2 = lhelp[number]
         except:
-            number = 0
-            lhelp2 = lhelp[0]
+            number = 1
+            lhelp2 = lhelp[1]
         for moduli in lhelp2:
             mhelp += f"• {', '.join(moduli['command'])} - {moduli['doc']} \n"
         mhelp += f"Страница: {number} \n"
