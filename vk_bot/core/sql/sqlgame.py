@@ -15,12 +15,6 @@ def sendall(event, text,vk, attachment=None):
                                 message=text, attachment=attachment)
             except vk_api.exceptions.ApiError:
                 pass
-def ban(uid):
-    if checktable("ban", "id", uid) == None:
-        tableadd("ban", "id", uid)
-    return {"message":"Забанен нахой!", "attachment":"video367919273_456240239"}
-def unban(uid):
-    tablerm("ban", "id", uid)
 def checkban(uid):
     if bool(checktable("ban", "id", uid)):
         return "kill him"

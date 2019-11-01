@@ -6,7 +6,7 @@ import random
 class Autdiototext(BacisPlug):
     doc = "гс в текст"
     types = "runalways"
-    command = ['Кыманды нет, увы']
+    command = ['Во время голосовых']
     def main(self):
         try:
             link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]

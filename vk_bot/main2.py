@@ -75,19 +75,6 @@ class Main:
                                         prefix=prefix, peer=event.object.peer_id)
                         module.main()
         if event.object.text:
-            if mc2["admins"]:
-                setxp(uid, random.randint(75, 100))
-                if requests == "/бан":
-                    response = ban(event.object.reply_message['from_id'])
-                    del mc[str(event.object.reply_message['from_id'])]
-                elif requests == "/разбан":
-                    unban(event.object.reply_message['from_id'])
-                    del mc[str(event.object.reply_message['from_id'])]
-                elif requests == "/рассылка":
-                    sendall(event, text, self.vk)
-                elif requests == "/вип":
-                    tableadd("vips", "id", event.object.reply_message['from_id'])
-                    del mc[str(event.object.from_id)]
             if requests in helpspisok:
                 response = {"message":help}
             elif requests == "/красилов":

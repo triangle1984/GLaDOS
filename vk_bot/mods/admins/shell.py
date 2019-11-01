@@ -1,6 +1,6 @@
 from vk_bot.core.utils.modutil import BacisPlug
 import subprocess
-class Test(BacisPlug):
+class Shell(BacisPlug):
     command = ["/шелл"]
     doc = "Выполнить команду в шелле"
     available_for = "admins"
