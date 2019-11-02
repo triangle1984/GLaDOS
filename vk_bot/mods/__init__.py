@@ -3,6 +3,12 @@ from importlib import import_module
 from vk_bot.core.utils.modutil import BacisPlug
 modules = []
 def test(pkgname):
+    """
+    Це хоурма нужна чобы импортировать все шо есть в mods рекурсивно, ежели
+    в тамошних каталогах есть пустой __init__.py
+    Ее необязательно изучать или понимать, она работает довольно автономно
+    и вряд ли ей когда-нибудь понадобятся изменения
+    """
     global modules
     package = import_module(pkgname)
     for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
