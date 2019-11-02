@@ -42,11 +42,17 @@ def mainlobby(vk, mc, event, upload):
                 photos = Photo(vk, text)
                 prefix = mc2["prefix"]
                 for module in mods.modules:
-                    if module.included:
-                        if requests in module.command and events in module.types or module.types == "runalways":
+                    run = False
+                    if module.included and events in module.vktypes and mc2[module.available_for]:
+                        if module.types == "command":
+                            if requests in module.command:
+                                run = True
+                        elif module.types == "runalways":
+                            run = True
+                        if run:
                             module = module(vk, vk, upload)
                             module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                            prefix=prefix, peer=event.peer_id)
+                                            prefix=prefix, peer="")
                             module.main()
                 if requests == "/калькулятор":
                     response = calc(text)
