@@ -67,13 +67,18 @@ class Main:
             uberequests = [None]
         photos = Photo(self.vk2, text)
         for module in self.modules:
-            if module.included:
-                if requests in module.command and events in module.types or module.types == "runalways":
-                    if mc2[module.available_for]:
-                        module = module(self.vk, self.vk2, self.upload)
-                        module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                        prefix=prefix, peer=event.object.peer_id)
-                        module.main()
+            run = False
+            if module.included and events in module.vktypes and mc2[module.available_for]:
+                if module.types == "command":
+                    if requests in module.command:
+                        run = True
+                elif module.types == "runalways":
+                    run = True
+                if run:
+                    module = module(self.vk, self.vk2, self.upload)
+                    module.givedata(uid=uid, text=text, event=event, mc2=mc2,
+                                    prefix=prefix, peer=event.object.peer_id)
+                    module.main()
         if event.object.text:
             if requests in helpspisok:
                 response = {"message":help}

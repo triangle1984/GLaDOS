@@ -8,7 +8,8 @@ class GetHelp(BacisPlug):
         lhelp = []
         mhelp = "\n"
         for moduli in mods.modules:
-            lhelp.append(dict(command=moduli.command, doc=moduli.doc))
+            if moduli.types == "command":
+                lhelp.append(dict(command=moduli.command, doc=moduli.doc))
         lhelp = list(iterutils.chunked_iter(lhelp, 9))
         lhelp = [dict(command="уходи от", doc="сюда мужик")] + lhelp
         try:

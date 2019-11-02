@@ -1,7 +1,8 @@
 from vk_api.utils import get_random_id
 class BacisPlug:
     included = True
-    types = ["message_new"]
+    types = 'command'
+    vktypes = ["message_new"]
     doc = "Заполните справку в модуле"
     available_for = "user"
     def __init__(self, vk, vk2, upload):
