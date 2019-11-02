@@ -14,6 +14,13 @@ from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
 class Main:
+    """
+    Инит главного класса, токен - токен группы
+    токен22 - токен страницы, который нужен шоб кидать пикчи из пабликов
+    при иницилизации класса, т.е t = Main(123, 123) - запускается усе добро
+    типа авторизиации, настройки потоков и импорта модулей
+    дальше можно запустить метод run(t.run()), щобы заставить бота работать
+    """
     def __init__(self, token, token22):
         self.token = token
         self.token22 = token22
@@ -32,14 +39,13 @@ class Main:
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
     def checkthread(self):
-        then = datetime.datetime.now()
+        """
+        Скинуть название исключения в потоке, ежели  такое произойдет
+        """
         for x in as_completed(self.futures):
             if x.exception() != None:
                 logging.error(x.exception())
             self.futures.remove(x)
-        now = datetime.datetime.now()
-        delta = now - then
-        logging.debug(f"Поток закрылся через {delta.total_seconds()}")
     def run(self):
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
@@ -66,6 +72,10 @@ class Main:
             requests = [None]
             uberequests = [None]
         photos = Photo(self.vk2, text)
+        """
+        Эта страшная хероборина снизу отвечает за проверку и запуск модулей
+        щобы ее получше понять, читаните core/util/botutil.py
+        """
         for module in self.modules:
             run = False
             if module.included and events in module.vktypes and mc2[module.available_for]:
@@ -78,7 +88,15 @@ class Main:
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id)
+                    then = datetime.datetime.now()
                     module.main()
+                    now = datetime.datetime.now()
+                    delta = now - then
+                    logging.debug(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+        """
+        А это остатки бывшей цивилизации, когда се портируем - выкинем нахуй,
+        ее замена между этими двумя комментариями
+        """
         if event.object.text:
             if requests in helpspisok:
                 response = {"message":help}
@@ -117,6 +135,8 @@ class Main:
             return
         except NameError:
             None
+# уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
+# жизни бота
 logging.basicConfig(level=logging.INFO)
 t = Main(token, token22)
 t.run()
