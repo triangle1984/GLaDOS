@@ -14,7 +14,7 @@ from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
 class Main:
-    def __init__(self, token, tokn22):
+    def __init__(self, token, token22):
         self.token = token
         self.token22 = token22
         self.authorization()
