@@ -84,6 +84,14 @@ class Main:
                         run = True
                 elif module.types == "runalways":
                     run = True
+                elif module.types == "commandb":
+                    command = module.getcommand(uid, text)
+                    if requests == command:
+                        run = True
+                elif module.types == "specialcommand":
+                    rlen = len(module.command[0])
+                    if requests[:rlen] == module.command[0]:
+                        run = True
                 if run:
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
