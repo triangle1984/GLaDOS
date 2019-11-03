@@ -1,7 +1,7 @@
 from vk_bot.core.utils.modutil import BacisPlug
 import random, os
 class CamShot(BacisPlug):
-    doc = "От чего кончить"
+    doc = "Сделать из фотки 'спасибо я кончил'"
     command = ["/спасибо"]
     def main(self):
         try:
@@ -14,5 +14,5 @@ class CamShot(BacisPlug):
         name = f"camshot{randomnumber}.jpg"
         os.system(f"wget -O {name} {url}")
         photo = self.uploadphoto(name)
-        self.sendmsg(f"Потом напишу", photo)
+        self.sendmsg(f"🌚🌚🌚", photo)
         os.remove(name)
