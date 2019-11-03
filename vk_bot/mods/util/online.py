@@ -11,5 +11,4 @@ class Online(BacisPlug):
                 onlinenumber+=1
                 onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
         onlinejoin = "\n".join(onlinelist)
-        print(onlinejoin)
         self.sendmsg(f"Участники онлайн:\n{onlinejoin}")
