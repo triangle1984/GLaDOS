@@ -5,10 +5,11 @@ class Online(BacisPlug):
     def main(self):
         onlinenumber = 0
         onlinelist = []
-        onlineid = self.vk2.messages.getConversationMembers(peer_id=self.event.object.peer_id)['profiles']
+        onlineid = self.vk.messages.getConversationMembers(peer_id=self.event.object.peer_id)['profiles']
         for a in onlineid:
             if a['online'] == 1:
                 onlinenumber+=1
                 onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
         onlinejoin = "\n".join(onlinelist)
+        print(onlinejoin)
         self.sendmsg(f"Участники онлайн:\n{onlinejoin}")

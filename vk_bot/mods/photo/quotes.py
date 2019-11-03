@@ -154,7 +154,7 @@ class Quote(BacisPlug):
         current_h, pad = 170, 10
         for line in para:
             w, h = draw.textsize(line, font=font)
-            draw.text(((850 - w) / 2, current_h),
+            draw.multiline_text(((850 - w) / 2, current_h),
                       line, font=font, fill=self.text)
             current_h += h + pad
 
