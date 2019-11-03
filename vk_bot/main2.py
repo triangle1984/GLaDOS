@@ -51,8 +51,10 @@ class Main:
             self.futures.append(self.pool.submit(self.lobby, event))
             self.pool.submit(self.checkthread)
     def lobby(self, event):
+        # какой ивент прислал вк. Например message_new
         events = event.type.value
         logging.debug(f"Событие: {events}")
+        # остатки прошлой цивилизации, скоро выкинем
         botmain(self.vk, event)
         response = {"message":None}
         try:
@@ -60,6 +62,13 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
+        """
+        mc и mc2 = Кеш, щобы каждый раз не делать запросы в бд
+        mc = сервер с мемкешем
+        а mc2 = то чо он вернул на юзера, который тригернул бота
+        подробнее о том, чо хранится в кеше -
+        мона глянуть в core/utils/botutil.py
+        """
         mc2 = sqlcache(self.mc, uid)
         prefix = mc2["prefix"]
         if mc2["ban"]:
