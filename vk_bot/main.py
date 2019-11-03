@@ -51,7 +51,7 @@ def mainlobby(vk, mc, event, upload):
                         if run:
                             module = module(vk, vk, upload)
                             module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                            prefix=prefix, peer="")
+                                            prefix=prefix, peer="", mc=mc)
                             module.main()
     except KeyboardInterrupt:
         sys.exit()
