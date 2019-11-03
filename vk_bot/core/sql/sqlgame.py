@@ -76,13 +76,13 @@ def saveload(uid):
     if checktable("economy","id", uid) == None:
         tableadd("economy", "id, money", f"{uid}, 0")
     return checktable("prefix", "id", uid)
-def update(uid, text, mc):
+def update(uid, text):
     conn = auth()
     newname = " ".join(text[1:])
     if len(newname) > 29:
-        return {"message":"максимальная длинна префикса: 30 символов"}
+        return False
     tableupdate("prefix", "name", newname, f"id = {uid}")
-    return {"message":"се ваш префикс сменен"}
+    return newname
 
 def setxp(uid, xp):
     conn = auth()

@@ -103,7 +103,7 @@ class Main:
                 if run:
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                    prefix=prefix, peer=event.object.peer_id)
+                                    prefix=prefix, peer=event.object.peer_id, mc=self.mc)
                     then = datetime.datetime.now()
                     module.main()
                     now = datetime.datetime.now()
@@ -114,12 +114,7 @@ class Main:
         ее замена между этими двумя комментариями
         """
         if event.object.text:
-            if requests == "/префикс":
-                response = update(uid,text, self.mc)
-                del self.mc[str(uid)]
-                mc2 = sqlcache(self.mc, uid)
-                prefix = mc2["prefix"]
-            elif "".join(text)[:7] == "/группы":
+            if "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
 

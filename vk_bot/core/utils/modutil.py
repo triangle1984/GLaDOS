@@ -9,13 +9,14 @@ class BacisPlug:
         self.vk = vk
         self.vk2 = vk2
         self.upload = upload
-    def givedata(self, uid, text, event, mc2, prefix, peer):
+    def givedata(self, uid, text, event, mc2, prefix, peer, mc):
         self.uid = uid
         self.text = text
         self.event = event
         self.mc2 = mc2
         self.prefix = prefix
         self.peer_id = peer
+        self.mc = mc
     def sendmsg(self, msg, attachmentst=None, disable_mentions=True):
         try:
             peer_id = self.event.object.peer_id
