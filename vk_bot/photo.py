@@ -25,8 +25,8 @@ class Photo:
                                     count=1, offset=num)['items'][0]['id']
 
                 photo2.append(f"photo{group_id}_{photo}")
-        except vk_api.exceptions.ApiError:
-            return {"message":"!error от вк"}
+        except KeyboardInterrupt:
+            self.sendmsg("!error от вк");return
         photo2 = ",".join(photo2)
         return photo2
     def args2(self):
@@ -35,4 +35,4 @@ class Photo:
         return args
     def yourpic(self, public):
         photo = self.phootowallrandom(public)
-        return {"message":"Пикча из личного альбома~", "attachment":photo}
+        return photo

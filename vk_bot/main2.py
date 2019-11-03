@@ -6,9 +6,8 @@ from util import *
 from photo import Photo
 from vk_bot.core.sql.vksql import *
 from vk_bot.core.utils.botutil import *
-from yourphoto import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-from yourgroup import *
+# from yourgroup import *
 import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
@@ -85,7 +84,7 @@ class Main:
                 elif module.types == "runalways":
                     run = True
                 elif module.types == "commandb":
-                    command = module.getcommand(uid, text)
+                    command = module.getcommand(uid, requests)
                     if requests == command:
                         run = True
                 elif module.types == "specialcommand":
@@ -106,27 +105,13 @@ class Main:
         ее замена между этими двумя комментариями
         """
         if event.object.text:
-            if requests in helpspisok:
-                response = {"message":help}
-            elif requests == "/красилов":
-                self.vk.messages.send(user_id=event.user_id, random_id=get_random_id(),
-                                message="Krasyliv")
-            elif requests == "/префикс":
+            if requests == "/префикс":
                 response = update(uid,text, self.mc)
                 del self.mc[str(uid)]
                 mc2 = sqlcache(self.mc, uid)
                 prefix = mc2["prefix"]
             elif "".join(text)[:7] == "/группы":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
-                del self.mc[str(uid)]
-            elif requests == getcommand(uid, requests):
-                response = sendyourphoto(self.vk2, text, uid, requests)
-            elif requests == "/казино":
-                response = economygame1(uid, text)
-            elif requests == "/экономика":
-                response = economylobby(uid, mc2, text)
-            elif "".join(text)[:8] == "/альбомы":
-                response = photoadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
 
         try:
@@ -136,9 +121,6 @@ class Main:
                 self.vk.messages.send(peer_id=event.object.peer_id, random_id=get_random_id(),
                                 message=f"{prefix}, {response['message']}",
                                 attachment=response["attachment"])
-                self.message += 1
-            setmessages(uid)
-            givemoney(uid,mc2)
         except TypeError:
             return
         except NameError:

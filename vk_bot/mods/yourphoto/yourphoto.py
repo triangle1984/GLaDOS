@@ -1,71 +1,59 @@
-# from vk_bot.core.sql.vksql import *
-# from photo import Photo
-# class Yourphoto(BacisPlug):
-#     command = ["/альбомы"]
-#     doc = "Личные альбомы, вызов без всего покажет справку"
-#     def nametoid2(vk, names):
-#         uid = []
-#         for convert in names:
-#             r = vk.utils.resolveScreenName(screen_name=convert)
-#             if r:
-#                 if r["type"] == "group":
-#                     uid.append(f"-{r['object_id']}")
-#                 else:
-#                     uid.append(str(r["object_id"]))
-#             else:
-#                 uid.append(convert)
-#         return uid
+from vk_bot.core.sql.vksql import *
+from vk_bot.photo import Photo
+from vk_bot.core.utils.modutil import BacisPlug
+class Yourphoto(BacisPlug):
+    command = ["/альбомы"]
+    doc = "Личные альбомы, вызов без всего покажет справку"
+    types = 'specialcommand'
+    def nametoid2(self, names):
+        uid = []
+        for convert in names:
+            r = self.vk.utils.resolveScreenName(screen_name=convert)
+            if r:
+                if r["type"] == "group":
+                    uid.append(f"-{r['object_id']}")
+                else:
+                    uid.append(str(r["object_id"]))
+            else:
+                uid.append(convert)
+        return uid
 
-#     def photoadd(vk, uid, text, mc, number=1):
-#         try:
-#             if text[1] == "список":
-#                 return {"message": getyourphoto(uid)}
-#             elif text[1] == "удалить":
-#                 return {"message":rmyourphoto(uid, text)}
-#             else:
-#                 command = text[1].lower()
-#                 public = "".join(text[2:]);public = public.split(",")
-#                 public = ",".join(nametoid2(vk, public))
-#                 number = "".join(text[0])[8:]
-#                 number = int(number)
-#                 if mc["vips"] == False and mc["count"] >=3:
-#                     return {"message":"А больше трех альбомов юзерам низя"}
-#         except IndexError:
-#             return {"message":"Гайд по альбомам: https://vk.com/@mtt_resort-gaid-po-lichnym-albomam"}
-#         except ValueError:
-#             number = 1
-#         if checktable("yourphoto","id", uid, andd=f"number = {number}"):
-#             tablerm("yourphoto", "id", uid, andd=f"number = {number}")
-#         tableadd("yourphoto", "id,command,public,number",f"{uid}, '{command}','{public}', '{number}'")
-#         return {"message":f"Ваш личный альбом №{number} настроен, паблики: {public}, команда: {command}"}
-#     def getcommand(uid, command):
-#         if bool(command) == False:
-#             return
-#         check = checktable("yourphoto", "id", uid, andd=f"command = '{command}'")
-#         if check:
-#             return check["command"]
-#         else:
-#             return 666
-#     def sendyourphoto(vk, text, uid, command):
-#         check = checktable("yourphoto", "id", uid, andd=f"command = '{command}'")
-#         if check:
-#             photos = Photo(vk, text)
-#             public = check["public"]
-#             public = public.split(",")
-#             return photos.yourpic(public)
-#     def getyourphoto(uid):
-#         conn = auth()
-#         total = "\n"
-#         with conn.cursor() as cursor:
-#             query = f"SELECT * FROM yourphoto WHERE id = '{uid}'"
-#             cursor.execute(query)
-#             for row in cursor:
-#                 total += f"Команда: {row['command']}, паблики: {row['public']}, айди: {row['number']}\n"
-#             return total
-#     def rmyourphoto(uid, text):
-#         number = text[2]
-#         if number != "все":
-#             tablerm("yourphoto", "id", uid, andd=f"number = '{number}'")
-#         else:
-#             tablerm("yourphoto", "id", uid)
-#         return "Се, удалил"
+    def main(self):
+        number = 1
+        try:
+            if self.text[1] == "список":
+                self.sendmsg(self.getyourphoto());return
+            elif self.text[1] == "удалить":
+                self.sendmsg(self.rmyourphoto());return
+            else:
+                command = self.text[1].lower()
+                public = "".join(self.text[2:]);public = public.split(",")
+                public = ",".join(self.nametoid2(public))
+                number = "".join(self.text[0])[8:]
+                number = int(number)
+                if self.mc2["vips"] == False and mc["count"] >=3:
+                    self.sendmsg("А больше трех альбомов юзерам низя");return
+        except IndexError:
+            self.sendmsg("Гайд по альбомам: https://self.vk.com/@mtt_resort-gaid-po-lichnym-albomam");return
+        except ValueError:
+            number = 1
+        if checktable("yourphoto","id", self.uid, andd=f"number = {number}"):
+            tablerm("yourphoto", "id", self.uid, andd=f"number = {number}")
+        tableadd("yourphoto", "id,command,public,number",f"{self.uid}, '{command}','{public}', '{number}'")
+        self.sendmsg(f"Ваш личный альбом №{number} настроен, паблики: {public}, команда: {command}");return
+    def getyourphoto(self):
+        conn = auth()
+        total = "\n"
+        with conn.cursor() as cursor:
+            query = f"SELECT * FROM yourphoto WHERE id = '{self.uid}'"
+            cursor.execute(query)
+            for row in cursor:
+                total += f"Команда: {row['command']}, паблики: {row['public']}, айди: {row['number']}\n"
+            return total
+    def rmyourphoto(self):
+        number = self.text[2]
+        if number != "все":
+            tablerm("yourphoto", "id", self.uid, andd=f"number = '{number}'")
+        else:
+            tablerm("yourphoto", "id", self.uid)
+        return "Се, удалил"
