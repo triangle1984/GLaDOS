@@ -3,14 +3,14 @@ from vk_bot import mods
 from boltons import iterutils
 class GetHelp(BacisPlug):
     doc = "Найти паблики по названию  и скинуть айди"
-    command = ["/хелп2"]
+    command = ["/help", "/хелп", "/начать", "/помощь", "/команды", "/старт"]
     def main(self):
         lhelp = []
         mhelp = "\n"
         for moduli in mods.modules:
             if moduli.types == "command":
                 lhelp.append(dict(command=moduli.command, doc=moduli.doc))
-        lhelp = list(iterutils.chunked_iter(lhelp, 9))
+        lhelp = list(iterutils.chunked_iter(lhelp, 11))
         lhelp = [dict(command="уходи от", doc="сюда мужик")] + lhelp
         try:
             number = int(self.text[1])
@@ -21,5 +21,6 @@ class GetHelp(BacisPlug):
         for moduli in lhelp2:
             mhelp += f"• {', '.join(moduli['command'])} - {moduli['doc']} \n"
         mhelp += f"Страница: {number} \n"
-        mhelp += f"Всего страниц: {len(lhelp)-1}"
+        mhelp += f"Всего страниц: {len(lhelp)-1} \n"
+        mhelp += "Пример переключения на другую страницу: /хелп 3"
         self.sendmsg(mhelp)
