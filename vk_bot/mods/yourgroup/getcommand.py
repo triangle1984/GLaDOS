@@ -1,5 +1,5 @@
 from vk_bot.core.utils.modutil import BacisPlug
-from vk_bot.group import Group
+from group import Group
 from vk_bot.core.sql.vksql import *
 class Getcommand(BacisPlug):
     doc = "вытащить команду"
@@ -19,5 +19,5 @@ class Getcommand(BacisPlug):
             post = Group(self.vk2, self.text)
             public = check["public"]
             public = public.split(",")
-            posts = posts.yourpic(public)
+            posts = posts.yourpost(public)
             self.sendmsg("Рандомный пост", posts)
