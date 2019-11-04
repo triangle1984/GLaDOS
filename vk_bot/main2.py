@@ -114,7 +114,7 @@ class Main:
         ее замена между этими двумя комментариями
         """
         if event.object.text:
-            if "".join(text)[:7] == "/группы":
+            if "".join(text)[:7] == "df":
                 response = groupadd(self.vk, uid, text, mc2, number=text)
                 del self.mc[str(uid)]
 
