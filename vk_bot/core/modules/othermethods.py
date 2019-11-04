@@ -4,8 +4,9 @@ class OtherMethod:
         args = argparse.ArgumentParser(description="пикчи")
         args.add_argument("-с", "-c", "--count", type=int, default=1)
         try:
-            a = args.parse_args(self.text[1:])
-        except KeyboardInterrupt:
+            a = args
+            a = a.parse_args(self.text[1:])
+        except:
             try:
                 a.count = int(self.text[1])
             except:
