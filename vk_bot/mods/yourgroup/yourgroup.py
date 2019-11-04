@@ -2,7 +2,7 @@ from vk_bot.core.sql.vksql import *
 from vk_bot.photo import Photo
 from vk_bot.core.utils.modutil import BacisPlug
 import random
-class Yourphoto(BacisPlug):
+class Yourgroup(BacisPlug):
     command = ["/группы"]
     doc = "Личные группы, вызов без всего покажет справку"
     types = 'specialcommand'
