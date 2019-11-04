@@ -1,7 +1,7 @@
 from vk_bot.core.sql.vksql import *
 from vk_bot.photo import Photo
-from vk_bot.core.modules.basicplug import BacisPlug
-class Yourphoto(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Yourphoto(BasicPlug):
     command = ["/альбомы"]
     doc = "Личные альбомы, вызов без всего покажет справку"
     types = 'specialcommand'

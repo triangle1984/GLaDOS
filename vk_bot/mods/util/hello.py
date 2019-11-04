@@ -1,8 +1,8 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.sqlgame import hellosql
 from vk_api.utils import get_random_id
 from loadevn import *
-class Hello(BacisPlug):
+class Hello(BasicPlug):
     doc = "Установка приветствий для новых участников беседы"
     command = ["/приветствие"]
     def main(self):

@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random, requests
 from loadevn import apinews
-class News(BacisPlug):
+class News(BasicPlug):
     doc = "Последние новости"
     command = ["/новость"]
     def main(self):

@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import vk_api, requests, random, argparse
 from vk_api.utils import get_random_id
-class Photos(BacisPlug):
+class Photos(BasicPlug):
     doc = "Фотачки"
     command = ["/юри", "/каты", "/геббельс", "/яой", "/трапы", "/лоли", "/махно",
                "/калян", "/хентай", "/ноги", "/ножки", "/мем", "/адольф", "/гитлер",

@@ -1,6 +1,6 @@
 import pkgutil
 from importlib import import_module
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 modules = []
 def test(pkgname):
     """
@@ -21,7 +21,7 @@ def test(pkgname):
             try:
                 if atribute not in modules and atribute.__module__ == t.__name__:
                     if isinstance(atribute, type):
-                        if issubclass(atribute, BacisPlug):
+                        if issubclass(atribute, BasicPlug):
                             modules.append(atribute)
             except AttributeError:
                 continue

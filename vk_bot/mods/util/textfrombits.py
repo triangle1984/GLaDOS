@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Textfrombits(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Textfrombits(BasicPlug):
     doc = "Расшифровать бинарный код"
     command = ["/бинарный1"]
     def main(self):

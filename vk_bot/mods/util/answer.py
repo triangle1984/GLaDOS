@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Answer(BacisPlug):
+class Answer(BasicPlug):
     doc = "Ответы на заданные сообщения"
     command = ["споки", "спокойной", "привет", "ку", "зиг", "слава украине", 'драсте']
     def main(self):

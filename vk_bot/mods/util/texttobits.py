@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Texttobits(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Texttobits(BasicPlug):
     doc = "Зашифровать сообщение в бинарный код"
     command = ["/бинарный0"]
     def main(self):

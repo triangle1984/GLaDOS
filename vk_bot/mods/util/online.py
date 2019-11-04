@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Online(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Online(BasicPlug):
     doc = "Список онлайн участников беседы"
     command = ["/онлайн", "/online"]
     def main(self):

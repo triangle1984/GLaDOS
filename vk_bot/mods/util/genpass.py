@@ -1,6 +1,6 @@
 import pyPrivnote, subprocess
-from vk_bot.core.modules.basicplug import BacisPlug
-class Genpass(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Genpass(BasicPlug):
     doc = "Сгенерирует пароль"
     command = ["/пароль"]
     def main(self):

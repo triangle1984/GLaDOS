@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Searchdoc(BacisPlug):
+class Searchdoc(BasicPlug):
     doc = "Поиск документов"
     command = ["/док", "/гиф"]
     def main(self):

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import random, sys, argparse
 from vk_bot.core.sql.sqlgame import smehdb
-from vk_bot.core.modules.basicplug import BacisPlug
-class Smeh(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Smeh(BasicPlug):
     command = ["/смех", "/смехк"]
     doc = "генератор смеха. С -h вызовет справку"
     def args(self):

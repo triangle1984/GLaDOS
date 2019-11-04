@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Chance(BacisPlug):
+class Chance(BasicPlug):
     doc = "Вероятность какого-либо события"
     command = ["/шансы", "/вероятность"]
     def main(self):

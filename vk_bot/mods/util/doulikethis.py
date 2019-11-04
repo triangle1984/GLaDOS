@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Doulikethis(BacisPlug):
+class Doulikethis(BasicPlug):
     doc = "Оценка чего либо"
     command = ["/оцени"]
     def main(self):

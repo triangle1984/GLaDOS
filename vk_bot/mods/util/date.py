@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Date(BacisPlug):
+class Date(BasicPlug):
     doc = "Дата какого-либо события"
     command = ["/дата"]
     def main(self):

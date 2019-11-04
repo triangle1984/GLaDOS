@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.photo import Photo
 from vk_bot.core.sql.vksql import *
-class Getcommand(BacisPlug):
+class Getcommand(BasicPlug):
     doc = "вытащить команду"
     types = 'commandb'
     @staticmethod

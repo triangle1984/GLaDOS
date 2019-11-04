@@ -1,8 +1,8 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import requests
 from loadevn import donatetoken
 from vk_bot.core.sql.vksql import tableadd
-class Checkdonate(BacisPlug):
+class Checkdonate(BasicPlug):
     doc = "Проверить донатил ли юзер"
     command = ["/чекнидонат"]
     def main(self):

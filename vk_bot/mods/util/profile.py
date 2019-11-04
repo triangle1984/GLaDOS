@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.vksql import *
-class Profile(BacisPlug):
+class Profile(BasicPlug):
     doc = "Профиль юзера"
     command = ["/профиль"]
     def main(self):

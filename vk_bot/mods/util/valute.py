@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import requests
-class Valute(BacisPlug):
+class Valute(BasicPlug):
     doc = "Курс валют"
     command = ["/курс"]
     def main(self):

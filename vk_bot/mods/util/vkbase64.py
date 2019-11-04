@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import base64
-class Vkbase64(BacisPlug):
+class Vkbase64(BasicPlug):
     doc = "Зашифровать или расшифровать текст"
     command = ["/зашифровать", "/расшифровать"]
     def main(self):

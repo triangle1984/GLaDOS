@@ -1,8 +1,8 @@
 from PIL import Image, ImageDraw
 from loadevn import *
 import io, requests, random, os
-from vk_bot.core.modules.basicplug import BacisPlug
-class Quote(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Quote(BasicPlug):
     doc = "Черно-белый фильтр"
     command = ["/чб"]
     def main(self):

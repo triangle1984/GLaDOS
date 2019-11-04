@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot import mods
 from boltons import iterutils
-class AboutBot(BacisPlug):
+class AboutBot(BasicPlug):
     doc = "Инфа о боте"
     command = ["/оботе"]
     def main(self):

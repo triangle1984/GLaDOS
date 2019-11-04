@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.sqlgame import update
-class Prefix(BacisPlug):
+class Prefix(BasicPlug):
     command = ["/префикс", "/preifx", "/кличка", "/зовименя"]
     doc = "Сменить то, как к вам обращается бот"
     def main(self):

@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import requests
-class Convvalute(BacisPlug):
+class Convvalute(BasicPlug):
     doc = "Конвертер валют"
     command = ["/конвертер"]
     def main(self):

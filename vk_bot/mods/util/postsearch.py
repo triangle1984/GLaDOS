@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Postsearch(BacisPlug):
+class Postsearch(BasicPlug):
     doc = "Поиск постов"
     command = ["/посты"]
     def main(self):

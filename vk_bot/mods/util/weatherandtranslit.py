@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import requests
-class Weatherandtranslit(BacisPlug):
+class Weatherandtranslit(BasicPlug):
     doc = "позже придумаю"
     command = ["/переводчик", "/погода"]
     def main(self):

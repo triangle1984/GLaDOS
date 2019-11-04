@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Number(BacisPlug):
+class Number(BasicPlug):
     doc = "Рандомное число из заданного диапазона"
     command = ["/число"]
     def main(self):

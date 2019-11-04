@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.vksql import *
 from vk_bot.core.sql.sqlgame import *
-class Admins(BacisPlug):
+class Admins(BasicPlug):
     command = ["/бан", "/разбан:", "/вип"]
     doc = "Забанить или разбанить"
     available_for = "admins"

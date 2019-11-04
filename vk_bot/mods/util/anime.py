@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import requests
 from datetime import timedelta
-class Anime(BacisPlug):
+class Anime(BasicPlug):
     doc = "Распознать аниме на фото"
     command = ["/анименафото"]
     def main(self):

@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Lentomsg(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Lentomsg(BasicPlug):
     doc = "Длина сообщения"
     command = ["/длина"]
     def main(self):

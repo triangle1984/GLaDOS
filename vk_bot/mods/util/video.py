@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Video(BacisPlug):
+class Video(BasicPlug):
     doc = "Поиск видео"
     command = ["/видео"]
     def main(self):

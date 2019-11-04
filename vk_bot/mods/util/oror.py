@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Oror(BacisPlug):
+class Oror(BasicPlug):
     doc = "Выбрать что-либо из предложенных вариантов"
     command = ["/выбери"]
     def main(self):

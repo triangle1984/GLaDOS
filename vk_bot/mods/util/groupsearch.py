@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Groupsearch(BacisPlug):
+class Groupsearch(BasicPlug):
     doc = "Найти паблики по названию  и скинуть айди"
     command = ["/паблики"]
     def main(self):

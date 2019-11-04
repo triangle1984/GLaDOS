@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Test(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Test(BasicPlug):
     command = ["/hello"]
     doc = "первый модуль, тест"
     def main(self):

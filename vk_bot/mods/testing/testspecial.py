@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Test2(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Test2(BasicPlug):
     doc = "первый модуль, тест"
     types = 'commandb'
     @staticmethod

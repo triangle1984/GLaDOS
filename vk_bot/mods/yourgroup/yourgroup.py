@@ -1,8 +1,8 @@
 from vk_bot.core.sql.vksql import *
 from vk_bot.photo import Photo
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Yourgroup(BacisPlug):
+class Yourgroup(BasicPlug):
     command = ["/группы"]
     doc = "Личные группы, вызов без всего покажет справку"
     types = 'specialcommand'

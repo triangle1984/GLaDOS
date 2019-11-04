@@ -1,7 +1,7 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot import mods
 from boltons import iterutils
-class GetHelp(BacisPlug):
+class GetHelp(BasicPlug):
     doc = "Найти паблики по названию  и скинуть айди"
     command = ["/help", "/хелп", "/начать", "/помощь", "/команды", "/старт"]
     def main(self):

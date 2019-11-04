@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import subprocess
-class Shell(BacisPlug):
+class Shell(BasicPlug):
     command = ["/шелл"]
     doc = "Выполнить команду в шелле"
     available_for = "admins"

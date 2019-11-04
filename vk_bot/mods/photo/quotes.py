@@ -7,12 +7,12 @@ import random
 import os
 import datetime
 import argparse
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.utils.pillowhelper import Pillowhelper
 from vk_bot.core.sql.vksql import *
 
 
-class Quote(BacisPlug):
+class Quote(BasicPlug):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
 

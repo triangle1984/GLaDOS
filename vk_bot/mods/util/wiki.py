@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import wikipedia
-class Wiki(BacisPlug):
+class Wiki(BasicPlug):
     doc = "Инфа из вики"
     command = ["/вики"]
     def main(self):

@@ -1,12 +1,12 @@
 """
 Модуль написал https://vk.com/feelan03
 """
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
 import random
-class Autdiototext(BacisPlug):
+class Autdiototext(BasicPlug):
     doc = "гс в текст"
     types = "runalways"
     def main(self):

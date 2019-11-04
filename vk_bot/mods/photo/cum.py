@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random, os
-class CamShot(BacisPlug):
+class CamShot(BasicPlug):
     doc = "Сделать из фотки 'спасибо я кончил'"
     command = ["/спасибо"]
     def main(self):

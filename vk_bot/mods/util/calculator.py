@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import math
-class Calculator(BacisPlug):
+class Calculator(BasicPlug):
     doc = "Калькулятор"
     command = ["/калькулятор"]
     def main(self):

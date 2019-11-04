@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import time
-class Counting(BacisPlug):
+class Counting(BasicPlug):
     command = ["/отсчет"]
     doc = "Отсчет от 1 до 3"
     def main(self):

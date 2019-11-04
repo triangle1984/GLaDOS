@@ -1,5 +1,5 @@
-from vk_bot.core.modules.basicplug import BacisPlug
-class Repeat(BacisPlug):
+from vk_bot.core.modules.basicplug import BasicPlug
+class Repeat(BasicPlug):
     doc = "Повторить сообщение"
     command = ["/повтори"]
     def main(self):

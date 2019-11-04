@@ -1,6 +1,6 @@
-from vk_bot.core.modules.basicplug import BacisPlug
+from vk_bot.core.modules.basicplug import BasicPlug
 import random
-class Who(BacisPlug):
+class Who(BasicPlug):
     doc = "Выбирает рандомного участника беседы под вашим предлогом"
     command = ["/кто"]
     def main(self):
