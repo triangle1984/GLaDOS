@@ -1,8 +1,8 @@
 #!/usr/bin/python3.7
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.utils import get_random_id
+from vk_api import VkUpload
 from loadevn import *
-from util import *
 from vk_bot.core.sql.vksql import *
 from vk_bot.core.utils.botutil import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed

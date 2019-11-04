@@ -26,4 +26,15 @@ class OtherMethod:
             self.sendmsg("!error от вк");return
         photo2 = ",".join(photo2)
         return photo2
-
+    def nametoid(self, names):
+        uid = []
+        for convert in names:
+            r = self.vk.utils.resolveScreenName(screen_name=convert)
+            if r:
+                if r["type"] == "group":
+                    uid.append(f"-{r['object_id']}")
+                else:
+                    uid.append(str(r["object_id"]))
+            else:
+                uid.append(convert)
+        return uid
