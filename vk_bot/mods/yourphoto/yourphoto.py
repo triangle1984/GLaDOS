@@ -1,5 +1,4 @@
 from vk_bot.core.sql.vksql import *
-from vk_bot.photo import Photo
 from vk_bot.core.modules.basicplug import BasicPlug
 class Yourphoto(BasicPlug):
     command = ["/альбомы"]

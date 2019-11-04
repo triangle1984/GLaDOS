@@ -3,11 +3,9 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from vk_api.utils import get_random_id
 from loadevn import *
 from util import *
-from photo import Photo
 from vk_bot.core.sql.vksql import *
 from vk_bot.core.utils.botutil import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-# from yourgroup import *
 import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
@@ -79,7 +77,6 @@ class Main:
         except IndexError:
             requests = [None]
             uberequests = [None]
-        photos = Photo(self.vk2, text)
         """
         Эта страшная хероборина снизу отвечает за проверку и запуск модулей
         щобы ее получше понять, читаните core/util/botutil.py

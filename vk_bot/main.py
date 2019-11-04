@@ -3,7 +3,6 @@ from vk_api.utils import get_random_id
 from vk_bot.core.sql.sqlgame import *
 from loadevn import *
 from util import *
-from photo import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 import vk_api
 import requests
@@ -38,7 +37,6 @@ def mainlobby(vk, mc, event, upload):
                     uid = event.user_id
                 mc2 = sqlcache(mc, uid)
                 givemoney(uid, mc2)
-                photos = Photo(vk, text)
                 prefix = mc2["prefix"]
                 for module in mods.modules:
                     run = False
