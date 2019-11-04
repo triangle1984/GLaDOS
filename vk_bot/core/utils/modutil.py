@@ -22,7 +22,7 @@ class BacisPlug:
             peer_id = self.event.object.peer_id
         except:
             peer_id = self.event.peer_id
-        prefix = f"*id{self.uid}({self.prefix})"
+        prefix = f"*id{self.uid}({self.mc2['prefix']})"
         self.vk.messages.send(peer_id=peer_id, random_id=get_random_id(),
                         message=f"{prefix}, {msg}", disable_mentions=disable_mentions,
                         attachment=attachmentst)
