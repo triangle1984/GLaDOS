@@ -1,5 +1,5 @@
 import requests
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 class Decodeqr(BacisPlug):
     doc = "Расшифровать qrcode"
     command = ["/decodeqr"]

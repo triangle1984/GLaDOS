@@ -1,5 +1,5 @@
 import requests, vk_api
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 class Encodeqr(BacisPlug):
     doc = "Зашифровать текст в qrcode"
     command = ["/encodeqr"]

@@ -1,7 +1,7 @@
 """
 Модуль написал https://vk.com/feelan03
 """
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 import speech_recognition as sr
 from pydub import AudioSegment
 import os

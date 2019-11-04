@@ -1,6 +1,6 @@
 import pkgutil
 from importlib import import_module
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 modules = []
 def test(pkgname):
     """

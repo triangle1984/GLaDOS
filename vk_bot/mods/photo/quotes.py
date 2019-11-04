@@ -7,7 +7,7 @@ import random
 import os
 import datetime
 import argparse
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 from vk_bot.core.utils.pillowhelper import Pillowhelper
 from vk_bot.core.sql.vksql import *
 

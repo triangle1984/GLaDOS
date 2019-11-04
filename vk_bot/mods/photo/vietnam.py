@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 from loadevn import *
 import io, requests, random, os
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 class Quote(BacisPlug):
     doc = "Фильтр Вьетнам"
     command = ["/вьетнам"]

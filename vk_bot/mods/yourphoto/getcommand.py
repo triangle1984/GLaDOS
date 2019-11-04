@@ -1,4 +1,4 @@
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 from vk_bot.photo import Photo
 from vk_bot.core.sql.vksql import *
 class Getcommand(BacisPlug):

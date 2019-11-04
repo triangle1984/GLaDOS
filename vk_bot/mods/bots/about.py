@@ -1,4 +1,4 @@
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 from vk_bot import mods
 from boltons import iterutils
 class AboutBot(BacisPlug):

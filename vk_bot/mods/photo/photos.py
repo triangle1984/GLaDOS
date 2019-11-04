@@ -1,4 +1,4 @@
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 import vk_api, requests, random, argparse
 from vk_api.utils import get_random_id
 class Photos(BacisPlug):

@@ -1,4 +1,4 @@
-from vk_bot.core.utils.modutil import BacisPlug
+from vk_bot.core.modules.basicplug import BacisPlug
 import base64
 class Vkbase64(BacisPlug):
     doc = "Зашифровать или расшифровать текст"
