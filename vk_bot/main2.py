@@ -109,26 +109,6 @@ class Main:
                     now = datetime.datetime.now()
                     delta = now - then
                     logging.debug(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
-        """
-        А это остатки бывшей цивилизации, когда се портируем - выкинем нахуй,
-        ее замена между этими двумя комментариями
-        """
-        if event.object.text:
-            if "".join(text)[:7] == "df":
-                response = groupadd(self.vk, uid, text, mc2, number=text)
-                del self.mc[str(uid)]
-
-        try:
-            if response["message"]:
-                if "attachment" not in response:
-                    response["attachment"] = None
-                self.vk.messages.send(peer_id=event.object.peer_id, random_id=get_random_id(),
-                                message=f"{prefix}, {response['message']}",
-                                attachment=response["attachment"])
-        except TypeError:
-            return
-        except NameError:
-            None
 # уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
 # жизни бота
 logging.basicConfig(level=logging.INFO)
