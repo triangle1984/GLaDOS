@@ -9,6 +9,7 @@ import random
 class Autdiototext(BasicPlug):
     doc = "гс в текст"
     types = "runalways"
+    attachment = 'audio_message'
     def main(self):
         try:
             link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]

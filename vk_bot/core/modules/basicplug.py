@@ -1,6 +1,7 @@
 from vk_api.utils import get_random_id
 class BasicPlug:
     included = True
+    attachment = False
     types = 'command'
     vktypes = ["message_new"]
     doc = "Заполните справку в модуле"

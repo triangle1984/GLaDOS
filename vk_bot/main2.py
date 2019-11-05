@@ -41,13 +41,20 @@ class Main:
         for x in as_completed(self.futures):
             if x.exception() != None:
                 logging.error(x.exception())
+                print(f"ошибОЧКА разраба: {x.exception()}")
             self.futures.remove(x)
+            logging.debug("Поток закрылся")
     def run(self):
+        logging.debug("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
             self.futures.append(self.pool.submit(self.lobby, event))
             self.pool.submit(self.checkthread)
     def lobby(self, event):
+        try:
+            attachmentype = event.object.attachments[0]['type']
+        except IndexError:
+            attachmentype = False
         # какой ивент прислал вк. Например message_new
         events = event.type.value
         logging.debug(f"Событие: {events}")
@@ -81,7 +88,7 @@ class Main:
         """
         for module in self.modules:
             run = False
-            if module.included and events in module.vktypes and mc2[module.available_for]:
+            if module.included and events in module.vktypes and mc2[module.available_for] and module.attachment == attachmentype:
                 if module.types == "command":
                     if requests in module.command:
                         run = True
@@ -96,6 +103,7 @@ class Main:
                     if requests[:rlen] == module.command[0]:
                         run = True
                 if run:
+                    logging.debug(f"Запуск модуля {module.__module__}")
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc)
