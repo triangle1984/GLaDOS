@@ -65,6 +65,7 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
+        logging.info(f"Сообщение: {' '.join(text)}")
         """
         mc и mc2 = Кеш, щобы каждый раз не делать запросы в бд
         mc = сервер с мемкешем
