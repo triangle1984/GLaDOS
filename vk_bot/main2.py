@@ -43,9 +43,9 @@ class Main:
                 logging.error(x.exception())
                 print(f"ошибОЧКА разраба: {x.exception()}")
             self.futures.remove(x)
-            logging.debug("Поток закрылся")
+            logging.info("Поток закрылся")
     def run(self):
-        logging.debug("Запуск бота")
+        logging.info("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
             self.futures.append(self.pool.submit(self.lobby, event))
@@ -57,7 +57,7 @@ class Main:
             attachmentype = False
         # какой ивент прислал вк. Например message_new
         events = event.type.value
-        logging.debug(f"Событие: {events}")
+        logging.info(f"Событие: {events}")
         # остатки прошлой цивилизации, скоро выкинем
         botmain(self.vk, event)
         try:
@@ -103,7 +103,7 @@ class Main:
                     if requests[:rlen] == module.command[0]:
                         run = True
                 if run:
-                    logging.debug(f"Запуск модуля {module.__module__}")
+                    logging.info(f"Запуск модуля {module.__module__}")
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc)
@@ -111,9 +111,9 @@ class Main:
                     module.main()
                     now = datetime.datetime.now()
                     delta = now - then
-                    logging.debug(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+                    logging.info(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
 # уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
 # жизни бота
-logging.basicConfig(level=logging.DEBUG, filename="bot.log", format='%(asctime)s - %(message)s')
+logging.basicConfig(level=logging.INFO, filename="bot.log", format='%(asctime)s - %(message)s')
 t = Main(token, token22)
 t.run()
