@@ -4,6 +4,7 @@ class Wiki(BasicPlug):
     doc = "Инфа из вики"
     command = ["/вики"]
     def main(self):
+        wikipedia.set_lang("ru")
         text = " ".join(self.text[1:])
         try:
             wikiotvet = wikipedia.summary(text, sentences=3)
