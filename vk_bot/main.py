@@ -2,7 +2,6 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.utils import get_random_id
 from vk_bot.core.sql.sqlgame import *
 from loadevn import *
-from util import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 import vk_api
 import requests
