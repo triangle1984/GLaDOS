@@ -1,74 +1,34 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.othermethods import OtherMethod
-import vk_api, requests, random
+import vk_api, random
 from vk_api.utils import get_random_id
 class Photos(BasicPlug, OtherMethod):
     doc = "Фотачки"
     command = ["/юри", "/каты", "/геббельс", "/яой", "/трапы", "/лоли", "/махно",
-               "/калян", "/хентай", "/ноги", "/ножки", "/мем", "/адольф", "/гитлер",
-               ""]
+               "/калян", "/хентай", "/ноги", "/ножки", "/мем", "/адольф", "/гитлер"]
     def main(self):
         requests = self.text[0]
         if requests == "/каты":
-            self.cats()
+            self.sendmsg("Шавухенция на заказ",self.phootowallrandom(["-43228812"]))
         elif requests == "/юри":
-            self.yuri()
+            self.sendmsg("Юрец~~🌚", self.phootowallrandom(["-170165000", "-63092480", "-153284406"]))
         elif requests == "/геббельс":
-            self.gebbels()
+            self.sendmsg("ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ", self.phootowallrandom(["-174482230"]))
         elif requests == "/яой":
-            self.yaoi()
+            self.sendmsg("Яойчег~~🌚", self.phootowallrandom(["-98467405", "-113004231", "-57807542", "-38230251"]))
         elif requests == "/трапы":
-            self.trap()
+            self.sendmsg("Трапы~~🌚", self.phootowallrandom(["-171834188"]))
         elif requests == "/лоли":
-            self.loli(self.vk2,text)
+            self.sendmsg("FBI OPEN UP", self.phootowallrandom(["-127518015", "-157516431", "-69721869"]))
         elif requests == "/махно":
-            self.mahno()
+            self.sendmsg("СВОБОДА АБО ИДИТЕ НАХУЙ", self.phootowallrandom(["367919273"], albid=262361216))
         elif requests == "/калян":
-            self.colyan()
+            self.sendmsg("БОЖЕЕЕЕЕЕЕ ЦАРЯ ХРАНИ", self.phootowallrandom(["-183493220"],albid=266695546))
         elif requests == "/хентай":
-            self.hentai()
+            self.sendmsg("Хентай~~🌚", self.phootowallrandom(["-161403814", "-170993976"]))
         elif requests == "/ноги" or requests == "/ножки":
-            self.legs()
+            self.sendmsg("Ножки &#127773;", self.phootowallrandom(["-174842315", "-102853758", "-134982584", "-138265009", "-114279288"]))
         elif requests == "/мем":
-            self.mem()
+            self.sendmsg("Держи мемас", self.phootowallrandom(["-154306815"]))
         elif requests == "/адольф" or requests == "/гитлер":
-            self.adolf()
-    def yuri(self):
-        photo = self.phootowallrandom(["-170165000", "-63092480", "-153284406"])
-        self.sendmsg("Юрец~~🌚", photo)
-    def gebbels(self):
-        photo = self.phootowallrandom(["-174482230"])
-        self.sendmsg("ХАЧЕШЬ ЛИ ТЫ ТОТАЛЬНОЙ ВАЙНЫ?", photo)
-    def yaoi(self):
-        photo = self.phootowallrandom(["-98467405", "-113004231", "-57807542", "-38230251"], )
-        self.sendmsg("Яойчег~~🌚", photo)
-    def trap(self):
-        photo = self.phootowallrandom(["-171834188"])
-        self.sendmsg("Трапы~~🌚", photo)
-    def cats(self):
-        photo = self.phootowallrandom(["-43228812"])
-        self.sendmsg("Шавухенция на заказ", photo)
-    def loli(self):
-        photo = self.phootowallrandom(["-127518015", "-157516431", "-69721869"])
-        self.sendmsg("FBI OPEN UP", photo)
-    def mahno(self):
-        photo = self.phootowallrandom(["367919273"], albid=262361216)
-        self.sendmsg("СВОБОДА АБО ИДИТЕ НАХУЙ", photo)
-    def colyan(self):
-        photo = self.phootowallrandom(["-183493220"],albid=266695546)
-        self.sendmsg("БОЖЕЕЕЕЕЕЕ, ЦАРЯ ХРАНИ", photo)
-    def hentai(self):
-        photo = self.phootowallrandom(["-161403814", "-170993976"])
-        self.sendmsg("Хентай~~🌚", photo)
-    def legs(self):
-        photo = self.phootowallrandom(["-174842315", "-102853758", "-134982584", "-138265009", "-114279288"])
-        self.sendmsg( "Ножки &#127773;",  photo)
-    def mem(self):
-        photo = self.phootowallrandom(["-154306815"])
-        self.sendmsg( "Держи мемас",  photo)
-    def adolf(self):
-        photo = self.phootowallrandom(["-183493220"], albid=266718794)
-        self.sendmsg("Хай фюрер", photo)
-    def yourpic(self, public):
-        photo = self.phootowallrandom(public)
-        self.sendmsg("Пикча из личного альбома~", photo)
+            self.sendmsg("Хай фюрер",self.phootowallrandom(["-183493220"], albid=266718794))
