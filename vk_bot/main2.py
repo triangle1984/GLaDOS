@@ -1,6 +1,5 @@
 #!/usr/bin/python3.7
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from vk_api.utils import get_random_id
 from vk_api import VkUpload
 from loadevn import *
 from vk_bot.core.sql.vksql import *
@@ -54,7 +53,6 @@ class Main:
         logging.debug(f"Событие: {events}")
         # остатки прошлой цивилизации, скоро выкинем
         botmain(self.vk, event)
-        response = {"message":None}
         try:
             text = event.object.text.split()
         except:
@@ -108,6 +106,6 @@ class Main:
                     logging.debug(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
 # уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
 # жизни бота
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG, filename="bot.log", format='%(asctime)s - %(message)s')
 t = Main(token, token22)
 t.run()
