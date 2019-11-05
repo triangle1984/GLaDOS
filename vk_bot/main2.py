@@ -7,7 +7,6 @@ from vk_bot.core.utils.botutil import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
-from systemd.journal import JournaldLogHandler
 from economy import *
 import mods
 class Main:
