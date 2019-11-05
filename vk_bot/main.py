@@ -12,8 +12,12 @@ import logging
 from vk_bot.core.utils.botutil import sqlcache
 from economy import *
 import mods
-
-
+"""
+main.py - страничный бот и почти заброшен
+в него прилетают только самые важные обновы
+за кодом тут не слежу,  можете не засирать
+и так знаю всю его бренность)0)
+"""
 def mainlobby(vk, mc, event, upload):
     events = event.type.name.lower()
     try:
@@ -58,14 +62,16 @@ def checkthread():
         if x.exception() != None:
             logging.error(x.exception())
         futures.remove(x)
-vk_session = vk_api.VkApi(token=token22)
-vk = vk_session.get_api()
-upload = vk_api.VkUpload(vk_session)
-longpoll = VkLongPoll(vk_session)
-mc = pylibmc.Client(["127.0.0.1"])
-pool = ThreadPoolExecutor(8)
-logging.basicConfig(level=logging.INFO)
-futures = []
-for event in longpoll.listen():
-    futures.append(pool.submit(mainlobby, vk, mc, event, upload))
-    pool.submit(checkthread)
+def run():
+    vk_session = vk_api.VkApi(token=token22)
+    vk = vk_session.get_api()
+    upload = vk_api.VkUpload(vk_session)
+    longpoll = VkLongPoll(vk_session)
+    mc = pylibmc.Client(["127.0.0.1"])
+    pool = ThreadPoolExecutor(8)
+    logging.basicConfig(level=logging.INFO)
+    futures = []
+    for event in longpoll.listen():
+        futures.append(pool.submit(mainlobby, vk, mc, event, upload))
+        pool.submit(checkthread)
+run()
