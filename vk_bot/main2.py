@@ -7,6 +7,7 @@ from vk_bot.core.utils.botutil import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
+from systemd.journal import JournaldLogHandler
 from economy import *
 import mods
 class Main:
@@ -22,6 +23,7 @@ class Main:
         self.token22 = token22
         self.authorization()
         self.thread()
+        self.loggercreate()
         self.modules = mods.modules
     def authorization(self):
         vk_session = vk_api.VkApi(token=token, api_version=5.102)
@@ -31,6 +33,11 @@ class Main:
         self.upload = VkUpload(vk_session)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
         self.message = 0
+    def loggercreate(self):
+        self.logger = logging.getLogger(__name__)
+        journald_handler = JournaldLogHandler()
+        journald_handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        self.logger.addHandler(journald_handler)
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
@@ -40,12 +47,12 @@ class Main:
         """
         for x in as_completed(self.futures):
             if x.exception() != None:
-                logging.error(x.exception())
+                self.logger.error(x.exception())
                 print(f"ошибОЧКА разраба: {x.exception()}")
             self.futures.remove(x)
-            logging.info("Поток закрылся")
+            self.logger.info("Поток закрылся")
     def run(self):
-        logging.info("Запуск бота")
+        self.logger.info("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
             self.futures.append(self.pool.submit(self.lobby, event))
@@ -57,7 +64,7 @@ class Main:
             attachmentype = False
         # какой ивент прислал вк. Например message_new
         events = event.type.value
-        logging.info(f"Событие: {events}")
+        self.logger.info(f"Событие: {events}")
         # остатки прошлой цивилизации, скоро выкинем
         botmain(self.vk, event)
         try:
@@ -65,7 +72,7 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
-        logging.info(f"Сообщение: {' '.join(text)}")
+        self.logger.info(f"Сообщение: {' '.join(text)}")
         """
         mc и mc2 = Кеш, щобы каждый раз не делать запросы в бд
         mc = сервер с мемкешем
@@ -104,7 +111,7 @@ class Main:
                     if requests[:rlen] == module.command[0]:
                         run = True
                 if run:
-                    logging.info(f"Запуск модуля {module.__module__}")
+                    self.logger.info(f"Запуск модуля {module.__module__}")
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc)
@@ -112,9 +119,8 @@ class Main:
                     module.main()
                     now = datetime.datetime.now()
                     delta = now - then
-                    logging.info(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+                    self.logger.info(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
 # уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
 # жизни бота
-logging.basicConfig(level=logging.INFO, filename="bot.log", format='%(asctime)s - %(message)s')
 t = Main(token, token22)
 t.run()
