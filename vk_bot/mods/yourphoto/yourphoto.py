@@ -10,7 +10,11 @@ class Yourphoto(BasicPlug, OtherMethod):
     types = 'specialcommand'
 
     def main(self):
-        number = random.randint(0, 9999999)
+        while 1:
+            rand = random.randint(0, 999999999)
+            if checktable("yourphoto", "id", self.uid, andd=f"number = {rand}"):
+                continue
+            break
         try:
             if self.text[1] == "список":
                 self.sendmsg(self.getyourphoto())
@@ -30,10 +34,10 @@ class Yourphoto(BasicPlug, OtherMethod):
                     return
         except IndexError:
             self.sendmsg(
-                "Гайд по альбомам: https://self.vk.com/@mtt_resort-gaid-po-lichnym-albomam")
+                "Гайд по альбомам: https://vk.com/@mtt_resort-gaid-po-lichnym-albomam")
             return
         except ValueError:
-            number = random.randint(0, 9999999)
+            number = rand
         if checktable("yourphoto", "id", self.uid, andd=f"number = {number}"):
             tablerm("yourphoto", "id", self.uid, andd=f"number = {number}")
         tableadd("yourphoto", "id,command,public,number",

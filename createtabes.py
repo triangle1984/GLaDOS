@@ -30,3 +30,6 @@ with conn.cursor() as cursor:
     query = "CREATE TABLE IF NOT EXISTS economy (id int, money int)"
     cursor.execute(query)
     conn.commit()
+    query = "CREATE TABLE IF NOT EXISTS quotes (uid int, yourtext(varchar(80), text(varchar(80))"
+    cursor.execute(query)
+    conn.commit()
