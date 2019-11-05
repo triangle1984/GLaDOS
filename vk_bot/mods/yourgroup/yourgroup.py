@@ -17,7 +17,7 @@ class Yourgroup(BasicPlug, OtherMethod):
                 command = self.text[1].lower()
                 public = "".join(self.text[2:]);public = public.split(",")
                 public = ",".join(self.nametoid(public))
-                number = "".join(self.text[0])[5:]
+                number = "".join(self.text[0])[7:]
                 number = int(number)
                 if self.mc2["vips"] == False and mc["count"] >=3:
                     self.sendmsg("А больше трех групп юзерам низя");return
