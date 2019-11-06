@@ -10,9 +10,9 @@ import argparse
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.utils.pillowhelper import Pillowhelper
 from vk_bot.core.sql.vksql import *
+from vk_bot.core.modules.othermethods import OtherMethod
 
-
-class Quote(BasicPlug):
+class Quote(BasicPlug, OtherMethod):
     doc = "Сделать цитату по пересланному сообщению"
     command = ["/цитата", "/цитаты"]
 

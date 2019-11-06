@@ -1,4 +1,4 @@
-import argparse, random
+import argparse, random, requests
 class OtherMethod:
     def phootowallrandom(self, groups, albid="wall"):
         args = argparse.ArgumentParser(description="пикчи")
@@ -39,3 +39,12 @@ class OtherMethod:
             else:
                 uid.append(convert)
         return uid
+    def uploadphoto(self, photo):
+        response = self.upload.photo_messages(photos=photo)[0]
+        return f"photo{response['owner_id']}_{response['id']}"
+    def dowloadfile(self, url, name):
+        with open(name, "wb") as files:
+            response = requests.get(url).content
+            files.write(response)
+    def dowloadupload(self, url, name):
+        pass

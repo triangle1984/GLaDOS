@@ -1,6 +1,7 @@
 import requests
 from vk_bot.core.modules.basicplug import BasicPlug
-class Forward(BasicPlug):
+from vk_bot.core.modules.othermethods import OtherMethod
+class Forward(BasicPlug, OtherMethod):
     doc = "Пересылает фотографию"
     command = ["/перешли"]
     def main(self):

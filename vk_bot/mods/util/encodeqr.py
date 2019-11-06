@@ -1,6 +1,7 @@
 import requests, vk_api
 from vk_bot.core.modules.basicplug import BasicPlug
-class Encodeqr(BasicPlug):
+from vk_bot.core.modules.othermethods import OtherMethod
+class Encodeqr(BasicPlug, OtherMethod):
     doc = "Зашифровать текст в qrcode"
     command = ["/encodeqr"]
     def main(self):

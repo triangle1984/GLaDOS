@@ -2,7 +2,8 @@ from PIL import Image, ImageDraw
 from loadevn import *
 import io, requests, random, os
 from vk_bot.core.modules.basicplug import BasicPlug
-class Quote(BasicPlug):
+from vk_bot.core.modules.othermethods import OtherMethod
+class Quote(BasicPlug, OtherMethod):
     doc = "ЧНегатив фильтр"
     command = ["/негатив"]
     def main(self):
@@ -11,7 +12,7 @@ class Quote(BasicPlug):
         f = io.BytesIO(img)
         image = Image.open(f)
         draw = ImageDraw.Draw(image)
-        pix = image.load() 
+        pix = image.load()
         (width, height) = image.size
         for i in range(width):
             for j in range(height):
