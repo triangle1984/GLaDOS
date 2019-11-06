@@ -10,7 +10,10 @@ class GetRule34(BasicPlug, OtherMethod):
             "tags": "".join(self.text[1:]),
             "limit": 50
         }
-        r = requests.get(url, params=params).json()
-        r = random.choice(r)['file_url']
-        photos = self.dowloadupload(r)
+        try:
+            r = requests.get(url, params=params).json()
+            r = random.choice(r)['file_url']
+            photos = self.dowloadupload(r)
+        except:
+            self.sendmsg("Нинашол или другие причины");return
         self.sendmsg("Тест", photos)
