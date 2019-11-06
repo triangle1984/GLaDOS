@@ -7,7 +7,7 @@ class GetRule34(BasicPlug, OtherMethod):
     def main(self):
         url = "https://r34-json-api.herokuapp.com/posts"
         params = {
-            "tags": self.text[1:],
+            "tags": "".join(self.text[1:]),
             "limit": 50
         }
         r = requests.get(url, params=params).json()
