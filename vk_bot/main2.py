@@ -9,6 +9,7 @@ import pylibmc, vk_api, logging, datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
+
 class Main:
     """
     Инит главного класса, токен - токен группы
