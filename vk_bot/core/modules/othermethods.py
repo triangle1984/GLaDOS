@@ -1,4 +1,4 @@
-import argparse, random, requests
+import argparse, random, requests, os
 class OtherMethod:
     def phootowallrandom(self, groups, albid="wall"):
         args = argparse.ArgumentParser(description="пикчи")
@@ -46,5 +46,11 @@ class OtherMethod:
         with open(name, "wb") as files:
             response = requests.get(url).content
             files.write(response)
-    def dowloadupload(self, url, name):
-        pass
+    def dowloadupload(self, url):
+        name = f"photo{random.randint(0, 1000000000000)}.png"
+        try:
+            self.dowloadfile(url, name)
+            photo = self.uploadphoto(name)
+        finally:
+            os.remove(name)
+        return photo
