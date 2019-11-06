@@ -4,6 +4,7 @@ import requests, random
 class GetRule34(BasicPlug, OtherMethod):
     doc = "Скора ето буит руле34"
     command = ["/руле34"]
+    available_for = "vips"
     def main(self):
         url = "https://r34-json-api.herokuapp.com/posts"
         params = {
