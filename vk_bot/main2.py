@@ -65,7 +65,7 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
-        logging.info(f"Сообщение: {' '.join(text)}")
+        logging.info(f"Сообщение: {event.object.text}  От: {uid}  В: {event.object.peer_id}")
         """
         mc и mc2 = Кеш, щобы каждый раз не делать запросы в бд
         mc = сервер с мемкешем
@@ -89,7 +89,7 @@ class Main:
         """
         for module in self.modules:
             run = False
-            if module.included and events in module.vktypes and mc2[module.available_for] and module.attachment == attachmentype:
+            if module.included and events in module.vktypes and mc2[module.available_for]:
                 if module.types == "command":
                     if requests in module.command:
                         run = True
@@ -103,6 +103,9 @@ class Main:
                     rlen = len(module.command[0])
                     if requests[:rlen] == module.command[0]:
                         run = True
+                if module.attachment:
+                    if attachmentype != module.attachment:
+                        run = False
                 if run:
                     logging.info(f"Запуск модуля {module.__module__}")
                     module = module(self.vk, self.vk2, self.upload)
