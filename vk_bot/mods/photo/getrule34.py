@@ -12,8 +12,10 @@ class GetRule34(BasicPlug, OtherMethod):
         }
         try:
             r = requests.get(url, params=params).json()
-            r = random.choice(r)['file_url']
-            photos = self.dowloadupload(r)
+            r = random.choice(r)
+            file_url = r['file_url']
+            tags = ", ".join(r['tags'])
+            photos = self.dowloadupload(file_url)
         except:
             self.sendmsg("Нинашол или другие причины");return
-        self.sendmsg("Тест", photos)
+        self.sendmsg(f"Теги: {tags}", photos)
