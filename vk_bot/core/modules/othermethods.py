@@ -2,6 +2,7 @@ import argparse
 import random
 import requests
 import os
+import time
 
 
 class OtherMethod:
@@ -62,11 +63,17 @@ class OtherMethod:
             response = requests.get(url).content
             files.write(response)
 
-    def dowloadupload(self, url):
-        name = f"photo{random.randint(0, 1000000000000)}.png"
+    def dowloadupload(self, url, doc=False):
+        extension = ".png"
+        if doc:
+            extension = ".gif"
+        name = f"photo{time.time()}{extension}"
         try:
             self.dowloadfile(url, name)
-            photo = self.uploadphoto(name)
+            if doc == False:
+                response = self.uploadphoto(name)
+            else:
+                response = self.uploaddoc(name, self.peer_id)
         finally:
             os.remove(name)
-        return photo
+        return response
