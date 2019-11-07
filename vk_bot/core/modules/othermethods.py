@@ -1,4 +1,9 @@
-import argparse, random, requests, os
+import argparse
+import random
+import requests
+import os
+
+
 class OtherMethod:
     def phootowallrandom(self, groups, albid="wall"):
         args = argparse.ArgumentParser(description="пикчи")
@@ -17,16 +22,19 @@ class OtherMethod:
         try:
             for _ in range(a.count):
                 group_id = random.choice(groups)
-                max_num = self.vk2.photos.get(owner_id=group_id, album_id=albid, count=0)['count']
+                max_num = self.vk2.photos.get(
+                    owner_id=group_id, album_id=albid, count=0)['count']
                 num = random.randint(0, max_num)
                 photo = self.vk2.photos.get(owner_id=group_id, album_id=albid,
-                                    count=1, offset=num)['items'][0]['id']
+                                            count=1, offset=num)['items'][0]['id']
 
                 photo2.append(f"photo{group_id}_{photo}")
         except KeyboardInterrupt:
-            self.sendmsg("!error от вк");return
+            self.sendmsg("!error от вк")
+            return
         photo2 = ",".join(photo2)
         return photo2
+
     def nametoid(self, names):
         uid = []
         for convert in names:
@@ -39,16 +47,21 @@ class OtherMethod:
             else:
                 uid.append(convert)
         return uid
+
     def uploadphoto(self, photo):
         response = self.upload.photo_messages(photos=photo)[0]
         return f"photo{response['owner_id']}_{response['id']}"
-    def uploaddoc(self, document):
-        response = self.upload.document_message(doc=document)[0]
-        return f"doc{response['owner_id']}_{response['id']}"    
+
+    def uploaddoc(self, document, peer_id):
+        response = self.upload.document_message(
+            doc=document, peer_id=peer_id)['doc']
+        return f"doc{response['owner_id']}_{response['id']}"
+
     def dowloadfile(self, url, name):
         with open(name, "wb") as files:
             response = requests.get(url).content
             files.write(response)
+
     def dowloadupload(self, url):
         name = f"photo{random.randint(0, 1000000000000)}.png"
         try:
