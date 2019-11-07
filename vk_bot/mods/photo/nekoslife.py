@@ -3,7 +3,7 @@ from vk_bot.core.modules.othermethods import OtherMethod
 import requests, nekos
 class Nekoslife(BasicPlug, OtherMethod):
     doc = "Рандом фотки с nekoslife"
-    command = ["/nekoslife"]
+    command = ["/nekoslife", "/некослайф", "/некос"]
     def main(self):
         try:
             session = requests.Session()
