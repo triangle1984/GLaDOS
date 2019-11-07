@@ -121,3 +121,4 @@ run.sh
 *.png
 *.jpg
 vk_bot/photos/*
+flasktest
