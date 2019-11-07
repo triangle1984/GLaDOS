@@ -42,6 +42,9 @@ class OtherMethod:
     def uploadphoto(self, photo):
         response = self.upload.photo_messages(photos=photo)[0]
         return f"photo{response['owner_id']}_{response['id']}"
+    def uploaddoc(self, document):
+        response = self.upload.document_message(doc=document)[0]
+        return f"doc{response['owner_id']}_{response['id']}"    
     def dowloadfile(self, url, name):
         with open(name, "wb") as files:
             response = requests.get(url).content
