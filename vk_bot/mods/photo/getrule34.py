@@ -1,7 +1,7 @@
 from vk_bot.core.modules.basicplug import BasicPlug
-from vk_bot.core.modules.othermethods import OtherMethod
+from vk_bot.core.modules.upload import Upload
 import requests, random
-class GetRule34(BasicPlug, OtherMethod):
+class GetRule34(BasicPlug, Upload):
     doc = "Скора ето буит руле34"
     command = ["/руле34"]
     available_for = "vips"

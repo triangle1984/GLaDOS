@@ -2,8 +2,8 @@ from PIL import Image, ImageDraw
 from loadevn import *
 import io, requests, random, os
 from vk_bot.core.modules.basicplug import BasicPlug
-from vk_bot.core.modules.othermethods import OtherMethod
-class Quote(BasicPlug, OtherMethod):
+from vk_bot.core.modules.upload import Upload
+class Quote(BasicPlug, Upload):
     doc = "Фильтр Вьетнам"
     command = ["/вьетнам"]
     def main(self):
