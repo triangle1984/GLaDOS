@@ -15,6 +15,7 @@ class GetRule34(BasicPlug, OtherMethod):
             r = requests.get(url, params=params).json()
             r = random.choice(r)
             file_url = r['file_url']
+            print(file_url)
             tags = ", ".join(r['tags'])
             photos = self.dowloadupload(file_url)
         except:

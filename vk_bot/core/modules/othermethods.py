@@ -59,18 +59,19 @@ class OtherMethod:
         return f"doc{response['owner_id']}_{response['id']}"
 
     def dowloadfile(self, url, name):
+        gif = False
         with open(name, "wb") as files:
             response = requests.get(url).content
             files.write(response)
+        if url[-3:] == "gif":
+            gif = True
+        return gif
 
-    def dowloadupload(self, url, doc=False):
-        extension = ".png"
-        if doc:
-            extension = ".gif"
-        name = f"photo{time.time()}{extension}"
+    def dowloadupload(self, url):
+        name = f"photo{time.time()}.png"
         try:
-            self.dowloadfile(url, name)
-            if doc == False:
+            files = self.dowloadfile(url, name)
+            if files == False:
                 response = self.uploadphoto(name)
             else:
                 response = self.uploaddoc(name, self.peer_id)

@@ -6,11 +6,8 @@ class Nekoslife(BasicPlug, OtherMethod):
     command = ["/nekoslife", "/некослайф", "/некос"]
     def main(self):
         try:
-            doc = False
             image_url = nekos.img(self.text[1])
-            if image_url[-3:] == 'gif':
-                doc = True
-            image = self.dowloadupload(image_url, doc=doc)
+            image = self.dowloadupload(image_url)
             self.sendmsg("Держи!", image)
         except:
             self.sendmsg("""Введи один из этих аргументов:
