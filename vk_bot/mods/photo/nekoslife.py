@@ -17,6 +17,7 @@ class Nekoslife(BasicPlug, Upload, OtherMethod):
         try:
             for _ in range(a.count):
                 image_url.append(nekos.img(self.text[1]))
+            self.sendmsg("начинаю качать пикчи")
             image = self.multithreadwoload(image_url)
             self.sendmsg("Держи!", image)
         except:

@@ -1,10 +1,14 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
-import requests, random
+import requests
+import random
+
+
 class GetRule34(BasicPlug, Upload):
     doc = "Скора ето буит руле34"
     command = ["/руле34"]
     available_for = "vips"
+
     def main(self):
         url = "https://r34-json-api.herokuapp.com/posts"
         params = {
@@ -15,9 +19,9 @@ class GetRule34(BasicPlug, Upload):
             r = requests.get(url, params=params).json()
             r = random.choice(r)
             file_url = r['file_url']
-            print(file_url)
             tags = ", ".join(r['tags'])
             photos = self.dowloadupload(file_url)
         except:
-            self.sendmsg("Нинашол или другие причины");return
+            self.sendmsg("Нинашол или другие причины")
+            return
         self.sendmsg(f"Теги: {tags}", photos)
