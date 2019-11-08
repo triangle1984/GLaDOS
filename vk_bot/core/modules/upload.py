@@ -36,7 +36,7 @@ class Upload:
         return response
 
     def multithreadwoload(self, url):
-        pool = ThreadPoolExecutor(4)
+        pool = ThreadPoolExecutor(6)
         futures = []
         photos = []
         for url in url:
