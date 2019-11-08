@@ -1,9 +1,11 @@
 from vk_bot.core.modules.basicplug import BasicPlug
-class Test2(BasicPlug):
-    doc = "первый модуль, тест"
-    types = 'commandb'
-    @staticmethod
-    def getcommand(uid, text):
-        return "/тест"
+from vk_bot.core.modules.upload import Upload
+
+
+class Test2(BasicPlug, Upload):
+    doc = "тест"
+    command = "/етотест"
+
     def main(self):
-        self.sendmsg(self.text[0])
+        self.multithreadwoload(
+            ['https://sun9-66.userapi.com/c543101/v543101670/6ed2b/wkoWj6GITj4.jpg'])

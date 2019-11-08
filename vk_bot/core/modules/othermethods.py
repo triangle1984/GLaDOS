@@ -3,17 +3,21 @@ import random
 
 
 class OtherMethod:
-    def phootowallrandom(self, groups, albid="wall"):
+    def args(self, text):
         args = argparse.ArgumentParser(description="пикчи")
         args.add_argument("-с", "-c", "--count", type=int, default=1)
         try:
             a = args
-            a = a.parse_args(self.text[1:])
+            a = a.parse_args(text)
         except:
             try:
-                a.count = int(self.text[1])
+                a.count = int(text[0])
             except:
                 a.count = 1
+        return a
+
+    def phootowallrandom(self, groups, albid="wall"):
+        a = self.args(self.text[1:])
         photo2 = []
         if a.count > 10:
             a.count = 10

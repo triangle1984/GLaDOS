@@ -1,6 +1,7 @@
 import time
 import os
 import requests
+from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 
 
 class Upload:
@@ -33,3 +34,13 @@ class Upload:
         finally:
             os.remove(name)
         return response
+
+    def multithreadwoload(self, url):
+        pool = ThreadPoolExecutor(4)
+        futures = []
+        photos = []
+        for url in url:
+            futures.append(pool.submit(self.dowloadupload, url))
+        for x in as_completed(futures):
+            photos.append(x.result())
+        return ",".join(photos)
