@@ -157,7 +157,7 @@ class Quote(BasicPlug, Upload):
             w, h = draw.textsize(line, font=font)
             draw.text(((850 - w) / 2, current_h),
                       line, font=font, fill=self.text)
-            current_h += h + pad
+            current_h += font.getsize(line)[1]
 
         self.img = requests.get(url).content
         f = io.BytesIO(self.img)
