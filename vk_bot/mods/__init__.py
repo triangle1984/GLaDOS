@@ -2,6 +2,10 @@ import pkgutil
 from importlib import import_module
 from vk_bot.core.modules.basicplug import BasicPlug
 modules = []
+"""
+Когда вы делаете import mods, сие файл рекурсивно проходит по всем каталогам тут
+И собирает классы, которые наследовали BasicPlug, добавляя их в список modules
+"""
 
 
 def test(pkgname):
