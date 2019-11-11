@@ -5,10 +5,14 @@ from loadevn import *
 from vk_bot.core.sql.vksql import *
 from vk_bot.core.utils.botutil import *
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-import pylibmc, vk_api, logging, datetime
+import pylibmc
+import vk_api
+import logging
+import datetime
 from vk_bot.core.sql.sqlgame import *
 from economy import *
 import mods
+
 
 class Main:
     """
@@ -18,12 +22,14 @@ class Main:
     типа авторизиации, настройки потоков и импорта модулей
     дальше можно запустить метод run(t.run()), щобы заставить бота работать
     """
+
     def __init__(self, token, token22):
         self.token = token
         self.token22 = token22
         self.authorization()
         self.thread()
         self.modules = mods.modules
+
     def authorization(self):
         vk_session = vk_api.VkApi(token=token, api_version=5.102)
         vk_session2 = vk_api.VkApi(token=token22)
@@ -32,9 +38,11 @@ class Main:
         self.upload = VkUpload(vk_session)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
         self.message = 0
+
     def thread(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
+
     def checkthread(self):
         """
         Скинуть название исключения в потоке, ежели  такое произойдет
@@ -45,13 +53,15 @@ class Main:
                 print(f"ошибОЧКА разраба: {x.exception()}")
             self.futures.remove(x)
             logging.info("Поток закрылся")
+
     def run(self):
         logging.info("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
-            # self.lobby(event)
-            self.futures.append(self.pool.submit(self.lobby, event))
-            self.pool.submit(self.checkthread)
+            self.lobby(event)
+            # self.futures.append(self.pool.submit(self.lobby, event))
+            # self.pool.submit(self.checkthread)
+
     def lobby(self, event):
         try:
             attachmentype = event.object.attachments[0]['type']
@@ -67,7 +77,8 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
-        logging.info(f"Сообщение: {event.object.text}  От: {uid}  В: {event.object.peer_id}")
+        logging.info(
+            f"Сообщение: {event.object.text}  От: {uid}  В: {event.object.peer_id}")
         """
         mc и mc2 = Кеш, щобы каждый раз не делать запросы в бд
         mc = сервер с мемкешем
@@ -117,9 +128,13 @@ class Main:
                     module.main()
                     now = datetime.datetime.now()
                     delta = now - then
-                    logging.info(f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+                    logging.info(
+                        f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+
+
 # уровень логирования, в инфо ничего нет, а дебаг расскажет вам всю бренность
 # жизни бота
-logging.basicConfig(level=logging.INFO, filename="bot.log", format='%(asctime)s - %(message)s')
+logging.basicConfig(level=logging.INFO, filename="bot.log",
+                    format='%(asctime)s - %(message)s')
 t = Main(token, token22)
 t.run()

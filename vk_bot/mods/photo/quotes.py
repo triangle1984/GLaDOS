@@ -117,6 +117,7 @@ class Quote(BasicPlug, Upload):
             self.data = tuple(map(int, data))
 
     def makequotes(self):
+        astr = []
         try:
             if not self.event.object.fwd_messages:
                 self.msg = self.event.object.reply_message
@@ -140,11 +141,17 @@ class Quote(BasicPlug, Upload):
         except KeyboardInterrupt:
             self.sendmsg("!error")
             return
+        line = astr.splitlines()
+        astr = []
+        n = 35
+        for messages in line:
+            astr += [messages[i:i+n] for i in range(0, len(messages), n)]
+        print(astr)
         self.checkbackground()
         self.getcolor()
         today = datetime.datetime.today().strftime("время: %H:%M:%S")
         today2 = datetime.datetime.today().strftime("дата: %Y-%m-%d")
-        para = textwrap.wrap(astr, width=30)
+        # para = textwrap.wrap(astr, width=30)
         draw = ImageDraw.Draw(self.im)
         font = ImageFont.truetype(fontc, 18)
         fontu = ImageFont.truetype(fontc, 16)
@@ -152,23 +159,17 @@ class Quote(BasicPlug, Upload):
                   font=fontu, fill=self.data)
         draw.text((10, 325), today, font=fontu, fill=self.data)
         draw.text((10, 340), today2, font=fontu, fill=self.data)
-        current_h, pad = 170, 10
-        for line in para:
-            w, h = draw.textsize(line, font=font)
-            draw.text(((850 - w) / 2, current_h),
-                      line, font=font, fill=self.text)
-            current_h += font.getsize(line)[1]
-
+        current_h = 150
+        for text in astr:
+            draw.text((280, current_h), text, font=font, fill=self.text)
+            current_h += 20
         self.img = requests.get(url).content
         f = io.BytesIO(self.img)
-
         watermark = Image.open(f).convert("RGBA")
         bigsize = watermark.size[0] * 3, watermark.size[1] * 3
         mask = Image.new('L', bigsize, 0)
-
         draw = ImageDraw.Draw(mask)
         draw.ellipse((0, 0) + bigsize, fill=255)
-
         mask = mask.resize(watermark.size, Image.ANTIALIAS)
         watermark.putalpha(mask)
         self.im.paste(watermark, (10, 100),  watermark)
