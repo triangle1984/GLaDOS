@@ -8,6 +8,10 @@ class Number(BasicPlug):
             x = int(self.text[1])
             y = int(self.text[2])
             nubmer2 = random.randint(x, y)
-        except:
+        except IndexError:
+            self.sendmsg("Напиши два числа. Например: /число 10 50")
             return
+        except ValueError:
+            self.sendmsg("Напиши два числа. Например: /число 10 50")
+            return 
         self.sendmsg(f"Число: {nubmer2}")
