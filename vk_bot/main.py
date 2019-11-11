@@ -18,6 +18,8 @@ main.py - страничный бот и почти заброшен
 за кодом тут не слежу,  можете не засирать
 и так знаю всю его бренность)0)
 """
+
+
 def mainlobby(vk, mc, event, upload):
     events = event.type.name.lower()
     try:
@@ -56,12 +58,15 @@ def mainlobby(vk, mc, event, upload):
                             module.main()
     except KeyboardInterrupt:
         sys.exit()
-def checkthread():
-    global futures
+
+
+def checkthread(futures):
     for x in as_completed(futures):
         if x.exception() != None:
             logging.error(x.exception())
         futures.remove(x)
+
+
 def run():
     vk_session = vk_api.VkApi(token=token22)
     vk = vk_session.get_api()
@@ -72,6 +77,9 @@ def run():
     logging.basicConfig(level=logging.INFO)
     futures = []
     for event in longpoll.listen():
+        # mainlobby(vk, mc, event, upload)
         futures.append(pool.submit(mainlobby, vk, mc, event, upload))
-        pool.submit(checkthread)
+        pool.submit(checkthread, futures)
+
+
 run()
