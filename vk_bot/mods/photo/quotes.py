@@ -138,9 +138,6 @@ class Quote(BasicPlug, Upload):
                 0]['first_name']
             lastname = self.vk.users.get(user_ids=self.msg['from_id'])[
                 0]['last_name']
-        except KeyboardInterrupt:
-            self.sendmsg("!error")
-            return
         except:
             self.sendmsg("""Чтобы использовать эту команду нужно переслать одно или более сообщений
             Также, с помощью команды \'/цитата фон\' можно установить свой фон для цитаты
