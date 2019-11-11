@@ -1,8 +1,12 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.vksql import *
+
+
 class Profile(BasicPlug):
     doc = "Профиль юзера"
     command = ["/профиль"]
+    included = False
+
     def main(self):
         msg = checktable('messages', 'id', self.uid)["msg"]
         xp = checktable('level', 'id', self.uid)["xp"]
@@ -17,8 +21,8 @@ class Profile(BasicPlug):
             user = "Вип🤵"
         else:
             user = "Юзер"
-        G = checktable("economy","id", self.uid)["money"]
-        self.sendmsg( f"""Твой профиль:
+        G = checktable("economy", "id", self.uid)["money"]
+        self.sendmsg(f"""Твой профиль:
     👦| Роль: {user}
     🔑| Префикс: {self.mc2['prefix']}
     📃| Айди: id{self.uid}
