@@ -58,9 +58,9 @@ class Main:
         logging.info("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
-            # self.lobby(event)
-            self.futures.append(self.pool.submit(self.lobby, event))
-            self.pool.submit(self.checkthread)
+            self.lobby(event)
+            # self.futures.append(self.pool.submit(self.lobby, event))
+            # self.pool.submit(self.checkthread)
 
     def lobby(self, event):
         try:

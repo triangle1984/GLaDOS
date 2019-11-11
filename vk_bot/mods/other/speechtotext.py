@@ -2,36 +2,40 @@
 Модуль написал https://vk.com/feelan03
 """
 from vk_bot.core.modules.basicplug import BasicPlug
+from vk_bot.core.modules.upload import Upload
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
+import time
 import random
-class Autdiototext(BasicPlug):
+
+
+class Autdiototext(BasicPlug, Upload):
     doc = "гс в текст"
     types = "runalways"
     attachment = 'audio_message'
+
     def main(self):
         try:
             link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]
         except:
             return
-        randomnumber = random.randint(0, 10000)
-        name = f"audio{randomnumber}.mp3"
-        os.system(f"wget -O {name} {link}")
+        name = self.dowloadfile(link)[1]
         sound = AudioSegment.from_mp3(name)
-        sound.export(f"audio2{randomnumber}.wav", format="wav")
+        soundname = f"audio2{time.time()}.wav"
+        sound.export(soundname, format="wav")
 
-        audio_file = f"audio2{randomnumber}.wav" # путь до файла
-        r  = sr.Recognizer() # Использование файла как источник
-        with sr.AudioFile(audio_file) as source:
-            audio = r.record(source) # Считывает весь файл
+        r = sr.Recognizer()  # Использование файла как источник
+        with sr.AudioFile(soundname) as source:
+            audio = r.record(source)  # Считывает весь файл
         try:
-            result = r.recognize_google(audio, language = "ru_RU")
+            result = r.recognize_google(audio, language="ru_RU")
             self.sendmsg(f"сказал: {result}")
         except sr.UnknownValueError:
-            self.sendmsg(f"НИХУЯ НЕ ПОНИМАЮ НИ ОДНОГО СЛОВА БЛЯТЬ, КАРТАВАЯ СУКА")
+            self.sendmsg(
+                f"НИХУЯ НЕ ПОНИМАЮ НИ ОДНОГО СЛОВА БЛЯТЬ, КАРТАВАЯ СУКА")
         except sr.RequestError:
             self.sendmsg(f"Ошибка при отправки запроса")
         finally:
             os.remove(name)
-            os.remove(f"audio2{randomnumber}.wav")
+            os.remove(soundname)
