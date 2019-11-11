@@ -17,7 +17,9 @@ class Kick(BasicPlug, Upload):
         for a in self.vk.messages.getConversationMembers(peer_id=self.event.object.peer_id)['items']:
             try:
                 if a['member_id'] == self.event.object.from_id:
-                    if a['is_admin'] == True:
+                    if 'is_admin' in a:
                         self.vk.messages.removeChatUser(chat_id=self.event.chat_id, user_id=uid)
+                    else:
+                        self.sendmsg("Вы не админ беседы!")
             except:
                 self.sendmsg("ОШИБКА НАХУЙ")
