@@ -122,3 +122,4 @@ run.sh
 *.jpg
 vk_bot/photos/*
 flasktest
+vk-bot
