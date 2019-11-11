@@ -9,5 +9,6 @@ class Number(BasicPlug):
             y = int(self.text[2])
             nubmer2 = random.randint(x, y)
         except:
+            self.sendmsg("Напиши два числа. Например: /число 10 50")
             return
         self.sendmsg(f"Число: {nubmer2}")
