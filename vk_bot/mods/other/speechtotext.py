@@ -22,7 +22,7 @@ class Autdiototext(BasicPlug, Upload):
             return
         name = self.dowloadfile(link)[1]
         sound = AudioSegment.from_mp3(name)
-        soundname = f"audio2{time.time()}.wav"
+        soundname = f"audio2{time.time_ns()}.wav"
         sound.export(soundname, format="wav")
 
         r = sr.Recognizer()  # Использование файла как источник

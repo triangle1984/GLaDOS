@@ -15,7 +15,7 @@ class Upload:
         return f"doc{response['owner_id']}_{response['id']}"
 
     def dowloadfile(self, url):
-        name = f"photo{time.time()}.png"
+        name = f"photo{time.time_ns()}.png"
         gif = False
         with open(name, "wb") as files:
             response = requests.get(url).content
