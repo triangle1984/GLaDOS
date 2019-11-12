@@ -9,6 +9,8 @@ class Calculator(BasicPlug):
             encalc = self.text[2]; encalc = encalc.lower()
             y = self.text[3]; y = int(y)
         except:
+            self.sendmsg("""Пример команды: /калькулятор 2 + 2
+            Использовать можно только 2 числа, и только через пробел""")
             return
         if encalc == "+" or encalc == "сложение":
             result = x + y

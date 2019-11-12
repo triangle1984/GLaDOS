@@ -24,6 +24,6 @@ class Shakal(BasicPlug, Upload):
             attachment = self.uploadphoto(name)
             self.sendmsg("Дэржите фотку", attachment)
         except IndexError:
-            self.sendmsg("Упс, что-то пошло не так")
+            self.sendmsg("Для работы команды, нужно прикрепить пикчу и написать цифру от 1 до 100 (чем меньше цифра, тем хуже качество)")
         finally:
             os.remove(name)
