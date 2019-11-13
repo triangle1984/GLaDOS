@@ -182,8 +182,5 @@ class Quote(BasicPlug, Upload):
         self.im.paste(watermark, (10, 100),  watermark)
         name = f"name{random.randint(0, 1000)}.jpg"
         self.im.save(name)
-        try:
-            attachment = self.uploadphoto(name)
-            self.sendmsg("Дэржите цитатку", attachment)
-        finally:
-            os.remove(name)
+        attachment = self.uploadphoto(name)
+        self.sendmsg("Дэржите цитатку", attachment)
