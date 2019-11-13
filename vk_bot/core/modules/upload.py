@@ -16,23 +16,20 @@ class Upload:
 
     def dowloadfile(self, url):
         name = f"photo{time.time_ns()}.png"
-        gif = False
         with open(name, "wb") as files:
             response = requests.get(url).content
             files.write(response)
-        if url[-3:] == "gif":
-            gif = True
-        return (gif, name)
+        return {"name": name, "expansion": url[-3:]}
 
     def dowloadupload(self, url):
         try:
             files = self.dowloadfile(url)
-            if files[0] == False:
-                response = self.uploadphoto(files[1])
+            if files['expansion'] == "gif":
+                response = self.uploaddoc(files['name'], self.peer_id)
             else:
-                response = self.uploaddoc(files[1], self.peer_id)
+                response = self.uploadphoto(files['name'])
         finally:
-            os.remove(files[1])
+            os.remove(files['name'])
         return response
 
     def multithreadwoload(self, url):

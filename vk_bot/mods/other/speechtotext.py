@@ -20,7 +20,7 @@ class Autdiototext(BasicPlug, Upload):
             link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]
         except:
             return
-        name = self.dowloadfile(link)[1]
+        name = self.dowloadfile(link)['name']
         sound = AudioSegment.from_mp3(name)
         soundname = f"audio2{time.time_ns()}.wav"
         sound.export(soundname, format="wav")
