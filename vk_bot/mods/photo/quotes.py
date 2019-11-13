@@ -148,7 +148,6 @@ class Quote(BasicPlug, Upload):
         n = 35
         for messages in line:
             astr += [messages[i:i+n] for i in range(0, len(messages), n)]
-        print(astr)
         self.checkbackground()
         self.getcolor()
         today = datetime.datetime.today().strftime("время: %H:%M:%S")
@@ -161,7 +160,13 @@ class Quote(BasicPlug, Upload):
                   font=fontu, fill=self.data)
         draw.text((10, 325), today, font=fontu, fill=self.data)
         draw.text((10, 340), today2, font=fontu, fill=self.data)
-        current_h = 150
+        if len(astr) > 19:
+            self.sendmsg("Слишком басой текст")
+            return
+        if len(astr) > 10:
+            current_h = 0
+        else:
+            current_h = 170
         for text in astr:
             draw.text((280, current_h), text, font=font, fill=self.text)
             current_h += 20
