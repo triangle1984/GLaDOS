@@ -14,7 +14,7 @@ class Hmux(BasicPlug, Upload):
         Жмыхает вашу прикрепленную фотку, так же
         можно передавать степень жмыхнутости, пример:
             /жмых 55 55
-            /жмых 59 80(разные значения не рекомендуются)
+            /жмых 59 80
             чем ниже значения, тем сильнее жмыханет
             максимум для одного из знчений - 100
             а дефолт - 40 40
@@ -24,7 +24,6 @@ class Hmux(BasicPlug, Upload):
         except IndexError:
             self.sendmsg(helps)
             return
-        self.sendmsg("етат процесс может быть чутка долгим")
         name = self.dowloadfile(url)['name']
         outname = f"{time.time_ns()}.out.png"
         x = 40
