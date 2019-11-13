@@ -26,8 +26,8 @@ class Hmux(BasicPlug, Upload):
             return
         name = self.dowloadfile(url)['name']
         outname = f"{time.time_ns()}.out.png"
-        x = 55
-        y = 55
+        x = 50
+        y = 50
         if len(self.text) > 2:
             try:
                 x = int(self.text[1])
