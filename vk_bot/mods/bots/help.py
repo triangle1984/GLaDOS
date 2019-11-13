@@ -4,7 +4,7 @@ from boltons import iterutils
 
 
 class GetHelp(BasicPlug):
-    doc = "Найти паблики по названию  и скинуть айди"
+    doc = "Вызвать хелп"
     command = ["/help", "/хелп", "/начать", "/помощь", "/команды", "/старт"]
 
     def main(self):

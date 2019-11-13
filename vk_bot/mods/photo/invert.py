@@ -1,11 +1,17 @@
 from PIL import Image, ImageDraw
 from loadevn import *
-import io, requests, random, os
+import io
+import requests
+import random
+import os
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
+
+
 class Quote(BasicPlug, Upload):
-    doc = "ЧНегатив фильтр"
+    doc = "Негатив фильтр"
     command = ["/негатив"]
+
     def main(self):
         url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         img = requests.get(url).content
@@ -23,7 +29,7 @@ class Quote(BasicPlug, Upload):
         name = f"name{random.randint(0, 1000)}.jpg"
         image.save(name)
         try:
-            attachment  = self.uploadphoto(name)
+            attachment = self.uploadphoto(name)
             self.sendmsg("Дэржите фотку", attachment)
         finally:
             os.remove(name)
