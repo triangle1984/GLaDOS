@@ -10,7 +10,6 @@ from vk_bot.core.sql.vksql import *
 import pylibmc
 import logging
 from vk_bot.core.utils.botutil import sqlcache
-from economy import *
 import mods
 """
 main.py - страничный бот и почти заброшен

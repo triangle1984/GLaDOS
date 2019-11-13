@@ -10,7 +10,6 @@ import vk_api
 import logging
 import datetime
 from vk_bot.core.sql.sqlgame import *
-from economy import *
 import mods
 
 
