@@ -7,11 +7,13 @@ from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 class Upload:
     def uploadphoto(self, photo):
         response = self.upload.photo_messages(photos=photo)[0]
+        os.remove(photo)
         return f"photo{response['owner_id']}_{response['id']}"
 
     def uploaddoc(self, document, peer_id):
         response = self.upload.document_message(
             doc=document, peer_id=peer_id)['doc']
+        os.remove(document)
         return f"doc{response['owner_id']}_{response['id']}"
 
     def dowloadfile(self, url):
@@ -22,14 +24,11 @@ class Upload:
         return {"name": name, "expansion": url[-3:]}
 
     def dowloadupload(self, url):
-        try:
-            files = self.dowloadfile(url)
-            if files['expansion'] == "gif":
-                response = self.uploaddoc(files['name'], self.peer_id)
-            else:
-                response = self.uploadphoto(files['name'])
-        finally:
-            os.remove(files['name'])
+        files = self.dowloadfile(url)
+        if files['expansion'] == "gif":
+            response = self.uploaddoc(files['name'], self.peer_id)
+        else:
+            response = self.uploadphoto(files['name'])
         return response
 
     def multithreadwoload(self, url):

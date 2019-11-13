@@ -40,7 +40,6 @@ def mainlobby(vk, mc, event, upload):
                 else:
                     uid = event.user_id
                 mc2 = sqlcache(mc, uid)
-                givemoney(uid, mc2)
                 prefix = mc2["prefix"]
                 for module in mods.modules:
                     run = False
