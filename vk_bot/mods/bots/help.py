@@ -5,7 +5,8 @@ from boltons import iterutils
 
 class GetHelp(BasicPlug):
     doc = "Вызвать хелп"
-    command = ["/help", "/хелп", "/начать", "/помощь", "/команды", "/старт"]
+    command = ["/help", "/хелп", "/начать",
+               "/помощь", "/команды", "/старт", "начать"]
 
     def main(self):
         lhelp = []

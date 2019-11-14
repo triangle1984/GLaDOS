@@ -6,8 +6,10 @@ from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 
 class Upload:
     def uploadphoto(self, photo):
-        response = self.upload.photo_messages(photos=photo)[0]
-        os.remove(photo)
+        try:
+            response = self.upload.photo_messages(photos=photo)[0]
+        finally:
+            os.remove(photo)
         return f"photo{response['owner_id']}_{response['id']}"
 
     def uploaddoc(self, document, peer_id):
