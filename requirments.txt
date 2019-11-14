@@ -3,8 +3,10 @@ vk_api
 requests
 pymysql
 wikipedia
-pylibmc
 pyPrivnote
 SpeechRecognition
 pydub
 boltons
+python-dotenv
+google_images_download
+pylibmc
