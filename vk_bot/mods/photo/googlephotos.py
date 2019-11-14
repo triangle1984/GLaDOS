@@ -9,14 +9,18 @@ class GooglePhotos(BasicPlug, Upload):
     command = ["/гугл", "/пикчи", "/гуглпикчи"]
 
     def main(self):
+        photos = None
+        msg = "Ничо не нашел"
         requests = "".join(self.text[1:])
         response = google_images_download.googleimagesdownload()
         arguments = {"keywords": requests, "limit": 25, "no_download": True,
-                     "language": "Russian"}
-        try:
-            url = random.choice(response.download(arguments)[0][requests])
+                     "language": "Russian", "silent_mode": True}
+        for _ in range(2):
+            try:
+                url = random.choice(response.download(arguments)[0][requests])
+            except IndexError:
+                continue
             photos = self.dowloadupload(url)
-        except:
-            self.sendmsg("Ошибочка")
-            return
-        self.sendmsg("Таки вот ваша пикча из гугла", photos)
+            msg = "Таки вот ваша пикча из гугла"
+            break
+        self.sendmsg(msg, photos)
