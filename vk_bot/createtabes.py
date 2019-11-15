@@ -17,7 +17,7 @@ with conn.cursor() as cursor:
     cursor.execute(query)
     query = "CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
     cursor.execute(query)
-    query = "CREATE TABLE IF NOT EXISTS {chathello} (id int)".format(chathello)
+    query = "CREATE TABLE IF NOT EXISTS {} (id int)".format(chathello)
     cursor.execute(query)
     query = "CREATE TABLE IF NOT EXISTS relation (id int, id2 int)"
     cursor.execute(query)
@@ -30,6 +30,6 @@ with conn.cursor() as cursor:
     query = "CREATE TABLE IF NOT EXISTS economy (id int, money int)"
     cursor.execute(query)
     conn.commit()
-    query = "CREATE TABLE IF NOT EXISTS quotes (uid int, yourtext(varchar(80), text(varchar(80))"
+    query = "CREATE TABLE IF NOT EXISTS quotes (uid int, yourtext varchar(80), text varchar(80))"
     cursor.execute(query)
     conn.commit()
