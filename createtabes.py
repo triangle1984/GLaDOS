@@ -9,17 +9,17 @@ with conn.cursor() as cursor:
     cursor.execute(query)
     query = "CREATE TABLE IF NOT EXISTS ban (id int)"
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS {tablechat} (id int)"
+    query = "CREATE TABLE IF NOT EXISTS {} (id int)".format(tablechat)
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
+    query = "CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS smehgen (id int, count int, smeh varchar(40), smehslova varchar(40))"
+    query = "CREATE TABLE IF NOT EXISTS smehgen (id int, count int, smeh varchar(40), smehslova varchar(40))"
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
+    query = "CREATE TABLE IF NOT EXISTS prefix (id int, name varchar(40))"
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS {chathello} (id int)"
+    query = "CREATE TABLE IF NOT EXISTS {chathello} (id int)".format(chathello)
     cursor.execute(query)
-    query = f"CREATE TABLE IF NOT EXISTS relation (id int, id2 int)"
+    query = "CREATE TABLE IF NOT EXISTS relation (id int, id2 int)"
     cursor.execute(query)
     query = "CREATE TABLE IF NOT EXISTS vips (id int)"
     cursor.execute(query)
