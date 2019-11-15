@@ -1,7 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 from vk_bot.core.modules.othermethods import OtherMethod
-import requests
 import nekos
 from boltons import iterutils
 
