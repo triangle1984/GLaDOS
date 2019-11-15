@@ -97,7 +97,7 @@ class Main:
             uberequests = [None]
         """
         Эта страшная хероборина снизу отвечает за проверку и запуск модулей
-        щобы ее получше понять, читаните core/util/botutil.py
+        щобы ее получше понять, читаните core/modules/
         """
         for module in self.modules:
             run = False
