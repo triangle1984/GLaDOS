@@ -9,9 +9,10 @@ class Kiss(BasicPlug, Upload):
     doc = "поцеловать юзера"
 
     def main(self):
-        attachment = self.dowloadupload(nekos.img("kiss"))
-        gender = self.vk.users.get(user_ids=self.uid, fields="sex")[0]['sex']
         if len(self.text) > 1:
+            attachment = self.dowloadupload(nekos.img("kiss"))
+            gender = self.vk.users.get(
+                user_ids=self.uid, fields="sex")[0]['sex']
             hug = ",".join(self.text[1:])
             if gender == 1:
                 act = "поцеловала"
