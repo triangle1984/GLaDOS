@@ -22,6 +22,12 @@ class BasicPlug:
         self.prefix = prefix
         self.peer_id = peer
         self.mc = mc
+        self.fwd_messages = self.event.object.fwd_messages
+        self.reply_message = self.event.object.reply_message
+        if self.fwd_messages:
+            self.amsg = self.fwd_messages[0]
+        else:
+            self.amsg = self.reply_message
 
     def sendmsg(self, msg, attachmentst=None, disable_mentions=True):
         try:
