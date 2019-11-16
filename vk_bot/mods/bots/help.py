@@ -13,7 +13,7 @@ class GetHelp(BasicPlug):
         mhelp = "\n"
         allowedtype = ["command", "specialcommand"]
         for moduli in mods.modules:
-            if moduli.types in allowedtype and moduli.available_for != "admins":
+            if moduli.types in allowedtype and moduli.available_for != "admins" and moduli.included:
                 lhelp.append(dict(command=moduli.command, doc=moduli.doc))
         lhelp = list(iterutils.chunked_iter(lhelp, 11))
         lhelp = [dict(command="уходи от", doc="сюда мужик")] + lhelp
