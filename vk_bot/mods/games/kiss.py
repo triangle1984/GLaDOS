@@ -11,9 +11,12 @@ class Kiss(BasicPlug, Upload):
     def main(self):
         attachment = self.dowloadupload(nekos.img("kiss"))
         gender = self.vk.users.get(user_ids=self.uid, fields="sex")[0]['sex']
-        hug = ",".join(self.text[1:])
-        if gender == 1:
-            act = "поцеловала"
+        if len(self.text) > 1:
+            hug = ",".join(self.text[1:])
+            if gender == 1:
+                act = "поцеловала"
+            else:
+                act = "поцеловал"
+            self.sendmsg(f"{act} {hug}", attachment)
         else:
-            act = "поцеловал"
-        self.sendmsg(f"{act} {hug}", attachment)
+            self.sendmsg("А кого целовать?")

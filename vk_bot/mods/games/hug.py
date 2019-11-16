@@ -9,11 +9,15 @@ class Hug(BasicPlug, Upload):
     doc = "обнять юзера"
 
     def main(self):
-        attachment = self.dowloadupload(nekos.img("hug"))
-        gender = self.vk.users.get(user_ids=self.uid, fields="sex")[0]['sex']
-        hug = ",".join(self.text[1:])
-        if gender == 1:
-            act = "обняла"
+        if len(self.text) < 1:
+            attachment = self.dowloadupload(nekos.img("hug"))
+            gender = self.vk.users.get(
+                user_ids=self.uid, fields="sex")[0]['sex']
+            hug = ",".join(self.text[1:])
+            if gender == 1:
+                act = "обняла"
+            else:
+                act = "обнял"
+            self.sendmsg(f"{act} {hug}", attachment)
         else:
-            act = "обнял"
-        self.sendmsg(f"{act} {hug}", attachment)
+            self.sendmsg("А кого обнимать?")
