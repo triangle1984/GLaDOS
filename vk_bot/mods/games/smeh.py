@@ -1,22 +1,30 @@
 #!/usr/bin/env python
-import random, sys, argparse
+import random
+import sys
+import argparse
 from vk_bot.core.sql.sqlgame import smehdb
 from vk_bot.core.modules.basicplug import BasicPlug
+
+
 class Smeh(BasicPlug):
     command = ["/смех", "/смехк"]
     doc = "генератор смеха. С -h вызовет справку"
+
     def args(self):
         args = argparse.ArgumentParser(description="генератор смеха")
-        args.add_argument("-c","-с", "--count", type=int, default=random.randint(5, 50))
+        args.add_argument("-c", "-с", "--count", type=int,
+                          default=random.randint(5, 50))
         args.add_argument("-s", "--smex", default='None')
         args.add_argument("-s2", "--smexslova", default='None')
         args.add_argument("-sc", "--smehcount", default=1, type=int)
         return args
+
     def main(self):
         helps = """а це посложнее. Для этой хуйни я проработал целую систему аргументов:
         /смех -c (число) = количество символов в смехе
         /смех -s (буквы) = символы для генерации смеха
         /смех -s2 (слово) = слово для генерации смеха
+        /смех -sc (число) = из сколькики сообщений буит смех
         -c и -s/s2 можно использовать одновременно
         примеры:
         /смех -s2 .exe -c 69
@@ -41,7 +49,7 @@ class Smeh(BasicPlug):
             ss = ss.parse_args(self.text[1:])
             proverka = self.text[1]
         except IndexError:
-            ss2 =  smehdb(ss, self.uid, db)
+            ss2 = smehdb(ss, self.uid, db)
             if ss2:
                 ss = ss2
         except:
