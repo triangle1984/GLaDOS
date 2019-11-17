@@ -19,6 +19,6 @@ class Kick(BasicPlug, Upload):
                 self.vk.messages.removeChatUser(
                     chat_id=self.event.chat_id, user_id=uid)
             except vk_api.exceptions.ApiError:
-                self.sendmsg("Может пользователя нет в беседе?")
+                self.sendmsg("Нэ удалось  кикнуть")
         else:
             self.sendmsg("Вы не админ беседы!")
