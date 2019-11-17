@@ -17,7 +17,6 @@ class Kick(BasicPlug, Upload, OtherMethod):
             self.sendmsg("каво кикать")
             return
         uadmin = False
-        print(uid)
         for a in self.vk.messages.getConversationMembers(peer_id=self.event.object.peer_id,
                                                          fields="admins")['items']:
             if a['member_id'] == self.event.object.from_id and 'is_admin' in a:
