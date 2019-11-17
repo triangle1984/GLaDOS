@@ -9,7 +9,7 @@ class Kick(BasicPlug, Upload, OtherMethod):
     command = ["/кик"]
 
     def main(self):
-        if len(self.text) > 0:
+        if len(self.text) > 1:
             uid = self.returnpusuid(self.text[1])[0]
         elif self.amsg:
             uid = self.amsg["from_id"]
