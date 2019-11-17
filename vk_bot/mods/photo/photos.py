@@ -8,7 +8,7 @@ from vk_api.utils import get_random_id
 class Photos(BasicPlug, OtherMethod):
     doc = "Фотачки"
     command = ["/юри", "/каты", "/геббельс", "/яой", "/трапы", "/лоли", "/махно",
-               "/калян", "/хентай", "/ноги", "/ножки", "/мем", "/адольф", "/гитлер"]
+               "/калян", "/хентай", "/ноги", "/ножки", "/мем", "/адольф"]
 
     def main(self):
         requests = self.text[0]
