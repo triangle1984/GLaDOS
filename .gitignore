@@ -123,3 +123,4 @@ run.sh
 vk_bot/photos/*
 flasktest
 vk-bot
+vk_bot/mods/admins/shell.py
