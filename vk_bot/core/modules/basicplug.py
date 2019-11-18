@@ -22,6 +22,8 @@ class BasicPlug:
         self.prefix = prefix
         self.peer_id = peer
         self.mc = mc
+
+    def makeothervariables(self):
         self.fwd_messages = self.event.object.fwd_messages
         self.reply_message = self.event.object.reply_message
         if self.fwd_messages:

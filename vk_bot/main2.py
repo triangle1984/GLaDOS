@@ -138,6 +138,7 @@ class Main:
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc)
+                    module.makeothervariables()
                     then = datetime.datetime.now()
                     module.main()
                     now = datetime.datetime.now()
