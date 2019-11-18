@@ -1,9 +1,7 @@
-from vk_api.utils import get_random_id
-
-
 class BasicPlug:
     included = True
     attachment = False
+    action = False
     types = 'command'
     vktypes = ["message_new"]
     doc = "Заполните справку в модуле"
@@ -31,12 +29,15 @@ class BasicPlug:
         else:
             self.amsg = self.reply_message
 
-    def sendmsg(self, msg, attachmentst=None, disable_mentions=True):
+    def sendmsg(self, msg, attachmentst=None, disable_mentions=True, prefix=True):
         try:
             peer_id = self.event.object.peer_id
         except:
             peer_id = self.event.peer_id
-        prefix = f"*id{self.uid}({self.mc2['prefix']})"
-        self.vk.messages.send(peer_id=peer_id, random_id=get_random_id(),
-                              message=f"{prefix}, {msg}", disable_mentions=disable_mentions,
+        if prefix:
+            prefix = f"*id{self.uid}({self.mc2['prefix']}), "
+        else:
+            prefix = ""
+        self.vk.messages.send(peer_id=peer_id, random_id=0,
+                              message=f"{prefix}{msg}", disable_mentions=disable_mentions,
                               attachment=attachmentst)

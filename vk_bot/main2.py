@@ -62,6 +62,11 @@ class Main:
             self.pool.submit(self.checkthread)
 
     def lobby(self, event):
+        action = event.object.action
+        if action:
+            action = action['type']
+        else:
+            action = False
         try:
             attachmentype = event.object.attachments[0]['type']
         except:
@@ -116,7 +121,7 @@ class Main:
         """
         for module in self.modules:
             run = False
-            if module.included and events in module.vktypes and mc2[module.available_for]:
+            if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
                 if module.types == "command":
                     if requests in module.command:
                         run = True
