@@ -32,8 +32,7 @@ class Autdiototext(BasicPlug, Upload):
             result = r.recognize_google(audio, language="ru_RU")
             self.sendmsg(f"сказал: {result}")
         except sr.UnknownValueError:
-            self.sendmsg(
-                f"НИХУЯ НЕ ПОНИМАЮ НИ ОДНОГО СЛОВА БЛЯТЬ, КАРТАВАЯ СУКА")
+            return
         except sr.RequestError:
             self.sendmsg(f"Ошибка при отправки запроса")
         finally:
