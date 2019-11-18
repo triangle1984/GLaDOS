@@ -8,7 +8,7 @@
 Добавьте в pythonpath путь к vk_bot    
 Например,  как можно сделать это в линуксе:
 ```
-export PYTHONPATH=/home/archie/vk-bot
+export PYTHONPATH=/home/$USER/GLaDOS
 ```
 ### Бд (mysql)
 Поднимете msql аль его форки, в инете гайдов на это много
