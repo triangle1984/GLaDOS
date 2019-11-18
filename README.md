@@ -5,10 +5,10 @@
 А так же, через ваш пакетный менеджер поставьте ffmpeg   
 В пипе не нашел, поэтому еще поставьте https://github.com/Nekos-life/nekos.py    
 А еще запустите локально сервер memcached        
-Добавьте в pythonpath путь к vk_bot    
+Добавьте в pythonpath путь к репе     
 Например,  как можно сделать это в линуксе:
 ```
-export PYTHONPATH=/home/archie/vk-bot
+export PYTHONPATH=/home/$USER/GLaDOS
 ```
 ### Бд (mysql)
 Поднимете msql аль его форки, в инете гайдов на это много
