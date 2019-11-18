@@ -10,7 +10,7 @@ import time
 import random
 
 
-class Autdiototext(BasicPlug, Upload):
+class AutdiotoText(BasicPlug, Upload):
     doc = "гс в текст"
     types = "runalways"
     attachment = 'audio_message'
