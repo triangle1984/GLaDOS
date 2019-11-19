@@ -29,8 +29,8 @@ class Upload:
             os.remove(name)
         return f"audio_message{audio['owner_id']}_{audio['id']}"
 
-    def dowloadfile(self, url):
-        name = f"photo{time.time_ns()}.png"
+    def dowloadfile(self, url, expansion="png"):
+        name = f"photo{time.time_ns()}.{expansion}"
         with open(name, "wb") as files:
             response = requests.get(url).content
             files.write(response)
