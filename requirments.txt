@@ -10,3 +10,5 @@ boltons
 python-dotenv
 google_images_download
 pylibmc
+bs4
+lxml
