@@ -1,5 +1,6 @@
 import pymysql
 
+
 from pymysql.cursors import DictCursor
 from contextlib import closing
 from vk_bot.core.sql.vksql import auth
