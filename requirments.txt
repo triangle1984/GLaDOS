@@ -12,3 +12,4 @@ google_images_download
 pylibmc
 bs4
 lxml
+pillow
