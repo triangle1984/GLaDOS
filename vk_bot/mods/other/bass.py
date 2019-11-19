@@ -3,8 +3,6 @@ from vk_bot.core.modules.upload import Upload
 from pydub import AudioSegment
 import os
 import random
-
-
 class MusicBoost(BasicPlug, Upload):
     doc = "басуха прям пиздец"
     command = ["/басуха"]
@@ -21,12 +19,12 @@ class MusicBoost(BasicPlug, Upload):
         sound.export(soundname, format="wav")
 
         sound = AudioSegment.from_file(soundname)
-        # make bassboost track
+        #make bassboost track
         bassboost = sound + 20
         bass = f"boost-{title}.wav"
         bassboost.export(bass, format="wav")
 
-        # Transfer wav to OGG
+        #Transfer wav to OGG
         sound = AudioSegment.from_file(bass)
         ogg = f"boost-{title}.ogg"
         sound.export(ogg, format="ogg")
@@ -36,7 +34,6 @@ class MusicBoost(BasicPlug, Upload):
         except:
             return
         finally:
-            os.remove(ogg)
             os.remove(bass)
             os.remove(soundname)
             os.remove(f"{title}.mp3")
