@@ -30,7 +30,7 @@ class MusicBoost(BasicPlug, Upload):
         sound.export(ogg, format="ogg")
         try:
             self.sendmsg(f"делаю бах-бах")
-            self.sendmsg(self.upload.audio_message(ogg))
+            self.sendmsg("", self.audiomessage(ogg))
         except:
             return
         finally:
