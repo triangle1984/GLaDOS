@@ -9,4 +9,4 @@ class Greeting(BasicPlug):
 
     def main(self):
         message = checktable(chathello, 'id', self.event.chat_id)['hello']
-        self.sendmsg(message)
+        self.sendmsg(message, prefix=False)

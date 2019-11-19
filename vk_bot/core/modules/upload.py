@@ -2,6 +2,7 @@ import time
 import os
 import requests
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
+from loadevn import *
 
 
 class Upload:
@@ -13,10 +14,20 @@ class Upload:
         return f"photo{response['owner_id']}_{response['id']}"
 
     def uploaddoc(self, document, peer_id):
-        response = self.upload.document_message(
-            doc=document, peer_id=peer_id)['doc']
-        os.remove(document)
+        try:
+            response = self.upload.document_message(
+                doc=document, peer_id=peer_id)['doc']
+        finally:
+            os.remove(document)
         return f"doc{response['owner_id']}_{response['id']}"
+
+    def audiomessage(self, name):
+        try:
+            audio = self.upload.audio_message(
+                name, peer_id=self.peer_id, group_id=group_idd)['audio_message']
+        finally:
+            os.remove(name)
+        return f"audio_message{audio['owner_id']}_{audio['id']}"
 
     def dowloadfile(self, url):
         name = f"photo{time.time_ns()}.png"
