@@ -3,8 +3,8 @@ import re
 
 
 class Calculator2(BasicPlug):
-    doc = "Калькулятор 2.0. Возможно заменит основной"
-    command = ["/калькулятор2"]
+    doc = "Полноценный калькулятор"
+    command = ["/калькулятор"]
 
     def main(self):
         equation = "".join(self.text[1:])
