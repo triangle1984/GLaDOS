@@ -4,7 +4,7 @@ import re
 
 class Calculator2(BasicPlug):
     doc = "Полноценный калькулятор"
-    command = ["/калькулятор"]
+    command = ["/калькулятор", "/посчитай", "/calc", "/скока"]
 
     def main(self):
         equation = "".join(self.text[1:])
