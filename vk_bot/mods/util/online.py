@@ -9,6 +9,6 @@ class Online(BasicPlug):
         for a in onlineid:
             if a['online'] == 1:
                 onlinenumber+=1
-                onlinelist.append(f"{str(onlinenumber)}. {a['first_name']} {a['last_name']}")
+                onlinelist.append(f"{str(onlinenumber)}. @id{a['id']} ({a['first_name']} {a['last_name']})")
         onlinejoin = "\n".join(onlinelist)
         self.sendmsg(f"Участники онлайн:\n{onlinejoin}")
