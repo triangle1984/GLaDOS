@@ -1,10 +1,10 @@
 import vk_api
 from vk_bot.core.modules.basicplug import BasicPlug
-from vk_bot.core.modules.upload import Upload
+from vk_bot.core.modules.chatmager import ChatManager
 from vk_bot.core.modules.othermethods import OtherMethod
 
 
-class Kick(BasicPlug, Upload, OtherMethod):
+class Kick(BasicPlug, ChatManager, OtherMethod):
     doc = "Кик юзера"
     command = ["/кик"]
 
@@ -16,11 +16,7 @@ class Kick(BasicPlug, Upload, OtherMethod):
         else:
             self.sendmsg("каво кикать")
             return
-        uadmin = False
-        for a in self.vk.messages.getConversationMembers(peer_id=self.event.object.peer_id,
-                                                         fields="admins")['items']:
-            if a['member_id'] == self.event.object.from_id and 'is_admin' in a:
-                uadmin = True
+        uadmin = self.checkuadmin()
         if uadmin:
             try:
                 self.vk.messages.removeChatUser(
