@@ -50,12 +50,6 @@ class OtherMethod:
                 uid.append(convert)
         return uid
 
-    def returnpusuid(self, text):
-        text = text.replace("[", "").replace("]", "").split("|")
-        text[0] = text[0].replace("club", "-")
-        text[0] = text[0].replace("id", "")
-        return text
-
     def randomuser(self):
         whoid = random.choice(self.vk.messages.getConversationMembers(
             peer_id=self.event.object.peer_id)['profiles'])

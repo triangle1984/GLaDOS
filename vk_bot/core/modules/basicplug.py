@@ -42,3 +42,9 @@ class BasicPlug:
         self.vk.messages.send(peer_id=peer_id, random_id=0,
                               message=f"{prefix}{msg}", disable_mentions=disable_mentions,
                               attachment=attachmentst)
+
+    def returnpusuid(self, text):
+        text = text.replace("[", "").replace("]", "").split("|")
+        text[0] = text[0].replace("club", "-")
+        text[0] = text[0].replace("id", "")
+        return text
