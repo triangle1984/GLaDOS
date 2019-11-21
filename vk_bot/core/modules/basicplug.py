@@ -4,6 +4,7 @@ class BasicPlug:
     action = False
     types = 'command'
     vktypes = ["message_new"]
+    uberequests = [False]
     doc = "Заполните справку в модуле"
     available_for = "user"
 

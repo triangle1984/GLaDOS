@@ -123,7 +123,7 @@ class Main:
             run = False
             if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
                 if module.types == "command":
-                    if requests in module.command:
+                    if requests in module.command or uberequests in module.uberequests:
                         run = True
                 elif module.types == "runalways":
                     run = True
