@@ -11,6 +11,8 @@ import logging
 import datetime
 from vk_bot.core.sql.sqlgame import *
 import mods
+import sys
+import argparse
 
 
 class Main:
@@ -25,6 +27,7 @@ class Main:
     def __init__(self, token, token22):
         self.token = token
         self.token22 = token22
+        self.argsdebug()
         self.authorization()
         self.thread()
         self.modules = mods.modules
@@ -42,6 +45,16 @@ class Main:
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
 
+    def argsdebug(self):
+        args = argparse.ArgumentParser(description="параметры запуска бота")
+        args.add_argument('-d', '--debug',  action='store_true',
+                          default=False, dest="debug")
+        try:
+            args = args.parse_args(sys.argv[1:])
+        except:
+            return
+        self.debug = args.debug
+
     def checkthread(self):
         """
         Скинуть название исключения в потоке, ежели  такое произойдет
@@ -57,9 +70,11 @@ class Main:
         logging.info("Запуск бота")
         self.mc = pylibmc.Client(["127.0.0.1"])
         for event in self.longpoll.listen():
-            # self.lobby(event)
-            self.futures.append(self.pool.submit(self.lobby, event))
-            self.pool.submit(self.checkthread)
+            if self.debug:
+                self.lobby(event)
+            else:
+                self.futures.append(self.pool.submit(self.lobby, event))
+                self.pool.submit(self.checkthread)
 
     def lobby(self, event):
         action = event.object.action
