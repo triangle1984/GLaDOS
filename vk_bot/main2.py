@@ -113,8 +113,8 @@ class Main:
             requests = text[0].lower()
             uberequests = " ".join(text[0:]).lower()
         except IndexError:
-            requests = None
-            uberequests = None
+            requests = [None]
+            uberequests = [None]
         """
         Эта страшная хероборина снизу отвечает за проверку и запуск модулей
         щобы ее получше понять, читаните core/modules/ или коммент снизу
