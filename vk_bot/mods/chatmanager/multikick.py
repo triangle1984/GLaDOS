@@ -18,6 +18,4 @@ class Kick(BasicPlug, ChatManager, OtherMethod):
             self.sendmsg("каво кикать")
             return
         for user in uidlist:
-            self.kick(user)
-        else:
-            self.sendmsg("Вы нэ админ беседы")    
+            self.kick(user) 
