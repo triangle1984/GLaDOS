@@ -15,7 +15,8 @@ class AutdiotoText(BasicPlug, Upload):
     attachment = 'audio_message'
 
     def main(self):
-        if checktable(f'{speechtotext}', "chat_id", f"{self.event.object.peer_id}")['status'] == 0:
+        if checktable(f'{speechtotext}', "chat_id", f"{self.event.object.peer_id}", andd="status = 0"):
+            print(".")
             return
         else:
             try:
