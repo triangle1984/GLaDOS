@@ -1,8 +1,7 @@
-"""
-Модуль написал https://vk.com/feelan03
-"""
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
+from vk_bot.core.sql.vksql import *
+from loadevn import speechtotext
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
@@ -16,14 +15,17 @@ class AutdiotoText(BasicPlug, Upload):
     attachment = 'audio_message'
 
     def main(self):
-        try:
-            link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]
-        except:
+        if checktable(f'{speechtotext}', "chat_id", f"{self.event.object.peer_id}")['status'] == 0:
             return
-        name = self.dowloadfile(link)['name']
-        sound = AudioSegment.from_mp3(name)
-        soundname = f"audio2{time.time_ns()}.wav"
-        sound.export(soundname, format="wav")
+        else:
+            try:
+                link = self.event.object["attachments"][0]["audio_message"]["link_mp3"]
+            except:
+                return
+            name = self.dowloadfile(link)['name']
+            sound = AudioSegment.from_mp3(name)
+            soundname = f"audio2{time.time_ns()}.wav"
+            sound.export(soundname, format="wav")
 
         r = sr.Recognizer()  # Использование файла как источник
         with sr.AudioFile(soundname) as source:
