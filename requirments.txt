@@ -13,3 +13,4 @@ pylibmc
 bs4
 lxml
 pillow
+gTTS
