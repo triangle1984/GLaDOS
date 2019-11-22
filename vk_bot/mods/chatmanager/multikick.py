@@ -17,13 +17,7 @@ class Kick(BasicPlug, ChatManager, OtherMethod):
         else:
             self.sendmsg("каво кикать")
             return
-        uadmin = self.checkuadmin()
-        if uadmin:
-            try:
-                for user in uidlist:
-                    self.vk.messages.removeChatUser(
-                        chat_id=self.event.chat_id, user_id=user)
-            except vk_api.exceptions.ApiError:
-                self.sendmsg("Нэ удалось  кикнуть")
+        for user in uidlist:
+            self.kick(user)
         else:
             self.sendmsg("Вы нэ админ беседы")    
