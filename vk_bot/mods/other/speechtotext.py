@@ -1,6 +1,3 @@
-"""
-Модуль написал https://vk.com/feelan03
-"""
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 import speech_recognition as sr
