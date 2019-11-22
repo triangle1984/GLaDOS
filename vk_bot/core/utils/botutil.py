@@ -29,8 +29,8 @@ def botmain(vk, event):
         vk.groups.enableOnline(group_id=group_idd)
     except vk_api.exceptions.ApiError:
         None
-    if "chat_id" in dir(event):
-        checkchat(event)
+    # if "chat_id" in dir(event):
+    #     checkchat(event)
 
 
 def sqlcache(mc, uid):
