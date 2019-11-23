@@ -5,7 +5,7 @@ import random
 
 
 class Yourphoto(BasicPlug, OtherMethod):
-    command = ["/тестинг"]
+    command = ["/альбомы"]
     doc = "Личные альбомы, вызов без всего покажет справку"
     types = 'specialcommand'
 
