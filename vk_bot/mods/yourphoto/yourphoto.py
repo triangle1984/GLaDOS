@@ -5,7 +5,7 @@ import random
 
 
 class Yourphoto(BasicPlug, OtherMethod):
-    command = ["/альбомы"]
+    command = ["/тестинг"]
     doc = "Личные альбомы, вызов без всего покажет справку"
     types = 'specialcommand'
 
@@ -23,10 +23,15 @@ class Yourphoto(BasicPlug, OtherMethod):
                 self.sendmsg(self.rmyourphoto())
                 return
             else:
+                text = " ".join(self.text[1:])
+                stext = text.split("::поиск")
+                if len(stext) > 1:
+                    public = ",".join(self.groupsearch(7, stext[1]))
+                else:
+                    public = "".join(self.text[2:])
+                    public = public.split(",")
+                    public = ",".join(self.nametoid(public))
                 command = self.text[1].lower()
-                public = "".join(self.text[2:])
-                public = public.split(",")
-                public = ",".join(self.nametoid(public))
                 number = "".join(self.text[0])[8:]
                 number = int(number)
                 if self.mc2["vips"] == False and mc["count"] >= 3:

@@ -57,3 +57,8 @@ class OtherMethod:
         wholastname = whoid['last_name']
         whoidstr = whoid['id']
         return f"@id{whoidstr} ({whofirstname} {wholastname})"
+
+    def groupsearch(self, count, name):
+        result = self.vk2.groups.search(
+            q=name, count=count)["items"]
+        return ("-" + str(x['id']) for x in result)
