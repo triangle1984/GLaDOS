@@ -21,6 +21,8 @@ main.py - страничный бот и почти заброшен
 
 def mainlobby(vk, mc, event, upload):
     events = event.type.name.lower()
+    action = False
+    attachmentype = False
     try:
         response = {"message": None}
         if "text" in dir(event) and "user_id" in dir(event):
@@ -43,17 +45,30 @@ def mainlobby(vk, mc, event, upload):
                 prefix = mc2["prefix"]
                 for module in mods.modules:
                     run = False
-                    if module.included and events in module.vktypes and mc2[module.available_for]:
+                    if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
                         if module.types == "command":
-                            if requests in module.command:
+                            if requests in module.command or uberequests in module.uberequests:
                                 run = True
                         elif module.types == "runalways":
                             run = True
+                        elif module.types == "commandb":
+                            command = module.getcommand(uid, requests)
+                            if requests == command:
+                                run = True
+                        elif module.types == "specialcommand":
+                            rlen = len(module.command[0])
+                            if requests[:rlen] == module.command[0]:
+                                run = True
+                        if module.attachment:
+                            if attachmentype != module.attachment:
+                                run = False
                         if run:
                             module = module(vk, vk, upload)
                             module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                            prefix=prefix, peer="", mc=mc)
+                                            prefix=prefix, peer=event.peer_id, mc=mc)
+                            module.makeothervariables()
                             module.main()
+
     except KeyboardInterrupt:
         sys.exit()
 
@@ -75,9 +90,9 @@ def run():
     logging.basicConfig(level=logging.INFO)
     futures = []
     for event in longpoll.listen():
-        # mainlobby(vk, mc, event, upload)
-        futures.append(pool.submit(mainlobby, vk, mc, event, upload))
-        pool.submit(checkthread, futures)
+        mainlobby(vk, mc, event, upload)
+        # futures.append(pool.submit(mainlobby, vk, mc, event, upload))
+        # pool.submit(checkthread, futures)
 
 
 run()

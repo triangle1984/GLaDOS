@@ -23,8 +23,12 @@ class BasicPlug:
         self.mc = mc
 
     def makeothervariables(self):
-        self.fwd_messages = self.event.object.fwd_messages
-        self.reply_message = self.event.object.reply_message
+        try:
+            self.fwd_messages = self.event.object.fwd_messages
+            self.reply_message = self.event.object.reply_message
+            # страничный бот, я тебя ненавижу
+        except:
+            return
         if self.fwd_messages:
             self.amsg = self.fwd_messages[0]
         else:
