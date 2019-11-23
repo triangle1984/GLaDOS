@@ -90,9 +90,9 @@ def run():
     logging.basicConfig(level=logging.INFO)
     futures = []
     for event in longpoll.listen():
-        mainlobby(vk, mc, event, upload)
-        # futures.append(pool.submit(mainlobby, vk, mc, event, upload))
-        # pool.submit(checkthread, futures)
+        # mainlobby(vk, mc, event, upload)
+        futures.append(pool.submit(mainlobby, vk, mc, event, upload))
+        pool.submit(checkthread, futures)
 
 
 run()
