@@ -15,7 +15,7 @@ def sendall(event, text, vk, attachment=None):
         result = cursor.fetchall()
         for a in result:
             if checktable(f'{tablechat}', "id", f"{a['id']}", andd="whitelist = 1"):
-                print(".")
+                None
             else:    
                 try:
                     vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
