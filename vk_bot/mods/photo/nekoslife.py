@@ -17,10 +17,10 @@ class Nekoslife(BasicPlug, Upload, OtherMethod):
             a.count = 30
         image_url = []
         try:
-            for _ in range(a.count):
-                image_url.append(nekos.img(self.text[1]))
             if a.count > 4:
                 self.sendmsg("начинаю качать пикчи")
+            for _ in range(a.count):
+                image_url.append(nekos.img(self.text[1]))
             image = self.multithreadwoload(image_url)
             image = list(iterutils.chunked_iter(image.split(","), 10))
             for image in image:
