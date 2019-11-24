@@ -19,10 +19,14 @@ class BasicPlug:
         self.event = event
         self.mc2 = mc2
         self.prefix = prefix
-        self.peer_id = peer
+        # self.peer_id = peer
         self.mc = mc
 
     def makeothervariables(self):
+        try:
+            self.peer_id = self.event.object.peer_id
+        except:
+            self.peer_id = self.event.peer_id
         try:
             self.fwd_messages = self.event.object.fwd_messages
             self.reply_message = self.event.object.reply_message
@@ -34,11 +38,9 @@ class BasicPlug:
         else:
             self.amsg = self.reply_message
 
-    def sendmsg(self, msg, attachmentst=None, disable_mentions=True, prefix=True):
-        try:
-            peer_id = self.event.object.peer_id
-        except:
-            peer_id = self.event.peer_id
+    def sendmsg(self, msg, attachmentst=None, disable_mentions=True, prefix=True, peer_id=False):
+        if peer_id == False:
+            peer_id = self.peer_id
         if prefix:
             prefix = f"*id{self.uid}({self.mc2['prefix']}), "
         else:

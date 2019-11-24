@@ -97,6 +97,8 @@ class Main:
         except:
             text = []
         uid = event.object.from_id
+        if uid == None:
+            uid = event.object['user_id']
         logging.info(
             f"Сообщение: {event.object.text}  От: {uid}  В: {event.object.peer_id}")
         """
