@@ -14,11 +14,15 @@ def sendall(event, text, vk, attachment=None):
         cursor.execute(query)
         result = cursor.fetchall()
         for a in result:
-            try:
-                vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
-                                 message=text, attachment=attachment)
-            except vk_api.exceptions.ApiError:
-                pass
+            if checktable(f'{tablechat}', "id", f"{a['id']}", andd="whitelist = 1"):
+                print(".")
+                return
+            else:    
+                try:
+                    vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
+                                    message=text, attachment=attachment)
+                except vk_api.exceptions.ApiError:
+                    pass
 
 
 def checkban(uid):
