@@ -52,6 +52,7 @@ class Main:
         try:
             args = args.parse_args(sys.argv[1:])
         except:
+            self.debug = False
             return
         self.debug = args.debug
 

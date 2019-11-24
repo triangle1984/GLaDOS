@@ -12,19 +12,9 @@ def groupjoin(vk, event):
                      message=f'В группу вступил новый пользователь! {idjoin}')
 
 
-def sendpost(vk, event):
-    post = event.object["id"]
-    owner_id = event.object["owner_id"]
-    attachment = f"wall{owner_id}_{post}"
-    text = "Новый пост в группе~"
-    sendall(event, text, vk, attachment)
-
-
 def botmain(vk, event):
     if event.type == VkBotEventType.GROUP_JOIN:
         groupjoin(vk, event)
-    if event.type == VkBotEventType.WALL_POST_NEW:
-        sendpost(vk, event)
     try:
         vk.groups.enableOnline(group_id=group_idd)
     except vk_api.exceptions.ApiError:
