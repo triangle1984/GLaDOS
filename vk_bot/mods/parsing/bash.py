@@ -4,7 +4,7 @@ import requests
 
 
 class Bash(BasicPlug):
-    command = ["/баш"]
+    command = ("баш",)
     doc = "рандом цитата из баша"
 
     def main(self):

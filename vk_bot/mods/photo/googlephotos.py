@@ -6,7 +6,7 @@ import random
 
 class GooglePhotos(BasicPlug, Upload):
     doc = "Найти в гугле пикчу по вашему запросу"
-    command = ["/гугл", "/пикчи", "/гуглпикчи"]
+    command = ("гугл", "пикчи", "гуглпикчи",)
 
     def main(self):
         photos = None

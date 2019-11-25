@@ -5,7 +5,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 class Pixel(BasicPlug, Upload):
     doc = "Фильтр пиксель"
-    command = ["/пиксель"]
+    command = ("пиксель",)
     def pixelate(self, image, pixel_size=9, draw_margin=True):
         margin_color = (0, 0, 0)
 

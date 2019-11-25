@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Video(BasicPlug):
     doc = "Поиск видео"
-    command = ["/видео"]
+    command = ("видео",)
     def main(self):
         text = " ".join(self.text[1:])
         try:

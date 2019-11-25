@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Postsearch(BasicPlug):
     doc = "Поиск постов"
-    command = ["/посты"]
+    command = ("посты",)
     def main(self):
         try:
             text = " ".join(self.text[1:])

@@ -1,7 +1,7 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 class Textfrombits(BasicPlug):
     doc = "Расшифровать бинарный код"
-    command = ["/бинарный1"]
+    command = ("бинарный1",)
     def main(self):
         text = " ".join(self.text[1:])
         try:

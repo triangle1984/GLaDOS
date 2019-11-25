@@ -111,12 +111,20 @@ class Main:
         prefix = mc2["prefix"]
         if mc2["ban"]:
             return
+        preixcommand = ("/", "!")
+        # бох ты мой, какой говнокод
+        requests = [None]
+        uberequests = [None]
+        requests2 = [None]
+        uberequests2 = [None]
         try:
             requests = text[0].lower()
-            uberequests = " ".join(text[0:]).lower()
+            if requests[0] in preixcommand:
+                requests2 = requests[1:]
+                uberequests2 = event.object.text[1:].lower()
+            uberequests = event.object.text.lower()
         except IndexError:
-            requests = [None]
-            uberequests = [None]
+            pass
         """
         Эта страшная хероборина снизу отвечает за проверку и запуск модулей
         щобы ее получше понять, читаните core/modules/ или коммент снизу
@@ -140,7 +148,7 @@ class Main:
             run = False
             if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
                 if module.types == "command":
-                    if requests in module.command or uberequests in module.uberequests:
+                    if requests2 in module.command or uberequests2 in module.uberequests:
                         run = True
                 elif module.types == "runalways":
                     run = True
@@ -150,7 +158,7 @@ class Main:
                         run = True
                 elif module.types == "specialcommand":
                     rlen = len(module.command[0])
-                    if requests[:rlen] == module.command[0]:
+                    if requests2[:rlen] == module.command[0]:
                         run = True
                 if module.attachment:
                     if attachmentype != module.attachment:

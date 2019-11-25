@@ -1,7 +1,7 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 import subprocess
 class Shell(BasicPlug):
-    command = ["/шелл"]
+    command = ("шелл",)
     doc = "Выполнить команду в шелле"
     available_for = "admins"
     def main(self):

@@ -5,7 +5,7 @@ import nekos
 
 
 class Kiss(BasicPlug, Upload):
-    command = ["/поцеловать", "/цмок", "/kiss"]
+    command = ("поцеловать", "цмок", "kiss",)
     doc = "поцеловать юзера"
 
     def main(self):

@@ -2,7 +2,7 @@
 # import math
 # class Calculator(BasicPlug):
 #     doc = "Калькулятор"
-#     command = ["/калькулятор"]
+#     command = ("калькулятор",)
 #     def main(self):
 #         try:
 #             x = self.text[1]; x = int(x)
@@ -22,7 +22,7 @@
 #             if x > 999 or y > 999:
 #                 return
 #             result = x ** y
-#         elif encalc == "/":
+#         elif encalc == "":
 #             try:
 #                 x / y
 #             except ZeroDivisionError:

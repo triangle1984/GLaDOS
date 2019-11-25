@@ -4,7 +4,7 @@ from vk_bot.core.modules.othermethods import OtherMethod
 
 
 class Yourgroup(BasicPlug, OtherMethod):
-    command = ["/группы"]
+    command = ("группы",)
     doc = "Личные группы, вызов без всего покажет справку"
     types = 'specialcommand'
 

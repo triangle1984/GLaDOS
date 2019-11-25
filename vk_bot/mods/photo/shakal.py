@@ -10,7 +10,7 @@ from vk_bot.core.modules.upload import Upload
 
 class Shakal(BasicPlug, Upload):
     doc = "Шакалим"
-    command = ["/шакал"]
+    command = ("шакал",)
 
     def main(self):
         try:

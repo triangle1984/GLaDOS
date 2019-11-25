@@ -5,7 +5,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 class Disappoint(BasicPlug, Upload):
     doc = "Наклеивает \"огорчило\""
-    command = ["/огорчило"]
+    command = ("огорчило",)
     def main(self):
         try:
             url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']

@@ -7,7 +7,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 
 
 class Smeh(BasicPlug):
-    command = ["/смех", "/смехк"]
+    command = ("смех", "смехк",)
     doc = "генератор смеха. С -h вызовет справку"
 
     def args(self):

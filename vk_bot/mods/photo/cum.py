@@ -6,7 +6,7 @@ import os
 
 class CamShot(BasicPlug, Upload):
     doc = "Сделать из фотки 'спасибо я кончил'"
-    command = ["/спасибо"]
+    command = ("спасибо",)
 
     def main(self):
         try:

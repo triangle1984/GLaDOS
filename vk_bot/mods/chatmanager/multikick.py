@@ -6,7 +6,7 @@ from vk_bot.core.modules.othermethods import OtherMethod
 
 class Kick(BasicPlug, ChatManager, OtherMethod):
     doc = "Кик нескольких юзеров"
-    command = ["/мультикик"]
+    command = ("мультикик",)
 
     def main(self):
         uidlist = []

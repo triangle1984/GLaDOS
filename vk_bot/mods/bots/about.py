@@ -3,7 +3,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 
 class AboutBot(BasicPlug):
     doc = "Инфа о боте"
-    command = ["/оботе"]
+    command = ("оботе",)
 
     def main(self):
         info = """

@@ -4,7 +4,7 @@ from vk_api.utils import get_random_id
 from loadevn import *
 class Hello(BasicPlug):
     doc = "Установка приветствий для новых участников беседы"
-    command = ["/приветствие"]
+    command = ("приветствие",)
     def main(self):
         text = " ".join(self.text[1:])
         if self.event.object['attachments']:

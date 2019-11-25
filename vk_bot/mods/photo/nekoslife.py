@@ -7,7 +7,7 @@ from boltons import iterutils
 
 class Nekoslife(BasicPlug, Upload, OtherMethod):
     doc = "Рандом фотки с nekoslife"
-    command = ["/nekoslife", "/некослайф", "/некос", "/nekos"]
+    command = ("nekoslife", "некослайф", "некос", "nekos",)
 
     def main(self):
         a = self.args(self.text[2:])

@@ -6,7 +6,7 @@ import random
 
 class GetRule34(BasicPlug, Upload):
     doc = "Скора ето буит руле34"
-    command = ["/руле34"]
+    command = ("руле34",)
     available_for = "vips"
 
     def main(self):

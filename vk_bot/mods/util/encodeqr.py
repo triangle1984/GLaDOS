@@ -3,7 +3,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.othermethods import OtherMethod
 class Encodeqr(BasicPlug, OtherMethod):
     doc = "Зашифровать текст в qrcode"
-    command = ["/encodeqr"]
+    command = ("encodeqr",)
     def main(self):
         try:
             attachments = []

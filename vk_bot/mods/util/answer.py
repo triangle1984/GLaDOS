@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Answer(BasicPlug):
     doc = "Ответы на заданные сообщения"
-    command = ["споки", "спокойной", "привет", "ку", "зиг", "слава украине", 'драсте']
+    command = ("споки", "спокойной", "привет", "ку", "зиг", "слава украине", 'драсте',)
     def main(self):
         zapros = self.text[0].lower()
         if zapros == "споки" or zapros == "спокойной":

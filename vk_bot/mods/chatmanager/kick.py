@@ -5,7 +5,7 @@ from vk_bot.core.modules.chatmager import ChatManager
 
 class Kick(BasicPlug, ChatManager):
     doc = "Кик юзера"
-    command = ["/кик"]
+    command = ("кик",)
 
     def main(self):
         if len(self.text) > 1:

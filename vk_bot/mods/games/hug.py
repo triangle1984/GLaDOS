@@ -5,7 +5,7 @@ import nekos
 
 
 class Hug(BasicPlug, Upload):
-    command = ["/обнять", "/обнимашки", "/hug"]
+    command = ("обнять", "обнимашки", "hug",)
     doc = "обнять юзера"
 
     def main(self):

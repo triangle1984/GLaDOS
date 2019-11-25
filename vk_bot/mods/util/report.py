@@ -3,7 +3,7 @@ from vk_api.utils import get_random_id
 from vk_bot.core.modules.basicplug import BasicPlug
 class Lentomsg(BasicPlug):
     doc = "Отправить сообщение админу"
-    command = ["/репорт"]
+    command = ("репорт",)
     def main(self):
         text = " ".join(self.text[1:])
         if text == "":

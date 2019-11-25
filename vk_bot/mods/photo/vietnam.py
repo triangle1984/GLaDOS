@@ -5,7 +5,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 class Quote(BasicPlug, Upload):
     doc = "Фильтр Вьетнам"
-    command = ["/вьетнам"]
+    command = ("вьетнам",)
     def main(self):
         url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         img = requests.get(url).content

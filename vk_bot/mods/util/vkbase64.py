@@ -2,12 +2,12 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import base64
 class Vkbase64(BasicPlug):
     doc = "Зашифровать или расшифровать текст"
-    command = ["/зашифровать", "/расшифровать"]
+    command = ("зашифровать", "расшифровать",)
     def main(self):
         com = self.text[0].lower()
-        if com == "/зашифровать":
+        if com == "зашифровать":
             self.sendmsg(vkbase64(self.text, encode=True))
-        elif com == "/расшифровать":
+        elif com == "расшифровать":
             self.sendmsg(vkbase64(self.text, decode=True))
 
 def vkbase64(text, encode=False, decode=False):

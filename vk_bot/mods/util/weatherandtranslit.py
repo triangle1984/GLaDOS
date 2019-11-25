@@ -3,14 +3,14 @@ import requests
 
 
 class Weatherandtranslit(BasicPlug):
-    doc = "/погода *город* - покажет погоду в городе, перевдчик - переведет текст с любого языка"
-    command = ["/переводчик", "/погода"]
+    doc = "погода *город* - покажет погоду в городе, перевдчик - переведет текст с любого языка"
+    command = ("переводчик", "погода",)
 
     def main(self):
         com = self.text[0].lower()
-        if com == "/переводчик":
+        if com == "переводчик":
             self.sendmsg(translit(self.text, self.vk))
-        if com == "/погода":
+        if com == "погода":
             weather(self)
 
 

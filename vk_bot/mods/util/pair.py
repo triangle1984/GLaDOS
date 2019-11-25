@@ -3,7 +3,7 @@ from vk_bot.core.modules.othermethods import OtherMethod
 import random, vk_api 
 class Pair(BasicPlug, OtherMethod): 
     doc = "Шипперит двух участников беседы" 
-    command = ["/шип"] 
+    command = ("шип",) 
     def main(self): 
         try: 
             person1 = self.randomuser() 

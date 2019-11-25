@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Number(BasicPlug):
     doc = "Рандомное число из заданного диапазона"
-    command = ["/число"]
+    command = ("число",)
     def main(self):
         try:
             x = int(self.text[1])

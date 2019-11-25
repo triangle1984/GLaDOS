@@ -4,7 +4,7 @@ from vk_bot.core.sql.vksql import *
 
 class Profile(BasicPlug):
     doc = "Профиль юзера"
-    command = ["/профиль"]
+    command = ("профиль",)
     included = False
 
     def main(self):

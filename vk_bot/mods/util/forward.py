@@ -5,7 +5,7 @@ from vk_bot.core.modules.upload import Upload
 
 class Forward(BasicPlug, Upload):
     doc = "Пересылает фотографию"
-    command = ["/перешли"]
+    command = ("перешли",)
 
     def main(self):
         try:

@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Searchdoc(BasicPlug):
     doc = "Поиск документов"
-    command = ["/док", "/гиф"]
+    command = ("док", "гиф",)
     def main(self):
         text = " ".join(self.text[1:])
         try:

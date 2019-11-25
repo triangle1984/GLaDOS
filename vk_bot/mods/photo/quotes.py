@@ -15,7 +15,7 @@ from vk_bot.core.modules.upload import Upload
 
 class Quote(BasicPlug, Upload):
     doc = "Сделать цитату по пересланному сообщению"
-    command = ["/цитата", "/цитаты"]
+    command = ("цитата", "цитаты",)
 
     def main(self):
         try:

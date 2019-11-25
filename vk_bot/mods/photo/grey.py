@@ -10,7 +10,7 @@ from vk_bot.core.modules.upload import Upload
 
 class Quote(BasicPlug, Upload):
     doc = "Черно-белый фильтр"
-    command = ["/чб"]
+    command = ("чб",)
 
     def main(self):
         url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']

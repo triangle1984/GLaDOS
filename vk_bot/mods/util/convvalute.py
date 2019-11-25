@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import requests
 class Convvalute(BasicPlug):
     doc = "Конвертер валют"
-    command = ["/конвертер"]
+    command = ("конвертер",)
     def main(self):
             api = "https://www.cbr-xml-daily.ru/daily_json.js"
             r = requests.get(api)

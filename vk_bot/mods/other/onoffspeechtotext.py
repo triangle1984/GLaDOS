@@ -4,7 +4,7 @@ from loadevn import speechtotext
 from vk_bot.core.sql.vksql import *
 class OnOff(BasicPlug):
     doc = "Включить или выключить перевод гс в беседе"
-    command = ["/гс"]
+    command = ("гс",)
     def main(self):
         if self.text[1] == 'выключить':
             status = '0'

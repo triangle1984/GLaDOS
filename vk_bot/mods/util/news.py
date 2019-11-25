@@ -3,7 +3,7 @@ import random, requests
 from loadevn import apinews
 class News(BasicPlug):
     doc = "Последние новости"
-    command = ["/новость"]
+    command = ("новость",)
     def main(self):
         api = 'https://newsapi.org/v2/top-headlines'
         params = {

@@ -2,7 +2,7 @@ import requests
 from vk_bot.core.modules.basicplug import BasicPlug
 class Decodeqr(BasicPlug):
     doc = "Расшифровать qrcode"
-    command = ["/decodeqr"]
+    command = ("decodeqr",)
     def main(self):
         try:
             image_url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']

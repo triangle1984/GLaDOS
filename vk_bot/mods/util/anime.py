@@ -3,7 +3,7 @@ import requests
 from datetime import timedelta
 class Anime(BasicPlug):
     doc = "Распознать аниме на фото"
-    command = ["/анименафото"]
+    command = ("анименафото",)
     def main(self):
         try:
             image_url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']

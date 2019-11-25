@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 import random
 class Date(BasicPlug):
     doc = "Дата какого-либо события"
-    command = ["/дата"]
+    command = ("дата",)
     def main(self):
         text = " ".join(self.text[1:])
         day = random.randint(1,31)

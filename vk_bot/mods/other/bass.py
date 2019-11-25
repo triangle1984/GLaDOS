@@ -7,7 +7,7 @@
 
 # class MusicBoost(BasicPlug, Upload):
 #    doc = "басуха прям пиздец"
-#    command = ["/басуха"]
+#    command = ("басуха",)
 #    included = False
 
 #    def main(self):

@@ -6,7 +6,7 @@ import time
 
 class Hmux(BasicPlug, Upload):
     doc = "Жмыхнуть фотку."
-    command = ["/жмых"]
+    command = ("жмых",)
 
     def main(self):
         helps = """

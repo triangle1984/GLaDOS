@@ -3,7 +3,7 @@ from vk_bot.core.modules.othermethods import OtherMethod
 import random
 class Who(BasicPlug, OtherMethod):
     doc = "Выбирает рандомного участника беседы под вашим предлогом"
-    command = ["/кто"]
+    command = ("кто",)
     def main(self):
         try:
             whotext = ' '.join(self.text[1:])

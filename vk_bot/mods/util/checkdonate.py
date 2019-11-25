@@ -6,7 +6,7 @@ from vk_bot.core.sql.vksql import tableadd
 
 class Checkdonate(BasicPlug):
     doc = "Проверить донатил ли юзер"
-    command = ["/чекнидонат"]
+    command = ("чекнидонат",)
 
     def main(self):
         url = f"https://api.vkdonate.ru?action=donates&count=50&sort=sum&key={donatetoken}"

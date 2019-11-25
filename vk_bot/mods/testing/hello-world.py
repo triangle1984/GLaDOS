@@ -2,7 +2,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 
 
 class Test(BasicPlug):
-    command = ["/hello"]
+    command = ("hello",)
     doc = "первый модуль, тест"
 
     def main(self):

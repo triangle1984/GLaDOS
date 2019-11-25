@@ -5,7 +5,7 @@ import random
 
 
 class Holidays(BasicPlug):
-    command = ["/праздники"]
+    command = ("праздники",)
     doc = "какие седня праздники"
 
     def main(self):

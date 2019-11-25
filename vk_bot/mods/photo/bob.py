@@ -5,7 +5,7 @@ from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 class Bob(BasicPlug, Upload):
     doc = "вашу пикчу нарисует сам Боб Росс!"
-    command = ["/боб"]
+    command = ("боб",)
     def main(self):
         url = self.event.object['attachments'][0]['photo']['sizes'][-1]['url']
         img = requests.get(url).content
