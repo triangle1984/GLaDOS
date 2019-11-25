@@ -1,24 +1,5 @@
-from loadevn import recipient, group_idd
-from vk_api.utils import get_random_id
 from vk_bot.core.sql.vksql import *
-from vk_api.bot_longpoll import VkBotEventType
-import vk_api
 from vk_bot.core.sql.sqlgame import *
-
-
-def groupjoin(vk, event):
-    idjoin = f"*id{event.object['user_id']}"
-    vk.messages.send(user_id=recipient, random_id=get_random_id(), attachment="photo271595905_457261640",
-                     message=f'В группу вступил новый пользователь! {idjoin}')
-
-
-def botmain(vk, event):
-    try:
-        vk.groups.enableOnline(group_id=group_idd)
-    except vk_api.exceptions.ApiError:
-        None
-    # if "chat_id" in dir(event):
-    #     checkchat(event)
 
 
 def sqlcache(mc, uid):

@@ -2,6 +2,7 @@ class BasicPlug:
     included = True
     attachment = False
     action = False
+    thread = False
     types = 'command'
     vktypes = ["message_new"]
     uberequests = [False]

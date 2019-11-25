@@ -91,7 +91,6 @@ class Main:
         events = event.type.value
         logging.info(f"Событие: {events}")
         # остатки прошлой цивилизации, скоро выкинем
-        botmain(self.vk, event)
         try:
             text = event.object.text.split()
         except:
@@ -157,17 +156,20 @@ class Main:
                     if attachmentype != module.attachment:
                         run = False
                 if run:
-                    logging.info(f"Запуск модуля {module.__module__}")
                     module = module(self.vk, self.vk2, self.upload)
                     module.givedata(uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc)
                     module.makeothervariables()
                     then = datetime.datetime.now()
-                    module.main()
-                    now = datetime.datetime.now()
-                    delta = now - then
-                    logging.info(
-                        f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+                    if module.thread == False:
+                        logging.info(f"Запуск модуля {module.__module__}")
+                        module.main()
+                        now = datetime.datetime.now()
+                        delta = now - then
+                        logging.info(
+                            f"{module.__module__} завершил свою работу через {delta.total_seconds()} секунд")
+                    else:
+                        self.pool.submit(module.main)
 
 
 # прост логирование

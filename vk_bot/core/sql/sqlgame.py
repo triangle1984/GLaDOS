@@ -16,10 +16,10 @@ def sendall(event, text, vk, attachment=None):
         for a in result:
             if checktable(f'{tablechat}', "id", f"{a['id']}", andd="whitelist = 1"):
                 None
-            else:    
+            else:
                 try:
                     vk.messages.send(chat_id=a["id"], random_id=get_random_id(),
-                                    message=text, attachment=attachment)
+                                     message=text, attachment=attachment)
                 except vk_api.exceptions.ApiError:
                     pass
 
@@ -55,7 +55,6 @@ def smehdb(ss, uid, db=False):
 
 
 def checkchat(event):
-    print(event.chat_id)
     check = checktable(tablechat, 'id', event.chat_id)
     if check == None:
         tableadd(tablechat, 'id', event.chat_id)

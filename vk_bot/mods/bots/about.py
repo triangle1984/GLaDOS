@@ -1,6 +1,4 @@
 from vk_bot.core.modules.basicplug import BasicPlug
-from vk_bot import mods
-from boltons import iterutils
 
 
 class AboutBot(BasicPlug):
