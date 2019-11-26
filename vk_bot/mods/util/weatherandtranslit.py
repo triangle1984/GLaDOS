@@ -7,7 +7,7 @@ class Weatherandtranslit(BasicPlug):
     command = ("переводчик", "погода",)
 
     def main(self):
-        com = self.text[0].lower()
+        com = self.text[0][1:].lower()
         if com == "переводчик":
             self.sendmsg(translit(self.text, self.vk))
         if com == "погода":
