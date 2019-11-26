@@ -13,6 +13,14 @@ def auth():
     return conn
 
 
+def tableaddone(table, value, add, update):
+    conn = auth()
+    with conn.cursor() as cursor:
+        query = f"INSERT INTO {table} ({value}) VALUES ({add}) ON DUPLICATE KEY UPDATE {update}"
+        cursor.execute(query)
+        return cursor.fetchone()
+
+
 def tablecount(table, value, count):
     conn = auth()
     with conn.cursor() as cursor:
