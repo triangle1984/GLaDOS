@@ -23,6 +23,7 @@ class GetHelp(BasicPlug):
         except:
             number = 1
             lhelp2 = lhelp[1]
+        mhelp += "Префиксы команд: / и ! \n"
         for moduli in lhelp2:
             mhelp += f"• {', '.join(moduli['command'])} - {moduli['doc']} \n"
         mhelp += f"Страница: {number} \n"
