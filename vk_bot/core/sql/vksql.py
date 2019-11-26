@@ -66,7 +66,7 @@ def tableupdate(table, value, should, where, add=False):
         query = f"UPDATE {table} SET {value} = '{should}' WHERE {where}"
         if add:
             query = f"UPDATE {table} SET {value} = ({should}) WHERE {where}"
-        if "#" in list(query):
+        if "#" in query:
             return
         cursor.execute(query)
         conn.commit()
