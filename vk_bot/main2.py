@@ -146,7 +146,7 @@ class Main:
         """
         for module in self.modules:
             run = False
-            if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
+            if all([module.included, events in module.vktypes, mc2[module.available_for], action == module.action]):
                 if module.types == "command":
                     if requests2 in module.command or uberequests2 in module.uberequests:
                         run = True
