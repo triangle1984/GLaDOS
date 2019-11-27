@@ -32,11 +32,20 @@ def mainlobby(vk, mc, event, upload):
                 uid = event.user_id
             if str(uid) in allowuser and "chat_id" not in dir(event):
                 text = event.text.split()
+                requests = [None]
+                uberequests = [None]
+                requests2 = [None]
+                uberequests2 = [None]
+                preixcommand = ("/", "!")
                 try:
                     requests = text[0].lower()
-                    uberequests = " ".join(text[0:]).lower()
+                    if requests[0] in preixcommand:
+                        requests2 = requests[1:]
+                    uberequests2 = event.text[1:].lower()
+                    uberequests = event.text.lower()
                 except IndexError:
-                    return
+                    pass
+
                 if event.from_me:
                     uid = recipient
                 else:
@@ -47,7 +56,7 @@ def mainlobby(vk, mc, event, upload):
                     run = False
                     if module.included and events in module.vktypes and mc2[module.available_for] and action == module.action:
                         if module.types == "command":
-                            if requests in module.command or uberequests in module.uberequests:
+                            if requests2 in module.command or uberequests2 in module.uberequests:
                                 run = True
                         elif module.types == "runalways":
                             run = True
