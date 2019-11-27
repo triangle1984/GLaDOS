@@ -8,6 +8,7 @@ from vk_bot.core.sql.vksql import *
 class Permban(BasicPlug, ChatManager):
     doc = "Пермбан"
     command = ("пермбан", "permban", "бан")
+    included = False
 
     def main(self):
         if len(self.text) > 1:
