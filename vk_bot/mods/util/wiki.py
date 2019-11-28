@@ -1,8 +1,11 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 import wikipedia
+
+
 class Wiki(BasicPlug):
     doc = "Инфа из вики"
     command = ("вики",)
+
     def main(self):
         wikipedia.set_lang("ru")
         text = " ".join(self.text[1:])
