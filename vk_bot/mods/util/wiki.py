@@ -10,11 +10,12 @@ class Wiki(BasicPlug):
         wikipedia.set_lang("ru")
         text = " ".join(self.text[1:])
         try:
-            wikiotvet = wikipedia.summary(text, sentences=3)
-            if len(wikiotvet) < 355:
-                wikiotvet = wikipedia.summary(text, sentences=6)
-        except wikipedia.exceptions.DisambiguationError:
-            wikiotvet = "точнее, пожалуйста"
+            response = wikipedia.summary(text, sentences=3)
+            if len(response) < 355:
+                response = wikipedia.summary(text, sentences=6)
+        except wikipedia.exceptions.DisambiguationError as error:
+            response = "Возможно вы имели ввиду: \n"
+            response += ", ".join(error.args[1])
         except wikipedia.exceptions.PageError:
-            wikiotvet = "такого нет"
-        self.sendmsg(wikiotvet)
+            response = "такого нет"
+        self.sendmsg(response)
