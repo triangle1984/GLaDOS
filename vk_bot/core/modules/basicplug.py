@@ -40,11 +40,11 @@ class BasicPlug:
         else:
             self.amsg = self.reply_message
 
-    def sendmsg(self, msg, attachmentst=None, disable_mentions=True, prefix=True, peer_id=False):
+    def sendmsg(self, msg, attachmentst=None, disable_mentions=True, prefix=True, peer_id=False, split=","):
         if peer_id == False:
             peer_id = self.peer_id
         if prefix:
-            prefix = f"*id{self.uid}({self.mc2['prefix']}), "
+            prefix = f"*id{self.uid}({self.mc2['prefix']}){split} "
         else:
             prefix = ""
         self.vk.messages.send(peer_id=peer_id, random_id=0,

@@ -18,6 +18,6 @@ class Hug(BasicPlug, Upload):
                 act = "обняла"
             else:
                 act = "обнял"
-            self.sendmsg(f"{act} {hug}", attachment)
+            self.sendmsg(f"{act} {hug}", attachment, split="")
         else:
             self.sendmsg("А кого обнимать?")

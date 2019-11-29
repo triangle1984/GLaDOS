@@ -33,7 +33,7 @@ class AutdiotoText(BasicPlug, Upload):
             audio = r.record(source)  # Считывает весь файл
         try:
             result = r.recognize_google(audio, language="ru_RU")
-            self.sendmsg(f"сказал: {result}")
+            self.sendmsg(f"сказал: {result}", split="")
         except sr.UnknownValueError:
             self.sendmsg(
                 f"НИХУЯ НЕ ПОНИМАЮ НИ ОДНОГО СЛОВА БЛЯТЬ, КАРТАВАЯ СУКА")

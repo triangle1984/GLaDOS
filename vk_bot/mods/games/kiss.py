@@ -18,6 +18,6 @@ class Kiss(BasicPlug, Upload):
                 act = "поцеловала"
             else:
                 act = "поцеловал"
-            self.sendmsg(f"{act} {hug}", attachment)
+            self.sendmsg(f"{act} {hug}", attachment, split="")
         else:
             self.sendmsg("А кого целовать?")
