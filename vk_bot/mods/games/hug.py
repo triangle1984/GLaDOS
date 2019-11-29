@@ -13,7 +13,7 @@ class Hug(BasicPlug, Upload):
             attachment = self.dowloadupload(nekos.img("hug"))
             gender = self.vk.users.get(
                 user_ids=self.uid, fields="sex")[0]['sex']
-            hug = ",".join(self.text[1:])
+            hug = " ".join(self.text[1:])
             if gender == 1:
                 act = "обняла"
             else:
