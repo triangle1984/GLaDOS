@@ -164,12 +164,12 @@ class Main:
                     if attachmentype != module.attachment:
                         run = False
                 if run:
-                    module = module(self.vk, self.vk2, self.upload)
-                    module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                    prefix=prefix, peer=event.object.peer_id, mc=self.mc)
+                    module = module(self.vk, self.vk2, self.upload, uid=uid, text=text, event=event, mc2=mc2,
+                                    prefix=prefix, peer=event.object.peer_id, mc=self.mc,
+                                    rtext=event.object.text)
                     module.makeothervariables()
-                    then = datetime.datetime.now()
                     if module.thread == False:
+                        then = datetime.datetime.now()
                         logging.info(f"Запуск модуля {module.__module__}")
                         module.main()
                         now = datetime.datetime.now()

@@ -9,32 +9,26 @@ class BasicPlug:
     doc = "Заполните справку в модуле"
     available_for = "user"
 
-    def __init__(self, vk, vk2, upload):
+    def __init__(self, vk, vk2, upload, uid, text, event, mc2, prefix, peer, mc, rtext):
         self.vk = vk
         self.vk2 = vk2
         self.upload = upload
-
-    def givedata(self, uid, text, event, mc2, prefix, peer, mc):
         self.uid = uid
         self.text = text
         self.event = event
         self.mc2 = mc2
+        self.peer_id = peer
         self.prefix = prefix
-        # self.peer_id = peer
         self.mc = mc
+        self.rawtext = rtext
 
     def makeothervariables(self):
-        self.textnocommand = " ".join(self.text[1:])
+        self.fwd_messages = self.event.object.fwd_messages
+        self.reply_message = self.event.object.reply_message
         try:
-            self.peer_id = self.event.object.peer_id
-        except:
-            self.peer_id = self.event.peer_id
-        try:
-            self.fwd_messages = self.event.object.fwd_messages
-            self.reply_message = self.event.object.reply_message
-            # страничный бот, я тебя ненавижу
-        except:
-            return
+            self.textnocommand = self.rawtext[self.rawtext.index(" ")+1:]
+        except ValueError:
+            pass
         if self.fwd_messages:
             self.amsg = self.fwd_messages[0]
         else:
