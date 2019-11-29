@@ -24,6 +24,7 @@ class BasicPlug:
         self.mc = mc
 
     def makeothervariables(self):
+        self.textnocommand = " ".join(self.text[1:])
         try:
             self.peer_id = self.event.object.peer_id
         except:

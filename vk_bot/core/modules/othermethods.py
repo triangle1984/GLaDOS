@@ -1,5 +1,6 @@
 import argparse
 import random
+import requests
 
 
 class OtherMethod:
@@ -62,3 +63,13 @@ class OtherMethod:
         result = self.vk2.groups.search(
             q=name, count=count)["items"]
         return ("-" + str(x['id']) for x in result)
+
+    def translit(self, text, lang="ru"):
+        apikey = "trnsl.1.1.20190508T201810Z.385ebfa1e596baa0.90672cf8655555b1b51ced31b03c2e8bb9bde46c"
+        url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
+        params = {"key": apikey,
+                  "text": text,
+                  "lang": lang}
+        r = requests.get(url, params=params, timeout=5)
+        encode = r.json()
+        return encode["text"][0]
