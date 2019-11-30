@@ -72,10 +72,8 @@ def mainlobby(vk, mc, event, upload):
                             if attachmentype != module.attachment:
                                 run = False
                         if run:
-                            module = module(vk, vk, upload)
-                            module.givedata(uid=uid, text=text, event=event, mc2=mc2,
-                                            prefix=prefix, peer=event.peer_id, mc=mc)
-                            module.makeothervariables()
+                            module = module(vk, vk, upload, uid=uid, text=text, event=event, mc2=mc2,
+                                            prefix=prefix, peer=event.peer_id, mc=mc, rtext=event.text)
                             module.main()
 
     except KeyboardInterrupt:
