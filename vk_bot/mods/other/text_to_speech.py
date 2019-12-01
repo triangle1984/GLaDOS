@@ -6,7 +6,7 @@ import time
 
 class TextToAudio(BasicPlug, Upload):
     doc = "гс в текст"
-    command = ("озвучить", "гуглбаба",)
+    command = ("озвучить", "гуглбаба", "озвучь", "скажи")
 
     def main(self):
         name = f"{time.time_ns()}.mp3"
