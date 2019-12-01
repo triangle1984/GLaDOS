@@ -10,6 +10,6 @@ class TextToAudio(BasicPlug, Upload):
 
     def main(self):
         name = f"{time.time_ns()}.mp3"
-        tts = gTTS("".join(self.text[1:]), lang='ru')
+        tts = gTTS(" ".join(self.text[1:]), lang='ru')
         tts.save(name)
         self.sendmsg("Дэржите", self.audiomessage(name))
