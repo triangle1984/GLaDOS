@@ -3,7 +3,7 @@ from vk_bot.core.sql.vksql import *
 import pylibmc
 class Relation(BasicPlug):
     doc = "Отношения"
-    command = ("отношения",)
+    command = ("отношения2",)
     def main(self):
         try:
             requests = self.text[1]
@@ -30,7 +30,7 @@ class Relation(BasicPlug):
         if self.mc.delete(f"r{self.uid}") == False:
             self.sendmsg("запросов не поступало")
     def offer(self):
-        uid2 = self.returnpusuid(self.text[2][3:])
+        uid2 = self.returnpusuid(self.text[2][3:])[0]
         if self.mc.get(f"r{uid2}"):
             self.sendmsg("вы уже отправили запрос")
         if checktable("relation", "id2 or id", self.uid):
