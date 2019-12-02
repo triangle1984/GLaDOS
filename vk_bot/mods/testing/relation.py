@@ -3,7 +3,7 @@ from vk_bot.core.sql.vksql import *
 import pylibmc
 class Relation(BasicPlug):
     doc = "Отношения"
-    command = ("отношения2",)
+    command = ("отношения",)
     def main(self):
         try:
             requests = self.text[1]
