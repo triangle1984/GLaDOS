@@ -5,7 +5,7 @@ import requests
 
 class Lurk(BasicPlug):
     command = ("лурк",)
-    doc = "какие седня праздники"
+    doc = "Поиск по лукру. Аналогично вики"
 
     def main(self):
         text = " ".join(self.text[1:])
