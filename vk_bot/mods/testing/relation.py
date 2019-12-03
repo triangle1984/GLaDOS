@@ -5,7 +5,7 @@ import pylibmc
 
 class Relation(BasicPlug):
     doc = "Отношения"
-    command = ("отношения2",)
+    command = ("отношения",)
 
     def main(self):
         try:
