@@ -18,6 +18,8 @@ class Relation(BasicPlug):
                 self.deny()
             elif requests == "стат":
                 self.statrelation()
+            elif requests == "порвать":
+                self.relationbreak()
         except:
             pass
 
@@ -67,3 +69,11 @@ class Relation(BasicPlug):
                 user = user['id']
             nameid = f"*id{user}({self. vk.users.get(user_ids=user, name_case='ins')[0]['first_name']})"
             self.sendmsg(f"Ты встречаешься с {nameid}")
+
+    def relationbreak(self):
+        if not checktable("relation", "id2 or id", self.uid):
+            self.sendmsg("ни с кем не встречаешься")
+            return
+        else:
+            tablerm("relation", "id or id2", f"{self.uid}")
+            self.sendmsg("ты разорвал свои отношения 😢")
