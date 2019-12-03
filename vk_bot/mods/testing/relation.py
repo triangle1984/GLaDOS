@@ -6,6 +6,7 @@ import pylibmc
 class Relation(BasicPlug):
     doc = "Отношения"
     command = ("отношения2",)
+    included = False
 
     def main(self):
         try:
