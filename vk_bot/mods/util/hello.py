@@ -7,6 +7,8 @@ class Hello(BasicPlug):
     command = ("приветствие",)
     def main(self):
         text = " ".join(self.text[1:])
+        if text == "":
+            return
         if self.event.object['attachments']:
             self.vk.messages.send(chat_id=self.event.chat_id, random_id=get_random_id(),  message="Никаких вложений! Только текст")
         elif len(text) > 500:
