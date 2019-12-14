@@ -7,7 +7,7 @@ recipient = parsed["recipient"]
 try:
     allowuser = parsed["allowuser"].split(",")
 except KeyError:
-    None
+    pass
 ip = parsed["ip"]
 tablechat = parsed["tablechat"]
 apinews = parsed["apinews"]
