@@ -173,7 +173,7 @@ class Main:
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc,
                                     rtext=event.object.text)
                     module.makeothervariables()
-                    if not module.init_threading:
+                    if not module.thread:
                         then = datetime.datetime.now()
                         logging.info(f"Запуск модуля {module.__module__}")
                         module.main()
