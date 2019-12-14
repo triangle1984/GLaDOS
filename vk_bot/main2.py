@@ -59,6 +59,7 @@ class Main:
         args = argparse.ArgumentParser(description="параметры запуска бота")
         args.add_argument('-d', '--debug',  action='store_true',
                           default=False, dest="debug")
+
         args = args.parse_args()
         self.debug = args.debug
 
