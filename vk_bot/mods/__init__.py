@@ -30,19 +30,16 @@ def test(pkgname):
                 continue
             # записать атрибут в переменную
             atribute = t.__getattribute__(name)
-            try:
-                # ежели атрибут уже не сохранен, а так ежели он относится к
-                # модулю, а не чота левое и импортированное, например сторонние
-                # либы
-                if atribute not in modules and atribute.__module__ == t.__name__:
-                    # это класс
-                    if isinstance(atribute, type):
-                        # этот класс наследует BasicPlug
-                        if issubclass(atribute, BasicPlug):
-                            # сохранить его в список модулей
-                            modules.append(atribute)
-            except AttributeError:
-                continue
+            # ежели атрибут уже не сохранен, а так ежели он относится к
+            # модулю, а не чота левое и импортированное, например сторонние
+            # либы
+            if atribute not in modules and hasattr(atribute, '__module__') and atribute.__module__ == t.__name__:
+                # это класс
+                if isinstance(atribute, type):
+                    # этот класс наследует BasicPlug
+                    if issubclass(atribute, BasicPlug):
+                        # сохранить его в список модулей
+                        modules.append(atribute)
         # Ежели это каталог, то так же пройтись по всем файлам в том каталоге
         if is_pkg:
             test(full_name)
