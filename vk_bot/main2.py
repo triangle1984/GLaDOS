@@ -51,7 +51,7 @@ class Main:
                           default=False, dest="debug")
         try:
             args = args.parse_args(sys.argv[1:])
-        except:
+        except IndexError:
             self.debug = False
             return
         self.debug = args.debug
