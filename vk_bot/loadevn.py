@@ -1,7 +1,7 @@
 from dotenv import dotenv_values
 parsed = dotenv_values(stream="config.env")
 token = parsed["token"]
-page_token = parsed["token22"]
+token22 = parsed["token22"]
 group_idd = parsed["group_idd"]
 recipient = parsed["recipient"]
 try:
