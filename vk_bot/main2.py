@@ -1,17 +1,15 @@
 #!/usr/bin/python3.7
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from vk_api import VkUpload
-from loadevn import *
-from vk_bot.core.sql.vksql import *
-from vk_bot.core.utils.botutil import *
-from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-import pylibmc
-import vk_api
-import logging
-import datetime
-from vk_bot.core.sql.sqlgame import *
-import mods
 import argparse
+import datetime
+import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+import pylibmc
+from vk_api import VkUpload
+from vk_api.bot_longpoll import VkBotLongPoll
+
+import mods
+from vk_bot.core.utils.botutil import *
 
 
 class Main:
@@ -130,7 +128,6 @@ class Main:
             if requests[0] in preixcommand:
                 requests2 = requests[1:]
                 uberequests2 = event.object.text[1:].lower()
-            uberequests = event.object.text.lower()
         except IndexError:
             pass
         """
