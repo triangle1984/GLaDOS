@@ -11,37 +11,49 @@ import logging
 import datetime
 from vk_bot.core.sql.sqlgame import *
 import mods
-import sys
 import argparse
 
 
 class Main:
     """
     Инит главного класса, токен - токен группы
-    токен22 - токен страницы, который нужен шоб кидать пикчи из пабликов
+    page_token - токен страницы, который нужен шоб кидать пикчи из пабликов
     при иницилизации класса, т.е t = Main(123, 123) - запускается усе добро
     типа авторизиации, настройки потоков и импорта модулей
     дальше можно запустить метод run(t.run()), щобы заставить бота работать
     """
 
-    def __init__(self, token, token22):
+    def __init__(self, token, page_token):
+        self.vk = None
+        self.page_vk = None
+        self.upload = None
+        self.longpoll = None
+        self.message = 0
+
+        self.pool = None
+        self.futures = []
+
+        self.debug = False
+
+        self.mc = None
+
         self.token = token
-        self.token22 = token22
+        self.page_token = page_token
         self.argsdebug()
-        self.authorization()
-        self.thread()
+        self.init_authorization()
+        self.init_threading()
         self.modules = mods.modules
 
-    def authorization(self):
-        vk_session = vk_api.VkApi(token=token, api_version=5.102)
-        vk_session2 = vk_api.VkApi(token=token22)
+    def init_authorization(self):
+        vk_session = vk_api.VkApi(token=token, api_version="5.102")
+        page_vk_session = vk_api.VkApi(token=page_token)
         self.vk = vk_session.get_api()
-        self.vk2 = vk_session2.get_api()
+        self.page_vk = page_vk_session.get_api()
         self.upload = VkUpload(vk_session)
         self.longpoll = VkBotLongPoll(vk_session, group_idd)
         self.message = 0
 
-    def thread(self):
+    def init_threading(self):
         self.pool = ThreadPoolExecutor(8)
         self.futures = []
 
@@ -49,11 +61,7 @@ class Main:
         args = argparse.ArgumentParser(description="параметры запуска бота")
         args.add_argument('-d', '--debug',  action='store_true',
                           default=False, dest="debug")
-        try:
-            args = args.parse_args(sys.argv[1:])
-        except:
-            self.debug = False
-            return
+        args = args.parse_args()
         self.debug = args.debug
 
     def checkthread(self):
@@ -61,7 +69,7 @@ class Main:
         Скинуть название исключения в потоке, ежели  такое произойдет
         """
         for x in as_completed(self.futures):
-            if x.exception() != None:
+            if x.exception() is not None:
                 logging.error(x.exception())
                 print(f"ошибОЧКА разраба: {x.exception()}")
             self.futures.remove(x)
@@ -91,13 +99,13 @@ class Main:
         events = event.type.value
         logging.info(f"Событие: {events}")
         # остатки прошлой цивилизации, скоро выкинем
-        try:
-            text = event.object.text.split()
-        except:
+        if 'text' in event.object:
+            text = event.object.text
+        else:
             text = []
         uid = event.object.from_id
-        if uid == None:
-            uid = event.object['user_id']
+        if uid is None:
+            uid = event.object.user_id
         logging.info(
             f"Сообщение: {event.object.text}  От: {uid}  В: {event.object.peer_id}")
         """
@@ -164,11 +172,11 @@ class Main:
                     if attachmentype != module.attachment:
                         run = False
                 if run:
-                    module = module(self.vk, self.vk2, self.upload, uid=uid, text=text, event=event, mc2=mc2,
+                    module = module(self.vk, self.page_vk, self.upload, uid=uid, text=text, event=event, mc2=mc2,
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc,
                                     rtext=event.object.text)
                     module.makeothervariables()
-                    if module.thread == False:
+                    if not module.init_threading:
                         then = datetime.datetime.now()
                         logging.info(f"Запуск модуля {module.__module__}")
                         module.main()
@@ -180,8 +188,9 @@ class Main:
                         self.pool.submit(module.main)
 
 
-# прост логирование
-logging.basicConfig(level=logging.INFO, filename="bot.log",
-                    format='%(asctime)s - %(message)s')
-t = Main(token, token22)
-t.run()
+if __name__ == '__main__':
+    # прост логирование
+    logging.basicConfig(level=logging.INFO, filename="bot.log",
+                        format='%(asctime)s - %(message)s')
+    t = Main(token, page_token)
+    t.run()

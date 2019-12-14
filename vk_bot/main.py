@@ -88,7 +88,7 @@ def checkthread(futures):
 
 
 def run():
-    vk_session = vk_api.VkApi(token=token22)
+    vk_session = vk_api.VkApi(token=page_token)
     vk = vk_session.get_api()
     upload = vk_api.VkUpload(vk_session)
     longpoll = VkLongPoll(vk_session)
