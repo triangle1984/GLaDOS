@@ -1,20 +1,14 @@
 #!/usr/bin/python3.7
+import sys
+from vk_bot.core.utils.botutil import *
 import argparse
 import datetime
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
 import pylibmc
 from vk_api import VkUpload
 from vk_api.bot_longpoll import VkBotLongPoll
-
 import mods
-<<<<<<< HEAD
-from vk_bot.core.utils.botutil import *
-=======
-import sys
-import argparse
->>>>>>> parent of c962518... начальный рефакторинг гавна
 
 
 class Main:
@@ -51,16 +45,12 @@ class Main:
         args = argparse.ArgumentParser(description="параметры запуска бота")
         args.add_argument('-d', '--debug',  action='store_true',
                           default=False, dest="debug")
-<<<<<<< HEAD
 
-        args = args.parse_args()
-=======
         try:
             args = args.parse_args(sys.argv[1:])
         except:
             self.debug = False
             return
->>>>>>> parent of c962518... начальный рефакторинг гавна
         self.debug = args.debug
 
     def checkthread(self):
@@ -174,11 +164,7 @@ class Main:
                                     prefix=prefix, peer=event.object.peer_id, mc=self.mc,
                                     rtext=event.object.text)
                     module.makeothervariables()
-<<<<<<< HEAD
-                    if not module.thread:
-=======
                     if module.thread == False:
->>>>>>> parent of c962518... начальный рефакторинг гавна
                         then = datetime.datetime.now()
                         logging.info(f"Запуск модуля {module.__module__}")
                         module.main()
