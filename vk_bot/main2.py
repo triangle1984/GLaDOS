@@ -66,7 +66,7 @@ class Main:
 
     def run(self):
         logging.info("Запуск бота")
-        self.mc = pylibmc.Client(["127.0.0.1"])
+        self.mc = pylibmc.Client([memcached])
         for event in self.longpoll.listen():
             if self.debug:
                 self.lobby(event)
