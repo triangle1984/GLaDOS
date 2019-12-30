@@ -7,7 +7,7 @@ recipient = parsed["recipient"]
 try:
     allowuser = parsed["allowuser"].split(",")
 except KeyError:
-    None
+    pass
 ip = parsed["ip"]
 tablechat = parsed["tablechat"]
 apinews = parsed["apinews"]
@@ -19,3 +19,4 @@ donatetoken = parsed["donatetoken"]
 fontc = parsed["font"]
 speechtotext = parsed["speechtotext"]
 permban = parsed["permban"]
+memcached = parsed["memcached"]

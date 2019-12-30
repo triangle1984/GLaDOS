@@ -10,7 +10,7 @@ class Holidays(BasicPlug):
 
     def main(self):
         req = requests.get("http://kakoysegodnyaprazdnik.ru/")
-        soup = BeautifulSoup(req.text, "lxml")
+        soup = BeautifulSoup(req.text, "html.parser")
         result = ["Седня празднуем: "]
         for text in soup.find_all('span', itemprop="text"):
             smile = random.choice(["🎈", "🎊", "🎉"])

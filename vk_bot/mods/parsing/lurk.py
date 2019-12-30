@@ -11,7 +11,7 @@ class Lurk(BasicPlug):
         text = " ".join(self.text[1:])
         url = f"http://lurkmore.to/{text}"
         req = requests.get(url)
-        soup = BeautifulSoup(req.text, "lxml")
+        soup = BeautifulSoup(req.text, "html.parser")
         error = "В настоящий момент тут ничего нет. Но вы можете:"
         try:
             result = soup.find(property="og:description")

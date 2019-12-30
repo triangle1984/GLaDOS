@@ -11,6 +11,6 @@ python-dotenv
 google_images_download
 pylibmc
 bs4
-lxml
 pillow
 gTTS
+https://github.com/Nekos-life/nekos.py/archive/master.zip

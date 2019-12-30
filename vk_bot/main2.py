@@ -1,18 +1,14 @@
 #!/usr/bin/python3.7
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from vk_api import VkUpload
-from loadevn import *
-from vk_bot.core.sql.vksql import *
-from vk_bot.core.utils.botutil import *
-from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-import pylibmc
-import vk_api
-import logging
-import datetime
-from vk_bot.core.sql.sqlgame import *
-import mods
 import sys
+from vk_bot.core.utils.botutil import *
 import argparse
+import datetime
+import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import pylibmc
+from vk_api import VkUpload
+from vk_api.bot_longpoll import VkBotLongPoll
+import mods
 
 
 class Main:
@@ -49,6 +45,7 @@ class Main:
         args = argparse.ArgumentParser(description="параметры запуска бота")
         args.add_argument('-d', '--debug',  action='store_true',
                           default=False, dest="debug")
+
         try:
             args = args.parse_args(sys.argv[1:])
         except:
@@ -69,7 +66,7 @@ class Main:
 
     def run(self):
         logging.info("Запуск бота")
-        self.mc = pylibmc.Client(["127.0.0.1"])
+        self.mc = pylibmc.Client([memcached])
         for event in self.longpoll.listen():
             if self.debug:
                 self.lobby(event)
@@ -122,7 +119,6 @@ class Main:
             if requests[0] in preixcommand:
                 requests2 = requests[1:]
                 uberequests2 = event.object.text[1:].lower()
-            uberequests = event.object.text.lower()
         except IndexError:
             pass
         """

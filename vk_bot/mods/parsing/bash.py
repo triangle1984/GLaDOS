@@ -9,6 +9,6 @@ class Bash(BasicPlug):
 
     def main(self):
         resp = requests.get("https://bash.im/random")
-        soup = BeautifulSoup(resp.text, 'lxml')
+        soup = BeautifulSoup(resp.text, 'html.parser')
         text = soup.find("div", {"class": "quote__body"})
         self.sendmsg(text.text)
