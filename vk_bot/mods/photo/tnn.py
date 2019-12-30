@@ -14,7 +14,7 @@ class Tnn(BasicPlug, Upload):
         resized_img = image.resize((159, 95), Image.ANTIALIAS)
         resized_img = resized_img.convert('RGBA')
         resized_img = resized_img.rotate(-2)
-        tnn = Image.open('/usr/local/bin/testing/GLaDOS/vk_bot/mods/testing/test.png')
+        tnn = Image.open('pics/test.png')
         tnn.paste(resized_img, (403, 103), resized_img)
         name = f"name{random.randint(0, 1000)}.png"
         tnn.save(name)

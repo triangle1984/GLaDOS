@@ -13,7 +13,7 @@ class Disappoint(BasicPlug, Upload):
             f = io.BytesIO(img)
             image = Image.open(f)
             resized_img = image.resize((1080, 720), Image.ANTIALIAS)
-            disappoint = Image.open('/usr/local/bin/danila/GLaDOS/vk_bot/mods/testing/1512680346_5734a2a99f15d154a59b66b4.png')
+            disappoint = Image.open('pics/1512680346_5734a2a99f15d154a59b66b4.png')
             resized_img.paste(disappoint.convert('RGB'), (220, 400), disappoint)
             name = f"name{random.randint(0, 1000)}.jpg"
             resized_img.save(name)
