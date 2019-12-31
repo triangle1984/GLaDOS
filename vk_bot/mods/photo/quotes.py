@@ -44,9 +44,9 @@ class Quote(BasicPlug, Upload):
         os.system(f'wget {url} -O photos/{self.uid}.jpg')
         result = Pillowhelper.resize_image(
             f'photos/{self.uid}.jpg', (700, 400))
-        cav = Image.open("/usr/local/bin/testing/GLaDOS/vk_bot/cav.png")
+        cav = Image.open("pics/cav.png")
         result.paste(cav, (180, 26), cav)
-        cav2 = Image.open("/usr/local/bin/testing/GLaDOS/vk_bot/cav2.png")
+        cav2 = Image.open("pics/cav2.png")
         result.paste(cav2, (615, 310), cav2)
         result.save(f'photos/{self.uid}.jpg')
         os.system(f'mv photos/{self.uid}.jpg photos/{self.uid}')

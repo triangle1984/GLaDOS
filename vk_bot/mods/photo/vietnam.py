@@ -21,7 +21,7 @@ class Quote(BasicPlug, Upload):
                 c = pix[i, j][2]
                 S = (a + b + c) // 3
                 draw.point((i, j), (S, S, S))
-        vietnam = Image.open('/usr/local/bin/danila/GLaDOS/vk_bot/mods/testing/u-s-_helicopters_vietnam.jpg')
+        vietnam = Image.open('pics/u-s-_helicopters_vietnam.jpg')
         resized_img = vietnam.resize((width, height), Image.ANTIALIAS)
         #resized_img = ImageEnhance.Brightness(resized_img).enhance(1.2)
         image.paste(resized_img.convert('RGB'), (0, 0), resized_img)
