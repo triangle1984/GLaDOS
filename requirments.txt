@@ -14,3 +14,4 @@ bs4
 pillow
 gTTS
 https://github.com/Nekos-life/nekos.py/archive/master.zip
+cryptography
