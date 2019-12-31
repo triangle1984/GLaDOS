@@ -125,5 +125,5 @@ flasktest
 vk-bot
 shell.py
 .idea
-
+config.py
 !vk_bot/pics/*

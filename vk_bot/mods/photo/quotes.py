@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-from loadevn import *
+from vk_bot.config import *
 import textwrap
 import io
 import requests

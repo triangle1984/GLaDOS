@@ -1,6 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 import requests
-from loadevn import donatetoken
+from vk_bot.config import donatetoken
 from vk_bot.core.sql.vksql import tableadd
 
 

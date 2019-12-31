@@ -1,6 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 import random, requests
-from loadevn import apinews
+from vk_bot.config import apinews
 class News(BasicPlug):
     doc = "Последние новости"
     command = ("новость",)

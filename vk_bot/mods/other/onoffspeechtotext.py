@@ -1,6 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_api.utils import get_random_id
-from loadevn import speechtotext
+from vk_bot.config import speechtotext
 from vk_bot.core.sql.vksql import *
 class OnOff(BasicPlug):
     doc = "Включить или выключить перевод гс в беседе"

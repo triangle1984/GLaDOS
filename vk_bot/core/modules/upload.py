@@ -2,7 +2,7 @@ import time
 import os
 import requests
 from concurrent.futures import ThreadPoolExecutor, wait, as_completed
-from loadevn import *
+from vk_bot.config import *
 
 
 class Upload:

@@ -1,4 +1,4 @@
-from loadevn import recipient
+from vk_bot.config import recipient
 from vk_api.utils import get_random_id
 from vk_bot.core.modules.basicplug import BasicPlug
 class Lentomsg(BasicPlug):

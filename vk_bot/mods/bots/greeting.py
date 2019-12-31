@@ -1,5 +1,5 @@
 from vk_bot.core.modules.basicplug import BasicPlug
-from vk_bot.loadevn import chathello
+from vk_bot.config import chathello
 from vk_bot.core.sql.vksql import *
 
 

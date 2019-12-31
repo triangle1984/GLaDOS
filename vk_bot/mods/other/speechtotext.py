@@ -1,7 +1,7 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 from vk_bot.core.sql.vksql import *
-from loadevn import speechtotext
+from vk_bot.config import speechtotext
 import speech_recognition as sr
 from pydub import AudioSegment
 import os

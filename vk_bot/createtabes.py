@@ -4,7 +4,7 @@ import pymysql
 from pymysql.cursors import DictCursor
 from contextlib import closing
 from vk_bot.core.sql.vksql import auth
-from loadevn import *
+from vk_bot.config import *
 conn = auth()
 with conn.cursor() as cursor:
     query = "CREATE TABLE IF NOT EXISTS admins (id int)"

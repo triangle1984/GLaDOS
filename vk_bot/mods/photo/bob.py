@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from loadevn import *
+from vk_bot.config import *
 import io, requests, random, os
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload

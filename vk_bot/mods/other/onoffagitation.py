@@ -1,6 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_api.utils import get_random_id
-from loadevn import tablechat
+from vk_bot.config import tablechat
 from vk_bot.core.sql.vksql import *
 class OnOffAgitation(BasicPlug):
     doc = "Включить или выключить рассылку в беседе"

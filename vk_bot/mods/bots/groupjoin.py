@@ -1,6 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.sql.sqlgame import sendall
-from loadevn import *
+from vk_bot.config import *
 
 
 class GroupJoin(BasicPlug):

@@ -1,7 +1,7 @@
 import vk_api
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.chatmager import ChatManager
-from loadevn import permban
+from vk_bot.config import permban
 from vk_bot.core.sql.vksql import *
 
 

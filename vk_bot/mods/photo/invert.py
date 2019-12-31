@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from loadevn import *
+from vk_bot.config import *
 import io
 import requests
 import random

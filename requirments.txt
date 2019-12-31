@@ -7,7 +7,6 @@ pyPrivnote
 SpeechRecognition
 pydub
 boltons
-python-dotenv
 google_images_download
 pylibmc
 bs4
