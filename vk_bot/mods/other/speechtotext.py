@@ -1,7 +1,6 @@
 from vk_bot.core.modules.basicplug import BasicPlug
 from vk_bot.core.modules.upload import Upload
 from vk_bot.core.sql.vksql import *
-from vk_bot.config import speechtotext
 import speech_recognition as sr
 from pydub import AudioSegment
 import os
@@ -15,7 +14,7 @@ class AutdiotoText(BasicPlug, Upload):
     attachment = 'audio_message'
 
     def main(self):
-        if checktable(f'{speechtotext}', "chat_id", f"{self.event.object.peer_id}", andd="status = 0"):
+        if checktable('speechtotext', "chat_id", f"{self.event.object.peer_id}", andd="status = 0"):
             print(".")
             return
         else:

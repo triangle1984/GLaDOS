@@ -14,5 +14,5 @@ class Hello(BasicPlug):
         elif len(text) > 500:
             self.vk.messages.send(chat_id=self.event.chat_id, random_id=get_random_id(),  message="Не больше 500 знаков!")
         else:
-            response = hellosql(chathello, self.event.chat_id, text)
+            response = hellosql('chathello', self.event.chat_id, text)
             self.sendmsg(f"Вы установили приветствие: \"{text}\"")
